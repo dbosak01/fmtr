@@ -1,15 +1,15 @@
 context("Format Tests")
 
 
-test_that("create_format() function sets class and levels as expected", {
+test_that("value() function sets class and levels as expected", {
   
   
   res <- c("Label A", "Label B", "Other")
   
   
-  fmt1 <- create_format(condition(x == "A", "Label A"),
-                        condition(x == "B", "Label B"), 
-                        condition(TRUE, "Other"))
+  fmt1 <- value(condition(x == "A", "Label A"),
+                condition(x == "B", "Label B"), 
+                condition(TRUE, "Other"))
   
   
   expect_equal(class(fmt1), "fmt")
@@ -19,48 +19,48 @@ test_that("create_format() function sets class and levels as expected", {
 
 
 
-test_that("create_format() function works as expected.", {
+test_that("a format object can be applied to a vector.", {
   
   
-  res <- c("Label A", "Label B", "Other", "Label B")
+  res <- c(A = "Label A", B = "Label B", C = "Other", B = "Label B")
   
   v1 <- c("A", "B", "C", "B")
   
-  fmt1 <- create_format(condition(x == "A", "Label A"),
-                        condition(x == "B", "Label B"), 
-                        condition(TRUE, "Other"))
+  fmt1 <- value(condition(x == "A", "Label A"),
+                condition(x == "B", "Label B"), 
+                condition(TRUE, "Other"))
   
   
-  a1 <- apply_format(fmt1, v1)
-  expect_equal(a1, res)
+  a1 <- fapply(fmt1, v1)
+  expect_equal(all(a1 == res), TRUE)
   
   
   v2 <- c(1, 2, 3, 2)
   
-  fmt2 <- create_format(condition(x == 1, "Label A"),
-                        condition(x == 2, "Label B"), 
-                        condition(TRUE, "Other"))
+  fmt2 <- value(condition(x == 1, "Label A"),
+                condition(x == 2, "Label B"), 
+                condition(TRUE, "Other"))
   
   
-  a2 <- apply_format(fmt2, v2)
-  expect_equal(a2, res)
+  a2 <- fapply(fmt2, v2)
+  expect_equal(all(a2 == res), TRUE)
   
   
-  fmt3 <- create_format(condition(x <= 1, "Label A"),
-                        condition(x > 1 & x <= 2, "Label B"), 
-                        condition(TRUE, "Other"))
+  fmt3 <- value(condition(x <= 1, "Label A"),
+                condition(x > 1 & x <= 2, "Label B"), 
+                condition(TRUE, "Other"))
   
   
-  a3 <- apply_format(fmt3, v2)
-  expect_equal(a3, res)
+  a3 <- fapply(fmt3, v2)
+  expect_equal(all(a3 == res), TRUE)
   
   
-  fmt4 <- create_format(condition(x == "A", 1),
-                        condition(x == "B", 2),
-                        condition(TRUE, 3))
+  fmt4 <- value(condition(x == "A", 1),
+                condition(x == "B", 2),
+                condition(TRUE, 3))
   
-  a4 <- apply_format(fmt4, v1)
-  expect_equal(a4, c(1, 2, 3, 2))
+  a4 <- fapply(fmt4, v1)
+  expect_equal(all(a4 == c(1, 2, 3, 2)), TRUE)
   
   
 })
@@ -71,9 +71,9 @@ test_that("labels() function works as expected", {
   res <- c("Label A", "Label B", "Other")
   
   
-  fmt1 <- create_format(condition(x == "A", "Label A"),
-                        condition(x == "B", "Label B"), 
-                        condition(TRUE, "Other"))
+  fmt1 <- value(condition(x == "A", "Label A"),
+                condition(x == "B", "Label B"), 
+                condition(TRUE, "Other"))
   
   
   lbls <- labels(fmt1)

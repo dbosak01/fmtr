@@ -1,17 +1,20 @@
 Package: fmtr
 Type: Package
-Title: Contains functions for formatting regulatory data
+Title: Contains functions for formatting data frames
 Version: 0.0.0.9000
 Author: David Bosak
 Author@R: person("David", "Bosak", email = "dbosak01@gmail.com",
   role = c("aut", "cre"))
 Maintainer: The package maintainer <dbosak01@gmail.com>
-Description: This package contains a set of functions that can be used to 
-  format regulatory data.  Regulatory data may include pharmaceutical, 
-  biotech, medical device, or other industries that are regulated by the FDA.
+Description: Contains a set of functions that can be used to 
+  format data frames.  The package aims to provide to R data frames 
+  functionality similar to that of SAS® formats. Formats are assigned to
+  the format attribute on data frame columns.  Then when the format() 
+  function is called, a new data frame is created with the column data
+  formatted as specified.  The fucntions also with with tidyverse tibbles.
 License: CC0
 Encoding: UTF-8
 LazyData: true
 Suggests: testthat
-Imports: scales
+Imports: tibble
 RoxygenNote: 7.1.1

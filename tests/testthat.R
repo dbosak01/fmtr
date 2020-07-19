@@ -1,4 +1,4 @@
 library(testthat)
-library(formater)
+library(fmtr)
 
-test_check("formater")
+test_check("fmtr")
