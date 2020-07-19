@@ -207,7 +207,7 @@ applied to the second item in the vector, and so on.  The list is recycled
 if the number of list items is shorter than the number of values in the 
 vector.
 
-For the lookup method, the formatting object is specified by a lookup vector.  
+For the lookup method, the formatting object is specified by a lookup vector. 
 The lookup vector should contain names 
 associated with the elements in the formatting list. The lookup vector should 
 also contain the same number of items as the data vector.  For each item
@@ -264,13 +264,13 @@ format_dataframe(df)
 ### The `formats()` function
 The formats associated with a data frame can be easily extracted or 
 assigned with the `formats()` function.  This function returns or accepts 
-a named list of formatting objects.  The names of the list items must 
+a named list of formatting objects.  The names of the list items  
 correspond to the names of the columns in the data frame.  This function is
 useful when you want to assign column formats from metadata.
 
 ### The `labels()` and `levels()` functions
 The labels associated with a user-defined format object can be extracted
-using the `labels()` or `levels()` function.  These functions will return a 
+using the `labels()` or `levels()` functions.  These functions will return a 
 vector of labels
 that have been assigned in each of the conditions, in the order they were 
 assigned.  This function is useful
