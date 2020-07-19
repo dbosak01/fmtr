@@ -143,7 +143,7 @@ The `value` function accepts one or more conditions.  The `conditions`
 function accepts an expression/label pair.  A user-defined format has the 
 advantage of a clear and flexible syntax.  It is excellent for categorizing
 data.  Here is an example of a user-defined 
-formatting function:
+format:
 ```
 v1 <- c("A", "B", "C", "B")
 f1 <- factor(v1, levels = c("A", "B", "C"))
@@ -211,7 +211,7 @@ For the lookup method, the formatting object is specified by a lookup vector.
 The lookup vector should contain names 
 associated with the elements in the formatting list. The lookup vector should 
 also contain the same number of items as the data vector.  For each item
-in the data vector, the **fmtr** will look up the approprate format
+in the data vector, **fmtr** will look up the approprate format
 from the formatting list, and apply that format to the
 corresponding data value.
 
