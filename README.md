@@ -10,18 +10,17 @@
 <!-- badges: end -->
 
 The **fmtr** package helps format data.  The package aims to replicate
-the basic functionality of SAS® formats, but with R data frames.  Formats 
-can be attached to data frame columns by assigning them to a **format** 
-attribute.  Once formats are assigned, the formatted data can be displayed
-using the `format()` function.  When the `format()` function is called,
-a new data frame is returned with all the columns formatted as specified
-in the **format** attributes.
+the basic functionality of SAS® formats, but with R.  
 
-The functions in the **fmtr** package also work with tidyverse tibbles.
+**fmtr** can apply 
+formats to data frames, tibbles, vectors, and factors.  The `format()` function
+is used to apply formats to data frames and tibbles, and the `fapply()`
+function is used to apply formats to vectors and factors.
 
-## How to use
+
+## How to use `format()`
 Data can be formatted by assigning formats to the **format** attribute
-of the columns in your dataframe, and then by calling the `format()` 
+of the columns in your dataframe or tibble, and then by calling the `format()` 
 function on that data frame.  A sample program is as follows:
 
 ```
@@ -73,11 +72,39 @@ Merc 280          Low  6.0
 You may apply formatting to variables of any data type: character, numeric, 
 date, etc.  The format label (the result) can also be any data type. 
 In addition, the type of objects that can be used for formatting is very 
-flexible. 
+flexible. Under the hood, the `format()` function is using the `fapply()`
+function on each column in the data frame.  If there is no format assigned
+to a column, that column is returned unaltered.
 
-The formatting for a data frame is applied using the `fapply` function 
-included in the **fmtr** package.  This function may also be used 
-directly on vectors, independant of the `format` function.
+## How to use `fapply()`
+
+The `fapply()` function applies a format to a vector or factor. This function 
+may be used independantly of the `format()` function.  Here is an example 
+of using `fapply()`:
+```
+v1 <- c("A", "B", "C", "B")
+
+fmt1 <- value(condition(x == "A", "Label A"),
+              condition(x == "B", "Label B"),
+              condition(TRUE, "Other"))
+
+fapply(fmt1, v1)
+
+```
+Here is the vector before formatting:
+```
+# [1] "A" "B" "C" "B"
+```
+
+And here is the vector after formatting:
+```
+#         A         B         C         B 
+# "Label A" "Label B"   "Other" "Label B" 
+```
+One advantage of using `fapply()` is that your original data is not
+altered. The formatted values are assigned to a new object, with no 
+direct connection to your original data values.  If your orignial data 
+changes, the formatting function should be reapplied to maintain consistency.
 
 ## What kind of formats are available
 Data can be formatted with four different types of objects:
@@ -93,7 +120,8 @@ strengths and weaknesses.
 #### Named vectors
 Data may be formatted using a named vector as a lookup.  Simply ensure that 
 the names on the vector correspond to the values in the vector.  The advantage
-of using a named vector for formatting is its simplicity.  Here is an 
+of using a named vector for formatting is its simplicity.  The disadvantage
+is that is only works with character values. Here is an 
 example of formatting using a named vector:
 ```
 v1 <- c("A", "B", "C", "B")
@@ -114,21 +142,25 @@ data.  Here is an example of a user-defined
 formatting function:
 ```
 v1 <- c("A", "B", "C", "B")
+f1 <- factor(v1, levels = c("A", "B", "C"))
 
-fmt3 <- value(condition(x == "A", "Label A"),
+fmt2 <- value(condition(x == "A", "Label A"),
               condition(x == "B", "Label B"),
               condition(TRUE, "Other"))
               
-fapply(fmt3, v1)
+fapply(fmt2, f1)
 
 ```
 
 #### Vectorized functions
-Vectorized functions provide a very flexible and powerful way of formatting 
-data.  The vectorized functions can be user-created, or an available packaged
-function.  The vectorized function has the advantage of being nearly limitless
-in the types of formatting you can perform.  Here is an example of formatting 
-using a user-defined, vectorized function:
+Vectorized functions provide the most powerful way of formatting 
+data.  Vectorized functions can be user-defined, or wrapping an 
+available packaged function.  The vectorized function has the advantage 
+of being nearly limitless
+in the types of formatting you can perform.  The drawback is that a 
+vectorized function can be more complicated to write.  Here is an 
+example of formatting 
+with a user-defined, vectorized function:
 ```
 v1 <- c("A", "B", "C", "B")
 
@@ -151,35 +183,45 @@ fapply(fmt2, v1)
 
 #### A formatting list
 Sometime data needs to be formatted differently for each row of data.  This 
-situation is normally difficult to deal with.  But it can be made easy 
-with a formatting list.
+situation is normally difficult to deal with in any language.  
+But it can be made easy in R with the **fmtr** package and a formatting list.
 
 A formatting list is a list that contains one or more of the three types
-of formatting objects described above.  The `fapply` function applies the
-list in two different ways: in order, or with a lookup.  
+of formatting objects described above.  A formatting list can be applied
+two different ways: in order, or with a lookup.  
 
 By default, the 
-list is applied in order.  That means, the first format in the list is 
+list is applied in order.  That means the first format in the list is 
 applied to the first item in the vector, the second format in the list is 
-applied to the second item in the vector, as so on.  The list is recycled 
+applied to the second item in the vector, and so on.  The list is recycled 
 if the number of list items is shorter than the number of values in the 
 vector.
 
-For the lookup method, the `fapply` function will apply the formatting 
-object as specified by a lookup vector.  The lookup vector should contain names 
+For the lookup method, the formatting object is specified by a lookup vector.  
+The lookup vector should contain names 
 associated with the elements in the formatting list. The lookup vector should 
 also contain the same number of items as the data vector.  For each item
 in the data vector, the `fapply` function will look up the approprate format
-from the formatting list, and apply that format to corresponding the data value.
+from the formatting list, and apply that format to the
+corresponding data value.
 
 The following is an example of a lookup style formatting list:
 ```
-## Coming soon
+## Coming soon!
 ```
 
 ## Additional Features
 
-### Feature 1
+### The 
 
-### Feature 2
+### The `labels()` function
+The labels associated with a user-defined format object can be extracted
+using the `labels()` function.  This function will return a vector of labels
+that have been assigned in each of the conditions, in the order they were 
+assigned.  This function is useful
+if you wish to create an ordered factor for your data.  You can assign the 
+levels property of the `factor()` function to the output of the 
+`labels()` function
+to keep your data ordered and everything in sync.
+
 

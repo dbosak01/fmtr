@@ -130,29 +130,26 @@ format.data.frame <- function(x, ...) {
 # Testing -----------------------------------------------------------------
 
 # 
-# df1 <- mtcars[1:10, ]
+# df1 <- mtcars[1:10, c("mpg", "cyl") ]
 # 
 # print(df1)
 # 
 # 
-# fmt1 <- value(condition(x >= 20, "H"),
-#                       condition(x < 20, "L"))
+# fmt1 <- value(condition(x >= 20, "High"),
+#                       condition(x < 20, "Low"))
 # 
 # fmt2 <- c(H = "High", L = "Low")
 # 
 # is.format(fmt1)
 # 
-# df1$mpgc <- fapply(fmt1, df1$mpg)
+# #df1$mpgc <- fapply(fmt1, df1$mpg)
 # attr(df1$mpg, "format") <- fmt1
-# attr(df1$mpgc, "format") <- fmt2
+# attr(df1$cyl, "format") <- function(x) {format(x, nsmall = 1)}
 # 
-# df2 <- format(df1, digits = 2, justify = "left")
+# 
+# df2 <- format(df1, justify = "left")
 # df2
 # class(df2)
-# mode(df2)
-# mode(mtcars)
-# 
-# mode(df1$mpg)
 # 
 # 
 # library(tibble)
@@ -181,4 +178,56 @@ format.data.frame <- function(x, ...) {
 # 
 # cat(paste0("\033[0;", "37", "m", "hello","\033[0m","\n"))
 
-
+# v1 <- c("A", "B", "C", "B")
+# 
+# fmt1 <- c(A = "Label A", B = "Label B", C= "Label C")
+# 
+# fapply(fmt1, v1)
+# 
+# 
+# v1 <- c("A", "B", "C", "B")
+# 
+# fmt2 <- Vectorize(function(x) {
+#   
+#   if (x == "A") 
+#     ret <- "Label A"
+#   else if (x == "B")
+#     ret <- "Label B"
+#   else 
+#     ret <- "Other"
+#   
+#   return(ret)
+#   
+# })
+# 
+# fapply(fmt2, v1)
+# 
+# v1 <- c("A", "B", "C", "B")
+# 
+# fmt3 <- value(condition(x == "A", "Label A"),
+#               condition(x == "B", "Label B"),
+#               condition(TRUE, "Other"))
+# 
+# fapply(fmt3, v1)
+# 
+# 
+# v1 <- c("A", "B", "C", "B")
+# 
+# fmt1 <- value(condition(x == "A", "Label A"),
+#               condition(x == "B", "Label B"),
+#               condition(TRUE, "Other"))
+# 
+# fapply(fmt1, v1)
+# v1
+# 
+# 
+# v1 <- c("A", "B", "C", "B", "A", "C")
+# f1 <- factor(v1, levels = c("A", "B", "C"))
+# 
+# fmt2 <- value(condition(x == "A", "Label A"),
+#               condition(x == "B", "Label B"),
+#               condition(TRUE, "Other"))
+# 
+# fapply(fmt2, f1)
+# 
+# 
