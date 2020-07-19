@@ -1,4 +1,4 @@
-#' @title Formats data frames and tibbles
+#' @title Formatting data frames 
 #'
 #' @description The \strong{fmtr} package contains functions to 
 #' format data frames.
@@ -61,4 +61,3 @@
 #' @name fmtr
 NULL
 
-"dfd\u00AE"

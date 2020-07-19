@@ -34,10 +34,10 @@
 #' @export
 #' @aliases format.tbl format.data.frame
 #' @examples 
-#' # Set up vector
+#' # Set up data frame
 #' df <- mtcars[1:10, c("mpg", "cyl")]
 #' 
-#' # Define format
+#' # Define and assign formats
 #' attr(df$mpg, "format") <- value(condition(x >= 20, "High"),
 #'                                 condition(x < 20, "Low"))
 #'                                 
