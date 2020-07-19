@@ -18,10 +18,10 @@ is used to apply formats to data frames and tibbles, and the `fapply()`
 function is used to apply formats to vectors and factors.
 
 
-## How to use `format()`
+## How to use format()
 Data can be formatted by assigning formats to the **format** attribute
 of the columns in your dataframe or tibble, and then by calling the `format()` 
-function on that data frame.  A sample program is as follows:
+function on that data.  A sample program is as follows:
 
 ```
 # Set up data frame
@@ -76,11 +76,10 @@ flexible. Under the hood, the `format()` function is using the `fapply()`
 function on each column in the data frame.  If there is no format assigned
 to a column, that column is returned unaltered.
 
-## How to use `fapply()`
+## How to use fapply()
 
 The `fapply()` function applies a format to a vector or factor. This function 
-may be used independantly of the `format()` function.  Here is an example 
-of using `fapply()`:
+may be used independantly of the `format()` function.  Here is an example:
 ```
 v1 <- c("A", "B", "C", "B")
 
@@ -104,7 +103,8 @@ And here is the vector after formatting:
 One advantage of using `fapply()` is that your original data is not
 altered. The formatted values are assigned to a new object, with no 
 direct connection to your original data values.  If your orignial data 
-changes, the formatting function should be reapplied to maintain consistency.
+changes, the formatting function should be reapplied to maintain consistency
+with the original data.
 
 ## What kind of formats are available
 Data can be formatted with four different types of objects:
@@ -119,9 +119,10 @@ strengths and weaknesses.
 
 #### Named vectors
 Data may be formatted using a named vector as a lookup.  Simply ensure that 
-the names on the vector correspond to the values in the vector.  The advantage
+the names on the formatting vector correspond to the values in the data vector.  
+The advantage
 of using a named vector for formatting is its simplicity.  The disadvantage
-is that is only works with character values. Here is an 
+is that it only works with character values. Here is an 
 example of formatting using a named vector:
 ```
 v1 <- c("A", "B", "C", "B")
@@ -129,6 +130,9 @@ v1 <- c("A", "B", "C", "B")
 fmt1 <- c(A = "Label A", B = "Label B", C= "Label C")
 
 fapply(fmt1, v1)
+
+#         A         B         C         B 
+# "Label A" "Label B" "Label C" "Label B" 
 
 ```
 #### User-defined formats
@@ -149,6 +153,9 @@ fmt2 <- value(condition(x == "A", "Label A"),
               condition(TRUE, "Other"))
               
 fapply(fmt2, f1)
+
+#         A         B         C         B 
+# "Label A" "Label B"   "Other" "Label B" 
 
 ```
 
@@ -179,11 +186,14 @@ fmt2 <- Vectorize(function(x) {
   
 fapply(fmt2, v1)
 
+#         A         B         C         B 
+# "Label A" "Label B"   "Other" "Label B" 
+
 ```
 
 #### A formatting list
-Sometime data needs to be formatted differently for each row of data.  This 
-situation is normally difficult to deal with in any language.  
+Sometimes data needs to be formatted differently for each row.  This 
+situation is difficult to deal with in any language.  
 But it can be made easy in R with the **fmtr** package and a formatting list.
 
 A formatting list is a list that contains one or more of the three types
@@ -201,7 +211,7 @@ For the lookup method, the formatting object is specified by a lookup vector.
 The lookup vector should contain names 
 associated with the elements in the formatting list. The lookup vector should 
 also contain the same number of items as the data vector.  For each item
-in the data vector, the `fapply` function will look up the approprate format
+in the data vector, the **fmtr** will look up the approprate format
 from the formatting list, and apply that format to the
 corresponding data value.
 
@@ -211,8 +221,6 @@ The following is an example of a lookup style formatting list:
 ```
 
 ## Additional Features
-
-### The 
 
 ### The `labels()` function
 The labels associated with a user-defined format object can be extracted
