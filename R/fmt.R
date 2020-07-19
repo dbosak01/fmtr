@@ -253,6 +253,7 @@ eval_conditions <- function(x, conds) {
 #' \code{\link{condition}} to define the conditions for a format.
 #' @export
 #' @examples 
+#' ## Example 1: Named vector ##
 #' # Set up vector
 #' v1 <- c("A", "B", "C", "B")
 #' 
@@ -262,6 +263,7 @@ eval_conditions <- function(x, conds) {
 #' # Apply format to vector
 #' fapply(fmt1, v1)
 #' 
+#' ## Example 2: User-defined format ##
 #' # Define format
 #' fmt2 <- value(condition(x == "A", "Format Label A"),
 #'               condition(x == "B", "Format Label B"), 
@@ -270,6 +272,8 @@ eval_conditions <- function(x, conds) {
 #' # Apply format to vector
 #' fapply(fmt2, v1)
 #' 
+#' ## Example 3: Formatting function ##
+#' # Set up vectorized function
 #' fmt3 <- Vectorize(function(x) {
 #' 
 #'   if (x == "A")
@@ -284,19 +288,35 @@ eval_conditions <- function(x, conds) {
 #' 
 #' # Apply format to vector
 #' fapply(fmt3, v1)
+#' 
+#' ## Example 4: Formatting List ##
+#' # Set up data
+#' # Notice each row has a different data type
+#' v2 <- list(1.258, "H", as.Date("2020-06-19"),
+#'            "L", as.Date("2020-04-24"), 2.8865)
+#' v3 <- c("type1", "type2", "type3", "type2", "type3", "type1")
+#' 
+#' # Create formatting list
+#' lst <- list()
+#' lst$type1 <- function(x) format(x, digits = 2, nsmall = 1)
+#' lst$type2 <- value(condition(x == "H", "High"),
+#'                    condition(x == "L", "Low"),
+#'                    condition(TRUE, "NA"))
+#' lst$type3 <- function(x) format(x, format = "%y-%m")
+#' 
+#' # Apply formatting list to vector
+#' fapply(lst, v2, v3)
 fapply <- function(fmt, vect, lookup = NULL) {
   
-  
   ret <- NULL
-  
-  
-  if (is.vector(fmt))
+
+  if (is.vector(fmt) & is.list(fmt) == FALSE)
     ret <- fmt[vect] 
   else if (is.function(fmt))
     ret <- do.call(fmt, list(vect))
   else if (is.format(fmt)) 
     ret <- mapply(eval_conditions, vect, MoreArgs = list(conds = fmt))
-  else if (is.list(ret))
+  else if (is.list(fmt))
     ret <- flapply(fmt, vect, lookup)
   else 
     stop(paste0("format parameter must be a vector, function, ", 
@@ -309,21 +329,35 @@ fapply <- function(fmt, vect, lookup = NULL) {
 
 
 #' @noRd
-flapply <- function(lst, vect, lookup) {
+flapply <- function(lst, vect, lookup = NULL, return_list = TRUE) {
+
+ print(lookup)  
   
- ret <- NULL
+ if (return_list == TRUE)
+   ret <- list()
+ else 
+   ret <- c()
  
- if (is.null(attr(vect, "format_lookup"))) {
+ fmts <- list()
+ 
+ if (!is.null(lookup)) {
    
+   fmts <- lst[lookup]
    
  } else {
    
-   
+   fmts <- rep(lst, length.out = length(vect))
+ }
+ 
+ for (i in seq_along(vect)) {
+   ret[[i]] <- fapply(fmts[[i]], vect[[i]][1])
  }
  
  return(ret)
   
 }
+
+
 
 
 

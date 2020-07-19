@@ -28,6 +28,7 @@ The function will first determine the type of format, and then apply
 the format in the appropriate way.  Results are returned as a vector.
 }
 \examples{
+## Example 1: Named vector ##
 # Set up vector
 v1 <- c("A", "B", "C", "B")
 
@@ -37,6 +38,7 @@ fmt1 <- c(A = "Vector Label A", B = "Vector Label B", C = "Vector Label C")
 # Apply format to vector
 fapply(fmt1, v1)
 
+## Example 2: User-defined format ##
 # Define format
 fmt2 <- value(condition(x == "A", "Format Label A"),
               condition(x == "B", "Format Label B"), 
@@ -45,6 +47,8 @@ fmt2 <- value(condition(x == "A", "Format Label A"),
 # Apply format to vector
 fapply(fmt2, v1)
 
+## Example 3: Formatting function ##
+# Set up vectorized function
 fmt3 <- Vectorize(function(x) {
 
   if (x == "A")
@@ -59,6 +63,24 @@ fmt3 <- Vectorize(function(x) {
 
 # Apply format to vector
 fapply(fmt3, v1)
+
+## Example 4: Formatting List ##
+# Set up data
+# Notice each row has a different data type
+v2 <- list(1.258, "H", as.Date("2020-06-19"),
+           "L", as.Date("2020-04-24"), 2.8865)
+v3 <- c("type1", "type2", "type3", "type2", "type3", "type1")
+
+# Create formatting list
+lst <- list()
+lst$type1 <- function(x) format(x, digits = 2, nsmall = 1)
+lst$type2 <- value(condition(x == "H", "High"),
+                   condition(x == "L", "Low"),
+                   condition(TRUE, "NA"))
+lst$type3 <- function(x) format(x, format = "\%y-\%m")
+
+# Apply formatting list to vector
+fapply(lst, v2, v3)
 }
 \seealso{
 \code{\link{value}} to define a format,

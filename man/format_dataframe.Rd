@@ -36,18 +36,43 @@ call \code{format_dataframe} on the data.frame class and the tbl (tibble)
 class, respectively.
 }
 \examples{
-# Set up vector
+## Example 1: Simple Formats ##
+# Set up data frame
 df <- mtcars[1:10, c("mpg", "cyl")]
 
-# Define format
+# Define and assign formats
 attr(df$mpg, "format") <- value(condition(x >= 20, "High"),
                                 condition(x < 20, "Low"))
                                 
 attr(df$cyl, "format") <- value(condition(x == 4, "Small"),
-                                condition(x == 6, "Mid-size"),
+                                condition(x == 6, "Midsize"),
                                 condition(x == 8, "Large"))
               
 # Apply formatting
+format(df)
+
+## Example 2: Formatting List ##
+# Set up data
+v1 <- c("type1", "type2", "type3", "type2", "type3", "type1")
+v2 <- list(1.258, "H", as.Date("2020-06-19"),
+           "L", as.Date("2020-04-24"), 2.8865)
+
+df <- data.frame(type = v1, values = I(v2))
+df
+
+# Create formatting list
+lst <- list()
+lst$type1 <- function(x) format(x, digits = 2, nsmall = 1)
+lst$type2 <- value(condition(x == "H", "High"),
+                   condition(x == "L", "Low"),
+                   condition(TRUE, "NA"))
+lst$type3 <- function(x) format(x, format = "\%y-\%m")
+
+# Assign list and lookup to column attributes
+attr(df$values, "format") <- lst
+attr(df$values, "format_lookup") <- "type"
+
+# Apply formatting list
 format(df)
 }
 \seealso{

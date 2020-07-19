@@ -31,7 +31,7 @@ df <- mtcars[1:10, c("mpg", "cyl")]
 attr(df$mpg, "format") <- value(condition(x >= 20, "High"),
                                 condition(x < 20, "Low"))
 
-attr(df$cyl, "format") <- function(x) {format(x, nsmall = 1)}
+attr(df$cyl, "format") <- function(x) format(x, nsmall = 1)
 
 # Apply formatting
 format(df)
@@ -217,19 +217,66 @@ corresponding data value.
 
 The following is an example of a lookup style formatting list:
 ```
-## Coming soon!
+# Set up data
+v1 <- c("type1", "type2", "type3", "type2", "type3", "type1")
+v2 <- list(1.258, "H", as.Date("2020-06-19"),
+           "L", as.Date("2020-04-24"), 2.8865)
+
+df <- data.frame(type = v1, values = I(v2))
+df
+
+#    type     values
+# 1 type1      1.258
+# 2 type2          H
+# 3 type3 2020-06-19
+# 4 type2          L
+# 5 type3 2020-04-24
+# 6 type1     2.8865
+
+# Set up formatting list
+lst <- list()
+lst$type1 <- function(x) format(x, digits = 2, nsmall = 1)
+lst$type2 <- value(condition(x == "H", "High"),
+                   condition(x == "L", "Low"),
+                   condition(TRUE, "NA"))
+lst$type3 <- function(x) format(x, format = "%y-%m")
+
+# Assign formatting list to values column
+attr(df$values, "format") <- lst
+attr(df$values, "format_lookup") <- "type"
+
+# Apply formatting
+format_dataframe(df)
+
+#    type values
+# 1 type1    1.3
+# 2 type2   High
+# 3 type3  20-06
+# 4 type2    Low
+# 5 type3  20-04
+# 6 type1    2.9
+
+
 ```
 
 ## Additional Features
 
-### The `labels()` function
+### The `formats()` function
+The formats associated with a data frame can be easily extracted or 
+assigned with the `formats()` function.  This function returns or accepts 
+a named list of formatting objects.  The names of the list items must 
+correspond to the names of the columns in the data frame.  This function is
+useful when you want to assign column formats from metadata.
+
+### The `labels()` and `levels()` functions
 The labels associated with a user-defined format object can be extracted
-using the `labels()` function.  This function will return a vector of labels
+using the `labels()` or `levels()` function.  These functions will return a 
+vector of labels
 that have been assigned in each of the conditions, in the order they were 
 assigned.  This function is useful
 if you wish to create an ordered factor for your data.  You can assign the 
 levels property of the `factor()` function to the output of the 
-`labels()` function
+`levels()` or `labels()` function
 to keep your data ordered and everything in sync.
 
 
