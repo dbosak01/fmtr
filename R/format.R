@@ -42,7 +42,7 @@
 #'                                 condition(x < 20, "Low"))
 #'                                 
 #' attr(df$cyl, "format") <- value(condition(x == 4, "Small"),
-#'                                 condition(x == 6, "Mid-size"),
+#'                                 condition(x == 6, "Midsize"),
 #'                                 condition(x == 8, "Large"))
 #'               
 #' # Apply formatting
@@ -80,6 +80,11 @@ format_dataframe <- function(x, ...) {
   if (any(class(x) == "tbl_df")) {
     
     ret <- as_tibble(ret)
+    
+    # Getting a missing or unexported object error on this
+    # Not sure why. It exists.
+    # Commenting out for now.
+    #ret <- tibble::format.tbl(ret, ...)
     
   }
   
@@ -124,7 +129,7 @@ format.data.frame <- function(x, ...) {
 
 # Testing -----------------------------------------------------------------
 
-
+# 
 # df1 <- mtcars[1:10, ]
 # 
 # print(df1)
@@ -148,9 +153,7 @@ format.data.frame <- function(x, ...) {
 # mode(mtcars)
 # 
 # mode(df1$mpg)
-
-
-# all(class(tb1) == "data.frame")
+# 
 # 
 # library(tibble)
 # tb1 <- tibble(mtcars[1:10, ])
@@ -158,15 +161,17 @@ format.data.frame <- function(x, ...) {
 # class(tb1)
 # print(tb1)
 # 
-# tb1$mpgc <- apply_format(fmt1, tb1$mpg)
+# tb1$mpgc <- fapply(fmt1, tb1$mpg)
 # attr(tb1$mpg, "format") <- fmt1
 # attr(tb1$mpgc, "format") <- fmt2
 # tb1
 # 
-# tb2 <- format(tb1, digits = 2)
-# tb2
-# class(tb2)
 # 
+# tibble::format.tbl()
+# tb2 <- format(tb1)
+# print(tb2, n = 5)
+# class(tb2)
+#
 # base::format(tb1)
 # 
 
@@ -176,34 +181,4 @@ format.data.frame <- function(x, ...) {
 # 
 # cat(paste0("\033[0;", "37", "m", "hello","\033[0m","\n"))
 
-# 
-# 
-# 
-# class(tibble(mtcars))
-# 
-# 
-# attr(f2$mpg, "format") <- fmt1
-# format(f2)
-# 
-# 
-# format(1:10)
-# format(1:10, trim = TRUE)
-# 
-# zz <- data.frame(col1= c("aaaaa", "b"), col2 = c(1, 2))
-# format(zz)
-# format(zz, justify = "left")
-# 
-# ## use of nsmall
-# format(13.7)
-# format(13.7, nsmall = 3)
-# format(c(6.0, 13.1), digits = 2)
-# format(c(6.0, 13.1), digits = 2, nsmall = 1)
-# 
-# tbl1 <- mtcars[1:10, ]
-# 
-# attr(tbl1$mpg, "format") <- fmt1
-# 
-# format(tbl1, digits = 2)
-# 
-# 
-# base::format(tbl1, digits = 2)
+
