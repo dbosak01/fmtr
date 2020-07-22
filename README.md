@@ -3,7 +3,7 @@
 <!-- badges: start -->
 
 [![logr version](https://www.r-pkg.org/badges/version/fmtr)](https://cran.r-project.org/package=fmtr)
-[![logr lifecycle](https://img.shields.io/badge/lifecycle-stable-blue.svg)](https://cran.r-project.org/package=fmtr)
+[![logr lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://cran.r-project.org/package=fmtr)
 [![logr downloads](https://cranlogs.r-pkg.org/badges/grand-total/fmtr)](https://cran.r-project.org/package=fmtr)
 [![Travis build status](https://travis-ci.com/dbosak01/logr.svg?branch=master)](https://travis-ci.com/dbosak01/fmtr)
 
@@ -246,7 +246,7 @@ attr(df$values, "format") <- lst
 attr(df$values, "format_lookup") <- "type"
 
 # Apply formatting
-format_dataframe(df)
+format_data(df)
 
 #    type values
 # 1 type1    1.3

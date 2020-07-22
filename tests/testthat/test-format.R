@@ -124,7 +124,7 @@ test_that("format() function works as expected with list of formats.", {
   attr(df$values, "format") <- lst
   attr(df$values, "format_lookup") <- "type"
   
-  format_dataframe(df)
+  format_data(df)
   
   lst2 <- list()
   lst2[[1]] <- lst$type1
@@ -138,7 +138,7 @@ test_that("format() function works as expected with list of formats.", {
   attr(df$values, "format") <- lst2
   attr(df$values, "format_lookup") <- NULL
   
-  format_dataframe(df)
+  format_data(df)
 
 
 })

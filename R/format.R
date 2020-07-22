@@ -3,25 +3,25 @@
 # Format Functions ----------------------------------------------
 
 #' @title
-#' Format a data table
+#' Format a data frame or tibble
 #' 
 #' @description 
-#' The \code{format_dataframe} function applies formatting attributes
+#' The \code{format_data} function applies formatting attributes
 #' to the entire data frame.
 #' 
 #' @details 
 #' If formats are assigned to the "format" attributes of the data frame
-#' columns, the \code{format_dataframe} function will apply those formats
+#' columns, the \code{format_data} function will apply those formats
 #' to the specified columns, and return a new formatted data frame. 
 #' Format can be specified as named vectors, vectorized formatting functions, 
-#' or a user-defined format.  The \code{format_dataframe} function will
+#' or a user-defined format.  The \code{format_data} function will
 #' apply the format to the associated column data using the \code{fapply} 
 #' function.  A format can also be specified as a list of 
 #' formats of the previous three types.  
 #' 
-#' The \code{format_dataframe} function has two overrides: 
+#' The \code{format_data} function has two overrides: 
 #' \code{format.data.frame} and \code{format.tbl}.  The two overrides will
-#' call \code{format_dataframe} on the data.frame class and the tbl (tibble)
+#' call \code{format_data} on the data.frame class and the tbl (tibble)
 #' class, respectively.
 #'
 #' @param x A data frame or tibble to be formatted.
@@ -72,7 +72,7 @@
 #' 
 #' # Apply formatting list
 #' format(df)
-format_dataframe <- function(x, ...) {
+format_data <- function(x, ...) {
   
   
   if (all(class(x) != "data.frame"))
@@ -133,25 +133,25 @@ format_dataframe <- function(x, ...) {
   
 }
 
-#' @aliases format_dataframe
+#' @aliases format_data
 #' @export 
 format.tbl <- function(x, ...) {
 
 
 
-  fbl <- format_dataframe(x, ...)
+  fbl <- format_data(x, ...)
 
 
   return(fbl)
 }
 
 
-#' @aliases format_dataframe
+#' @aliases format_data
 #' @export 
 format.data.frame <- function(x, ...) {
   
   
-  fbl <- format_dataframe(x, ...)
+  fbl <- format_data(x, ...)
 
   
   return(fbl)

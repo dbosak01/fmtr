@@ -31,7 +31,7 @@ The two main functions include in the \strong{fmtr} package are as follows:
   \item \code{\link{value}}
 }
 
-The \code{format_dataframe()} function applies the format attributes 
+The \code{format_data()} function applies the format attributes 
 to the dataframe.  
 
 The \code{value()} function creates a new
