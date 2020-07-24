@@ -81,27 +81,29 @@ format_data <- function(x, ...) {
   ret <- list()
   for (nm in names(x)) {
     
-    if (is.null(attr(x[[nm]], "format")) == FALSE) {
-      
-      fmt <- attr(x[[nm]], "format")
-
-      if (is.list(fmt)) {
-        lkp <- attr(x[[nm]], "format_lookup")
-        if (is.null(lkp) == FALSE && is.null(x[[lkp]]))
-            stop(paste0("Format lookup for column '", nm, "' not found: ", lkp))
-        
-        if (is.null(lkp) || is.character(lkp) == FALSE)
-          ret[[length(ret) + 1]] <- I(fapply(fmt, x[[nm]]))
-        else 
-          ret[[length(ret) + 1]] <- I(fapply(fmt, x[[nm]], x[[lkp]]))
-      } else {
-        ret[[length(ret) + 1]] <- fapply(fmt, x[[nm]])
-      }
-      
-    } else {
-      
-      ret[[length(ret) + 1]] <- x[[nm]]
-    }
+    # if (is.null(attr(x[[nm]], "format")) == FALSE) {
+    #   
+    #   fmt <- attr(x[[nm]], "format")
+    # 
+    #   if (is.list(fmt)) {
+    #     lkp <- attr(x[[nm]], "format_lookup")
+    #     if (is.null(lkp) == FALSE && is.null(x[[lkp]]))
+    #         stop(paste0("Format lookup for column '", nm, "' not found: ", lkp))
+    #     
+    #     if (is.null(lkp) || is.character(lkp) == FALSE)
+    #       ret[[length(ret) + 1]] <- I(fapply(fmt, x[[nm]]))
+    #     else 
+    #       ret[[length(ret) + 1]] <- I(fapply(fmt, x[[nm]], x[[lkp]]))
+    #   } else {
+    #     ret[[length(ret) + 1]] <- fapply(fmt, x[[nm]])
+    #   }
+    #   
+    # } else {
+    #   
+    #   ret[[length(ret) + 1]] <- x[[nm]]
+    # }
+    
+    ret[[length(ret) + 1]] <- fapply(x[[nm]])
     
   }
   

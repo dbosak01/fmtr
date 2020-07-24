@@ -311,3 +311,36 @@ fapply(t1)
 fapply(c(4, 3, 2, 1.2))
 fapply(c("My", "Crazy", "Testing"))
 fapply(as.Date(c("2020-06-21", "2020-09-18", NA)), width = 15, format = "%d%b%Y")
+
+fapply(f, format = function(x) trimws(format(x, big.mark = ",", digits = 1, nsmall = 1)))
+
+
+format(f)
+
+library(randomNames)
+
+# No missing values
+subjid <- 100:109
+name <- randomNames(10)
+sex <- factor(c("M", "F", "F", "M", "M", "F", "M", "F", "F", "M"),
+              levels =  c("M", "F", "UNK"))
+age <- c(41.3, 53.9567, 43.2, 39.734, 47, 52, 21, 38, 62, 26)
+arm <- c(rep("A", 5), rep("B", 5))
+
+name <- fattr(name, justify = "left")
+sex <- fattr(sex, format = c(M = "Male", F = "Female"))
+age <- fattr(age, format = "%6.1f", justify = "left")
+arm <- fattr(arm, format = "Arm: %s")
+
+
+# Create data frame
+df <- data.frame(subjid, name, sex, age, arm)
+df
+
+
+
+fapply(df$sex)
+fapply(df$age)
+fapply(df$arm)
+format(df)
+
