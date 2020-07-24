@@ -25,12 +25,13 @@ eval_conditions <- function(x, conds) {
 #' vectorized functions, user-defined formats, or a list of formats.
 #' The function will first determine the type of format, and then apply 
 #' the format in the appropriate way.  Results are returned as a vector.
-#'
-#' @param fmt A format to be applied.
+#' 
 #' @param vect A vector to apply the format to.
-#' @param lookup An optional lookup vector. This parameter is used when the
-#' format is a list.  If specified, the function will first lookup which 
-#' format to apply, and then apply it to the vector value.
+#' @param format A format to be applied.
+#' @param width The desired character width of the formatted vector.  Default
+#' value is NULL, meaning the vector will be variable width.
+#' @param justify Whether to justify the return vector.  Valid values are 
+#' 'left', 'right', 'center', 'centre', or 'none'. 
 #' @return A vector of formatted values.
 #' @seealso \code{\link{value}} to define a format,
 #' \code{\link{condition}} to define the conditions for a format.
@@ -89,28 +90,93 @@ eval_conditions <- function(x, conds) {
 #' 
 #' # Apply formatting list to vector
 #' fapply(lst, v2, v3)
-fapply <- function(fmt, vect) {
+fapply <- function(vect, format = NULL, width = NULL, justify = NULL) {
   
   ret <- NULL
   
-  if (is.vector(fmt) & is.list(fmt) == FALSE)
-    ret <- fmt[vect] 
-  else if (is.function(fmt))
-    ret <- do.call(fmt, list(vect))
-  else if (is.format(fmt)) 
-    ret <- mapply(eval_conditions, vect, MoreArgs = list(conds = fmt))
-  else if (is.flist(fmt))
+  # Get attribute value if available
+  if (is.null(format) & is.null(attr(vect, "format")) == FALSE) 
+    format <- attr(vect, "format")
+    
+  if (is.null(width) & is.null(attr(vect, "width")) == FALSE)
+    width <- attr(vect, "width")
+  
+  if (is.null(justify) & is.null(attr(vect, "justify")) == FALSE)
+    justify <- attr(vect, "justify")
+  
+  
+  if (is.vector(format) & is.list(format) == FALSE) {
+   
+    if (length(format) == 1)
+      ret <- format_vector(vect, format)
+    else
+      ret <- format[vect] 
+    
+  }
+  else if (is.function(format))
+    ret <- do.call(format, list(vect))
+  else if (is.format(format)) 
+    ret <- mapply(eval_conditions, vect, MoreArgs = list(conds = format))
+  else if (is.flist(format))
     if (fmt$type == "row")
-      ret <- flist_row_apply(fmt, vect, lookup)
+      ret <- flist_row_apply(format, vect, lookup)
     else 
-      ret <- flist_column_apply(fmt, vect)
+      ret <- flist_column_apply(format, vect)
+  else if (is.null(format))
+      ret <- vect
   else 
     stop(paste0("format parameter must be a vector, function, ", 
                 "user-defined format, or list."))
   
+
+  ret <- justify_vector(ret, width, justify)
   
   return(ret)
   
+}
+
+
+format_vector <- function(x, fmt) {
+ 
+  if (any(class(x) %in% c("Date", "POSIXt")))
+    ret <- format(x, format = fmt)
+  else if (any(class(x) %in% c("numeric", "character", "integer"))) {
+    
+   ret <- sprintf(fmt, x)
+   
+  }
+  
+  return(ret)
+  
+}
+
+#' @noRd
+justify_vector <- function(x, width = NULL, justify = NULL) {
+  
+  
+  if (is.null(width) & is.null(justify)) {
+    
+    ret <- x
+    
+  } else {
+    
+    jst <- justify
+    if (is.null(justify) == FALSE) {
+      if (justify == "center")
+        jst <- "centre"
+    }
+
+    if (is.null(justify) == FALSE & any(class(x) %in% c("integer", "numeric"))){
+      ret <- format(as.character(x), width = width, justify = jst)
+    } else if (any(class(x) %in% c("Date", "POSIXt")))
+      ret <- format(as.character(x), width = width, justify = jst)
+    else
+      ret <- format(x, width = width, justify = jst)
+
+  
+  }
+
+  return(ret)
 }
 
 
@@ -144,6 +210,7 @@ flist_row_apply <- function(lst, vect) {
   
 }
 
+#' @noRd
 flist_column_apply <- function(lst, vect) {
   
   print(lookup)  
@@ -173,6 +240,74 @@ flist_column_apply <- function(lst, vect) {
 }
 
 
+# Format attributes -------------------------------------------------------
+
+
+
+fattr <- function(x, format = NULL, width = NULL, justify = NULL) {
+  
+  attr(x, "format") <- format
+  attr(x, "width") <- width
+  attr(x, "justify") <- justify
+  
+  return(x)
+  
+}
+
+"fattr<-" <- function(x, value) {
+  
+  attr(x, "format") <- value[["format"]]
+  attr(x, "width") <- value[["width"]]
+  attr(x, "justify") <- value[["justify"]]
+  
+  return(x)
+  
+}
+
 # Testing -----------------------------------------------------------------
 
 
+
+t <- c("A", "B", "B", "UNK", "A")
+n <- c(1L, 2L, 3L, 10L, 11838L)
+f <- c(1.2, 2, 3.3577, 10.39488, 11838.3)
+d <- c("2020-05-02", "2020-08", "2020-10-17")
+d <- as.Date(d)
+d
+l <- c(A = "Var A", B = "Var B", UNK = "Unknown")
+
+
+fapply(t, width = 10)
+fapply(n, width = 10)
+fapply(f, width = 10)
+fapply(d, width = 15)  
+
+
+fapply(t, justify = "right")
+fapply(n, justify = "center")
+fapply(f, justify = "left")
+fapply(d, justify = "center")
+
+
+fapply(t, width = 10, justify = "right")
+fapply(n, width = 10, justify = "center")
+fapply(f, width = 10, justify = "left")
+fapply(d, width = 15, justify = "left")
+
+
+fapply(t, fmt = "My Stuff: %s")
+fapply(n, fmt = "%+6d")
+fapply(f, fmt = "%6.1f%%")
+fapply(d, fmt = "%d%b%Y")
+
+fapply(t, width = 10, justify = "right", fmt = "My Stuff: %s")
+fapply(n, width = 10, justify = "center", fmt = "%+d")
+fapply(f, width = 10, justify = "left", fmt = "%.1f%%")
+fapply(d, width = 15, justify = "right", fmt = "%d%b%Y")
+
+t1 <- fattr(t, "My stuff: %s", width = 10, justify = "right")
+fapply(t1)
+
+fapply(c(4, 3, 2, 1.2))
+fapply(c("My", "Crazy", "Testing"))
+fapply(as.Date(c("2020-06-21", "2020-09-18", NA)), width = 15, format = "%d%b%Y")
