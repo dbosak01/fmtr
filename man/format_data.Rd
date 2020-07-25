@@ -24,11 +24,13 @@ to the entire data frame.
 If formats are assigned to the "format" attributes of the data frame
 columns, the \code{format_data} function will apply those formats
 to the specified columns, and return a new formatted data frame. 
-Format can be specified as named vectors, vectorized formatting functions, 
-or a user-defined format.  The \code{format_data} function will
+Format can be specified as formatting strings, named vectors, user-defined
+formats, or vectorized formatting functions.  The \code{format_data} 
+function will
 apply the format to the associated column data using the \code{fapply} 
 function.  A format can also be specified as a list of 
-formats of the previous three types.  
+formats of the previous four types.  See the \code{\link{fapply}}
+function for additional information.
 
 The \code{format_data} function has two overrides: 
 \code{format.data.frame} and \code{format.tbl}.  The two overrides will
@@ -53,30 +55,30 @@ format(df)
 
 ## Example 2: Formatting List ##
 # Set up data
-v1 <- c("type1", "type2", "type3", "type2", "type3", "type1")
-v2 <- list(1.258, "H", as.Date("2020-06-19"),
-           "L", as.Date("2020-04-24"), 2.8865)
+v1 <- c("num", "char", "date", "char", "date", "num")
+v2 <- list(1.258, "H", Sys.Date(),
+           "L", Sys.Date() + 60, 2.8865)
 
 df <- data.frame(type = v1, values = I(v2))
 df
 
 # Create formatting list
-lst <- list()
-lst$type1 <- function(x) format(x, digits = 2, nsmall = 1)
-lst$type2 <- value(condition(x == "H", "High"),
-                   condition(x == "L", "Low"),
-                   condition(TRUE, "NA"))
-lst$type3 <- function(x) format(x, format = "\%y-\%m")
+lst <- flist(type = "row", lookup = v1, 
+             num = "\%.1f",
+             char = value(condition(x == "H", "High"),
+                          condition(x == "L", "Low"),
+                          condition(TRUE, "NA")),
+             date = "\%d\%b\%y")
 
 # Assign list and lookup to column attributes
-attr(df$values, "format") <- lst
-attr(df$values, "format_lookup") <- "type"
+df$values <- fattr(df$values, format = lst)
 
 # Apply formatting list
 format(df)
 }
 \seealso{
 \code{\link{value}} to define a format,
-\code{\link{levels}} or \code{labels} to access the labels, and 
-\code{\link{fapply}} to apply the format to a vector.
+\code{\link{fattr}} to apply formatting to a column/vector, and the
+\code{\link{formats}}, \code{\link{widths}}, and \code{\link{justification}}
+functions to get or set formatting for an entire data frame.
 }

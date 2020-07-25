@@ -7,6 +7,8 @@
 fapply(x, format = NULL, width = NULL, justify = NULL)
 }
 \arguments{
+\item{x}{A vector, factor, or list to apply the format to.}
+
 \item{format}{A format to be applied.}
 
 \item{width}{The desired character width of the formatted vector.  Default
@@ -14,8 +16,6 @@ value is NULL, meaning the vector will be variable width.}
 
 \item{justify}{Whether to justify the return vector.  Valid values are 
 'left', 'right', 'center', 'centre', or 'none'.}
-
-\item{vect}{A vector to apply the format to.}
 }
 \value{
 A vector of formatted values.

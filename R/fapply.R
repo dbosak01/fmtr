@@ -42,7 +42,7 @@
 #' the most flexibility and power over your formatting.  You can use 
 #' an existing formatting function from any package, or create 
 #' your own user-defined formatting function.
-#' @param vect A vector to apply the format to.
+#' @param x A vector, factor, or list to apply the format to.
 #' @param format A format to be applied.
 #' @param width The desired character width of the formatted vector.  Default
 #' value is NULL, meaning the vector will be variable width.

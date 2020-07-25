@@ -87,35 +87,26 @@ test_that("format() function works as expected with list of formats.", {
              "L", as.Date("2020-04-24"), 2.8865)
   
   df <- data.frame(type = v1, values = I(v2))
+  df
   
-  
-  lst <- list()
-  lst$type1 <- function(x) format(x, digits = 2, nsmall = 1)
-  lst$type2 <- value(condition(x == "H", "High"),
-                     condition(x == "L", "Low"),
-                     condition(TRUE, "NA"))
-  lst$type3 <- function(x) format(x, format = "%y-%m")
+  lst <- flist(type  = "row", lookup = v1,
+               type1 = "%.1f",
+               type2 = value(condition(x == "H", "High"),
+                              condition(x == "L", "Low"),
+                              condition(TRUE, "NA")),
+               type3 = "%y-%m")
   
   
   attr(df$values, "format") <- lst
-  attr(df$values, "format_lookup") <- "type"
+  df$values
   
-  format_data(df)
-  
-  lst2 <- list()
-  lst2[[1]] <- lst$type1
-  lst2[[2]] <- lst$type2
-  lst2[[3]] <- lst$type3
-  lst2[[4]] <- lst$type2
-  lst2[[5]] <- lst$type3
-  lst2[[6]] <- lst$type1
+  ret <- format_data(df)
+  ret
   
   
-  attr(df$values, "format") <- lst2
-  attr(df$values, "format_lookup") <- NULL
-  
-  format_data(df)
-
+  expect_equal(ret[[1, 2]], "1.3")
+  expect_equal(ret[[2, 2]], "High")
+  expect_equal(ret[[3, 2]], "20-06")
 
 })
 
