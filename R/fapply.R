@@ -94,41 +94,42 @@ fapply <- function(vect, format = NULL, width = NULL, justify = NULL) {
   
   ret <- NULL
   
-  # Get attribute value if available
+  # Get attribute values if available
   if (is.null(format) & is.null(attr(vect, "format")) == FALSE) 
     format <- attr(vect, "format")
-    
   if (is.null(width) & is.null(attr(vect, "width")) == FALSE)
     width <- attr(vect, "width")
-  
   if (is.null(justify) & is.null(attr(vect, "justify")) == FALSE)
     justify <- attr(vect, "justify")
   
-  
+  # Perform different operations depending on type of format
   if (is.vector(format) & is.list(format) == FALSE) {
    
     if (length(format) == 1)
       ret <- format_vector(vect, format)
-    else
+    else {
       ret <- format[vect] 
+      names(ret) <- NULL
+    }
     
   }
   else if (is.function(format))
     ret <- do.call(format, list(vect))
   else if (is.format(format)) 
     ret <- mapply(eval_conditions, vect, MoreArgs = list(conds = format))
-  else if (is.flist(format))
-    if (fmt$type == "row")
-      ret <- flist_row_apply(format, vect, lookup)
+  else if (is.flist(format)) {
+    print("Process Flist")
+    if (format$type == "row")
+      ret <- flist_row_apply(format, vect)
     else 
       ret <- flist_column_apply(format, vect)
-  else if (is.null(format))
+  } else if (is.null(format))
       ret <- vect
   else 
     stop(paste0("format parameter must be a vector, function, ", 
                 "user-defined format, or list."))
   
-
+  
   ret <- justify_vector(ret, width, justify)
   
   return(ret)
@@ -138,6 +139,9 @@ fapply <- function(vect, format = NULL, width = NULL, justify = NULL) {
 
 format_vector <- function(x, fmt) {
  
+  print(paste("Vector:", x))
+  print(paste("Format:", fmt))
+  print(paste("Class:", class(x)))
   if (any(class(x) %in% c("Date", "POSIXt")))
     ret <- format(x, format = fmt)
   else if (any(class(x) %in% c("numeric", "character", "integer"))) {
@@ -159,6 +163,9 @@ justify_vector <- function(x, width = NULL, justify = NULL) {
     ret <- x
     
   } else {
+    
+    
+    print("Sammy")
     
     jst <- justify
     if (is.null(justify) == FALSE) {
@@ -183,28 +190,34 @@ justify_vector <- function(x, width = NULL, justify = NULL) {
 #' @noRd
 flist_row_apply <- function(lst, vect) {
   
-  print(lookup)  
+  print("Here1")
   
-  if (lst$return_type == "list")
-    ret <- list()
-  else 
-    ret <- c()
+  ret <- c()
+  
+  print(paste("Ret:", class(ret)))
   
   fmts <- list()
   
   if (!is.null(lst$lookup)) {
     
-    fmts <- lst[lst$lookup]
+    print("Here2")
+    fmts <- lst$formats[lst$lookup]
+    print(fmts)
     
   } else {
     
-    
-    fmts <- rep(lst, length.out = length(vect))
+    print("Here2a")
+    fmts <- rep(lst$formats, length.out = length(vect))
+    print(fmts)
   }
   
+  print("Here3")
   for (i in seq_along(vect)) {
-    ret[[i]] <- fapply(fmts[[i]], vect[[i]][1])
+    ret[[i]] <- fapply(vect[[i]][1], fmts[[i]])
   }
+  
+  if (lst$return_type == "vector")
+    ret <- unlist(ret)
   
   return(ret)
   
@@ -225,6 +238,7 @@ flist_column_apply <- function(lst, vect) {
   if (!is.null(lookup)) {
     
     fmts <- lst[lookup]
+    print(fmts)
     
   } else {
     
@@ -234,6 +248,7 @@ flist_column_apply <- function(lst, vect) {
   for (i in seq_along(vect)) {
     ret[[i]] <- fapply(fmts[[i]], vect[[i]][1])
   }
+  
   
   return(ret)
   
@@ -267,80 +282,46 @@ fattr <- function(x, format = NULL, width = NULL, justify = NULL) {
 # Testing -----------------------------------------------------------------
 
 
+# flist lookup
+a <- list("A", 1.263, "B", as.Date("2020-07-21"), 5.8732, as.Date("2020-10-17"))
+b <- c("f1", "f2", "f1", "f3", "f2", "f3")
 
-t <- c("A", "B", "B", "UNK", "A")
-n <- c(1L, 2L, 3L, 10L, 11838L)
-f <- c(1.2, 2, 3.3577, 10.39488, 11838.3)
-d <- c("2020-05-02", "2020-08", "2020-10-17")
-d <- as.Date(d)
-d
-l <- c(A = "Var A", B = "Var B", UNK = "Unknown")
+fl <- flist(f1 = c(A = "Label A", B = "Label B"),
+            f2 = "%.1f",
+            f3 = "%d%b%Y",
+            type = "row",
+            lookup = b)
+a <- fattr(a, format = fl)
 
+fl
 
-fapply(t, width = 10)
-fapply(n, width = 10)
-fapply(f, width = 10)
-fapply(d, width = 15)  
-
-
-fapply(t, justify = "right")
-fapply(n, justify = "center")
-fapply(f, justify = "left")
-fapply(d, justify = "center")
+r <- fapply(a)
+r
+class(r)
 
 
-fapply(t, width = 10, justify = "right")
-fapply(n, width = 10, justify = "center")
-fapply(f, width = 10, justify = "left")
-fapply(d, width = 15, justify = "left")
+# flist type row
+a <- list("A", 1.263, as.Date("2020-07-21"), "B", 5.8732, as.Date("2020-10-17"))
+fmt1 <- c(A = "Label A", B = "Label B")
+fmt2 <- "%.1f"
+fmt3 <- "%d%b%Y"
+  
+fl <- flist(fmt1, fmt2, fmt3,
+            type = "row")
+a <- fattr(a, format = fl)
 
+fl
 
-fapply(t, fmt = "My Stuff: %s")
-fapply(n, fmt = "%+6d")
-fapply(f, fmt = "%6.1f%%")
-fapply(d, fmt = "%d%b%Y")
-
-fapply(t, width = 10, justify = "right", fmt = "My Stuff: %s")
-fapply(n, width = 10, justify = "center", fmt = "%+d")
-fapply(f, width = 10, justify = "left", fmt = "%.1f%%")
-fapply(d, width = 15, justify = "right", fmt = "%d%b%Y")
-
-t1 <- fattr(t, "My stuff: %s", width = 10, justify = "right")
-fapply(t1)
-
-fapply(c(4, 3, 2, 1.2))
-fapply(c("My", "Crazy", "Testing"))
-fapply(as.Date(c("2020-06-21", "2020-09-18", NA)), width = 15, format = "%d%b%Y")
-
-fapply(f, format = function(x) trimws(format(x, big.mark = ",", digits = 1, nsmall = 1)))
-
-
-format(f)
-
-library(randomNames)
-
-# No missing values
-subjid <- 100:109
-name <- randomNames(10)
-sex <- factor(c("M", "F", "F", "M", "M", "F", "M", "F", "F", "M"),
-              levels =  c("M", "F", "UNK"))
-age <- c(41.3, 53.9567, 43.2, 39.734, 47, 52, 21, 38, 62, 26)
-arm <- c(rep("A", 5), rep("B", 5))
-
-name <- fattr(name, justify = "left")
-sex <- fattr(sex, format = c(M = "Male", F = "Female"))
-age <- fattr(age, format = "%6.1f", justify = "left")
-arm <- fattr(arm, format = "Arm: %s")
-
-
-# Create data frame
-df <- data.frame(subjid, name, sex, age, arm)
-df
+r <- fapply(a,  justify = "right")
+r
+class(r)
 
 
 
-fapply(df$sex)
-fapply(df$age)
-fapply(df$arm)
-format(df)
+# flist type col
+b <- c(1.2356, 8.345, 4.5422)
+
+fl2 <- flist(function(x) round(x, 2), "$%f")
+b <- fattr(b, format = fl2)
+fapply(b)
 

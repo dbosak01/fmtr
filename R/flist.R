@@ -20,7 +20,7 @@ flist <- function(..., type = "column", lookup = NULL, return_type = "vector") {
   x$formats <- list(...)
   x$type <- type
   x$lookup <- lookup
-  return_type <- return_type
+  x$return_type <- return_type
   
   
   return(x)

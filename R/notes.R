@@ -3,4 +3,4 @@
 #' Additional class for containing multiple formats: fmt_lst
 #' Additional function for applying a format to a vector: fapply
 #' Additional/override functions for applying formats to data: format_data
-#' 
+#' Convenience functions: fattr(), formats(), 
