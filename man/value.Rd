@@ -41,13 +41,13 @@ fmt1 <- value(condition(x == "A", "Label A"),
               condition(TRUE, "Other"))
               
 # Apply format to vector
-fapply(fmt1, v1)
+fapply(v1, fmt1)
 
 fmt2 <- value(condition(x == "A", 1),
               condition(x == "B", 2),
               condition(TRUE, 3))
 
-fapply(fmt2, v1)
+fapply(v1, fmt2)
 
 #' # Set up vector
 v2 <- c(1, 6, 11, 7)
@@ -58,7 +58,7 @@ fmt3 <- value(condition(x < 5, "Low"),
               condition(TRUE, "Out of range"))
               
 # Apply format to vector
-fapply(fmt3, v2)
+fapply(v2, fmt3)
 }
 \seealso{
 \code{\link{condition}} to define a condition,

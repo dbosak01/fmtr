@@ -76,30 +76,6 @@ test_that("format() function works as expected with vectorized function.", {
   
 })
 
-test_that("formats() function works as expected.", {
-  
-  df1 <- mtcars[1:10, c("mpg", "cyl") ]
-
-
-  # Assign formats
-  attr(df1$mpg, "format") <- value(condition(x >= 20, "High"),
-                                   condition(x < 20, "Low"))
-  attr(df1$cyl, "format") <- function(x) format(x, nsmall = 1)
-
-
-  # Extract format list
-  lst <- formats(df1)
-  
-  expect_equal(length(lst), 2)
-
-  # Alter format list and reassign
-  lst$mpg <- value(condition(x >= 22, "High"),
-                   condition(x < 22, "Low"))
-  lst$cyl <- function(x) format(x, nsmall = 2)
-  formats(df1) <-  lst
-  
-  
-})
 
 
 

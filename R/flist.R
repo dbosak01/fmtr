@@ -1,6 +1,63 @@
 
 
-
+#' @title Create a formatting list
+#' @description A formatting list contains more than one formatting object
+#' @details 
+#' To apply more than one formatting object to a vector, use a formatting
+#' list.  
+#' @param ... A set of formatting objects.
+#' @param type The type of formatting list.  Valid values are 'row' or 'column'.
+#' The default value is 'column'.
+#' @param lookup A lookup vector.  Used for looking up the format from 
+#' the formatting list.  This parameter is only used for 'row' type 
+#' formatting lists.
+#' @param return_type The type of data structure to return.  Valid values are
+#' 'vector' or 'list'.  Default is 'vector'.
+#' @return A vector or list of formatted values.
+#' @export
+#' @examples
+#' #' ## Example 1: Formatting List - Column Type ##
+#' # Set up data
+#' v1 <- c(Sys.Date(), Sys.Date() + 30, Sys.Date() + 60)
+#' 
+#' # Create formatting list
+#' fl1 <- flist("%B", "The month is: %s")
+#' 
+#' # Apply formatting list to vector
+#' fapply(v1, fl1)
+#' 
+#' ## Example 1: flist type ordered row ##
+#' # Set up data
+#' # Notice each row has a different data type
+#' l1 <- list("A", 1.263, as.Date("2020-07-21"), 
+#'           "B", 5.8732, as.Date("2020-10-17"))
+#'           
+#' # These formats will be recycled in the order specified           
+#' fl2 <- flist(type = "row",
+#'              c(A = "Label A", B = "Label B"),
+#'              "%.1f",
+#'              "%d%b%Y")
+#' 
+#' fapply(l1, fl2)
+#' 
+#' ## Example 3: Formatting List - Row Type with lookup ##
+#' # Set up data
+#' # Notice each row has a different data type
+#' l2 <- list(2841.258, "H", as.Date("2020-06-19"),
+#'            "L", as.Date("2020-04-24"), 1382.8865)
+#' v3 <- c("type1", "type2", "type3", "type2", "type3", "type1")
+#' 
+#' # Create formatting list
+#' fl3 <- flist(type = "row", lookup = v3,
+#'              type1 = function(x) format(x, digits = 2, nsmall = 1, 
+#'                                   big.mark=","),
+#'              type2 = value(condition(x == "H", "High"),
+#'                      condition(x == "L", "Low"),
+#'                      condition(TRUE, "NA")),
+#'              type3 = "%d%b%Y")
+#' 
+#' # Apply formatting list to vector, using lookup
+#' fapply(l2, fl3)
 flist <- function(..., type = "column", lookup = NULL, return_type = "vector") {
   
   if (!type %in% c("column", "row"))
@@ -27,7 +84,16 @@ flist <- function(..., type = "column", lookup = NULL, return_type = "vector") {
   
 }
 
-
+#' @title Is object a formatting list
+#' @description Determines if object is a formatting list of class 'fmt_lst'.
+#' @param x Object to test.
+#' @return TRUE or FALSE, depending on class of object.
+#' @export
+#' @examples
+#' # Create flist
+#' flst <- flist("%d%b%Y", "%.1f")
+#' is.flist(flst)
+#' is.flist("A")
 is.flist <- function(x) {
  
   if (any(class(x) == "fmt_lst"))

@@ -2,31 +2,65 @@
 % Please edit documentation in R/fapply.R
 \name{fapply}
 \alias{fapply}
-\title{Apply a format to a vector}
+\title{Apply formatting to a vector}
 \usage{
-fapply(fmt, vect, lookup = NULL)
+fapply(x, format = NULL, width = NULL, justify = NULL)
 }
 \arguments{
-\item{fmt}{A format to be applied.}
+\item{format}{A format to be applied.}
+
+\item{width}{The desired character width of the formatted vector.  Default
+value is NULL, meaning the vector will be variable width.}
+
+\item{justify}{Whether to justify the return vector.  Valid values are 
+'left', 'right', 'center', 'centre', or 'none'.}
 
 \item{vect}{A vector to apply the format to.}
-
-\item{lookup}{An optional lookup vector. This parameter is used when the
-format is a list.  If specified, the function will first lookup which 
-format to apply, and then apply it to the vector value.}
 }
 \value{
 A vector of formatted values.
 }
 \description{
-The \code{fapply} function can be used to apply a format to a vector.
+The \code{fapply} function can be used to apply a formatting to a vector.
 }
 \details{
-The \code{fapply} function accepts several types of formats:  named vectors,
-vectorized functions, user-defined formats, or a list of formats.
+The \code{fapply} function accepts several types of formats:  formatting
+strings, named vectors,
+vectorized functions, or user-defined formats.  It also 
+accepts a formatting list, composed of any of the previous types.  
 The function will first determine the type of format, and then apply 
 the format in the appropriate way.  Results are returned as a vector.
+
+The function also has parameters for width and justification.
+
+Parameters may also be passed as attributes on the vector.  See the
+the \code{link{fattr}} function for additional information on setting
+formatting attributes.
 }
+\section{Types of Formats}{
+
+The \code{fapply} function will process any of the following types of
+formats:
+
+* \strong{Formatting string}: A single string will be interpreted as 
+a formatting string.  A formatting string will be processed differently
+depending on the class of the vector.  A vector of class date will 
+execute the \code{format} function.  A vector of numeric, character, 
+or integer will execute the \code{sprintf} function.  See the formatting
+codes for the \code{format} and \code{sprintf} functions for further 
+details.
+* \strong{Named vector}: A named vector can serve as a lookup list or decode
+for a vector.  You can sse a named vector to perform simple 
+lookups on character vectors.
+* \strong{Format object}:  A format object may be created using the 
+\code{\link{value}} function.  The format object is included in the 
+\strong{fmtr} package, and is specially designed for data categorization.  
+* \strong{Vectorized formatting function}: A vectorized function provides
+the most flexibility and power over your formatting.  You can use 
+an existing formatting function from any package, or create 
+your own user-defined formatting function.
+}
+
 \examples{
 ## Example 1: Named vector ##
 # Set up vector
@@ -36,7 +70,7 @@ v1 <- c("A", "B", "C", "B")
 fmt1 <- c(A = "Vector Label A", B = "Vector Label B", C = "Vector Label C")
 
 # Apply format to vector
-fapply(fmt1, v1)
+fapply(v1, fmt1)
 
 ## Example 2: User-defined format ##
 # Define format
@@ -45,7 +79,7 @@ fmt2 <- value(condition(x == "A", "Format Label A"),
               condition(TRUE, "Format Other"))
               
 # Apply format to vector
-fapply(fmt2, v1)
+fapply(v1, fmt2)
 
 ## Example 3: Formatting function ##
 # Set up vectorized function
@@ -62,27 +96,39 @@ fmt3 <- Vectorize(function(x) {
 })
 
 # Apply format to vector
-fapply(fmt3, v1)
+fapply(v1, fmt3)
 
-## Example 4: Formatting List ##
+## Example 4: Formatting List - Row Type ##
 # Set up data
 # Notice each row has a different data type
-v2 <- list(1.258, "H", as.Date("2020-06-19"),
-           "L", as.Date("2020-04-24"), 2.8865)
+v2 <- list(2841.258, "H", as.Date("2020-06-19"),
+           "L", as.Date("2020-04-24"), 1382.8865)
 v3 <- c("type1", "type2", "type3", "type2", "type3", "type1")
 
 # Create formatting list
-lst <- list()
-lst$type1 <- function(x) format(x, digits = 2, nsmall = 1)
-lst$type2 <- value(condition(x == "H", "High"),
-                   condition(x == "L", "Low"),
-                   condition(TRUE, "NA"))
-lst$type3 <- function(x) format(x, format = "\%y-\%m")
+lst <- flist(type = "row", lookup = v3,
+       type1 = function(x) format(x, digits = 2, nsmall = 1, 
+                                  big.mark=","),
+       type2 = value(condition(x == "H", "High"),
+                     condition(x == "L", "Low"),
+                     condition(TRUE, "NA")),
+       type3 = "\%d\%b\%Y")
 
 # Apply formatting list to vector
-fapply(lst, v2, v3)
+fapply(v2, lst)
+
+## Example 5: Formatting List - Column Type ##
+# Set up data
+v2 <- c(Sys.Date(), Sys.Date() + 30, Sys.Date() + 60)
+
+# Create formatting list
+lst <- flist("\%B", "The month is: \%s")
+
+# Apply formatting list to vector
+fapply(v2, lst)
 }
 \seealso{
-\code{\link{value}} to define a format,
-\code{\link{condition}} to define the conditions for a format.
+\code{\link{value}} to define a format, 
+\code{\link{fattr}} to easily set the attributes of a vector, 
+and \code{\link{flist}} to define a formatting list.
 }

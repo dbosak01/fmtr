@@ -38,30 +38,17 @@ test_that("fapply() function works as expected with vectors.", {
   fapply(d, width = 15, justify = "left")
   
   
-  fapply(t, fmt = "My Stuff: %s")
-  fapply(n, fmt = "%+6d")
-  fapply(f, fmt = "%6.1f%%")
-  fapply(d, fmt = "%d%b%Y")
+  fapply(t, format = "My Stuff: %s")
+  fapply(n, format = "%+6d")
+  fapply(f, format = "%6.1f%%")
+  fapply(d, format = "%d%b%Y")
   
-  fapply(t, width = 10, justify = "right", fmt = "My Stuff: %s")
-  fapply(n, width = 10, justify = "center", fmt = "%+d")
-  fapply(f, width = 10, justify = "left", fmt = "%.1f%%")
-  fapply(d, width = 15, justify = "right", fmt = "%d%b%Y")
+  fapply(t, width = 10, justify = "right", format = "My Stuff: %s")
+  fapply(n, width = 10, justify = "center", format = "%+d")
+  fapply(f, width = 10, justify = "left", format = "%.1f%%")
+  fapply(d, width = 15, justify = "right", format = "%d%b%Y")
   
   
-  # t1 <- fattr(t, "My stuff: %s", width = 10, justify = "right")
-  # fapply(t1)
-  # 
-  # fapply(c(4, 3, 2, 1.2))
-  # fapply(c("My", "Crazy", "Testing"))
-  # fapply(as.Date(c("2020-06-21", "2020-09-18", NA)), 
-  #                  width = 15, format = "%d%b%Y")
-  # 
-  # fapply(f, format = function(x) trimws(format(x, big.mark = ",
-  #                                     ", digits = 1, nsmall = 1)))
-  # 
-  # 
-
   
   
 })
@@ -71,56 +58,59 @@ test_that("fapply() function works as expected with vectors.", {
 test_that("fapply() function works as expected with flist", {
   
 
-  
-  # No missing values
-  subjid <- 100:104
-  name <- c("Pinkett, Jacqulyn", "al-Harron, Ibtisaama", "el-Hammoud, Kabeera",
-            "Tao, Tia", "Maldonado, Estevan")
-  sex <- factor(c("M", "F", "F", "M", "UNK"),
-                levels =  c("M", "F", "UNK"))
-  age <- c(41.3, 53.9567, 43.2, 39.734, 47)
-  arm <- c(rep("A", 3), rep("B", 2))
-  
-  name <- fattr(name, justify = "left")
-  sex <- fattr(sex, format = c(M = "Male", F = "Female"))
-  age <- fattr(age, format = "%6.1f", justify = "left")
-  arm <- fattr(arm, format = "Arm: %s")
-  
-  
-  # Create data frame
-  df <- data.frame(subjid, name, sex, age, arm)
-  df
-  
-  
-  
-  fapply(df$sex)
-  fapply(df$age)
-  fapply(df$arm)
-  format(df)
-  
-  s <- df$sex
-  
-  attributes(s)[[1]]
-  
-  p <- factor(c("C", "D", "C", "D"), levels = c("C", "D"))
-  attr(p, "format") <- c(C = "Cat C", D = "Cat D")
-  p
-  
-  q <- c("C", "D", "C", "D")
-  cat_fmt <- c(C = "Cat C", D = "Cat D")
-  attr(q, "format") <- cat_fmt
-  q
-  fapply(q)
-  x <- cat_fmt[q]
-  names(x) <- NULL
-  x
-  
-  
-  attr(p, "format") <- function(x) ifelse(x == "C", "Label C", "Label D")
-  
-  fapply(p)
-  base::format(df$sex)  
+   ## Formatting List - Row Type ##
+   v1 <- list(2841.258, "H", as.Date("2020-06-19"), 1382.8865,
+              "L", as.Date("2020-04-24"))
 
-  format(df$age)  
-  fapply(df$age)
+   
+   # Create formatting list
+   lst <- flist(type = "row",
+           type1 = function(x) format(x, digits = 2, nsmall = 1, 
+                                     big.mark=","),
+           type2 = value(condition(x == "H", "High"),
+                        condition(x == "L", "Low"),
+                        condition(TRUE, "NA")),
+           type3 = "%d%b%Y")
+   
+   # Apply formatting list to vector
+   fmtd <- fapply(v1, lst)
+   
+   res <- c("2,841.3", "High", "19Jun2020", "1,382.9", "Low", "24Apr2020")
+   expect_equal(fmtd, res)
+   
+   ## Formatting List - Row Type with lookup ##
+   v2 <- list(2841.258, "H", as.Date("2020-06-19"),
+              "L", as.Date("2020-04-24"), 1382.8865)
+   v3 <- c("type1", "type2", "type3", "type2", "type3", "type1")
+   
+   # Create formatting list
+   lst <- flist(type = "row", lookup = v3,
+                type1 = function(x) format(x, digits = 2, nsmall = 1, 
+                                           big.mark=","),
+                type2 = value(condition(x == "H", "High"),
+                              condition(x == "L", "Low"),
+                              condition(TRUE, "NA")),
+                type3 = "%d%b%Y")
+   
+   # Apply formatting list to vector
+   fmtd <- fapply(v2, lst)
+   
+   res <- c("2,841.3", "High", "19Jun2020", "Low", "24Apr2020", "1,382.9")
+   expect_equal(fmtd, res)
+   
+   
+   
+   ## Formatting List - Column Type ##
+   v3 <- as.Date(c("2020-08-23", "2020-09-15", "2020-10-05"))
+   
+   
+   # Create formatting list
+   lst <- flist("%B", "Month: %s", type="column")
+   
+   # Apply formatting list to vector
+   fmtd2 <- fapply(v3, lst)
+   
+   res <- c("Month: August", "Month: September", "Month: October")
+   
+   expect_equal(fmtd2, res)
 })

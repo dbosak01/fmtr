@@ -1,0 +1,88 @@
+
+#' @title
+#' Get or set justification for data frame columns
+#' 
+#' @description 
+#' The \code{justification} function extracts all assigned justify
+#' attributes from a 
+#' data frame, and returns them in a named list. The function also
+#' assigns justify attributes from a named list.
+#' 
+#' @details 
+#' If justification values are assigned to the "justify" 
+#' attributes of the data frame
+#' columns, the \code{justification} function will extract those values.  The 
+#' function will return the justification values in a named list, 
+#' where the names
+#' correspond to the name of the column that the justification was assigned to.
+#' If a column does not have a justify attribute assigned, that column
+#' will not be included in the list. 
+#' 
+#' When used on the receiving side of an assignment, the function will assign
+#' justification to a data frame.  The justification values 
+#' should be in a named list, where
+#' each name corresponds to the name of the data frame column to assign
+#' values to.
+#'     
+#' @param x A data frame or tibble.
+#' @return A named list of justification values. 
+#' @seealso \code{\link{format_data}} to display formatted data, 
+#' \code{\link{value}} to create user-defined formats, and 
+#' \code{\link{fapply}} to apply formatting to a vector.
+#' @export
+#' @aliases "justification<-"
+#' @examples 
+#' # Take subset of data
+#' df1 <- mtcars[1:10, c("mpg", "cyl") ]
+#' 
+#' # Print current state
+#' print(df1)
+#' 
+#' # Assign justification
+#' justification(df1) <- list(mpg = "left", cyl = "center")
+#' widths(df1) <- list(mpg = 12, cyl = 10)
+#' 
+#' format(df1)
+#' 
+#' 
+#' # Display justification
+#' justification(df1)
+#' widths(df1)
+justification <- function(x) {
+  
+  ret <- list()
+  
+  for (nm in names(x)) {
+    
+    if (!is.null(attr(x[[nm]], "justify"))) {
+      ret[[nm]] <- attr(x[[nm]], "justify")
+    }
+    
+  }
+  
+  return(ret)
+  
+}
+
+#' @aliases formats
+#' @rdname  formats
+#' @param x A data frame or tibble
+#' @param value A named list of formats 
+#' @export 
+`justification<-` <- function(x, value) {
+  
+  
+  for (nm in names(value)) {
+    
+    if (is.null(x[[nm]])) 
+      stop(paste("Name not found:", nm))
+    else
+      attr(x[[nm]], "justify") <- value[[nm]]
+    
+  }
+  
+  return(x)
+  
+}
+
+

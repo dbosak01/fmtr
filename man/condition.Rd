@@ -47,7 +47,7 @@ fmt1 <- value(condition(x == "A", "Label A"),
               condition(TRUE, "Other"))
               
 # Apply format to vector
-v2 <- fapply(fmt1, v1)
+v2 <- fapply(v1, fmt1)
 v2
 }
 \seealso{

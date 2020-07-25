@@ -40,13 +40,13 @@
 #'               condition(TRUE, "Other"))
 #'               
 #' # Apply format to vector
-#' fapply(fmt1, v1)
+#' fapply(v1, fmt1)
 #' 
 #' fmt2 <- value(condition(x == "A", 1),
 #'               condition(x == "B", 2),
 #'               condition(TRUE, 3))
 #' 
-#' fapply(fmt2, v1)
+#' fapply(v1, fmt2)
 #' 
 #' #' # Set up vector
 #' v2 <- c(1, 6, 11, 7)
@@ -57,7 +57,7 @@
 #'               condition(TRUE, "Out of range"))
 #'               
 #' # Apply format to vector
-#' fapply(fmt3, v2)
+#' fapply(v2, fmt3)
 value <- function(...) {
   
   if (...length() == 0)
@@ -116,7 +116,7 @@ value <- function(...) {
 #'               condition(TRUE, "Other"))
 #'               
 #' # Apply format to vector
-#' v2 <- fapply(fmt1, v1)
+#' v2 <- fapply(v1, fmt1)
 #' v2
 condition <- function(expr, label) {
   
