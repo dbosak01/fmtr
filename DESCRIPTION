@@ -1,15 +1,15 @@
 Package: fmtr
 Type: Package
 Title: Contains functions for formatting data frames
-Version: 0.0.0.9001
+Version: 0.0.0.9002
 Author: David Bosak
 Author@R: person("David", "Bosak", email = "dbosak01@gmail.com",
   role = c("aut", "cre"))
 Maintainer: The package maintainer <dbosak01@gmail.com>
 Description: Contains a set of functions that can be used to 
-  format data frames or tibbles.  The package aims to provide to R 
+  format data frames or vectors.  The package aims to provide to R 
   functionality similar to that of SAS® formats. Formats are assigned to
-  the format attribute on data frame columns.  Then when the format() 
+  the format attribute on data frame columns.  Then when the fdata() 
   function is called, a new data frame is created with the column data
   formatted as specified.  The package also contains a value() function
   to create a user-defined format, similar to a SAS® user-defined format.

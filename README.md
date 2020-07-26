@@ -15,7 +15,10 @@ the basic functionality of SAS® formats, but with R.
 Formatting may be assigned
 to data frame columns using the **format**, **width**, and **justify** 
 attributes.  Formatting is then applied by calling the `fdata` function. 
-`fdata` returns a new data frame with the specified formatting applied. 
+`fdata` returns a new data frame with the specified formatting applied. This 
+method of formatting provides much greater control over data formatting
+than the base R `format` function.
+
 Here is a example:
 
 ```
