@@ -6,24 +6,24 @@
 #' Format a data frame or tibble
 #' 
 #' @description 
-#' The \code{format_data} function applies formatting attributes
+#' The \code{fdata} function applies formatting attributes
 #' to the entire data frame.
 #' 
 #' @details 
 #' If formats are assigned to the "format" attributes of the data frame
-#' columns, the \code{format_data} function will apply those formats
+#' columns, the \code{fdata} function will apply those formats
 #' to the specified columns, and return a new formatted data frame. 
 #' Format can be specified as formatting strings, named vectors, user-defined
-#' formats, or vectorized formatting functions.  The \code{format_data} 
+#' formats, or vectorized formatting functions.  The \code{fdata} 
 #' function will
 #' apply the format to the associated column data using the \code{fapply} 
 #' function.  A format can also be specified as a list of 
 #' formats of the previous four types.  See the \code{\link{fapply}}
 #' function for additional information.
 #' 
-#' The \code{format_data} function has two overrides: 
+#' The \code{fdata} function has two overrides: 
 #' \code{format.data.frame} and \code{format.tbl}.  The two overrides will
-#' call \code{format_data} on the data.frame class and the tbl (tibble)
+#' call \code{fdata} on the data.frame class and the tbl (tibble)
 #' class, respectively.
 #'
 #' @param x A data frame or tibble to be formatted.
@@ -74,9 +74,9 @@
 #' 
 #' # Apply formatting list
 #' format(df)
-format_data <- function(x, ...) {
+fdata <- function(x, ...) {
   
-  
+
   if (all(class(x) != "data.frame"))
     stop("Input value must be derived from class data.frame")
   
@@ -116,30 +116,6 @@ format_data <- function(x, ...) {
   
 }
 
-#' @aliases format_data
-#' @export 
-format.tbl <- function(x, ...) {
-
-
-
-  fbl <- format_data(x, ...)
-
-
-  return(fbl)
-}
-
-
-#' @aliases format_data
-#' @export 
-format.data.frame <- function(x, ...) {
-  
-  
-  fbl <- format_data(x, ...)
-
-  
-  return(fbl)
-  
-}
 
 
 

@@ -26,7 +26,7 @@ The \code{fattr} function is a convenience function for assigning
 formatting attributes to a vector.  The function accepts parameters
 for format, width, and justify.  Any formatting attributes assigned 
 to a vector can be applied using \code{\link{fapply}} or
-\code{\link{format_data}}.
+\code{\link{fdata}}.
 }
 \examples{
 # Create vector
@@ -39,6 +39,6 @@ a <- fattr(a, format = "\%.1f", width = 10, justify = "right")
 fapply(a)
 }
 \seealso{
-\code{\link{format_data}} to apply formats to a data frame, 
+\code{\link{fdata}} to apply formats to a data frame, 
  \code{\link{fapply}} to apply formats to a vector.
 }

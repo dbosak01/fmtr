@@ -31,6 +31,6 @@ fattr(a) <- list(format = "\%.1f")
 fapply(a)
 }
 \seealso{
-\code{\link{format_data}} to apply formats to a data frame, 
+\code{\link{fdata}} to apply formats to a data frame, 
  \code{\link{fapply}} to apply formats to a vector.
 }

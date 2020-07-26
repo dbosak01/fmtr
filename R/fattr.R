@@ -9,7 +9,7 @@
 #' formatting attributes to a vector.  The function accepts parameters
 #' for format, width, and justify.  Any formatting attributes assigned 
 #' to a vector can be applied using \code{\link{fapply}} or
-#' \code{\link{format_data}}.
+#' \code{\link{fdata}}.
 #' @param x The vector to assign attributes to.
 #' @param format The format to assign to the format attribute.  Format 
 #' can be a formatting string, a named vector decode, a vectorized
@@ -17,7 +17,7 @@
 #' @param width The desired width of the formatted output. 
 #' @param justify Justification of the output vector. Valid values are 
 #' 'none', 'left', 'right', 'center', or 'centre'. 
-#' @seealso \code{\link{format_data}} to apply formats to a data frame, 
+#' @seealso \code{\link{fdata}} to apply formats to a data frame, 
 #'  \code{\link{fapply}} to apply formats to a vector.
 #' @export
 #' @examples
@@ -71,7 +71,7 @@ fattr <- function(x, format = NULL, width = NULL, justify = NULL) {
 #' See \code{\link{fattr}} for additional details.  
 #' @param x The vector to assign attributes to.
 #' @param value A named vector of attribute values.
-#' @seealso \code{\link{format_data}} to apply formats to a data frame, 
+#' @seealso \code{\link{fdata}} to apply formats to a data frame, 
 #'  \code{\link{fapply}} to apply formats to a vector.
 #' @export
 #' @examples

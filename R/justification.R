@@ -26,7 +26,7 @@
 #'     
 #' @param x A data frame or tibble.
 #' @return A named list of justification values. 
-#' @seealso \code{\link{format_data}} to display formatted data, 
+#' @seealso \code{\link{fdata}} to display formatted data, 
 #' \code{\link{value}} to create user-defined formats, and 
 #' \code{\link{fapply}} to apply formatting to a vector.
 #' @export

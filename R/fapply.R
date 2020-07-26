@@ -33,7 +33,7 @@
 #' codes for the \code{format} and \code{sprintf} functions for further 
 #' details.
 #' * \strong{Named vector}: A named vector can serve as a lookup list or decode
-#' for a vector.  You can sse a named vector to perform simple 
+#' for a vector.  You can use a named vector to perform simple 
 #' lookups on character vectors.
 #' * \strong{Format object}:  A format object may be created using the 
 #' \code{\link{value}} function.  The format object is included in the 
@@ -93,8 +93,8 @@
 #' ## Example 4: Formatting List - Row Type ##
 #' # Set up data
 #' # Notice each row has a different data type
-#' v2 <- list(2841.258, "H", as.Date("2020-06-19"),
-#'            "L", as.Date("2020-04-24"), 1382.8865)
+#' v2 <- list(2841.258, "H", Sys.Date(),
+#'            "L", Sys.Date() + 60, 1382.8865)
 #' v3 <- c("type1", "type2", "type3", "type2", "type3", "type1")
 #' 
 #' # Create formatting list
@@ -112,9 +112,10 @@
 #' ## Example 5: Formatting List - Column Type ##
 #' # Set up data
 #' v2 <- c(Sys.Date(), Sys.Date() + 30, Sys.Date() + 60)
+#' v2
 #' 
 #' # Create formatting list
-#' lst <- flist("%B", "The month is: %s")
+#' lst <- flist("%B", "This month is: %s")
 #' 
 #' # Apply formatting list to vector
 #' fapply(v2, lst)

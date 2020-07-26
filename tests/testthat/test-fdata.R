@@ -1,8 +1,8 @@
-context("format Tests")
+context("fdata Tests")
 
 
 
-test_that("format() function works as expected with named vector.", {
+test_that("fdata() function works as expected with named vector.", {
   
   res <- c(A = "Label A", B = "Label B", C = "Other", B = "Label B")
   
@@ -14,7 +14,7 @@ test_that("format() function works as expected with named vector.", {
   attr(fb$catc, "format") <- c(A = "Label A", B = "Label B", C = "Other")
 
   
-  fmt_fb <- format(fb)
+  fmt_fb <- fdata(fb)
   
   
   expect_equal(all(fmt_fb$catc == res), TRUE)
@@ -24,7 +24,7 @@ test_that("format() function works as expected with named vector.", {
 
 
 
-test_that("format() function works as expected with fmt object.", {
+test_that("fdata() function works as expected with fmt object.", {
   
   res <- c("Label A", "Label B", "Other", "Label B")
   
@@ -38,7 +38,7 @@ test_that("format() function works as expected with fmt object.", {
           condition(x == "B", "Label B"),
           condition(TRUE, "Other"))
 
-  fmt_fb <- format(fb)
+  fmt_fb <- fdata(fb)
   
   expect_equal(all(fmt_fb$catc == res), TRUE)
   
@@ -46,7 +46,7 @@ test_that("format() function works as expected with fmt object.", {
 
 
 
-test_that("format() function works as expected with vectorized function.", {
+test_that("fdata() function works as expected with vectorized function.", {
   
   res <- c("Label A", "Label B", "Other", "Label B")
   
@@ -68,7 +68,7 @@ test_that("format() function works as expected with vectorized function.", {
   })
   
   
-  fmt_fb <- format(fb)
+  fmt_fb <- fdata(fb)
 
   
   expect_equal(all(fmt_fb$catc == res), TRUE)
@@ -79,7 +79,7 @@ test_that("format() function works as expected with vectorized function.", {
 
 
 
-test_that("format() function works as expected with list of formats.", {
+test_that("fdata() function works as expected with list of formats.", {
 
   
   v1 <- c("type1", "type2", "type3", "type2", "type3", "type1")
@@ -100,7 +100,7 @@ test_that("format() function works as expected with list of formats.", {
   attr(df$values, "format") <- lst
   df$values
   
-  ret <- format_data(df)
+  ret <- fdata(df)
   ret
   
   
