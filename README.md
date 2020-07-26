@@ -2,25 +2,83 @@
 
 <!-- badges: start -->
 
-[![logr version](https://www.r-pkg.org/badges/version/fmtr)](https://cran.r-project.org/package=fmtr)
-[![logr lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://cran.r-project.org/package=fmtr)
-[![logr downloads](https://cranlogs.r-pkg.org/badges/grand-total/fmtr)](https://cran.r-project.org/package=fmtr)
+[![fmtr version](https://www.r-pkg.org/badges/version/fmtr)](https://cran.r-project.org/package=fmtr)
+[![fmtr lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://cran.r-project.org/package=fmtr)
+[![fmtr downloads](https://cranlogs.r-pkg.org/badges/grand-total/fmtr)](https://cran.r-project.org/package=fmtr)
 [![Travis build status](https://travis-ci.com/dbosak01/logr.svg?branch=master)](https://travis-ci.com/dbosak01/fmtr)
 
 <!-- badges: end -->
 
-The **fmtr** package helps format data.  The package aims to replicate
+The **fmtr** package helps format data.  The package aims to provide
 the basic functionality of SAS® formats, but with R.  
 
-**fmtr** can apply 
-formats to data frames, tibbles, vectors, and factors.  The `format()` function
-is used to apply formats to data frames and tibbles, and the `fapply()`
-function is used to apply formats to vectors and factors.
+Formatting may be assigned
+to data frame columns using the **format**, **width**, and **justify** 
+attributes.  Formatting is then applied by calling the `fdata` function. 
+`fdata` returns a new data frame with the specified formatting applied. 
+Here is a example:
+
+```
+# Construct data frame from state vectors
+df <- data.frame(state = state.abb, area = state.area)[1:10, ]
+
+# Calculate percentages
+df$pct <- df$area / sum(state.area) * 100
+
+# Before formatting 
+df
+
+#    state   area         pct
+# 1     AL  51609  1.42629378
+# 2     AK 589757 16.29883824
+# 3     AZ 113909  3.14804973
+# 4     AR  53104  1.46761040
+# 5     CA 158693  4.38572418
+# 6     CO 104247  2.88102556
+# 7     CT   5009  0.13843139
+# 8     DE   2057  0.05684835
+# 9     FL  58560  1.61839532
+# 10    GA  58876  1.62712846
+
+# Create state name lookup list
+name_lookup <- state.name
+names(name_lookup) <- state.abb
+
+# Assign formats
+formats(df) <- list(state = name_lookup,                         
+                    area  = function(x) format(x, big.mark = ","), 
+                    pct   = "%.1f%%") 
+
+# Apply formats
+fdata(df)
+
+#          state    area   pct
+# 1      Alabama  51,609  1.4%
+# 2       Alaska 589,757 16.3%
+# 3      Arizona 113,909  3.1%
+# 4     Arkansas  53,104  1.5%
+# 5   California 158,693  4.4%
+# 6     Colorado 104,247  2.9%
+# 7  Connecticut   5,009  0.1%
+# 8     Delaware   2,057  0.1%
+# 9      Florida  58,560  1.6%
+# 10     Georgia  58,876  1.6%
+
+```
+## Key Features
+
+**fmtr** contains the following key features:
+
+* The `fdata` function to apply formatting to any data frame or tibble.
+* The `fapply` function to apply formatting to any vector.
+* The `value` and `condition` functions to create a new user-defined format.
+* The `flist` function to create a formatting list.
+* Convenience functions for setting formatting attributes.
 
 
-## How to use format()
+## How to use fdata()
 Data can be formatted by assigning formats to the **format** attribute
-of the columns in your dataframe or tibble, and then by calling the `format()` 
+of the columns in your dataframe or tibble, and then by calling the `fdata()` 
 function on that data.  A sample program is as follows:
 
 ```
@@ -34,77 +92,69 @@ attr(df$mpg, "format") <- value(condition(x >= 20, "High"),
 attr(df$cyl, "format") <- function(x) format(x, nsmall = 1)
 
 # Apply formatting
-format(df)
+fdata(df)
 
 ```
 
 Here is the mtcars subset before formatting:
 ```
-                   mpg cyl
-Mazda RX4         21.0   6
-Mazda RX4 Wag     21.0   6
-Datsun 710        22.8   4
-Hornet 4 Drive    21.4   6
-Hornet Sportabout 18.7   8
-Valiant           18.1   6
-Duster 360        14.3   8
-Merc 240D         24.4   4
-Merc 230          22.8   4
-Merc 280          19.2   6
+#                    mpg cyl
+# Mazda RX4         21.0   6
+# Mazda RX4 Wag     21.0   6
+# Datsun 710        22.8   4
+# Hornet 4 Drive    21.4   6
+# Hornet Sportabout 18.7   8
+# Valiant           18.1   6
+# Duster 360        14.3   8
+# Merc 240D         24.4   4
+# Merc 230          22.8   4
+# Merc 280          19.2   6
 ```
 
 And here is the mtcars subset after formatting:
 ```
-                   mpg cyl
-Mazda RX4         High 6.0
-Mazda RX4 Wag     High 6.0
-Datsun 710        High 4.0
-Hornet 4 Drive    High 6.0
-Hornet Sportabout Low  8.0
-Valiant           Low  6.0
-Duster 360        Low  8.0
-Merc 240D         High 4.0
-Merc 230          High 4.0
-Merc 280          Low  6.0
+#                    mpg cyl
+# Mazda RX4         High 6.0
+# Mazda RX4 Wag     High 6.0
+# Datsun 710        High 4.0
+# Hornet 4 Drive    High 6.0
+# Hornet Sportabout Low  8.0
+# Valiant           Low  6.0
+# Duster 360        Low  8.0
+# Merc 240D         High 4.0
+# Merc 230          High 4.0
+# Merc 280          Low  6.0
 
 ```
 
 You may apply formatting to variables of any data type: character, numeric, 
-date, etc.  The format label (the result) can also be any data type. 
-In addition, the type of objects that can be used for formatting is very 
-flexible. Under the hood, the `format()` function is using the `fapply()`
+date, etc. Internally, the `fdata()` function is using the `fapply()`
 function on each column in the data frame.  If there is no format assigned
 to a column, that column is returned unaltered.
 
 ## How to use fapply()
 
 The `fapply()` function applies a format to a vector or factor. This function 
-may be used independantly of the `format()` function.  Here is an example:
+may be used independantly of the `fdata()` function.  Here is an example:
 ```
 v1 <- c("A", "B", "C", "B")
+v1
+
+# [1] "A" "B" "C" "B"
 
 fmt1 <- value(condition(x == "A", "Label A"),
               condition(x == "B", "Label B"),
               condition(TRUE, "Other"))
 
-fapply(fmt1, v1)
+fapply(v1, fmt1)
 
-```
-Here is the vector before formatting:
-```
-# [1] "A" "B" "C" "B"
-```
-
-And here is the vector after formatting:
-```
-#         A         B         C         B 
 # "Label A" "Label B"   "Other" "Label B" 
+
 ```
 One advantage of using `fapply()` is that your original data is not
-altered. The formatted values are assigned to a new object, with no 
-direct connection to your original data values.  If your orignial data 
-changes, the formatting function should be reapplied to maintain consistency
-with the original data.
+altered. The formatted values are assigned to a new object. If your 
+orignial data changes, the formatting function should be reapplied 
+to maintain consistency with the original data.
 
 ## What kind of formats are available
 Data can be formatted with four different types of objects:
@@ -129,9 +179,8 @@ v1 <- c("A", "B", "C", "B")
 
 fmt1 <- c(A = "Label A", B = "Label B", C= "Label C")
 
-fapply(fmt1, v1)
+fapply(v1, fmt1)
 
-#         A         B         C         B 
 # "Label A" "Label B" "Label C" "Label B" 
 
 ```
@@ -152,9 +201,8 @@ fmt2 <- value(condition(x == "A", "Label A"),
               condition(x == "B", "Label B"),
               condition(TRUE, "Other"))
               
-fapply(fmt2, f1)
+fapply(f1, fmt2)
 
-#         A         B         C         B 
 # "Label A" "Label B"   "Other" "Label B" 
 
 ```
@@ -184,9 +232,8 @@ fmt2 <- Vectorize(function(x) {
     
   })
   
-fapply(fmt2, v1)
+fapply(v1, fmt2)
 
-#         A         B         C         B 
 # "Label A" "Label B"   "Other" "Label B" 
 
 ```
@@ -218,7 +265,7 @@ corresponding data value.
 The following is an example of a lookup style formatting list:
 ```
 # Set up data
-v1 <- c("type1", "type2", "type3", "type2", "type3", "type1")
+v1 <- c("num", "char", "date", "char", "date", "num")
 v2 <- list(1.258, "H", as.Date("2020-06-19"),
            "L", as.Date("2020-04-24"), 2.8865)
 
@@ -226,40 +273,40 @@ df <- data.frame(type = v1, values = I(v2))
 df
 
 #    type     values
-# 1 type1      1.258
-# 2 type2          H
-# 3 type3 2020-06-19
-# 4 type2          L
-# 5 type3 2020-04-24
-# 6 type1     2.8865
+# 1   num      1.258
+# 2  char          H
+# 3  date 2020-06-19
+# 4  char          L
+# 5  date 2020-04-24
+# 6   num     2.8865
 
 # Set up formatting list
-lst <- list()
-lst$type1 <- function(x) format(x, digits = 2, nsmall = 1)
-lst$type2 <- value(condition(x == "H", "High"),
-                   condition(x == "L", "Low"),
-                   condition(TRUE, "NA"))
-lst$type3 <- function(x) format(x, format = "%y-%m")
+lst <- flist(type = "row", lookup = v1,
+             num = function(x) format(x, digits = 2, nsmall = 1),
+             char = value(condition(x == "H", "High"),
+                          condition(x == "L", "Low"),
+                          condition(TRUE, "NA")),
+             date = function(x) format(x, format = "%y-%m"))
 
 # Assign formatting list to values column
 attr(df$values, "format") <- lst
-attr(df$values, "format_lookup") <- "type"
+
 
 # Apply formatting
-format_data(df)
+fdata(df)
 
-#    type values
-# 1 type1    1.3
-# 2 type2   High
-# 3 type3  20-06
-# 4 type2    Low
-# 5 type3  20-04
-# 6 type1    2.9
+#   type values
+# 1  num    1.3
+# 2 char   High
+# 3 date  20-06
+# 4 char    Low
+# 5 date  20-04
+# 6  num    2.9
 
 
 ```
 
-## Additional Features
+## Convenience Functions
 
 ### The `formats()` function
 The formats associated with a data frame can be easily extracted or 
@@ -279,4 +326,5 @@ levels property of the `factor()` function to the output of the
 `levels()` or `labels()` function
 to keep your data ordered and everything in sync.
 
+## Additional Features
 
