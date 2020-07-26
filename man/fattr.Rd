@@ -4,7 +4,7 @@
 \alias{fattr}
 \title{Set formatting attributes}
 \usage{
-fattr(x, format = NULL, width = NULL, justify = NULL)
+fattr(x, format = NULL, width = NULL, justify = NULL, keep = TRUE)
 }
 \arguments{
 \item{x}{The vector to assign attributes to.}
@@ -17,6 +17,9 @@ formatting function, or a formatting list.}
 
 \item{justify}{Justification of the output vector. Valid values are 
 'none', 'left', 'right', 'center', or 'centre'.}
+
+\item{keep}{Whether to keep any existing formatting settings and 
+transfer to the new vector.  Default value is TRUE.}
 }
 \description{
 Assign formatting attributes to a vector
