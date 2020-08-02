@@ -6,7 +6,6 @@
 #' 
 #' @description 
 #' The \code{fapply} function can be used to apply a formatting to a vector. 
-#' 
 #' @details 
 #' The \code{fapply} function accepts several types of formats:  formatting
 #' strings, named vectors,
@@ -54,7 +53,9 @@
 #' @return A vector of formatted values.
 #' @seealso \code{\link{value}} to define a format, 
 #' \code{\link{fattr}} to easily set the formatting attributes of a vector, 
-#' and \code{\link{flist}} to define a formatting list.
+#' and \code{\link{flist}} to define a formatting list.  Also see 
+#' \code{\link{fdata}} to apply formats to an entire data frame, and 
+#' \link{FormattingStrings} for how to define a formatting string.
 #' @export
 #' @examples 
 #' ## Example 1: Formatting string ##

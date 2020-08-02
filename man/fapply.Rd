@@ -145,5 +145,7 @@ fapply(v5, lst)
 \seealso{
 \code{\link{value}} to define a format, 
 \code{\link{fattr}} to easily set the formatting attributes of a vector, 
-and \code{\link{flist}} to define a formatting list.
+and \code{\link{flist}} to define a formatting list.  Also see 
+\code{\link{fdata}} to apply formats to an entire data frame, and 
+\link{FormattingStrings} for how to define a formatting string.
 }
