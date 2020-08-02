@@ -19,20 +19,25 @@
 #' similar to SAS® formats.
 #' 
 #' @section Functions:
-#' The two main functions include in the \strong{fmtr} package are as follows:
+#' The three main functions included in the \strong{fmtr} package are 
+#' as follows:
 #' \itemize{
-#'   \item \code{\link{format}}
+#'   \item \code{\link{fdata}}
+#'   \item \code{\link{fapply}}
 #'   \item \code{\link{value}}
 #' }
 #' 
-#' The \code{format_data()} function applies the format attributes 
-#' to the dataframe.  
+#' The \code{fdata()} function applies formatting 
+#' to dataframe.  
+#' 
+#' #' The \code{fapply()} function applies the formatting 
+#' to a vector.  
 #' 
 #' The \code{value()} function creates a new
-#' user-defined function. 
+#' user-defined format. 
 #' 
 #' @section Available Formats:
-#' The formats that can be used with \code{fmtr} include the following:
+#' The formats that can be used with \strong{fmtr} include the following:
 #' \itemize{
 #'   \item Named vectors
 #'   \item Vectorized functions
