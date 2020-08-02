@@ -23,38 +23,22 @@ The \strong{fmtr} package also contains a function named
 \code{value} for defining user-defined formats in a manner
 similar to SAS® formats.
 }
-\section{NA}{
+\section{Functions}{
 
-The formats that can be used with \strong{fmtr} include the following:
+The main functions included in the \strong{fmtr} package are 
+as follows:
 \itemize{
-  \item Formatting string
-  \item Named vectors
-  \item Vectorized functions
-  \item User-defined formats
-  \item Formatting lists
+  \item {\code{\link{fdata}}:}{ Applies formatting 
+to a dataframe.}
+  \item {\code{\link{fapply}}:}{ Applies formatting 
+to a vector.}
+  \item {\code{\link{value}}:}{ Creates a new
+user-defined format.}
+  \item {\code{\link{formats}}:}{ Helps assign format attributes
+  to a data frame.}
+  \item {\code{\link{fattr}}:}{ Helps assign formatting attributes
+  to a vector.}
 }
-
-A formatting string will be passed to the \code{\link[base]{format}}
-function, or the \code{\link[base]{sprintf}} function depending on the
-class of the input vector.
-
-Named vectors map one string value to another string value.
-
-Vectorized functions can be those created by the user or by a formatting
-function like those created with Base R or the \strong{scales} package.
-
-User-defined function are those created by the \strong{fmtr} 
-\code{value} function.  See \code{\link{value}} for 
-additional details.
-
-Formatting lists are lists which contain any of the above format types.
-The formatting lists allow the user to apply one of several formats to the 
-column.  Formatting lists may also be used to apply different formats 
-to each item in a vector.  See \code{\link{flist}} for 
-additional details on formatting lists.
-
-See the \code{\link{fapply}} function documentation for additional details
-on applying formats.
 }
 
 \section{Available Formats}{

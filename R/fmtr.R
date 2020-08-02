@@ -28,7 +28,7 @@
 #' to a vector.}
 #'   \item {\code{\link{value}}:}{ Creates a new
 #' user-defined format.}
-#'   \item {\code{\link{formats}}:{ Helps assign format attributes
+#'   \item {\code{\link{formats}}:}{ Helps assign format attributes
 #'   to a data frame.}
 #'   \item {\code{\link{fattr}}:}{ Helps assign formatting attributes
 #'   to a vector.}
