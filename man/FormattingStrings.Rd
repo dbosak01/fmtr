@@ -9,5 +9,64 @@ of the base R \code{\link[base]{format}} and \code{\link[base]{sprintf}}
 functions. See below for further details.
 }
 \details{
+The \strong{fmtr} packages accepts single strings as formatting 
+specifications.  These formatting strings are interpreted differently 
+depending on the data type of the vector being formatted.  For 
+date and datetime vectors, the string will be interpreted as an input 
+to the base R \code{format} function.  For all other types of vectors, 
+the formatting string will be interpreted as an input to the \code{sprintf}
+function.  
 
+The formatting codes for these functions are simple to use. For example, 
+the code \code{fapply(as.Date("1970-01-01", "\%B \%d, \%Y"))} will produce
+the output \code{"January 01, 1970"}.  The code 
+\code{fapply(1.2345, "\%.1f")} will produce the output \code{"1.2"}.
+
+Below are some commonly used formatting codes for dates:
+
+\%d = day as a number 
+\%a = abbreviated weekday
+\%A = unabbreviated weekday	
+\%m = month 
+\%b = abbreviated month
+\%B = unabbreviated month
+\%y = 2-digit year
+\%Y = 4-digit year	
+\%H = hour
+\%M = minute
+\%S = second
+\%p = AM/PM indicator
+
+See the \code{\link[base]{strptime}} function for additional codes and 
+examples of formatting dates and times.
+
+Below are some commonly used formatting codes for other data types:
+
+\%s = string
+\%d = integer
+\%f = decimal number
+See the \code{\link[base]{sprintf}} function for additional codes and 
+examples of formatting other data types.
+}
+\examples{
+# Examples for formatting dates and times 
+t <- Sys.time()
+fapply(t, "\%d/\%m/\%Y")              # day/month/year
+fapply(t, "\%d\%b\%Y")                # day abbreviated month year
+fapply(t, "\%y-\%m")                 # two digit year - month
+fapply(t, "\%A, \%B \%d")             # weekday, unabbreviated month and date
+fapply(t, "\%Y-\%m\%-\%d \%H:\%M:\%S \%p") # common timestamp format
+
+# Examples for formatting numbers
+a <- 1234.56789
+fapply(a, "\%f")                  # Floating point number
+fapply(a, "\%.1f")                # One decimal place
+fapply(a, "\%8.1f")               # Fixed width
+fapply(a, "\%-8.1f")              # Fixed width left justified
+fapply(a, "\%08.1f")              # Zero padded
+fapply(a, "\%+.1f")               # Forced sign
+fapply(-a, "\%+.1f")              # Negative 
+fapply(a, "\%.1f\%\%")              # Percentage
+fapply(a, "$\%.2f")               # Currency
+fapply(a, "The number is \%f.")   # Interpolation
 }
