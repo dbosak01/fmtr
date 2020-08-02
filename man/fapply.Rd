@@ -33,7 +33,7 @@ the format in the appropriate way.  Results are returned as a vector.
 
 The function also has parameters for width and justification.
 
-Parameters may also be passed as attributes on the vector.  See the
+Parameters may also be passed as attributes on the vector.  See 
 the \code{\link{fattr}} function for additional information on setting
 formatting attributes.
 }
@@ -42,20 +42,22 @@ formatting attributes.
 The \code{fapply} function will process any of the following types of
 formats:
 \itemize{
-  \item{Formatting string}{A single string will be interpreted as 
+  \item{\strong{Formatting string:}}{ A single string will be interpreted as 
 a formatting string.  A formatting string will be processed differently
 depending on the class of the vector.  A vector of class date will 
 execute the \code{format} function.  A vector of numeric, character, 
 or integer will execute the \code{sprintf} function.  See the formatting
 codes for the \code{format} and \code{sprintf} functions for further 
 details.}
-  \item{Named vector}{A named vector can serve as a lookup list or decode
+  \item{\strong{Named vector:}}{ A named vector can serve as a lookup list or 
+  decode
 for a vector.  You can use a named vector to perform simple 
 lookups on character vectors.}
-  \item{Format object}{A format object may be created using the 
+  \item{\strong{Format object:}}{ A format object may be created using the 
 \code{\link{value}} function.  The format object is included in the 
 \strong{fmtr} package, and is specially designed for data categorization.}  
-  \item{Vectorized formatting function}{A vectorized function provides
+  \item{\strong{Vectorized formatting function:}}{ A vectorized function 
+  provides
 the most flexibility and power over your formatting.  You can use 
 an existing formatting function from any package, or create 
 your own user-defined formatting function.}
@@ -73,6 +75,7 @@ v1 <- c(1.235, 8.363, 5.954, 2.465)
 # Apply string format.
 fapply(v1, "\%.1f")
 
+
 ## Example 2: Named vector ##
 # Set up vector
 v2 <- c("A", "B", "C", "B")
@@ -83,6 +86,7 @@ fmt2 <- c(A = "Vector Label A", B = "Vector Label B", C = "Vector Label C")
 # Apply format to vector
 fapply(v2, fmt2)
 
+
 ## Example 3: User-defined format ##
 # Define format
 fmt3 <- value(condition(x == "A", "Format Label A"),
@@ -91,6 +95,7 @@ fmt3 <- value(condition(x == "A", "Format Label A"),
               
 # Apply format to vector
 fapply(v2, fmt3)
+
 
 ## Example 4: Formatting function ##
 # Set up vectorized function
@@ -108,6 +113,7 @@ fmt4 <- Vectorize(function(x) {
 
 # Apply format to vector
 fapply(v1, fmt4)
+
 
 ## Example 5: Formatting List - Row Type ##
 # Set up data
@@ -128,6 +134,7 @@ lst <- flist(type = "row", lookup = v4,
 # Apply formatting list to vector
 fapply(v3, lst)
 
+
 ## Example 6: Formatting List - Column Type ##
 # Set up data
 v5 <- c(Sys.Date(), Sys.Date() + 30, Sys.Date() + 60)
@@ -141,6 +148,6 @@ fapply(v5, lst)
 }
 \seealso{
 \code{\link{value}} to define a format, 
-\code{\link{fattr}} to easily set the attributes of a vector, 
+\code{\link{fattr}} to easily set the formatting attributes of a vector, 
 and \code{\link{flist}} to define a formatting list.
 }

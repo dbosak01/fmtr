@@ -43,6 +43,7 @@
 #' # Apply format to vector
 #' fapply(v1, fmt1)
 #' 
+#' 
 #' ## Example 2: Character to Integer Mapping ##
 #' fmt2 <- value(condition(x == "A", 1),
 #'               condition(x == "B", 2),
@@ -50,6 +51,7 @@
 #' 
 #' # Apply format to vector
 #' fapply(v1, fmt2)
+#' 
 #' 
 #' ## Example 3: Categorization of Continuous Variable ##
 #' #' # Set up vector
