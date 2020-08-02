@@ -22,9 +22,10 @@
 #'     
 #' @param x A data frame or tibble.
 #' @return A named list of formats. 
-#' @seealso \code{\link{format}} to display formatted data, 
+#' @seealso \code{\link{fdata}} to display formatted data, 
 #' \code{\link{value}} to create user-defined formats, and 
-#' \code{\link{fapply}} to apply formats to a vector.
+#' \code{\link{fapply}} to apply formats to a vector. Also see
+#' \link{FormattingStrings} for documentation on formatting strings.
 #' @export
 #' @aliases formats<-
 #' @examples 

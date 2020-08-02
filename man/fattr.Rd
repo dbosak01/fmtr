@@ -38,7 +38,7 @@ to a vector can be applied using \code{\link{fapply}} or
 # Create vector
 a <- c(1.3243, 5.9783, 2.3848)
 
-# Assign format attriutes
+# Assign format attributes
 a <- fattr(a, format = "\%.1f", width = 10, justify = "right")
 
 # Apply format attributes
@@ -46,5 +46,6 @@ fapply(a)
 }
 \seealso{
 \code{\link{fdata}} to apply formats to a data frame, 
- \code{\link{fapply}} to apply formats to a vector.
+ \code{\link{fapply}} to apply formats to a vector.  See
+\link{FormattingStrings} for documentation on formatting strings.
 }

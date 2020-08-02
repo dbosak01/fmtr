@@ -13,7 +13,7 @@
 #' @param x The vector to assign attributes to.
 #' @param format The format to assign to the format attribute.  Format 
 #' can be a formatting string, a named vector decode, a vectorized
-#' formatting function, or a formatting list.
+#' formatting function, or a formatting list. 
 #' @param width The desired width of the formatted output. 
 #' @param justify Justification of the output vector. Valid values are 
 #' 'none', 'left', 'right', 'center', or 'centre'. 
@@ -21,13 +21,14 @@
 #' transfer to the new vector.  Default value is TRUE.
 #' @return The vector with formatting attributes applied.
 #' @seealso \code{\link{fdata}} to apply formats to a data frame, 
-#'  \code{\link{fapply}} to apply formats to a vector.
+#'  \code{\link{fapply}} to apply formats to a vector.  See
+#' \link{FormattingStrings} for documentation on formatting strings.
 #' @export
 #' @examples
 #' # Create vector
 #' a <- c(1.3243, 5.9783, 2.3848)
 #' 
-#' # Assign format attriutes
+#' # Assign format attributes
 #' a <- fattr(a, format = "%.1f", width = 10, justify = "right")
 #' 
 #' # Apply format attributes

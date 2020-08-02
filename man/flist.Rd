@@ -31,7 +31,7 @@ A formatting list contains more than one formatting object
 \details{
 To apply more than one formatting object to a vector, use a formatting
 list.  There are two types of formatting list: column and row.  The column
-type formatting lists applies multiple formats to all values in the
+type formatting lists applies all formats to all values in the
 vector.  The row type formatting list can apply a different format to 
 each value in the vector.  
 
@@ -90,4 +90,10 @@ fl3 <- flist(type = "row", lookup = v3,
 
 # Apply formatting list to vector, using lookup
 fapply(l2, fl3)
+}
+\seealso{
+\code{\link{fapply}} for information on how formats are applied
+to a vector, \code{\link{value}} for how to create a user-defined format,
+and \link{FormattingStrings} for details on how to use
+formatting strings.
 }

@@ -62,7 +62,8 @@ formats(df1) <-  lst
 format(df1)
 }
 \seealso{
-\code{\link{format}} to display formatted data, 
+\code{\link{fdata}} to display formatted data, 
 \code{\link{value}} to create user-defined formats, and 
-\code{\link{fapply}} to apply formats to a vector.
+\code{\link{fapply}} to apply formats to a vector. Also see
+\link{FormattingStrings} for documentation on formatting strings.
 }

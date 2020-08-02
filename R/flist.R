@@ -5,7 +5,7 @@
 #' @details 
 #' To apply more than one formatting object to a vector, use a formatting
 #' list.  There are two types of formatting list: column and row.  The column
-#' type formatting lists applies multiple formats to all values in the
+#' type formatting lists applies all formats to all values in the
 #' vector.  The row type formatting list can apply a different format to 
 #' each value in the vector.  
 #' 
@@ -30,6 +30,10 @@
 #' @return A vector or list of formatted values.  The type of return value 
 #' can be controlled with the \code{simplify} parameter.  The default return
 #' type is a vector.
+#' @seealso \code{\link{fapply}} for information on how formats are applied
+#' to a vector, \code{\link{value}} for how to create a user-defined format,
+#' and \link{FormattingStrings} for details on how to use
+#' formatting strings.
 #' @export
 #' @examples
 #' #' ## Example 1: Formatting List - Column Type ##

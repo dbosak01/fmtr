@@ -123,24 +123,24 @@ NULL
 #' @examples 
 #' # Examples for formatting dates and times 
 #' t <- Sys.time()
-#' fapply(t, "%d/%m/%Y")              # day/month/year
-#' fapply(t, "%d%b%Y")                # day abbreviated month year
-#' fapply(t, "%y-%m")                 # two digit year - month
-#' fapply(t, "%A, %B %d")             # weekday, unabbreviated month and date
-#' fapply(t, "%Y-%m%-%d %H:%M:%S %p") # common timestamp format
+#' fapply(t, "%d/%m/%Y")              # Day/Month/Year
+#' fapply(t, "%d%b%Y")                # Day abbreviated month year
+#' fapply(t, "%y-%m")                 # Two digit year - month
+#' fapply(t, "%A, %B %d")             # Weekday, unabbreviated month and date
+#' fapply(t, "%Y-%m%-%d %H:%M:%S %p") # Common timestamp format
 #' 
 #' # Examples for formatting numbers
 #' a <- 1234.56789
-#' fapply(a, "%f")                  # Floating point number
-#' fapply(a, "%.1f")                # One decimal place
-#' fapply(a, "%8.1f")               # Fixed width
-#' fapply(a, "%-8.1f")              # Fixed width left justified
-#' fapply(a, "%08.1f")              # Zero padded
-#' fapply(a, "%+.1f")               # Forced sign
-#' fapply(-a, "%+.1f")              # Negative 
-#' fapply(a, "%.1f%%")              # Percentage
-#' fapply(a, "$%.2f")               # Currency
-#' fapply(a, "The number is %f.")   # Interpolation
+#' fapply(a, "%f")                    # Floating point number
+#' fapply(a, "%.1f")                  # One decimal place
+#' fapply(a, "%8.1f")                 # Fixed width
+#' fapply(a, "%-8.1f")                # Fixed width left justified
+#' fapply(a, "%08.1f")                # Zero padded
+#' fapply(a, "%+.1f")                 # Forced sign
+#' fapply(-a, "%+.1f")                # Negative 
+#' fapply(a, "%.1f%%")                # Percentage
+#' fapply(a, "$%.2f")                 # Currency
+#' fapply(a, "The number is %f.")     # Interpolation
 #' @name FormattingStrings
 NULL
 

@@ -78,5 +78,6 @@ format(df)
 \code{\link{value}} to define a format,
 \code{\link{fattr}} to apply formatting to a column/vector, and the
 \code{\link{formats}}, \code{\link{widths}}, and \code{\link{justification}}
-functions to get or set formatting for an entire data frame.
+functions to get or set formatting for an entire data frame.  Also see
+\link{FormattingStrings} for documentation on formatting strings.
 }
