@@ -25,10 +25,10 @@
 #' formats:
 #' \itemize{
 #'   \item{\strong{Formatting string:}}{ A single string will be interpreted as 
-#' a formatting string.  See the \link{FormattingStrings} documentation
+#' a formatting string.  See the \link{FormattingStrings} documentation for 
 #' further details.}
 #'   \item{\strong{Named vector:}}{ A named vector can serve as a lookup list or 
-#'   decode
+#'   decode 
 #' for a vector.  You can use a named vector to perform simple 
 #' lookups on character vectors.}
 #'   \item{\strong{Format object:}}{ A format object may be created using the 

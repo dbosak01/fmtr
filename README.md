@@ -9,7 +9,7 @@
 
 <!-- badges: end -->
 
-The **fmtr** package helps format data.  The package aims to provide
+The **fmtr** package helps format data.  The package aims to simulate 
 the basic functionality of SAS® formats, but with R.  
 
 Formatting may be assigned
@@ -77,8 +77,6 @@ fdata(df)
 * The `formats` and `fattr` functions to easily assign formatting attributes.
 * The `value` and `condition` functions to create a new user-defined format.
 * The `flist` function to create a formatting list.
-* Convenience functions for setting formatting attributes.
-
 
 ## How to use fdata()
 Data can be formatted by assigning formats to the **format** attribute
@@ -138,8 +136,9 @@ to a column, that column is returned unaltered.
 
 ## How to use fapply()
 
-The `fapply()` function applies a format to a vector or factor. This function 
-may be used independantly of the `fdata()` function.  Here is an example:
+The `fapply()` function applies a format to a vector, factor, or list. 
+This function 
+may be used independently of the `fdata()` function.  Here is an example:
 ```
 v1 <- c("A", "B", "C", "B")
 v1
@@ -157,7 +156,7 @@ fapply(v1, fmt1)
 ```
 One advantage of using `fapply()` is that your original data is not
 altered. The formatted values are assigned to a new object. If your 
-orignial data changes, the formatting function should be reapplied 
+original data changes, the formatting function should be reapplied 
 to maintain consistency with the original data.
 
 ## What kind of formats are available
@@ -214,16 +213,16 @@ advantage of a clear and flexible syntax.  It is excellent for categorizing
 data.  Here is an example of a user-defined 
 format:
 ```
-v1 <- c("A", "B", "C", "B")
-f1 <- factor(v1, levels = c("A", "B", "C"))
+v1 <- c("A", "B", NA, "C")
 
-fmt2 <- value(condition(x == "A", "Label A"),
+fmt2 <- value(condition(is.na(x), "Missing"),
+              condition(x == "A", "Label A"),
               condition(x == "B", "Label B"),
               condition(TRUE, "Other"))
               
-fapply(f1, fmt2)
+fapply(v1, fmt2)
 
-# "Label A" "Label B"   "Other" "Label B" 
+# "Label A" "Label B"   "Missing" "Other" 
 
 ```
 
@@ -237,14 +236,14 @@ vectorized function can be more complicated to write.  Here is an
 example of formatting 
 with a user-defined, vectorized function:
 ```
-v1 <- c("A", "B", "C", "B")
+v1 <- c("A", "B", NA, "C")
 
 fmt2 <- Vectorize(function(x) {
     
-    if (x == "A") 
-      ret <- "Label A"
-    else if (x == "B")
-      ret <- "Label B"
+    if (is.na(x)) 
+      ret <- "Missing"
+    else if (x %in% c("A", "B"))
+      ret <- paste("Label", x)
     else 
       ret <- "Other"
     
@@ -254,7 +253,7 @@ fmt2 <- Vectorize(function(x) {
   
 fapply(v1, fmt2)
 
-# "Label A" "Label B"   "Other" "Label B" 
+# "Label A" "Label B"   "Missing" "Other" 
 
 ```
 
@@ -278,7 +277,7 @@ For the lookup method, the formatting object is specified by a lookup vector.
 The lookup vector should contain names 
 associated with the elements in the formatting list. The lookup vector should 
 also contain the same number of items as the data vector.  For each item
-in the data vector, **fmtr** will look up the approprate format
+in the data vector, **fmtr** will look up the appropriate format
 from the formatting list, and apply that format to the
 corresponding data value.
 
@@ -342,5 +341,9 @@ and justify attributes all at once.  These attributes are passed in as
 arguments to the `fattr()` function, instead of as properties on a call
 to `attr()`.
 
-
+### Other convenience functions
+The `logr` package contains several other functions for setting attributes
+easily.  These include the `widths` and `justification` functions to set 
+columns widths and column justification on an entire data frame.  The package
+also includes class testing functions like `is.format` and `is.flist`.
 

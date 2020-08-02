@@ -1,7 +1,7 @@
 Package: fmtr
 Type: Package
 Title: Contains functions for formatting data frames
-Version: 0.0.0.9004
+Version: 1.0.0
 Author: David Bosak
 Author@R: person("David", "Bosak", email = "dbosak01@gmail.com",
   role = c("aut", "cre"))
@@ -16,6 +16,8 @@ Description: Contains a set of functions that can be used to
 License: CC0
 Encoding: UTF-8
 LazyData: true
+URL: https://github.com/dbosak01/fmtr
+BugReports: https://github.com/dbosak01/fmtr/issues
 Suggests: 
     testthat,
     knitr,

@@ -87,7 +87,7 @@ value <- function(...) {
 #' 
 #' @details 
 #' The \code{condition} function creates a condition as part of a format 
-#' definition.  The format defined using the \code{\link{value}}, 
+#' definition.  The format is defined using the \code{\link{value}} 
 #' function.  The condition is defined as an expression/label pair.  The 
 #' expression parameter can be any valid R expression.   The label parameter
 #' can be any valid literal.  Conditions are evaluated in the order they 
@@ -110,7 +110,7 @@ value <- function(...) {
 #' @return The new condition object.
 #' @seealso \code{\link{fdata}} to apply formatting to a data frame,
 #' \code{\link{value}} to define a format,
-#' \code{\link{levels}} or \code{labels} to access the labels, and 
+#' \code{\link{levels}} or \code{\link{labels.fmt}} to access the labels, and 
 #' \code{\link{fapply}} to apply the format to a vector.
 #' @export
 #' @examples 
