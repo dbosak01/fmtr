@@ -19,6 +19,7 @@
 #' 'none', 'left', 'right', 'center', or 'centre'. 
 #' @param keep Whether to keep any existing formatting settings and 
 #' transfer to the new vector.  Default value is TRUE.
+#' @return The vector with formatting attributes applied.
 #' @seealso \code{\link{fdata}} to apply formats to a data frame, 
 #'  \code{\link{fapply}} to apply formats to a vector.
 #' @export

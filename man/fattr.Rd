@@ -21,6 +21,9 @@ formatting function, or a formatting list.}
 \item{keep}{Whether to keep any existing formatting settings and 
 transfer to the new vector.  Default value is TRUE.}
 }
+\value{
+The vector with formatting attributes applied.
+}
 \description{
 Assign formatting attributes to a vector
 }

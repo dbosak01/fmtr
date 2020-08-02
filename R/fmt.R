@@ -22,7 +22,7 @@
 #' \code{labels} function.
 #' 
 #' The format object may be applied to a vector using the \code{fapply}
-#' function.  See \code{link{fapply}} for further details.
+#' function.  See \code{\link{fapply}} for further details.
 #'
 #' @param ... One or more conditions.
 #' @return The new format object.
@@ -80,7 +80,7 @@ value <- function(...) {
 }
 
 #' @title
-#' Define a condition for a format
+#' Define a condition for a user-defined format
 #' 
 #' @description 
 #' The \code{condition} function creates a condition for a user-defined format. 

@@ -45,10 +45,14 @@ formats:
   \item{\strong{Formatting string:}}{ A single string will be interpreted as 
 a formatting string.  A formatting string will be processed differently
 depending on the class of the vector.  A vector of class date will 
-execute the \code{format} function.  A vector of numeric, character, 
-or integer will execute the \code{sprintf} function.  See the formatting
-codes for the \code{format} and \code{sprintf} functions for further 
-details.}
+execute the \code{format} generic function, with the format string as an 
+input
+to the \code{format} parameter.  A vector of numeric, character, 
+or integer will execute the \code{sprintf} function, with the 
+formatting
+string as an input to the \code{fmt} parameter.  See the formatting
+codes for the \code{\link[base]{format}} and \code{\link[base]{sprintf}} 
+functions for further details.}
   \item{\strong{Named vector:}}{ A named vector can serve as a lookup list or 
   decode
 for a vector.  You can use a named vector to perform simple 

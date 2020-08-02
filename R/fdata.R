@@ -35,7 +35,6 @@
 #' functions to get or set formatting for an entire data frame.
 #' @import tibble
 #' @export
-#' @aliases format.tbl format.data.frame
 #' @examples 
 #' ## Example 1: Simple Formats ##
 #' # Set up data frame

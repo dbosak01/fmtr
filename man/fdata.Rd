@@ -2,8 +2,6 @@
 % Please edit documentation in R/fdata.R
 \name{fdata}
 \alias{fdata}
-\alias{format.tbl}
-\alias{format.data.frame}
 \title{Format a data frame or tibble}
 \usage{
 fdata(x, ...)

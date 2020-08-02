@@ -29,7 +29,7 @@ These labels may be accessed either from the \code{levels} function or the
 \code{labels} function.
 
 The format object may be applied to a vector using the \code{fapply}
-function.  See \code{link{fapply}} for further details.
+function.  See \code{\link{fapply}} for further details.
 }
 \examples{
 ## Example 1: Character to Character Mapping ##

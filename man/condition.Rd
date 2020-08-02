@@ -2,7 +2,7 @@
 % Please edit documentation in R/fmt.R
 \name{condition}
 \alias{condition}
-\title{Define a condition for a format}
+\title{Define a condition for a user-defined format}
 \usage{
 condition(expr, label)
 }
