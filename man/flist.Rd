@@ -94,6 +94,8 @@ fapply(l2, fl3)
 \seealso{
 \code{\link{fapply}} for information on how formats are applied
 to a vector, \code{\link{value}} for how to create a user-defined format,
-and \link{FormattingStrings} for details on how to use
+and \code{\link{as.flist}} to convert an existing list of formats 
+to a formatting
+list. Also see \link{FormattingStrings} for details on how to use
 formatting strings.
 }
