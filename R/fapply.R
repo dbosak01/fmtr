@@ -333,7 +333,7 @@ flist_row_apply <- function(lst, vect) {
   }
   
   # Unlist if requested
-  if (lst$return_type == "vector")
+  if (lst$simplify == TRUE)
     ret <- unlist(ret)
   
   return(ret)
@@ -353,9 +353,9 @@ flist_column_apply <- function(lst, vect) {
   }
 
   # Unlist if requested  
-  if(lst$return_type == "vector")
+  if(lst$simplify == TRUE)
     ret <- unlist(ret)
-  else if (lst$return_type == "list" & class(ret) != "list")
+  else if (lst$simplify == FALSE & class(ret) != "list")
     ret <- as.list(ret)
 
   return(ret)

@@ -4,7 +4,7 @@
 \alias{flist}
 \title{Create a formatting list}
 \usage{
-flist(..., type = "column", lookup = NULL, return_type = "vector")
+flist(..., type = "column", lookup = NULL, simplify = TRUE)
 }
 \arguments{
 \item{...}{A set of formatting objects.}
@@ -16,11 +16,14 @@ The default value is 'column'.}
 the formatting list.  This parameter is only used for 'row' type 
 formatting lists.}
 
-\item{return_type}{The type of data structure to return.  Valid values are
-'vector' or 'list'.  Default is 'vector'.}
+\item{simplify}{Whether to simplify the results to a vector.  Valid values 
+are TRUE or FALSE.  Default is TRUE.  If the value is set to FALSE, the 
+return type will be a list.}
 }
 \value{
-A vector or list of formatted values.
+A vector or list of formatted values.  The type of return value 
+can be controlled with the \code{simplify} parameter.  The default return
+type is a vector.
 }
 \description{
 A formatting list contains more than one formatting object
@@ -40,7 +43,8 @@ fl1 <- flist("\%B", "The month is: \%s")
 # Apply formatting list to vector
 fapply(v1, fl1)
 
-## Example 1: flist type ordered row ##
+
+## Example 2: flist type ordered row ##
 # Set up data
 # Notice each row has a different data type
 l1 <- list("A", 1.263, as.Date("2020-07-21"), 
@@ -53,6 +57,7 @@ fl2 <- flist(type = "row",
              "\%d\%b\%Y")
 
 fapply(l1, fl2)
+
 
 ## Example 3: Formatting List - Row Type with lookup ##
 # Set up data

@@ -11,9 +11,12 @@
 #' @param lookup A lookup vector.  Used for looking up the format from 
 #' the formatting list.  This parameter is only used for 'row' type 
 #' formatting lists.
-#' @param return_type The type of data structure to return.  Valid values are
-#' 'vector' or 'list'.  Default is 'vector'.
-#' @return A vector or list of formatted values.
+#' @param simplify Whether to simplify the results to a vector.  Valid values 
+#' are TRUE or FALSE.  Default is TRUE.  If the value is set to FALSE, the 
+#' return type will be a list.
+#' @return A vector or list of formatted values.  The type of return value 
+#' can be controlled with the \code{simplify} parameter.  The default return
+#' type is a vector.
 #' @export
 #' @examples
 #' #' ## Example 1: Formatting List - Column Type ##
@@ -26,7 +29,8 @@
 #' # Apply formatting list to vector
 #' fapply(v1, fl1)
 #' 
-#' ## Example 1: flist type ordered row ##
+#' 
+#' ## Example 2: flist type ordered row ##
 #' # Set up data
 #' # Notice each row has a different data type
 #' l1 <- list("A", 1.263, as.Date("2020-07-21"), 
@@ -39,6 +43,7 @@
 #'              "%d%b%Y")
 #' 
 #' fapply(l1, fl2)
+#' 
 #' 
 #' ## Example 3: Formatting List - Row Type with lookup ##
 #' # Set up data
@@ -58,15 +63,15 @@
 #' 
 #' # Apply formatting list to vector, using lookup
 #' fapply(l2, fl3)
-flist <- function(..., type = "column", lookup = NULL, return_type = "vector") {
+flist <- function(..., type = "column", lookup = NULL, simplify = TRUE) {
   
   if (!type %in% c("column", "row"))
     stop (paste("Invalid value for type parameter.", 
                 "Value values are 'column' or 'row'"))
   
-  if (!return_type %in% c("vector", "list"))
-    stop (paste("Invalid value for return_type parameter.", 
-                "Valid values are 'vector' or 'list'."))
+  if (!simplify %in% c(TRUE, FALSE))
+    stop (paste("Invalid value for simplify parameter.", 
+                "Valid values are TRUE or FALSE."))
   
   if (is.null(lookup) == FALSE & type == "column")
     stop (paste("Lookup parameter only allowed on type 'row'."))
@@ -77,7 +82,7 @@ flist <- function(..., type = "column", lookup = NULL, return_type = "vector") {
   x$formats <- list(...)
   x$type <- type
   x$lookup <- lookup
-  x$return_type <- return_type
+  x$simplify <- simplify
   
   
   return(x)

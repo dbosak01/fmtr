@@ -7,14 +7,14 @@ test_that("flist() function works as expected.", {
               f2 = "%d%b%Y",
               type = "row",
               lookup = c(1, 2),
-              return_type = "list")
+              simplify = FALSE)
   
   fl
   
   expect_equal(fl$formats$f1, "%.1f")
   expect_equal(fl$formats$f2, "%d%b%Y")
   expect_equal(fl$type, "row")
-  expect_equal(fl$return_type, "list")
+  expect_equal(fl$simplify, FALSE)
   expect_equal(class(fl), "fmt_lst")
   
 })
@@ -86,3 +86,21 @@ test_that("flist works as expected for column type.", {
   expect_equal(r, c("$1.24", "$8.35", "$4.54"))
 
 })
+
+
+test_that("flist works as expected for column type and simplify false.", {
+  
+  
+  # flist type col
+  b <- c(1.2356, 8.345, 4.5422)
+  
+  fl2 <- flist(function(x) round(x, 2), "$%f", 
+               function(x) substr(x, 1, 5), simplify = FALSE)
+  b <- fattr(b, format = fl2)
+  r <- fapply(b)
+  r
+  
+  expect_equal(r, list("$1.24", "$8.35", "$4.54"))
+  
+})
+

@@ -61,7 +61,7 @@ Named vectors map one string value to another string value.
 Vectorized functions can be those created by the user or by a formatting
 function like those created with Base R or the \strong{scales} package.
 
-User-defined function are those created by the \strong{fmtr} 
+User-defined functions are those created by the \strong{fmtr} 
 \code{value} function.  See \code{\link{value}} for 
 additional details.
 
