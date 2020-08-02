@@ -92,28 +92,31 @@ NULL
 #' \code{fapply(1.2345, "\%.1f")} will produce the output \code{"1.2"}.
 #' 
 #' Below are some commonly used formatting codes for dates:
-#' 
-#' \%d = day as a number 
-#' \%a = abbreviated weekday
-#' \%A = unabbreviated weekday	
-#' \%m = month 
-#' \%b = abbreviated month
-#' \%B = unabbreviated month
-#' \%y = 2-digit year
-#' \%Y = 4-digit year	
-#' \%H = hour
-#' \%M = minute
-#' \%S = second
-#' \%p = AM/PM indicator
+#' \itemize{
+#' \item \%d = day as a number 
+#' \item \%a = abbreviated weekday
+#' \item \%A = unabbreviated weekday	
+#' \item \%m = month 
+#' \item \%b = abbreviated month
+#' \item \%B = unabbreviated month
+#' \item \%y = 2-digit year
+#' \item \%Y = 4-digit year	
+#' \item \%H = hour
+#' \item \%M = minute
+#' \item \%S = second
+#' \item \%p = AM/PM indicator
+#' }
 #' 
 #' See the \code{\link[base]{strptime}} function for additional codes and 
 #' examples of formatting dates and times.
 #' 
 #' Below are some commonly used formatting codes for other data types:
 #' 
-#' \%s = string
-#' \%d = integer
-#' \%f = decimal number
+#' \itemize{
+#' \item \%s = string
+#' \item \%d = integer
+#' \item \%f = decimal number
+#' }
 
 #' See the \code{\link[base]{sprintf}} function for additional codes and 
 #' examples of formatting other data types.
