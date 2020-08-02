@@ -26,7 +26,7 @@
 #' \code{\link{value}} to create user-defined formats, and 
 #' \code{\link{fapply}} to apply formats to a vector.
 #' @export
-#' @aliases "formats<-"
+#' @aliases formats<-
 #' @examples 
 #' # Take subset of data
 #' df1 <- mtcars[1:10, c("mpg", "cyl") ]

@@ -2,7 +2,6 @@
 % Please edit documentation in R/widths.R
 \name{widths}
 \alias{widths}
-\alias{"widths<-"}
 \alias{widths<-}
 \title{Get or set column widths for a data frame}
 \usage{
@@ -13,7 +12,7 @@ widths(x) <- value
 \arguments{
 \item{x}{A data frame or tibble}
 
-\item{value}{A named list of widths.  The widths must be positive intergers
+\item{value}{A named list of widths.  The widths must be positive integers
 greater than zero.}
 }
 \value{

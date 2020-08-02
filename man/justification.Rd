@@ -2,13 +2,17 @@
 % Please edit documentation in R/justification.R
 \name{justification}
 \alias{justification}
-\alias{"justification<-"}
+\alias{justification<-}
 \title{Get or set justification for data frame columns}
 \usage{
 justification(x)
+
+justification(x) <- value
 }
 \arguments{
-\item{x}{A data frame or tibble.}
+\item{x}{A data frame or tibble}
+
+\item{value}{A named list of justification values.}
 }
 \value{
 A named list of justification values.

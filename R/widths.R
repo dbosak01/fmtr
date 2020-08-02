@@ -26,7 +26,7 @@
 #' \code{\link{value}} to create user-defined formats, and 
 #' \code{\link{fapply}} to apply formats to a vector.
 #' @export
-#' @aliases "widths<-"
+#' @aliases widths<-
 #' @examples 
 #' # Take subset of data
 #' df1 <- mtcars[1:10, c("mpg", "cyl") ]
@@ -61,7 +61,7 @@ widths <- function(x) {
 #' @aliases widths
 #' @rdname  widths
 #' @param x A data frame or tibble
-#' @param value A named list of widths.  The widths must be positive intergers
+#' @param value A named list of widths.  The widths must be positive integers
 #' greater than zero. 
 #' @export 
 `widths<-` <- function(x, value) {

@@ -30,7 +30,7 @@
 #' \code{\link{value}} to create user-defined formats, and 
 #' \code{\link{fapply}} to apply formatting to a vector.
 #' @export
-#' @aliases "justification<-"
+#' @aliases justification<-
 #' @examples 
 #' # Take subset of data
 #' df1 <- mtcars[1:10, c("mpg", "cyl") ]
@@ -64,10 +64,10 @@ justification <- function(x) {
   
 }
 
-#' @aliases formats
-#' @rdname  formats
+#' @aliases justification
+#' @rdname  justification
 #' @param x A data frame or tibble
-#' @param value A named list of formats 
+#' @param value A named list of justification values. 
 #' @export 
 `justification<-` <- function(x, value) {
   
