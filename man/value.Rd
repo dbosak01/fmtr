@@ -32,6 +32,7 @@ The format object may be applied to a vector using the \code{fapply}
 function.  See \code{link{fapply}} for further details.
 }
 \examples{
+## Example 1: Character to Character Mapping ##
 # Set up vector
 v1 <- c("A", "B", "C", "B")
 
@@ -43,12 +44,15 @@ fmt1 <- value(condition(x == "A", "Label A"),
 # Apply format to vector
 fapply(v1, fmt1)
 
+## Example 2: Character to Integer Mapping ##
 fmt2 <- value(condition(x == "A", 1),
               condition(x == "B", 2),
               condition(TRUE, 3))
 
+# Apply format to vector
 fapply(v1, fmt2)
 
+## Example 3: Categorization of Continuous Variable ##
 #' # Set up vector
 v2 <- c(1, 6, 11, 7)
 
