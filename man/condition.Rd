@@ -51,6 +51,7 @@ v2 <- fapply(v1, fmt1)
 v2
 }
 \seealso{
+\code{\link{fdata}} to apply formatting to a data frame,
 \code{\link{value}} to define a format,
 \code{\link{levels}} or \code{labels} to access the labels, and 
 \code{\link{fapply}} to apply the format to a vector.

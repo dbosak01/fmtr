@@ -1,7 +1,7 @@
 Package: fmtr
 Type: Package
 Title: Contains functions for formatting data frames
-Version: 0.0.0.9003
+Version: 0.0.0.9004
 Author: David Bosak
 Author@R: person("David", "Bosak", email = "dbosak01@gmail.com",
   role = c("aut", "cre"))

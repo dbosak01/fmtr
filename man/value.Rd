@@ -55,7 +55,7 @@ fapply(v1, fmt2)
 
 
 ## Example 3: Categorization of Continuous Variable ##
-#' # Set up vector
+# Set up vector
 v2 <- c(1, 6, 11, 7)
 
 # Define format

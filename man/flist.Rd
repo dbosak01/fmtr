@@ -30,7 +30,20 @@ A formatting list contains more than one formatting object
 }
 \details{
 To apply more than one formatting object to a vector, use a formatting
-list.
+list.  There are two types of formatting list: column and row.  The column
+type formatting lists applies multiple formats to all values in the
+vector.  The row type formatting list can apply a different format to 
+each value in the vector.  
+
+Further, there are two styles of row type list: ordered and lookup.  The
+ordered style applies each format in the list to the vector values
+in the order specified.  The
+ordered style will recycle the formats as needed.  The lookup style 
+formatting list uses a lookup to determine which format from the list to
+apply to a particular value of the vector.  The lookup columns values should
+correspond to names on the formatting list.  
+
+Examples of column type and row type formatting lists are given below.
 }
 \examples{
 #' ## Example 1: Formatting List - Column Type ##
@@ -44,7 +57,7 @@ fl1 <- flist("\%B", "The month is: \%s")
 fapply(v1, fl1)
 
 
-## Example 2: flist type ordered row ##
+## Example 2: Formatting List - Row Type ordered ##
 # Set up data
 # Notice each row has a different data type
 l1 <- list("A", 1.263, as.Date("2020-07-21"), 
@@ -64,16 +77,16 @@ fapply(l1, fl2)
 # Notice each row has a different data type
 l2 <- list(2841.258, "H", as.Date("2020-06-19"),
            "L", as.Date("2020-04-24"), 1382.8865)
-v3 <- c("type1", "type2", "type3", "type2", "type3", "type1")
+v3 <- c("num", "char", "date", "char", "date", "num")
 
 # Create formatting list
 fl3 <- flist(type = "row", lookup = v3,
-             type1 = function(x) format(x, digits = 2, nsmall = 1, 
+             num = function(x) format(x, digits = 2, nsmall = 1, 
                                   big.mark=","),
-             type2 = value(condition(x == "H", "High"),
+             char = value(condition(x == "H", "High"),
                      condition(x == "L", "Low"),
                      condition(TRUE, "NA")),
-             type3 = "\%d\%b\%Y")
+             date = "\%d\%b\%Y")
 
 # Apply formatting list to vector, using lookup
 fapply(l2, fl3)

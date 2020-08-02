@@ -54,7 +54,7 @@
 #' 
 #' 
 #' ## Example 3: Categorization of Continuous Variable ##
-#' #' # Set up vector
+#' # Set up vector
 #' v2 <- c(1, 6, 11, 7)
 #' 
 #' # Define format
@@ -108,7 +108,8 @@ value <- function(...) {
 #' string.  However, the label parameter does not restrict the data type.
 #' Meaning, the label could also be a number, date, or other R object type.
 #' @return The new condition object.
-#' @seealso \code{\link{value}} to define a format,
+#' @seealso \code{\link{fdata}} to apply formatting to a data frame,
+#' \code{\link{value}} to define a format,
 #' \code{\link{levels}} or \code{labels} to access the labels, and 
 #' \code{\link{fapply}} to apply the format to a vector.
 #' @export
