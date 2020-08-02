@@ -78,10 +78,11 @@ NULL
 #' functions. See below for further details.
 #' @details 
 #' Here is a table:
+#' \tabular{
 #' |Code|Description|Example|
 #' |----|-----------|-------|
 #' |%%d |Date.      |"%%d%%m%%Y" = "01/01/1970"|
-#' 
+#' }
 #' That was a table.
 #' @name FormattingCodes
 NULL
