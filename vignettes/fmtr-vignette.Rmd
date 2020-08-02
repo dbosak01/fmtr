@@ -1,13 +1,20 @@
-# fmtr <img src="man/images/mat_star.svg" align="right" height="138" />
+---
+title: "fmtr-vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{fmtr-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
 
-<!-- badges: start -->
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+# fmtr <img src="../man/images/mat_star.svg" align="right" height="138" />
 
-[![fmtr version](https://www.r-pkg.org/badges/version/fmtr)](https://cran.r-project.org/package=fmtr)
-[![fmtr lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://cran.r-project.org/package=fmtr)
-[![fmtr downloads](https://cranlogs.r-pkg.org/badges/grand-total/fmtr)](https://cran.r-project.org/package=fmtr)
-[![Travis build status](https://travis-ci.com/dbosak01/logr.svg?branch=master)](https://travis-ci.com/dbosak01/fmtr)
-
-<!-- badges: end -->
 
 The **fmtr** package helps format data.  The package aims to provide
 the basic functionality of SAS® formats, but with R.  
