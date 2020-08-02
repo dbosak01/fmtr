@@ -127,6 +127,46 @@ is.flist <- function(x) {
 }
 
 
+#' @title Convert to a formatting list
+#' @description Converts a normal list to a formatting list.  All
+#' other parameters are the same as the \code{flist} function.
+#' @param x List to convert.
+#' @return A formatting list object.
+#' @inherit flist
+#' @seealso \code{\link{flist}} function documentation for additional details.
+#' @export
+#' @examples
+#' # Create flist
+#' lst <- list("%d%b%Y", "%.1f")
+#' flst <- as.flist(lst)
+#' is.flist(flst)
+#' is.flist("A")
+as.flist <- function(x, type = "column", lookup = NULL, simplify = TRUE) {
+  
+  
+  if (!type %in% c("column", "row"))
+    stop (paste("Invalid value for type parameter.", 
+                "Value values are 'column' or 'row'"))
+  
+  if (!simplify %in% c(TRUE, FALSE))
+    stop (paste("Invalid value for simplify parameter.", 
+                "Valid values are TRUE or FALSE."))
+  
+  if (is.null(lookup) == FALSE & type == "column")
+    stop (paste("Lookup parameter only allowed on type 'row'."))
+  
+  # Create new structure of class "fmt_lst"
+  f <- structure(list(), class = c("fmt_lst"))
+  
+  f$formats <- x
+  f$type <- type
+  f$lookup <- lookup
+  f$simplify <- simplify
+  
+  return(f)
+}
+
+
 # Testing -----------------------------------------------------------------
 # 
 # # Simple use case

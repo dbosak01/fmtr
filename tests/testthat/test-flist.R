@@ -104,3 +104,13 @@ test_that("flist works as expected for column type and simplify false.", {
   
 })
 
+
+test_that("as.flist and is.flist work as expected.", {
+  
+  lst <- list("%d%b%Y", "%.1f")
+  flst <- as.flist(lst)
+  expect_equal(is.flist(flst), TRUE)
+  expect_equal(is.flist("A"), FALSE)
+  
+})
+
