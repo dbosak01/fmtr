@@ -44,7 +44,7 @@ Vectorized functions can be those created by the user or by a formatting
 function like those created with Base R or the \strong{scales} package.
 
 User-defined function are those created by the \strong{fmtr} 
-\code{value} function.  See \code{\link{value()}} for 
+\code{value} function.  See \code{\link{value}} for 
 additional details.
 
 Formatting lists are lists which contain any of the above format types.
@@ -78,7 +78,7 @@ Vectorized functions can be those created by the user or by a formatting
 function like those created with Base R or the \strong{scales} package.
 
 User-defined function are those created by the \strong{fmtr} 
-\code{value} function.  See \code{\link{value()}} for 
+\code{value} function.  See \code{\link{value}} for 
 additional details.
 
 Formatting lists are lists which contain any of the above format types.
