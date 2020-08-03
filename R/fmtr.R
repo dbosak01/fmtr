@@ -120,6 +120,8 @@ NULL
 
 #' See the \code{\link[base]{sprintf}} function for additional codes and 
 #' examples of formatting other data types.
+#' @seealso \code{\link{fapply}} for formatting vectors, and 
+#' \code{\link{fdata}} for formatting data frames.
 #' @examples 
 #' # Examples for formatting dates and times 
 #' t <- Sys.time()

@@ -40,7 +40,7 @@ ordered style applies each format in the list to the vector values
 in the order specified.  The
 ordered style will recycle the formats as needed.  The lookup style 
 formatting list uses a lookup to determine which format from the list to
-apply to a particular value of the vector.  The lookup columns values should
+apply to a particular value of the vector.  The lookup column values should
 correspond to names on the formatting list.  
 
 Examples of column type and row type formatting lists are given below.

@@ -29,7 +29,8 @@ function.  The condition is defined as an expression/label pair.  The
 expression parameter can be any valid R expression.   The label parameter
 can be any valid literal.  Conditions are evaluated in the order they 
 are assigned.  A default condition is created by assigning the expression
-parameter to TRUE.
+parameter to TRUE.  If your data can contain missing values, it is 
+recommended that you test for those values first.
 
 The condition object is an S3 class of type "fmt_cond". The condition 
 labels can be extracted from the format using the \code{labels} function.

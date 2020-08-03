@@ -12,25 +12,27 @@
 #' @details 
 #' If formats are assigned to the "format" attributes of the data frame
 #' columns, the \code{fdata} function will apply those formats
-#' to the specified columns, and return a new formatted data frame. 
-#' Format can be specified as formatting strings, named vectors, user-defined
+#' to the specified columns, and return a new, formatted data frame. 
+#' Formats can be specified as formatting strings, named vectors, user-defined
 #' formats, or vectorized formatting functions.  The \code{fdata} 
 #' function will
 #' apply the format to the associated column data using the \code{fapply} 
-#' function.  A format can also be specified as a list of 
-#' formats of the previous four types.  See the \code{\link{fapply}}
+#' function. A format can also be specified as a formatting list of the 
+#' previous four types.  See the \code{\link{fapply}}
 #' function for additional information.
 #' 
-#' The \code{fdata} function has two overrides: 
-#' \code{format.data.frame} and \code{format.tbl}.  The two overrides will
-#' call \code{fdata} on the data.frame class and the tbl (tibble)
-#' class, respectively.
+#' After formatting each column, the \code{fdata} function will 
+#' call the base R \code{\link{format}} function on 
+#' the data frame.  Any follow on parameters will be sent to the \code{format}
+#' function.   
 #'
 #' @param x A data frame or tibble to be formatted.
 #' @param ... Any follow-on parameters to the format function.
 #' @return A new, formatted data frame or tibble with the formats applied.
-#' @seealso \code{\link{value}} to define a format,
-#' \code{\link{fattr}} to apply formatting to a column/vector, and the
+#' @seealso \code{\link{fapply}} to apply a format to a vector,
+#' \code{\link{value}} to define a format object,
+#' \code{\link{fattr}} to assign formatting specifications to a single 
+#' column/vector, and the
 #' \code{\link{formats}}, \code{\link{widths}}, and \code{\link{justification}}
 #' functions to get or set formatting for an entire data frame.  Also see
 #' \link{FormattingStrings} for documentation on formatting strings.
@@ -40,17 +42,17 @@
 #' ## Example 1: Simple Formats ##
 #' # Set up data frame
 #' df <- mtcars[1:10, c("mpg", "cyl")]
+#' df
 #' 
 #' # Define and assign formats
-#' attr(df$mpg, "format") <- value(condition(x >= 20, "High"),
-#'                                 condition(x < 20, "Low"))
-#'                                 
-#' attr(df$cyl, "format") <- value(condition(x == 4, "Small"),
+#' formats(df) <- list( mpg = value(condition(x >= 20, "High"),
+#'                                 condition(x < 20, "Low")),
+#'                      cyl = value(condition(x == 4, "Small"),
 #'                                 condition(x == 6, "Midsize"),
-#'                                 condition(x == 8, "Large"))
+#'                                 condition(x == 8, "Large")))
 #'               
 #' # Apply formatting
-#' format(df)
+#' fdata(df)
 #' 
 #' ## Example 2: Formatting List ##
 #' # Set up data
@@ -73,7 +75,7 @@
 #' df$values <- fattr(df$values, format = lst)
 #' 
 #' # Apply formatting list
-#' format(df)
+#' fdata(df)
 fdata <- function(x, ...) {
   
 

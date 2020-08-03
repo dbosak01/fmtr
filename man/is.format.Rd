@@ -13,13 +13,13 @@ is.format(x)
 A logical value or TRUE or FALSE.
 }
 \description{
-The \code{is.format} can be used to determine if an object is a 
+The \code{is.format} function can be used to determine if an object is a 
 user-defined format of class "fmt".
 }
 \details{
 The \code{is.format} function returns TRUE if the object passed is a 
 user-defined format.  User-defined formats are defined using the \code{value}
-function. See the \code{link{value}}
+function. See the \code{\link{value}}
 function help for further details.
 }
 \examples{

@@ -12,7 +12,8 @@
 #' The \code{value} function creates a user defined format object, in a manner
 #' similar to a SAS® format.  The \code{value} function accepts 
 #' one or more \code{condition} arguments that define the format.  The 
-#' conditions map an R expression to a label.  
+#' conditions map an R expression to a label.  When applied, the format 
+#' will return the label corresponding to the first true expression.
 #' 
 #' The format object is an S3 class of type "fmt". When the object is created,
 #' the \strong{levels} attribute of the object will be set with a vector 
@@ -92,7 +93,8 @@ value <- function(...) {
 #' expression parameter can be any valid R expression.   The label parameter
 #' can be any valid literal.  Conditions are evaluated in the order they 
 #' are assigned.  A default condition is created by assigning the expression
-#' parameter to TRUE.
+#' parameter to TRUE.  If your data can contain missing values, it is 
+#' recommended that you test for those values first.
 #' 
 #' The condition object is an S3 class of type "fmt_cond". The condition 
 #' labels can be extracted from the format using the \code{labels} function.
@@ -151,7 +153,7 @@ condition <- function(expr, label) {
 #' definition.  Each condition has a label as part of its definition.
 #' The \code{labels} function extracts the labels from the conditions and
 #' returns them as a vector.  While the labels will typically be of type
-#' character, the can be of any data type. See the \code{link{condition}}
+#' character, they can be of any data type. See the \code{link{condition}}
 #' function help for further details.  
 #'
 #' @param object A user-defined format of class "fmt".
@@ -188,13 +190,13 @@ labels.fmt <- function(object, ...) {
 #' Determine whether an object is a user-defined format
 #' 
 #' @description 
-#' The \code{is.format} can be used to determine if an object is a 
+#' The \code{is.format} function can be used to determine if an object is a 
 #' user-defined format of class "fmt". 
 #' 
 #' @details 
 #' The \code{is.format} function returns TRUE if the object passed is a 
 #' user-defined format.  User-defined formats are defined using the \code{value}
-#' function. See the \code{link{value}}
+#' function. See the \code{\link{value}}
 #' function help for further details.  
 #'
 #' @param x A user-defined format of class "fmt".

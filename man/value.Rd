@@ -19,7 +19,8 @@ The \code{value} function creates a user-defined format.
 The \code{value} function creates a user defined format object, in a manner
 similar to a SAS® format.  The \code{value} function accepts 
 one or more \code{condition} arguments that define the format.  The 
-conditions map an R expression to a label.  
+conditions map an R expression to a label.  When applied, the format 
+will return the label corresponding to the first true expression.
 
 The format object is an S3 class of type "fmt". When the object is created,
 the \strong{levels} attribute of the object will be set with a vector 

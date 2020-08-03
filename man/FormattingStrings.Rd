@@ -73,3 +73,7 @@ fapply(a, "\%.1f\%\%")                # Percentage
 fapply(a, "$\%.2f")                 # Currency
 fapply(a, "The number is \%f.")     # Interpolation
 }
+\seealso{
+\code{\link{fapply}} for formatting vectors, and 
+\code{\link{fdata}} for formatting data frames.
+}

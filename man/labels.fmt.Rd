@@ -23,7 +23,7 @@ The \code{condition} function creates a condition as part of a format
 definition.  Each condition has a label as part of its definition.
 The \code{labels} function extracts the labels from the conditions and
 returns them as a vector.  While the labels will typically be of type
-character, the can be of any data type. See the \code{link{condition}}
+character, they can be of any data type. See the \code{link{condition}}
 function help for further details.
 }
 \examples{
