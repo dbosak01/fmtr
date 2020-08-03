@@ -17,7 +17,7 @@
 #' @param width The desired width of the formatted output. 
 #' @param justify Justification of the output vector. Valid values are 
 #' 'none', 'left', 'right', 'center', or 'centre'. 
-#' @param keep Whether to keep any existing formatting settings and 
+#' @param keep Whether to keep any existing formatting attributes and 
 #' transfer to the new vector.  Default value is TRUE.
 #' @return The vector with formatting attributes applied.
 #' @seealso \code{\link{fdata}} to apply formats to a data frame, 
@@ -124,9 +124,10 @@ fattr <- function(x, format = NULL, width = NULL, justify = NULL, keep = TRUE) {
     
   }
   
-  attr(x, "format") <- value[["format"]]
-  attr(x, "width") <- value[["width"]]
-  attr(x, "justify") <- value[["justify"]]
+
+    attr(x, "format") <- value[["format"]]
+    attr(x, "width") <- value[["width"]]
+    attr(x, "justify") <- value[["justify"]]
   
   return(x)
   

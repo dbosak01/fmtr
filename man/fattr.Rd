@@ -18,7 +18,7 @@ formatting function, or a formatting list.}
 \item{justify}{Justification of the output vector. Valid values are 
 'none', 'left', 'right', 'center', or 'centre'.}
 
-\item{keep}{Whether to keep any existing formatting settings and 
+\item{keep}{Whether to keep any existing formatting attributes and 
 transfer to the new vector.  Default value is TRUE.}
 }
 \value{
