@@ -86,6 +86,7 @@ function on that data.  A sample program is as follows:
 ```
 # Set up data frame
 df <- mtcars[1:10, c("mpg", "cyl")]
+df
 
 # Define and assign formats
 attr(df$mpg, "format") <- value(condition(x >= 20, "High"),
@@ -262,7 +263,7 @@ Sometimes data needs to be formatted differently for each row.  This
 situation is difficult to deal with in any language.  
 But it can be made easy in R with the **fmtr** package and a formatting list.
 
-A formatting list is a list that contains one or more of the three types
+A formatting list is a list that contains one or more of the four types
 of formatting objects described above.  A formatting list can be applied in 
 two different ways: in order, or with a lookup.  
 
@@ -301,11 +302,11 @@ df
 
 # Set up formatting list
 lst <- flist(type = "row", lookup = v1,
-             num = function(x) format(x, digits = 2, nsmall = 1),
+             num = "%.1f",
              char = value(condition(x == "H", "High"),
                           condition(x == "L", "Low"),
                           condition(TRUE, "NA")),
-             date = function(x) format(x, format = "%y-%m"))
+             date = "%y-%m")
 
 # Assign formatting list to values column
 attr(df$values, "format") <- lst
