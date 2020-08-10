@@ -94,7 +94,7 @@ fdata <- function(x, ...) {
   ret <- as.data.frame(ret)
   rownames(ret) <- rownames(x)
   
-  if (all(class(x) == "data.frame")) {
+  if (any(class(x) == "data.frame") & ...length() > 0) {
     
     ret <- base::format.data.frame(ret, ...)
   }
