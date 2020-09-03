@@ -354,3 +354,22 @@ easily.  These include the `widths` and `justification` functions to set
 columns widths and column justification on an entire data frame.  The package
 also includes class testing functions like `is.format` and `is.flist`.
 
+## Formatting Helper Functions
+
+The **fmtr** package also contains several formatting helper functions.  These
+functions help with common formatting styles seen in statistical reports.
+For example, a range from 1 to 10 is commonly displayed as "1 - 10", with a 
+hyphen separating the minimum from the maximum.  To accomplish this formatting
+easily, the package provides a `fmt_range()` function that both calculates
+the range and formats it in the desired manner.
+
+Below is a complete list of the formatting helper functions.  See the help 
+documentation for additional details:
+
+* `fmt_range()`
+* `fmt_n()`
+* `fmt_quantile_range()`
+* `fmt_median()`
+* `fmt_cnt_pct()`
+* `fmt_mean_sd()`
+

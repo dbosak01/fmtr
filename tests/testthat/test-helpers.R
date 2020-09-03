@@ -52,6 +52,8 @@ test_that("fmt_quantile_range() function works as expected.", {
 test_that("fmt_median() function works as expected.", {
   
   
+  sample(seq(from = 0, to = 10, by = .1), 10)
+  
   v <- c(1, 5, 10, 13, 6, 3, NA)
   
   res1 <- fmt_median(v)

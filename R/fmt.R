@@ -109,6 +109,12 @@ value <- function(...) {
 #' can any valid literal value.  Typically, the label will be a character 
 #' string.  However, the label parameter does not restrict the data type.
 #' Meaning, the label could also be a number, date, or other R object type.
+#' @param order An option integer order number. When used, this parameter 
+#' will effect the order of the labels returned from the 
+#' \code{\link{labels.fmt}} function.  The purpose of the parameter is to control
+#' ordering of the format labels independently of the order they are assigned
+#' in the conditions.  This functionality is useful when you are using the format
+#' labels to assign ordered levels in a factor.  
 #' @return The new condition object.
 #' @seealso \code{\link{fdata}} to apply formatting to a data frame,
 #' \code{\link{value}} to define a format,
@@ -127,12 +133,13 @@ value <- function(...) {
 #' # Apply format to vector
 #' v2 <- fapply(v1, fmt1)
 #' v2
-condition <- function(expr, label) {
+condition <- function(expr, label, order = NULL) {
   
   y <- structure(list(), class = c("fmt_cnd"))    
   
-  y$expression <- substitute(expr)
+  y$expression <- substitute(expr, env = environment())
   y$label <- label
+  y$order <- order
   
   return(y)
   
@@ -175,16 +182,31 @@ condition <- function(expr, label) {
 labels.fmt <- function(object, ...) {
   
   ret <- NULL
+  o <- c()
+  r <- c()
   
   for (i in seq_along(object)) {
     
-    ret[length(ret) + 1] <- object[[i]][["label"]]
-    
+    if (is.null( object[[i]][["order"]])) {
+      r[length(r) + 1] <- object[[i]][["label"]]
+    } else {
+      tmp <- object[[i]][["order"]]
+
+      if (tmp > 0 & tmp <= length(object))
+        o[tmp] <- object[[i]][["label"]]
+      else
+        stop(paste("Order parameter invalid:", tmp))
+      
+    }
   }
+
+  ret <- c(o, r)
+
   
   return(ret)
   
 }
+
 
 #' @title
 #' Determine whether an object is a user-defined format

@@ -10,19 +10,39 @@ fmt_cnt_pct(x, denom = NULL, format = "\%5.1f")
 \item{x}{The input data vector.}
 
 \item{denom}{The denominator to use for the percentage. By default, the 
-parameter is NULL, meaning the function will use non-missing values of the 
-data vector as the denominator.  Otherwise, supply the denominator as 
-a numeric value.}
+parameter is NULL, meaning the function will use the number of 
+non-missing values of the data vector as the denominator.  
+Otherwise, supply the denominator as a numeric value.}
 
 \item{format}{A formatting string suitable for input into the 
 \code{\link[base]{sprintf}} function.  By default, this format is
 defined as "\%5.1f", which displays the value with one decimal place.}
 }
 \value{
-The formatted median value
+The formatted counts and percents.
 }
 \description{
-A function to calculate and format a count and percent
+A function to calculate and format a count and percent.
+}
+\details{
+This function calculates a percent and appends to the provided count.
+The result is then formatted using \code{\link[base]{sprintf}}. By default,
+the number of values in the input data vector is used as the denominator.
+Alternatively, you may supply the denominator using the **denom**
+parameter.
+You may also control the percent format using the **format** parameter.  
+Function will return any NA values in the input data. Results are 
+returned as a character vector.
+}
+\examples{
+v1 <- c(4, 3, 8, 6, 9, 5, NA, 0, 7, 4)
+
+# Format count and percent
+fmt_cnt_pct(v1)
+
+# Output
+# "4 ( 44.4\%)" "3 ( 33.3\%)" "8 ( 88.9\%)" "6 ( 66.7\%)" "9 (100.0\%)" 
+# "5 ( 55.6\%)" NA           "0 (  0.0\%)" "7 ( 77.8\%)" "4 ( 44.4\%)"
 }
 \seealso{
 Other helpers: 

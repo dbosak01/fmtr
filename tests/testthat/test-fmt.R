@@ -17,6 +17,22 @@ test_that("value() function sets class and levels as expected", {
   
 })
 
+test_that("ordered conditions set levels as expected", {
+  
+  
+  res <- c("Label B", "Other", "Label A")
+  
+  
+  fmt1 <- value(condition(x == "A", "Label A", order = 3),
+                condition(x == "B", "Label B", order = 1), 
+                condition(TRUE, "Other", order = 2))
+  
+  
+  expect_equal(class(fmt1), "fmt")
+  expect_equal(levels(fmt1), res)
+  
+})
+
 
 
 test_that("a format object can be applied to a vector.", {
@@ -83,6 +99,34 @@ test_that("labels() function works as expected", {
 })
 
 
+test_that("order parameter works as expected", {
+  
+  
+  res <- c("Label B", "Label A","Other")
+  
+  
+  fmt1 <- value(condition(x == "A", "Label A", order = 2),
+                condition(x == "B", "Label B", order = 1), 
+                condition(TRUE, "Other"))
+  
+  
+  lbls <- labels(fmt1)
+  
+  expect_equal(lbls, res)
+  
+})
 
-
+test_that("invalid order parameter generates error.", {
+  
+  
+  res <- c("Label B", "Label A","Other")
+  
+  
+  expect_error(value(condition(x == "A", "Label A", order = 6),
+                condition(x == "B", "Label B", order = 1), 
+                condition(TRUE, "Other")))
+  
+  
+  
+})
 

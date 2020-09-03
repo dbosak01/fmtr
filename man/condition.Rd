@@ -4,7 +4,7 @@
 \alias{condition}
 \title{Define a condition for a user-defined format}
 \usage{
-condition(expr, label)
+condition(expr, label, order = NULL)
 }
 \arguments{
 \item{expr}{A valid R expression.  The value in the expression is identified
@@ -15,6 +15,13 @@ should not be quoted.}
 can any valid literal value.  Typically, the label will be a character 
 string.  However, the label parameter does not restrict the data type.
 Meaning, the label could also be a number, date, or other R object type.}
+
+\item{order}{An option integer order number. When used, this parameter 
+will effect the order of the labels returned from the 
+\code{\link{labels.fmt}} function.  The purpose of the parameter is to control
+ordering of the format labels independently of the order they are assigned
+in the conditions.  This functionality is useful when you are using the format
+labels to assign ordered levels in a factor.}
 }
 \value{
 The new condition object.
