@@ -20,6 +20,6 @@ Suggests:
     testthat,
     knitr,
     rmarkdown
-Imports: tibble
+Imports: tibble, stats
 RoxygenNote: 7.1.1
 VignetteBuilder: knitr
