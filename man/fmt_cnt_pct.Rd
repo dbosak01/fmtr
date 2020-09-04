@@ -7,7 +7,7 @@
 fmt_cnt_pct(x, denom = NULL, format = "\%5.1f")
 }
 \arguments{
-\item{x}{The input data vector.}
+\item{x}{The input data vector or data frame column.}
 
 \item{denom}{The denominator to use for the percentage. By default, the 
 parameter is NULL, meaning the function will use the number of 

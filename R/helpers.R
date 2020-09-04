@@ -10,7 +10,7 @@
 #' function, and then formats the output using \code{\link[base]{sprintf}}.
 #' You may control the format using the \strong{format} parameter.  Any NA values
 #' in the input data are ignored. Results are returned as a character vector. 
-#' @param x The input data vector.
+#' @param x The input data vector or data frame column.
 #' @param sep The token used to separate the minimum and maximum range
 #' values.  Default value is a hyphen ("-").
 #' @param format A formatting string suitable for input into the 
@@ -44,7 +44,7 @@ fmt_range <- function(x, format = "%s", sep = "-") {
 #' This function calculates a count using the Base R \code{\link[base]{sum}}
 #' function. NA values are not counted. Results are returned as a 
 #' character vector. 
-#' @param x The input data vector.
+#' @param x The input data vector or data frame column.
 #' @return The formatted count value.
 #' @family helpers 
 #' @examples 
@@ -73,7 +73,7 @@ fmt_n <- function(x) {
 #' You may control the format using the \strong{format} parameter.  Function will 
 #' ignore any NA values in the input data. Results are returned as a 
 #' character vector. 
-#' @param x The input data vector.
+#' @param x The input data vector or data frame column.
 #' @param sep The token used to separate the minimum and maximum range
 #' values.  Default value is a hyphen ("-").
 #' @param format A formatting string suitable for input into the 
@@ -112,7 +112,7 @@ fmt_quantile_range <- function(x, format = "%.1f", sep = "-") {
 #' You may control the format using the \strong{format} parameter.  Function will 
 #' ignore any NA values in the input data. Results are returned as a 
 #' character vector. 
-#' @param x The input data vector.
+#' @param x The input data vector or data frame column.
 #' @param format A formatting string suitable for input into the 
 #' \code{\link[base]{sprintf}} function.  By default, this format is
 #' defined as "\%.1f", which displays the value with one decimal place.
@@ -150,7 +150,7 @@ fmt_median <- function(x, format = "%.1f") {
 #' You may also control the percent format using the \strong{format} parameter.  
 #' Function will return any NA values in the input data. Results are 
 #' returned as a character vector. 
-#' @param x The input data vector.
+#' @param x The input data vector or data frame column.
 #' @param denom The denominator to use for the percentage. By default, the 
 #' parameter is NULL, meaning the function will use the number of 
 #' non-missing values of the data vector as the denominator.  
@@ -201,7 +201,7 @@ fmt_cnt_pct <- function(x, denom = NULL, format = "%5.1f") {
 #' You may control the format using the \strong{format} parameter.  
 #' Function will ignore NA values in the input data. Results are 
 #' returned as a character vector. 
-#' @param x The input data vector.
+#' @param x The input data vector or data frame column.
 #' @param format A formatting string suitable for input into the 
 #' \code{\link[base]{sprintf}} function.  By default, this format is
 #' defined as "\%.1f", which displays the mean and standard deviation with 

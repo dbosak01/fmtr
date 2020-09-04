@@ -7,7 +7,7 @@
 fmt_n(x)
 }
 \arguments{
-\item{x}{The input data vector.}
+\item{x}{The input data vector or data frame column.}
 }
 \value{
 The formatted count value.

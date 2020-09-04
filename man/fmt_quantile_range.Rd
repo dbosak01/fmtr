@@ -7,7 +7,7 @@
 fmt_quantile_range(x, format = "\%.1f", sep = "-")
 }
 \arguments{
-\item{x}{The input data vector.}
+\item{x}{The input data vector or data frame column.}
 
 \item{format}{A formatting string suitable for input into the 
 \code{\link[base]{sprintf}} function.  By default, this format is
