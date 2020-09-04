@@ -8,7 +8,7 @@
 #' @details 
 #' This function calculates a range using the Base R \code{\link[base]{range}}
 #' function, and then formats the output using \code{\link[base]{sprintf}}.
-#' You may control the format using the **format** parameter.  Any NA values
+#' You may control the format using the \strong{format} parameter.  Any NA values
 #' in the input data are ignored. Results are returned as a character vector. 
 #' @param x The input data vector.
 #' @param sep The token used to separate the minimum and maximum range
@@ -70,7 +70,7 @@ fmt_n <- function(x) {
 #' This function calculates a quantile range using the stats package
 #' \code{\link[stats]{quantile}}
 #' function, and then formats the output using \code{\link[base]{sprintf}}.
-#' You may control the format using the **format** parameter.  Function will 
+#' You may control the format using the \strong{format} parameter.  Function will 
 #' ignore any NA values in the input data. Results are returned as a 
 #' character vector. 
 #' @param x The input data vector.
@@ -109,7 +109,7 @@ fmt_quantile_range <- function(x, format = "%.1f", sep = "-") {
 #' This function calculates a median using the stats package
 #' \code{\link[stats]{median}}
 #' function, and then formats the output using \code{\link[base]{sprintf}}.
-#' You may control the format using the **format** parameter.  Function will 
+#' You may control the format using the \strong{format} parameter.  Function will 
 #' ignore any NA values in the input data. Results are returned as a 
 #' character vector. 
 #' @param x The input data vector.
@@ -145,9 +145,9 @@ fmt_median <- function(x, format = "%.1f") {
 #' This function calculates a percent and appends to the provided count.
 #' The result is then formatted using \code{\link[base]{sprintf}}. By default,
 #' the number of values in the input data vector is used as the denominator.
-#' Alternatively, you may supply the denominator using the **denom**
+#' Alternatively, you may supply the denominator using the \strong{denom}
 #' parameter.
-#' You may also control the percent format using the **format** parameter.  
+#' You may also control the percent format using the \strong{format} parameter.  
 #' Function will return any NA values in the input data. Results are 
 #' returned as a character vector. 
 #' @param x The input data vector.
@@ -198,7 +198,7 @@ fmt_cnt_pct <- function(x, denom = NULL, format = "%5.1f") {
 #' @details
 #' This function calculates a mean and standard deviation, and formats using
 #' \code{\link[base]{sprintf}}. 
-#' You may control the format using the **format** parameter.  
+#' You may control the format using the \strong{format} parameter.  
 #' Function will ignore NA values in the input data. Results are 
 #' returned as a character vector. 
 #' @param x The input data vector.

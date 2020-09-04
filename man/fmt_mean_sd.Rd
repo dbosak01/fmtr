@@ -23,7 +23,7 @@ A function to calculate and format a mean and standard deviation.
 \details{
 This function calculates a mean and standard deviation, and formats using
 \code{\link[base]{sprintf}}. 
-You may control the format using the **format** parameter.  
+You may control the format using the \strong{format} parameter.  
 Function will ignore NA values in the input data. Results are 
 returned as a character vector.
 }

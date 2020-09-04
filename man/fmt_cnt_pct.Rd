@@ -28,9 +28,9 @@ A function to calculate and format a count and percent.
 This function calculates a percent and appends to the provided count.
 The result is then formatted using \code{\link[base]{sprintf}}. By default,
 the number of values in the input data vector is used as the denominator.
-Alternatively, you may supply the denominator using the **denom**
+Alternatively, you may supply the denominator using the \strong{denom}
 parameter.
-You may also control the percent format using the **format** parameter.  
+You may also control the percent format using the \strong{format} parameter.  
 Function will return any NA values in the input data. Results are 
 returned as a character vector.
 }

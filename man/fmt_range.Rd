@@ -26,7 +26,7 @@ A function to calculate and format a numeric range.
 \details{
 This function calculates a range using the Base R \code{\link[base]{range}}
 function, and then formats the output using \code{\link[base]{sprintf}}.
-You may control the format using the **format** parameter.  Any NA values
+You may control the format using the \strong{format} parameter.  Any NA values
 in the input data are ignored. Results are returned as a character vector.
 }
 \examples{

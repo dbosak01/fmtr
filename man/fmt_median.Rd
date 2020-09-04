@@ -23,7 +23,7 @@ A function to calculate and format a median.
 This function calculates a median using the stats package
 \code{\link[stats]{median}}
 function, and then formats the output using \code{\link[base]{sprintf}}.
-You may control the format using the **format** parameter.  Function will 
+You may control the format using the \strong{format} parameter.  Function will 
 ignore any NA values in the input data. Results are returned as a 
 character vector.
 }
