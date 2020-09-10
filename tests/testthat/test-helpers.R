@@ -39,11 +39,12 @@ test_that("fmt_quantile_range() function works as expected.", {
   res1 <- fmt_quantile_range(v)
   res2 <- fmt_quantile_range(v, format = "%.2f")
   res3 <- fmt_quantile_range(v, format = "%.2f", sep = "to")
+  res4 <- fmt_quantile_range(v, upper = .8, lower = .2)
   
   expect_equal(res1, "3.5 - 9.0")
   expect_equal(res2, "3.50 - 9.00")
   expect_equal(res3, "3.50 to 9.00")
-  
+  expect_equal(res4, "3.0 - 10.0") 
   
 })
 

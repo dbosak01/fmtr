@@ -73,6 +73,10 @@ fmt_n <- function(x) {
 #' You may control the format using the \strong{format} parameter.  Function will 
 #' ignore any NA values in the input data. Results are returned as a 
 #' character vector. 
+#' 
+#' By default, the function calculates the 1st and 3rd quantiles at .25 and .75.
+#' The upper and lower quantile ranges may be changed with the \code{upper}
+#' and \code{lower} parameters. 
 #' @param x The input data vector or data frame column.
 #' @param sep The token used to separate the minimum and maximum range
 #' values.  Default value is a hyphen ("-").
@@ -80,6 +84,8 @@ fmt_n <- function(x) {
 #' \code{\link[base]{sprintf}} function.  By default, this format is
 #' defined as "\%.1f", which displays the value with one decimal place.
 #' @param sep The character to use as a separator between the two quantiles.
+#' @param lower The lower quantile range.  Default is .25.
+#' @param upper The upper quantile range.  Default is .75.
 #' @return The formatted quantile range.
 #' @family helpers 
 #' @import stats
@@ -93,10 +99,11 @@ fmt_n <- function(x) {
 #' # Output
 #' # "4.3 - 7.8"
 #' @export
-fmt_quantile_range <- function(x, format = "%.1f", sep = "-") {
+fmt_quantile_range <- function(x, format = "%.1f", sep = "-", 
+                               lower = .25, upper = .75 ) {
   
-  q1 <- quantile(x, 0.25, na.rm = TRUE)
-  q3 <- quantile(x, 0.75, na.rm = TRUE)
+  q1 <- quantile(x, lower, na.rm = TRUE)
+  q3 <- quantile(x, upper, na.rm = TRUE)
   
   ret <- paste(sprintf(format, q1), sep, sprintf(format, q3))
   
@@ -142,14 +149,22 @@ fmt_median <- function(x, format = "%.1f") {
 #' @title Formatted count and percent
 #' @description A function to calculate and format a count and percent.
 #' @details 
-#' This function calculates a percent and appends to the provided count.
+#' This function calculates a percent and appends to the provided count.  The 
+#' input vector is assumed to contain the counts. This function will not perform 
+#' counting.  It will calculate percentages and append to the given counts.
+#' 
 #' The result is then formatted using \code{\link[base]{sprintf}}. By default,
-#' the number of values in the input data vector is used as the denominator.
+#' the number of non-missing values in the input data vector is used as the 
+#' denominator.
 #' Alternatively, you may supply the denominator using the \strong{denom}
 #' parameter.
 #' You may also control the percent format using the \strong{format} parameter.  
-#' Function will return any NA values in the input data. Results are 
-#' returned as a character vector. 
+#' The function will return any NA values in the input data unaltered. 
+#' 
+#' If the calculated percentage is between 0\% and 1\%, the function will 
+#' display "(< 1.0\%)" as the percentage value.  Zero values will be displayed
+#' as "(  0.0\%)"
+#'
 #' @param x The input data vector or data frame column.
 #' @param denom The denominator to use for the percentage. By default, the 
 #' parameter is NULL, meaning the function will use the number of 
@@ -158,7 +173,7 @@ fmt_median <- function(x, format = "%.1f") {
 #' @param format A formatting string suitable for input into the 
 #' \code{\link[base]{sprintf}} function.  By default, this format is
 #' defined as "\%5.1f", which displays the value with one decimal place.
-#' @return The formatted counts and percents.
+#' @return A character vector of formatted counts and percents. 
 #' @family helpers 
 #' @examples
 #' v1 <- c(4, 3, 8, 6, 9, 5, NA, 0, 7, 4)

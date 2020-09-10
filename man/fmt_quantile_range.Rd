@@ -4,7 +4,7 @@
 \alias{fmt_quantile_range}
 \title{Formatted Quantile Range}
 \usage{
-fmt_quantile_range(x, format = "\%.1f", sep = "-")
+fmt_quantile_range(x, format = "\%.1f", sep = "-", lower = 0.25, upper = 0.75)
 }
 \arguments{
 \item{x}{The input data vector or data frame column.}
@@ -14,6 +14,10 @@ fmt_quantile_range(x, format = "\%.1f", sep = "-")
 defined as "\%.1f", which displays the value with one decimal place.}
 
 \item{sep}{The character to use as a separator between the two quantiles.}
+
+\item{lower}{The lower quantile range.  Default is .25.}
+
+\item{upper}{The upper quantile range.  Default is .75.}
 }
 \value{
 The formatted quantile range.
@@ -27,7 +31,11 @@ This function calculates a quantile range using the stats package
 function, and then formats the output using \code{\link[base]{sprintf}}.
 You may control the format using the \strong{format} parameter.  Function will 
 ignore any NA values in the input data. Results are returned as a 
-character vector.
+character vector. 
+
+By default, the function calculates the 1st and 3rd quantiles at .25 and .75.
+The upper and lower quantile ranges may be changed with the \code{upper}
+and \code{lower} parameters.
 }
 \examples{
 # Create example vector

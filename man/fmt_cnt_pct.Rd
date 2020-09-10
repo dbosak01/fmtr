@@ -19,20 +19,27 @@ Otherwise, supply the denominator as a numeric value.}
 defined as "\%5.1f", which displays the value with one decimal place.}
 }
 \value{
-The formatted counts and percents.
+A character vector of formatted counts and percents.
 }
 \description{
 A function to calculate and format a count and percent.
 }
 \details{
-This function calculates a percent and appends to the provided count.
+This function calculates a percent and appends to the provided count.  The 
+input vector is assumed to contain the counts. This function will not perform 
+counting.  It will calculate percentages and append to the given counts.
+
 The result is then formatted using \code{\link[base]{sprintf}}. By default,
-the number of values in the input data vector is used as the denominator.
+the number of non-missing values in the input data vector is used as the 
+denominator.
 Alternatively, you may supply the denominator using the \strong{denom}
 parameter.
 You may also control the percent format using the \strong{format} parameter.  
-Function will return any NA values in the input data. Results are 
-returned as a character vector.
+The function will return any NA values in the input data unaltered. 
+
+If the calculated percentage is between 0\% and 1\%, the function will 
+display "(< 1.0\%)" as the percentage value.  Zero values will be displayed
+as "(  0.0\%)"
 }
 \examples{
 v1 <- c(4, 3, 8, 6, 9, 5, NA, 0, 7, 4)
