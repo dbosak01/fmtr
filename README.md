@@ -344,7 +344,7 @@ arguments to the `fattr()` function, instead of as properties on a call
 to `attr()`.
 
 ### Other convenience functions
-The `logr` package contains several other functions for setting attributes
+The `fmtr` package contains several other functions for setting attributes
 easily.  These include the `widths` and `justification` functions to set 
 columns widths and column justification on an entire data frame.  The package
 also includes class testing functions like `is.format` and `is.flist`.
