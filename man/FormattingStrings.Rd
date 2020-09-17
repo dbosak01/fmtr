@@ -18,7 +18,7 @@ the formatting string will be interpreted as an input to the \code{sprintf}
 function.  
 
 The formatting codes for these functions are simple to use. For example, 
-the code \code{fapply(as.Date("1970-01-01", "\%B \%d, \%Y"))} will produce
+the code \code{fapply(as.Date("1970-01-01"), "\%B \%d, \%Y")} will produce
 the output \code{"January 01, 1970"}.  The code 
 \code{fapply(1.2345, "\%.1f")} will produce the output \code{"1.2"}.
 

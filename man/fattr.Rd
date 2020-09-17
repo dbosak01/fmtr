@@ -7,9 +7,9 @@
 fattr(x, format = NULL, width = NULL, justify = NULL, keep = TRUE)
 }
 \arguments{
-\item{x}{The vector to assign attributes to.}
+\item{x}{The vector or data frame column to assign attributes to.}
 
-\item{format}{The format to assign to the format attribute.  Format 
+\item{format}{The format to assign to the format attribute.  The format 
 can be a formatting string, a named vector decode, a vectorized
 formatting function, or a formatting list.}
 
@@ -22,16 +22,16 @@ formatting function, or a formatting list.}
 transfer to the new vector.  Default value is TRUE.}
 }
 \value{
-The vector with formatting attributes applied.
+The vector with formatting attributes assigned.
 }
 \description{
-Assign formatting attributes to a vector
+Assign formatting attributes to a vector.
 }
 \details{
 The \code{fattr} function is a convenience function for assigning 
 formatting attributes to a vector.  The function accepts parameters
 for format, width, and justify.  Any formatting attributes assigned 
-to a vector can be applied using \code{\link{fapply}} or
+can be applied using \code{\link{fapply}} or
 \code{\link{fdata}}.
 }
 \examples{
@@ -39,7 +39,7 @@ to a vector can be applied using \code{\link{fapply}} or
 a <- c(1.3243, 5.9783, 2.3848)
 
 # Assign format attributes
-a <- fattr(a, format = "\%.1f", width = 10, justify = "right")
+a <- fattr(a, format = "\%.1f", width = 10, justify = "center")
 
 # Apply format attributes
 fapply(a)

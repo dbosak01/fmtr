@@ -130,3 +130,22 @@ test_that("invalid order parameter generates error.", {
   
 })
 
+
+test_that("unassigned and NA values in value() function fall through unaltered.", {
+  
+  v1 <- c("A", "B", "C", "B", NA, 1)
+  res <- c("Label A", "Label B", "C", "Label B", NA, "1")
+  
+  
+  fmt1 <- value(condition(x == "A", "Label A"),
+                condition(x == "B", "Label B"))
+  
+  
+  fmtd <- fapply(v1, fmt1)
+  
+  expect_equal(fapply(v1, fmt1), res)
+
+  
+})
+
+

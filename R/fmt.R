@@ -20,12 +20,15 @@
 #' of values
 #' assigned to the \strong{labels} property of the \code{condition} arguments.  
 #' These labels may be accessed either from the \code{levels} function or the 
-#' \code{labels} function.
+#' \code{labels} function.  If no order has been assigned to the conditions,
+#' the labels will be returned in the order the conditions were passed to the
+#' \code{value} function.  If an order has been assigned to the conditions,
+#' the labels will be returned in the order specified.
 #' 
 #' The format object may be applied to a vector using the \code{fapply}
 #' function.  See \code{\link{fapply}} for further details.
 #'
-#' @param ... One or more conditions.
+#' @param ... One or more \code{\link{condition}} functions.
 #' @return The new format object.
 #' @seealso \code{\link{condition}} to define a condition,
 #' \code{\link{levels}} or \code{labels} to access the labels, and 
@@ -84,7 +87,8 @@ value <- function(...) {
 #' Define a condition for a user-defined format
 #' 
 #' @description 
-#' The \code{condition} function creates a condition for a user-defined format. 
+#' The \code{condition} function creates a condition for a user-defined format.
+#' It is typically used in conjunction with the \code{\link{value}} function. 
 #' 
 #' @details 
 #' The \code{condition} function creates a condition as part of a format 
@@ -94,13 +98,14 @@ value <- function(...) {
 #' can be any valid literal.  Conditions are evaluated in the order they 
 #' are assigned.  A default condition is created by assigning the expression
 #' parameter to TRUE.  If your data can contain missing values, it is 
-#' recommended that you test for those values first.
+#' recommended that you test for those values first.  Any data values that 
+#' do not meet one of the conditions will fall through the format as-is.
 #' 
 #' The condition object is an S3 class of type "fmt_cond". The condition 
 #' labels can be extracted from the format using the \code{labels} function.
 #' 
 #' The format object may be applied to a vector using the \code{fapply}
-#' function.  See \code{link{fapply}} for further details.
+#' function.  See \code{\link{fapply}} for further details.
 #'
 #' @param expr A valid R expression.  The value in the expression is identified
 #' by the variable 'x', i.e.  x == 'A' or x > 3 & x < 6.  The expression 
@@ -109,11 +114,11 @@ value <- function(...) {
 #' can any valid literal value.  Typically, the label will be a character 
 #' string.  However, the label parameter does not restrict the data type.
 #' Meaning, the label could also be a number, date, or other R object type.
-#' @param order An option integer order number. When used, this parameter 
+#' @param order An optional integer order number. When used, this parameter 
 #' will effect the order of the labels returned from the 
 #' \code{\link{labels.fmt}} function.  The purpose of the parameter is to control
 #' ordering of the format labels independently of the order they are assigned
-#' in the conditions.  This functionality is useful when you are using the format
+#' in the conditions.  The order parameter is useful when you are using the format
 #' labels to assign ordered levels in a factor.  
 #' @return The new condition object.
 #' @seealso \code{\link{fdata}} to apply formatting to a data frame,

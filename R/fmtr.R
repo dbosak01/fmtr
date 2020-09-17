@@ -44,9 +44,9 @@
 #'   \item Formatting lists
 #' }
 #' 
-#' A formatting string will be passed to the \code{\link[base]{format}}
-#' function, or the \code{\link[base]{sprintf}} function depending on the
-#' class of the input vector.
+#' A formatting string is a compact set of codes typically used for formatting
+#' dates and numbers.  See \link{FormattingStrings} for a glossary of 
+#' common formatting codes.
 #' 
 #' Named vectors map one string value to another string value.
 #' 
@@ -87,7 +87,7 @@ NULL
 #' function.  
 #' 
 #' The formatting codes for these functions are simple to use. For example, 
-#' the code \code{fapply(as.Date("1970-01-01", "\%B \%d, \%Y"))} will produce
+#' the code \code{fapply(as.Date("1970-01-01"), "\%B \%d, \%Y")} will produce
 #' the output \code{"January 01, 1970"}.  The code 
 #' \code{fapply(1.2345, "\%.1f")} will produce the output \code{"1.2"}.
 #' 

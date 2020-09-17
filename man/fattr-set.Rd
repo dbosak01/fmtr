@@ -7,7 +7,7 @@
 fattr(x) <- value
 }
 \arguments{
-\item{x}{The vector to assign attributes to.}
+\item{x}{The vector or data frame column to assign attributes to.}
 
 \item{value}{A named vector of attribute values.}
 }

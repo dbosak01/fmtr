@@ -111,6 +111,28 @@ test_that("fdata() function works as expected with list of formats.", {
 })
 
 
+test_that("fdata() function restores any labels.", {
+  
+  res <- c(A = "Label A", B = "Label B", C = "Other", B = "Label B")
+  
+  fb <- data.frame(id = 100:103, 
+                   catc = c("A", "B", "C", "B"), 
+                   catn = c(1, 2, 3, 2)) 
+  
+  attr(fb$catc, "label") <- "My Labels" 
+  
+  attr(fb$catc, "format") <- c(A = "Label A", B = "Label B", C = "Other")
+  
+  
+  fmt_fb <- fdata(fb)
+  
+  
+  expect_equal(attr(fmt_fb$catc, "label"), "My Labels")
+  
+  
+})
+
+
 
 
 

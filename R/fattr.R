@@ -3,15 +3,15 @@
 
 
 #' @title Set formatting attributes
-#' @description Assign formatting attributes to a vector 
+#' @description Assign formatting attributes to a vector. 
 #' @details 
 #' The \code{fattr} function is a convenience function for assigning 
 #' formatting attributes to a vector.  The function accepts parameters
 #' for format, width, and justify.  Any formatting attributes assigned 
-#' to a vector can be applied using \code{\link{fapply}} or
+#' can be applied using \code{\link{fapply}} or
 #' \code{\link{fdata}}.
-#' @param x The vector to assign attributes to.
-#' @param format The format to assign to the format attribute.  Format 
+#' @param x The vector or data frame column to assign attributes to.
+#' @param format The format to assign to the format attribute.  The format 
 #' can be a formatting string, a named vector decode, a vectorized
 #' formatting function, or a formatting list. 
 #' @param width The desired width of the formatted output. 
@@ -19,7 +19,7 @@
 #' 'none', 'left', 'right', 'center', or 'centre'. 
 #' @param keep Whether to keep any existing formatting attributes and 
 #' transfer to the new vector.  Default value is TRUE.
-#' @return The vector with formatting attributes applied.
+#' @return The vector with formatting attributes assigned.
 #' @seealso \code{\link{fdata}} to apply formats to a data frame, 
 #'  \code{\link{fapply}} to apply formats to a vector.  See
 #' \link{FormattingStrings} for documentation on formatting strings.
@@ -29,7 +29,7 @@
 #' a <- c(1.3243, 5.9783, 2.3848)
 #' 
 #' # Assign format attributes
-#' a <- fattr(a, format = "%.1f", width = 10, justify = "right")
+#' a <- fattr(a, format = "%.1f", width = 10, justify = "center")
 #' 
 #' # Apply format attributes
 #' fapply(a)
@@ -75,7 +75,7 @@ fattr <- function(x, format = NULL, width = NULL, justify = NULL, keep = TRUE) {
 #' formatting attributes to a vector.  The function accepts a named list of
 #' formatting attributes.  Valid names are 'format', 'width', and 'justify'.
 #' See \code{\link{fattr}} for additional details.  
-#' @param x The vector to assign attributes to.
+#' @param x The vector or data frame column to assign attributes to.
 #' @param value A named vector of attribute values.
 #' @seealso \code{\link{fdata}} to apply formats to a data frame, 
 #'  \code{\link{fapply}} to apply formats to a vector.

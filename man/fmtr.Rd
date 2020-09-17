@@ -52,9 +52,9 @@ The formats that can be used with \strong{fmtr} include the following:
   \item Formatting lists
 }
 
-A formatting string will be passed to the \code{\link[base]{format}}
-function, or the \code{\link[base]{sprintf}} function depending on the
-class of the input vector.
+A formatting string is a compact set of codes typically used for formatting
+dates and numbers.  See \link{FormattingStrings} for a glossary of 
+common formatting codes.
 
 Named vectors map one string value to another string value.
 

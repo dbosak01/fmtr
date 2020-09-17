@@ -7,7 +7,7 @@
 value(...)
 }
 \arguments{
-\item{...}{One or more conditions.}
+\item{...}{One or more \code{\link{condition}} functions.}
 }
 \value{
 The new format object.
@@ -27,7 +27,10 @@ the \strong{levels} attribute of the object will be set with a vector
 of values
 assigned to the \strong{labels} property of the \code{condition} arguments.  
 These labels may be accessed either from the \code{levels} function or the 
-\code{labels} function.
+\code{labels} function.  If no order has been assigned to the conditions,
+the labels will be returned in the order the conditions were passed to the
+\code{value} function.  If an order has been assigned to the conditions,
+the labels will be returned in the order specified.
 
 The format object may be applied to a vector using the \code{fapply}
 function.  See \code{\link{fapply}} for further details.

@@ -25,7 +25,7 @@ to the specified columns, and return a new, formatted data frame.
 Formats can be specified as formatting strings, named vectors, user-defined
 formats, or vectorized formatting functions.  The \code{fdata} 
 function will
-apply the format to the associated column data using the \code{fapply} 
+apply the format to the associated column data using the \code{\link{fapply}} 
 function. A format can also be specified as a formatting list of the 
 previous four types.  See the \code{\link{fapply}}
 function for additional information.
@@ -36,43 +36,50 @@ the data frame.  Any follow on parameters will be sent to the \code{format}
 function.
 }
 \examples{
-## Example 1: Simple Formats ##
-# Set up data frame
-df <- mtcars[1:10, c("mpg", "cyl")]
+# Construct data frame from state vectors
+df <- data.frame(state = state.abb, area = state.area)[1:10, ]
+
+# Calculate percentages
+df$pct <- df$area / sum(state.area) * 100
+
+# Before formatting 
 df
 
-# Define and assign formats
-formats(df) <- list( mpg = value(condition(x >= 20, "High"),
-                                condition(x < 20, "Low")),
-                     cyl = value(condition(x == 4, "Small"),
-                                condition(x == 6, "Midsize"),
-                                condition(x == 8, "Large")))
-              
-# Apply formatting
+#    state   area         pct
+# 1     AL  51609  1.42629378
+# 2     AK 589757 16.29883824
+# 3     AZ 113909  3.14804973
+# 4     AR  53104  1.46761040
+# 5     CA 158693  4.38572418
+# 6     CO 104247  2.88102556
+# 7     CT   5009  0.13843139
+# 8     DE   2057  0.05684835
+# 9     FL  58560  1.61839532
+# 10    GA  58876  1.62712846
+
+# Create state name lookup list
+name_lookup <- state.name
+names(name_lookup) <- state.abb
+
+# Assign formats
+formats(df) <- list(state = name_lookup,                         
+                    area  = function(x) format(x, big.mark = ","), 
+                    pct   = "\%.1f\%\%") 
+
+# Apply formats
 fdata(df)
 
-## Example 2: Formatting List ##
-# Set up data
-v1 <- c("num", "char", "date", "char", "date", "num")
-v2 <- list(1.258, "H", Sys.Date(),
-           "L", Sys.Date() + 60, 2.8865)
-
-df <- data.frame(type = v1, values = I(v2))
-df
-
-# Create formatting list
-lst <- flist(type = "row", lookup = v1, 
-             num = "\%.1f",
-             char = value(condition(x == "H", "High"),
-                          condition(x == "L", "Low"),
-                          condition(TRUE, "NA")),
-             date = "\%d\%b\%y")
-
-# Assign list and lookup to column attributes
-df$values <- fattr(df$values, format = lst)
-
-# Apply formatting list
-fdata(df)
+#          state    area   pct
+# 1      Alabama  51,609  1.4\%
+# 2       Alaska 589,757 16.3\%
+# 3      Arizona 113,909  3.1\%
+# 4     Arkansas  53,104  1.5\%
+# 5   California 158,693  4.4\%
+# 6     Colorado 104,247  2.9\%
+# 7  Connecticut   5,009  0.1\%
+# 8     Delaware   2,057  0.1\%
+# 9      Florida  58,560  1.6\%
+# 10     Georgia  58,876  1.6\%
 }
 \seealso{
 \code{\link{fapply}} to apply a format to a vector,
