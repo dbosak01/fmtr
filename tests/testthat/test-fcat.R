@@ -147,3 +147,16 @@ test_that("fcat printing works as expected.", {
   expect_output(print(c1))
   
 })
+
+test_that("fcat test", {
+  
+  df <- read.table(header = TRUE, text = '
+  Name  Type  Expression Label              Order
+  AESEV U     x==1     MILD               NA   
+  AESEV U     x==2     MODERATE           NA   
+  AESEV U     x==3     SEVERE             NA')  
+  
+  
+  ct <- as.fcat(df)
+  
+})

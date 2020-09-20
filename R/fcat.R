@@ -98,6 +98,17 @@ as.fcat.data.frame <- function(x) {
   
 }
 
+
+#' @inherit as.fcat.data.frame
+#' @export
+as.fcat.tbl_df <- function(x) {
+  
+ ret <- as.fcat.data.frame(as.data.frame(x))
+ 
+ return(ret)
+}
+
+
 #' @title Convert a list to a format catalog
 #' @param x The list to convert.  List must contained named formats.
 #' @return A format catalog based on the formats contained in the input list.
