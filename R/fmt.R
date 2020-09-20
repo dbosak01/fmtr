@@ -151,6 +151,98 @@ condition <- function(expr, label, order = NULL) {
 }
   
 
+
+# Conversion Functions ----------------------------------------------------
+
+#' @title Generic Casting Method for Formats
+#' @description A generic method for casting objects to
+#' a format.  Individual objects will inherit from this function.
+#' @param x The object to cast.
+#' @return A formatting object, created using the information in the 
+#' input object.
+#' @export
+as.fmt <- function (x) {
+  UseMethod("as.fmt", x)
+}
+
+
+#' @title Casts a format to a data frame
+#' @description Cast a format object to a data frame.  This function is
+#' a class-specific implementation of the the generic \code{as.data.frame} 
+#' method.
+#' @param x An object of class "fmt".
+#' @param row.names Row names of the return data frame.  Default is NULL.
+#' @param optional TRUE or FALSE value indicating whether converting to
+#' syntactic variable names is options.  In the case of formats, the 
+#' resulting data frame will always be returned with syntactic names, and 
+#' this parameter is ignored.
+#' @param ... Any follow-on parameters.
+#' @param name An optional name for the format.  By default, the name of 
+#' the variable holding the format will be used.
+#' @export
+as.data.frame.fmt <- function(x, row.names = NULL, optional = FALSE, ...,
+                              name=deparse(substitute(x, 
+                                              env = environment()))) {
+  
+  if (all(class(x) != "fmt"))
+    stop("Parameter x must be an object of class 'fmt'.")
+  
+  e <- c()
+  l <- c()
+  o <- c()
+  
+  for (cond in x) {
+    e[[length(e) + 1]] <- deparse1(cond$expression, collapse = " ")
+    l[[length(l) + 1]] <- cond$label
+    o[[length(o) + 1]] <- ifelse(is.null(cond$order), NA, cond$order)
+  }
+  
+  e <- unlist(e)
+  l <- unlist(l)
+  o <- unlist(o)
+  
+  dat <- data.frame(Name = name, Type = "U", 
+                    Expression = e, Label = l, Order = o)
+  
+  if (!is.null(row.names))
+    rownames(dat) <- row.names
+  
+  return(dat)
+  
+}
+
+
+#' @export
+as.fmt.data.frame <- function(x) {
+  
+  
+  names(x) <- titleCase(names(x))
+  
+  ret <- list()
+  
+  for (i in seq_len(nrow(x))) {
+    
+    
+    y <- structure(list(), class = c("fmt_cnd"))    
+    
+    y$expression <- str2lang(x[i, "Expression"])
+    y$label <- x[i, "Label"]
+    y$order <- x[i, "Order"]
+    
+    
+    ret[[length(ret) + 1]] <- y
+    
+    
+  }
+  
+  class(ret) <- "fmt"
+  
+  
+  return(ret)
+  
+}
+
+
 # Utilities ---------------------------------------------------------------
 
 #' @title
@@ -253,6 +345,51 @@ is.format <- function(x) {
 
 
 
+#' @title Print a format
+#' @description Prints a format object.  This function is
+#' a class-specific implementation of the the generic \code{print} method.
+#' @param x An object of class "fmt".
+#' @param ... Any follow-on parameters to the print function.
+#' @param name The name of the format to print. By default, the variable
+#' name that holds the format will be used.
+#' @param verbose Turn on or off verbose printing mode.  Verbose mode will
+#' print object as a list.  Otherwise, the object will be printed as a table.
+#' @export
+print.fmt <- function(x, ..., name = deparse(substitute(x, env = environment())), 
+                      verbose = FALSE) {
+  
+  if (!any(class(x) == "fmt"))
+    stop("Class must be of type 'fmt'.")
+  
+  if (verbose == TRUE) {
+    print(unclass(x))
+  } else {
+
+    dat <- as.data.frame(x, name = name)
+    
+    print(dat)
+  }
+  
+  
+  invisible(x)
+}
+
+
+
+
+#' @noRd
+titleCase <- Vectorize(function(x) {
+  
+  # Split input vector value
+  s <- strsplit(x, " ")[[1]]
+  
+  # Perform title casing and recombine
+  ret <- paste(toupper(substring(s, 1,1)), tolower(substring(s, 2)),
+        sep="", collapse=" ")
+  
+  return(ret)
+  
+}, USE.NAMES = FALSE)
 
 
 # Testing -----------------------------------------------------------------

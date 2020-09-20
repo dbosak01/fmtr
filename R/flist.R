@@ -169,6 +169,42 @@ as.flist <- function(x, type = "column", lookup = NULL, simplify = TRUE) {
 }
 
 
+
+import.flist <- function(dat) {
+  
+  
+  
+  
+  
+}
+
+export.flist <- function(x) {
+  
+  
+  
+  
+}
+
+
+write.flist <- function(x) {
+  
+}
+
+
+read.flist <- function(x) {
+  
+  
+  
+}
+
+print.flist <- function(x) {
+  
+  
+}
+
+
+
+
 # Testing -----------------------------------------------------------------
 # 
 # # Simple use case
