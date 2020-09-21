@@ -18,6 +18,9 @@ A generic method for casting objects to
 a format catalog.  Individual objects will inherit from this function.
 }
 \seealso{
+For class-specific methods, see \code{\link{as.fcat.data.frame}},
+\code{\link{as.fcat.list}}, and \code{\link{as.fcat.fmt_lst}}.
+
 Other fcat: 
 \code{\link{as.data.frame.fcat}()},
 \code{\link{as.fcat.fmt_lst}()},

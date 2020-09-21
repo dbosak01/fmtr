@@ -141,6 +141,7 @@ lst <- flist("\%B", "This month is: \%s", type = "column")
 fapply(v5, lst)
 }
 \seealso{
+\code{\link{fcat}} to create a format catalog,
 \code{\link{value}} to define a format, 
 \code{\link{fattr}} to easily set the formatting attributes of a vector, 
 and \code{\link{flist}} to define a formatting list.  Also see 

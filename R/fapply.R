@@ -51,7 +51,8 @@
 #' @param justify Whether to justify the return vector.  Valid values are 
 #' 'left', 'right', 'center', 'centre', or 'none'. 
 #' @return A vector of formatted values.
-#' @seealso \code{\link{value}} to define a format, 
+#' @seealso \code{\link{fcat}} to create a format catalog,
+#' \code{\link{value}} to define a format, 
 #' \code{\link{fattr}} to easily set the formatting attributes of a vector, 
 #' and \code{\link{flist}} to define a formatting list.  Also see 
 #' \code{\link{fdata}} to apply formats to an entire data frame, and 

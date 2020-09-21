@@ -231,3 +231,5 @@ test_that("as.fmt.data.frame function works as expected with caps.", {
   expect_equal(res[3], "Other")
   
 })
+
+

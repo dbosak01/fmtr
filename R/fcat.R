@@ -8,13 +8,28 @@
 #' \code{fcat} function defines the format catalog.
 #' @details A format catalog is an S3 object of class "fcat".  The purpose of 
 #' the catalog is to combine related formats, and allow you to manipulate all
-#' of them as a single object.  The format catalog can be saved to a file 
-#' using the \code{\link{write.fcat}} function.  A format catalog can also
+#' of them as a single object.  The format catalog can be saved to/from a file 
+#' using the \code{\link{write.fcat}} and \code{\link{read.fcat}} functions. 
+#' A format catalog can also 
 #' be converted to/from a data frame using the \code{\link{as.fcat.data.frame}}
-#' and \code{\link{as.data.frame.fcat}} functions.
+#' and \code{\link{as.data.frame.fcat}} functions.  Formats are accessed in the
+#' catalog using list syntax. 
+#' 
+#' A format catalog can be used to assign formats to a data frame
+#' or tibble using the \code{formats} function. See the \code{\link{formats}}
+#' function for additional details.
+#' 
+#' A format catalog may contain any type of format except a formatting list.
+#' Allowed formats include a formatting string, a named vector lookup, a 
+#' user-defined format, and a vectorized formatting function.  A formatting 
+#' list can be converted to a format catalog and saved independently.  See the 
+#' 
 #' @param ... A set of formats. Pass the formats as a name/value pair.  Multiple
 #' name/value pairs may be separated by a comma.
 #' @return The format catalog object.
+#' @seealso \code{\link{formats}} function for assigning formats to a data 
+#' frame, and the \code{\link{fdata}} and \code{\link{fapply}} functions for
+#' applying formats.
 #' @family fcat
 #' @examples 
 #' # Create format catalog
@@ -34,8 +49,7 @@ fcat <- function(...) {
   # Create new structure of class "fcat"
   f <- structure(list(...), class = c("fcat", "list"))
   
-  
-  
+
   return(f)
   
 }
@@ -50,6 +64,8 @@ fcat <- function(...) {
 #' @param x The object to cast.
 #' @return A formatting object, created using the information in the 
 #' input object.
+#' @seealso For class-specific methods, see \code{\link{as.fcat.data.frame}},
+#' \code{\link{as.fcat.list}}, and \code{\link{as.fcat.fmt_lst}}.
 #' @family fcat
 #' @export
 as.fcat <- function (x) {
@@ -62,15 +78,62 @@ as.fcat <- function (x) {
 #' in the data frame. The data frame should have 5 columns: "Name", "Type",
 #' "Expression", "Label" and "Order".  
 #' @details 
+#' The \code{as.fcat.data.frame} converts a data frame to a format catalog. A
+#' corresponding conversion for class "tbl_df" converts a tibble.
+#' 
+#' To understand the format of the data frame, create a format and use
+#' the \code{as.data.frame} method to convert the format to a data frame.
+#' Then observe the columns and organization of the data.
+#' @section Input Data Frame Specifications:
+#' The input data frame should contain the following columns:
+#' \itemize{
+#' \item \strong{Name}: The name of the format
+#' \item \strong{Type}: The type of format.  See the type codes below.
+#' \item \strong{Expression}: The formatting expression. The expression will 
+#' hold different types of values depending on the format type.
+#' \item \strong{Label}: The label for user-defined, "U" type formats.
+#' \item \strong{Order}: The order for user-defined, "U" type formats. 
+#' }
+#' Any additional columns will be ignored.  Column names are case-insensitive.
+#' 
 #' Valid values for the "Type" column are as follows:
 #' \itemize{
 #' \item \strong{U}: User Defined List created with the \code{value} function.
 #' \item \strong{S}: A formatting string of formatting codes.
 #' \item \strong{F}: A vectorized function.
 #' \item \strong{V}: A named vector lookup.}
+#' 
+#' The "Label" and "Order" columns are used only for a type "U", user-defined
+#' format created with the \code{\link{value}} function.
 #' @param x The data frame to convert.
 #' @return A format catalog based on the information contained in the 
 #' input data frame.
+#' @examples 
+#' # Create a format catalog
+#' c1 <- fcat(num_fmt  = "%.1f",
+#'            label_fmt = value(condition(x == "A", "Label A"),
+#'                              condition(x == "B", "Label B"),
+#'                              condition(TRUE, "Other")),
+#'            date_fmt = "%d-%b-%Y")
+#'            
+#' # Convert catalog to data frame to view the structure
+#' df <- as.data.frame(c1)
+#' print(df)
+#' 
+#' #       Name Type Expression   Label Order
+#' # 1   num_fmt    S       %.1f            NA
+#' # 2 label_fmt    U   x == "A" Label A    NA
+#' # 3 label_fmt    U   x == "B" Label B    NA
+#' # 4 label_fmt    U       TRUE   Other    NA
+#' # 5  date_fmt    S   %d-%b-%Y            NA
+#' 
+#' # Convert data frame back to a format catalog
+#' c2 <- as.fcat(df)
+#' 
+#' # Use re-converted catalog
+#' fapply(123.456, c2$num_fmt)
+#' fapply(c("A", "B", "C", "B"), c2$label_fmt)
+#' fapply(Sys.Date(), c2$date_fmt)
 #' @export
 as.fcat.data.frame <- function(x) {
   
@@ -158,6 +221,27 @@ as.fcat.fmt_lst <- function(x) {
 #' @return A data frame that contains the values stored in the format 
 #' catalog.  
 #' @family fcat
+#' @examples 
+#' # Create a format catalog
+#' c1 <- fcat(num_fmt  = "%.1f",
+#'            label_fmt = value(condition(x == "A", "Label A"),
+#'                              condition(x == "B", "Label B"),
+#'                              condition(TRUE, "Other")),
+#'            date_fmt = "%d%b%Y")
+#'            
+#' # Convert catalog to data frame to view the structure
+#' df <- as.data.frame(c1)
+#' print(df)
+#' 
+#' #       Name Type Expression   Label Order
+#' # 1   num_fmt    S       %.1f            NA
+#' # 2 label_fmt    U   x == "A" Label A    NA
+#' # 3 label_fmt    U   x == "B" Label B    NA
+#' # 4 label_fmt    U       TRUE   Other    NA
+#' # 5  date_fmt    S     %d%b%Y            NA
+#' 
+#' # Convert data frame back to a format catalog
+#' c2 <- as.fcat(df)
 #' @export
 as.data.frame.fcat <- function(x, row.names = NULL, optional = FALSE, ...) {
   

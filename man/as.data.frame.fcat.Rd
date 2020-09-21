@@ -30,6 +30,28 @@ data frame show the name of the formats, their class, and the format
 expression.  For use-defined formats, the data frame populates 
 additional columns for the label and order.
 }
+\examples{
+# Create a format catalog
+c1 <- fcat(num_fmt  = "\%.1f",
+           label_fmt = value(condition(x == "A", "Label A"),
+                             condition(x == "B", "Label B"),
+                             condition(TRUE, "Other")),
+           date_fmt = "\%d\%b\%Y")
+           
+# Convert catalog to data frame to view the structure
+df <- as.data.frame(c1)
+print(df)
+
+#       Name Type Expression   Label Order
+# 1   num_fmt    S       \%.1f            NA
+# 2 label_fmt    U   x == "A" Label A    NA
+# 3 label_fmt    U   x == "B" Label B    NA
+# 4 label_fmt    U       TRUE   Other    NA
+# 5  date_fmt    S     \%d\%b\%Y            NA
+
+# Convert data frame back to a format catalog
+c2 <- as.fcat(df)
+}
 \seealso{
 Other fcat: 
 \code{\link{as.fcat.fmt_lst}()},

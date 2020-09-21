@@ -20,10 +20,61 @@ in the data frame. The data frame should have 5 columns: "Name", "Type",
 "Expression", "Label" and "Order".
 }
 \details{
+The \code{as.fcat.data.frame} converts a data frame to a format catalog. A
+corresponding conversion for class "tbl_df" converts a tibble.
+
+To understand the format of the data frame, create a format and use
+the \code{as.data.frame} method to convert the format to a data frame.
+Then observe the columns and organization of the data.
+}
+\section{Input Data Frame Specifications}{
+
+The input data frame should contain the following columns:
+\itemize{
+\item \strong{Name}: The name of the format
+\item \strong{Type}: The type of format.  See the type codes below.
+\item \strong{Expression}: The formatting expression. The expression will 
+hold different types of values depending on the format type.
+\item \strong{Label}: The label for user-defined, "U" type formats.
+\item \strong{Order}: The order for user-defined, "U" type formats. 
+}
+Any additional columns will be ignored.  Column names are case-insensitive.
+
 Valid values for the "Type" column are as follows:
 \itemize{
 \item \strong{U}: User Defined List created with the \code{value} function.
 \item \strong{S}: A formatting string of formatting codes.
 \item \strong{F}: A vectorized function.
 \item \strong{V}: A named vector lookup.}
+
+The "Label" and "Order" columns are used only for a type "U", user-defined
+format created with the \code{\link{value}} function.
+}
+
+\examples{
+# Create a format catalog
+c1 <- fcat(num_fmt  = "\%.1f",
+           label_fmt = value(condition(x == "A", "Label A"),
+                             condition(x == "B", "Label B"),
+                             condition(TRUE, "Other")),
+           date_fmt = "\%d-\%b-\%Y")
+           
+# Convert catalog to data frame to view the structure
+df <- as.data.frame(c1)
+print(df)
+
+#       Name Type Expression   Label Order
+# 1   num_fmt    S       \%.1f            NA
+# 2 label_fmt    U   x == "A" Label A    NA
+# 3 label_fmt    U   x == "B" Label B    NA
+# 4 label_fmt    U       TRUE   Other    NA
+# 5  date_fmt    S   \%d-\%b-\%Y            NA
+
+# Convert data frame back to a format catalog
+c2 <- as.fcat(df)
+
+# Use re-converted catalog
+fapply(123.456, c2$num_fmt)
+fapply(c("A", "B", "C", "B"), c2$label_fmt)
+fapply(Sys.Date(), c2$date_fmt)
 }

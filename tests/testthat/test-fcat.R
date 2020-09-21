@@ -148,15 +148,29 @@ test_that("fcat printing works as expected.", {
   
 })
 
-test_that("fcat test", {
+
+test_that("fcat can be applied to a data frame with formats function.", {
   
-  df <- read.table(header = TRUE, text = '
-  Name  Type  Expression Label              Order
-  AESEV U     x==1     MILD               NA   
-  AESEV U     x==2     MODERATE           NA   
-  AESEV U     x==3     SEVERE             NA')  
+  c1 <- fcat(AGE  = "%.1f",
+             CATEGORY = value(condition(x == "A", "Label A"),
+                               condition(x == "B", "Label B"),
+                               condition(TRUE, "Other")),
+             BDATE = "%d%b%Y")
   
+  dat <- data.frame(NAME = c("Fred", "Sally", "Sven"),
+                    AGE = c(25.356, 84.345, 56.346),
+                    CATEGORY = c("A", "B", "C"),
+                    BDATE = c(as.Date("1995-04-24"), 
+                              as.Date("1940-02-11"), 
+                              as.Date("1964-11-12")))
   
-  ct <- as.fcat(df)
+  formats(dat) <- c1
+  
+  fdat <- fdata(dat)
+  
+  expect_equal(fdat[1, "AGE"], "25.4")
+  expect_equal(fdat[2, "CATEGORY"], "Label B")
+  expect_equal(fdat[1, "AGE"], "25.4")
   
 })
+

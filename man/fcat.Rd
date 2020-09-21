@@ -21,10 +21,21 @@ collection allows you to manage and store formats as a unit.  The
 \details{
 A format catalog is an S3 object of class "fcat".  The purpose of 
 the catalog is to combine related formats, and allow you to manipulate all
-of them as a single object.  The format catalog can be saved to a file 
-using the \code{\link{write.fcat}} function.  A format catalog can also
+of them as a single object.  The format catalog can be saved to/from a file 
+using the \code{\link{write.fcat}} and \code{\link{read.fcat}} functions. 
+A format catalog can also 
 be converted to/from a data frame using the \code{\link{as.fcat.data.frame}}
-and \code{\link{as.data.frame.fcat}} functions.
+and \code{\link{as.data.frame.fcat}} functions.  Formats are accessed in the
+catalog using list syntax. 
+
+A format catalog can be used to assign formats to a data frame
+or tibble using the \code{formats} function. See the \code{\link{formats}}
+function for additional details.
+
+A format catalog may contain any type of format except a formatting list.
+Allowed formats include a formatting string, a named vector lookup, a 
+user-defined format, and a vectorized formatting function.  A formatting 
+list can be converted to a format catalog and saved independently.  See the
 }
 \examples{
 # Create format catalog
@@ -40,6 +51,10 @@ fapply(c("A", "B", "C", "B"), c1$label_fmt)
 fapply(Sys.Date(), c1$date_fmt)
 }
 \seealso{
+\code{\link{formats}} function for assigning formats to a data 
+frame, and the \code{\link{fdata}} and \code{\link{fapply}} functions for
+applying formats.
+
 Other fcat: 
 \code{\link{as.data.frame.fcat}()},
 \code{\link{as.fcat.fmt_lst}()},

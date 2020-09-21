@@ -9,7 +9,12 @@ condition(expr, label, order = NULL)
 \arguments{
 \item{expr}{A valid R expression.  The value in the expression is identified
 by the variable 'x', i.e.  x == 'A' or x > 3 & x < 6.  The expression 
-should not be quoted.}
+should not be quoted.  The expression parameter will accept equality, 
+relational, and logical operators.  It will also accept numeric or string
+literals.  String literals should be quoted.  It will not accept functions 
+or any expression that includes a comma.  For these more complex operations, 
+it is best to use a vectorized function.  See \code{\link{fapply}} for an example of 
+a vectorized function.}
 
 \item{label}{A label to be assigned if the expression is TRUE.  The label 
 can any valid literal value.  Typically, the label will be a character 

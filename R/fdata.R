@@ -29,7 +29,8 @@
 #' @param x A data frame or tibble to be formatted.
 #' @param ... Any follow-on parameters to the format function.
 #' @return A new, formatted data frame or tibble with the formats applied.
-#' @seealso \code{\link{fapply}} to apply a format to a vector,
+#' @seealso \code{\link{fcat}} to create a format catalog, 
+#' \code{\link{fapply}} to apply a format to a vector,
 #' \code{\link{value}} to define a format object,
 #' \code{\link{fattr}} to assign formatting specifications to a single 
 #' column/vector, and the
