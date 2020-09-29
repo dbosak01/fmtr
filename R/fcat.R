@@ -3,7 +3,7 @@
 
 
 #' @title Create a format catalog
-#' @description A format catalog is a collection of formats.  This format
+#' @description A format catalog is a collection of formats.  A format
 #' collection allows you to manage and store formats as a unit.  The 
 #' \code{fcat} function defines the format catalog.
 #' @details A format catalog is an S3 object of class "fcat".  The purpose of 
@@ -23,9 +23,10 @@
 #' Allowed formats include a formatting string, a named vector lookup, a 
 #' user-defined format, and a vectorized formatting function.  A formatting 
 #' list can be converted to a format catalog and saved independently.  See the 
+#' \code{\link{flist}} function for more information on formatting lists.
 #' 
 #' @param ... A set of formats. Pass the formats as a name/value pair.  Multiple
-#' name/value pairs may be separated by a comma.
+#' name/value pairs are separated by a comma.
 #' @return The format catalog object.
 #' @seealso \code{\link{formats}} function for assigning formats to a data 
 #' frame, and the \code{\link{fdata}} and \code{\link{fapply}} functions for
@@ -81,7 +82,7 @@ as.fcat <- function (x) {
 #' The \code{as.fcat.data.frame} converts a data frame to a format catalog. A
 #' corresponding conversion for class "tbl_df" converts a tibble.
 #' 
-#' To understand the format of the data frame, create a format and use
+#' To understand the format of the input data frame, create a format and use
 #' the \code{as.data.frame} method to convert the format to a data frame.
 #' Then observe the columns and organization of the data.
 #' @section Input Data Frame Specifications:
@@ -98,7 +99,8 @@ as.fcat <- function (x) {
 #' 
 #' Valid values for the "Type" column are as follows:
 #' \itemize{
-#' \item \strong{U}: User Defined List created with the \code{value} function.
+#' \item \strong{U}: User Defined List created with the \code{\link{value}} 
+#' function.
 #' \item \strong{S}: A formatting string of formatting codes.
 #' \item \strong{F}: A vectorized function.
 #' \item \strong{V}: A named vector lookup.}
@@ -173,6 +175,8 @@ as.fcat.tbl_df <- function(x) {
 
 
 #' @title Convert a list to a format catalog
+#' @description The \code{as.fcat.list} function converts a list of formats
+#' to a format catalog.  
 #' @param x The list to convert.  List must contained named formats.
 #' @return A format catalog based on the formats contained in the input list.
 #' @family fcat
@@ -189,7 +193,11 @@ as.fcat.list <- function(x) {
 }
 
 #' @title Convert a formatting list to a format catalog
+#' #' @description The \code{as.fcat.list} function converts a list of formats
+#' to a format catalog.  
 #' @param x The formatting list to convert.
+#' @return A format catalog based on the formats contained in the input
+#' formatting list.
 #' @family fcat
 #' @export
 as.fcat.fmt_lst <- function(x) {
@@ -208,13 +216,13 @@ as.fcat.fmt_lst <- function(x) {
 #' @description This function takes the information stored in a format 
 #' catalog, and coverts it to the data frame.  The data frame format is 
 #' useful for storage, editing, saving to a spreadsheet, etc.  The 
-#' data frame show the name of the formats, their class, and the format 
+#' data frame shows the name of the formats, their type, and the format 
 #' expression.  For use-defined formats, the data frame populates 
 #' additional columns for the label and order.
 #' @param x The format catalog to convert.
 #' @param row.names Row names of the return data frame.  Default is NULL.
 #' @param optional TRUE or FALSE value indicating whether converting to
-#' syntactic variable names is options.  In the case of formats, the 
+#' syntactic variable names is desired.  In the case of formats, the 
 #' resulting data frame will always be returned with syntactic names, and 
 #' this parameter is ignored.
 #' @param ... Any follow-on parameters.

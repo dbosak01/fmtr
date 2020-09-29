@@ -23,7 +23,7 @@ in the data frame. The data frame should have 5 columns: "Name", "Type",
 The \code{as.fcat.data.frame} converts a data frame to a format catalog. A
 corresponding conversion for class "tbl_df" converts a tibble.
 
-To understand the format of the data frame, create a format and use
+To understand the format of the input data frame, create a format and use
 the \code{as.data.frame} method to convert the format to a data frame.
 Then observe the columns and organization of the data.
 }
@@ -42,7 +42,8 @@ Any additional columns will be ignored.  Column names are case-insensitive.
 
 Valid values for the "Type" column are as follows:
 \itemize{
-\item \strong{U}: User Defined List created with the \code{value} function.
+\item \strong{U}: User Defined List created with the \code{\link{value}} 
+function.
 \item \strong{S}: A formatting string of formatting codes.
 \item \strong{F}: A vectorized function.
 \item \strong{V}: A named vector lookup.}

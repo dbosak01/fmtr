@@ -13,7 +13,8 @@
 A format catalog based on the formats contained in the input list.
 }
 \description{
-Convert a list to a format catalog
+The \code{as.fcat.list} function converts a list of formats
+to a format catalog.
 }
 \seealso{
 Other fcat: 

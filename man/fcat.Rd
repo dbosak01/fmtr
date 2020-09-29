@@ -8,13 +8,13 @@ fcat(...)
 }
 \arguments{
 \item{...}{A set of formats. Pass the formats as a name/value pair.  Multiple
-name/value pairs may be separated by a comma.}
+name/value pairs are separated by a comma.}
 }
 \value{
 The format catalog object.
 }
 \description{
-A format catalog is a collection of formats.  This format
+A format catalog is a collection of formats.  A format
 collection allows you to manage and store formats as a unit.  The 
 \code{fcat} function defines the format catalog.
 }
@@ -35,7 +35,8 @@ function for additional details.
 A format catalog may contain any type of format except a formatting list.
 Allowed formats include a formatting string, a named vector lookup, a 
 user-defined format, and a vectorized formatting function.  A formatting 
-list can be converted to a format catalog and saved independently.  See the
+list can be converted to a format catalog and saved independently.  See the 
+\code{\link{flist}} function for more information on formatting lists.
 }
 \examples{
 # Create format catalog

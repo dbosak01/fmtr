@@ -12,7 +12,7 @@
 \item{row.names}{Row names of the return data frame.  Default is NULL.}
 
 \item{optional}{TRUE or FALSE value indicating whether converting to
-syntactic variable names is options.  In the case of formats, the 
+syntactic variable names is desired.  In the case of formats, the 
 resulting data frame will always be returned with syntactic names, and 
 this parameter is ignored.}
 
@@ -26,7 +26,7 @@ catalog.
 This function takes the information stored in a format 
 catalog, and coverts it to the data frame.  The data frame format is 
 useful for storage, editing, saving to a spreadsheet, etc.  The 
-data frame show the name of the formats, their class, and the format 
+data frame shows the name of the formats, their type, and the format 
 expression.  For use-defined formats, the data frame populates 
 additional columns for the label and order.
 }
