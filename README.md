@@ -77,6 +77,7 @@ fdata(df)
 * The `formats` and `fattr` functions to easily assign formatting attributes.
 * The `value` and `condition` functions to create a new user-defined format.
 * The `flist` function to create a formatting list.
+* The `fcat` function to create a format catalog.
 * A set of formatting helper functions for statistical reports. 
 
 ## How to use fdata()
@@ -324,6 +325,38 @@ fdata(df)
 # 5 date  20-04
 # 6  num    2.9
 
+
+```
+
+## Format Catalogs
+
+### The `fcat()` function
+As of **fmtr** version 1.2, you can now create a format catalog.  A format
+catalog is a collection of formats that can be saved, and shared, and reused.
+The format catalog is created with the `fcat()` function.  A format catalog 
+can also be converted to and from a data frame using the `as.data.frame()`
+and `as.fcat()` functions.  These functions make it easy to store
+formatting information as tabular metadata, such as in database tables or 
+Excel spreadsheets. Here is an example:
+```
+# Create format catalog
+c1 <- fcat(num_fmt  = "%.1f",
+           label_fmt = value(condition(x == "A", "Label A"),
+                             condition(x == "B", "Label B"),
+                             condition(TRUE, "Other")),
+           date_fmt = "%d%b%Y")
+ 
+# Use formats in the catalog
+fapply(2, c1$num_fmt)
+fapply(c("A", "B", "C", "B"), c1$label_fmt)
+fapply(Sys.Date(), c1$date_fmt)
+
+# Convert to a data frame
+dat <- as.data.frame(c1)
+dat
+
+# Save format catalog for later use
+write.fcat(c1, tempdir())
 
 ```
 
