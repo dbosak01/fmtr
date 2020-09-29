@@ -420,6 +420,7 @@ print.fcat <- function(x, ..., verbose = FALSE) {
   if (verbose == TRUE) {
     
    print(unclass(x))  
+    
   } else {
     
    dat <- as.data.frame(x)
@@ -430,7 +431,6 @@ print.fcat <- function(x, ..., verbose = FALSE) {
     
   invisible(x)
 }
-
 
 
 #' @title Class test for a format catalog
