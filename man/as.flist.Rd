@@ -53,4 +53,11 @@ is.flist("A")
 }
 \seealso{
 \code{\link{flist}} function documentation for additional details.
+
+Other flist: 
+\code{\link{as.data.frame.fmt_lst}()},
+\code{\link{flist}()},
+\code{\link{is.flist}()},
+\code{\link{print.fmt_lst}()}
 }
+\concept{flist}

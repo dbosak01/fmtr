@@ -15,7 +15,7 @@ test_that("flist() function works as expected.", {
   expect_equal(fl$formats$f2, "%d%b%Y")
   expect_equal(fl$type, "row")
   expect_equal(fl$simplify, FALSE)
-  expect_equal(class(fl), "fmt_lst")
+  expect_equal("fmt_lst" %in% class(fl), TRUE)
   
 })
 
@@ -35,7 +35,7 @@ test_that("flist works as expected for row type with lookup.", {
   
   r <- fapply(a)
   r
-  
+
   expect_equal(class(r), "character")
   expect_equal(length(r), 6)
   expect_equal(r[[1]], "Label A")
@@ -111,6 +111,41 @@ test_that("as.flist and is.flist work as expected.", {
   flst <- as.flist(lst)
   expect_equal(is.flist(flst), TRUE)
   expect_equal(is.flist("A"), FALSE)
+  
+})
+
+
+test_that("as.data.frame.flist works as expected.", {
+  
+  
+  fl2 <- flist(fmt1 = function(x) round(x, 2), 
+               fmt2 = "$%f", 
+               fmt3 = function(x) substr(x, 1, 5),
+               fmt4 = value(condition(x == 1, "Label 1"),
+                            condition(TRUE, "Label 2")))
+  fl2
+  dat <- as.data.frame(fl2)
+  dat
+  
+  expect_equal(nrow(dat), 5)
+  
+})
+
+test_that("as.data.frame.flist works as expected with no names.", {
+  
+  
+  # flist type col
+  
+  fl2 <- flist(function(x) round(x, 2), 
+               "$%f", 
+               function(x) substr(x, 1, 5),
+               value(condition(x == 1, "Label 1"),
+                            condition(TRUE, "Label 2")))
+  fl2
+  dat <- as.data.frame(fl2)
+  dat
+  
+  expect_equal(nrow(dat), 5)
   
 })
 

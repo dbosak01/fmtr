@@ -11,6 +11,8 @@ test_that("value() function sets class and levels as expected", {
                 condition(x == "B", "Label B"), 
                 condition(TRUE, "Other"))
   
+  print(fmt1)
+  
   
   expect_equal(class(fmt1), "fmt")
   expect_equal(levels(fmt1), res)
@@ -232,4 +234,21 @@ test_that("as.fmt.data.frame function works as expected with caps.", {
   
 })
 
+
+test_that("values function works with range.", {
+  
+  
+  res <- c("Label A", "Label B", "Other", "Label B")
+  
+  v1 <- c(22, 26.3, 23, 25)
+
+
+  fmt3 <- value(condition(x > 22 & x <= 25, "Label B"), 
+                condition(TRUE, "Other"))
+  
+  
+  a3 <- fapply(v1, fmt3)
+  expect_equal(a3, c("Other", "Other", "Label B", "Label B"))
+  
+})
 

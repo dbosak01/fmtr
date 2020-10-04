@@ -1,5 +1,8 @@
 
 
+# Flist Function ----------------------------------------------------------
+
+
 #' @title Create a formatting list
 #' @description A formatting list contains more than one formatting object
 #' @details 
@@ -36,6 +39,7 @@
 #' to a formatting
 #' list. Also see \link{FormattingStrings} for details on how to use
 #' formatting strings.
+#' @family flist
 #' @export
 #' @examples
 #' #' ## Example 1: Formatting List - Column Type ##
@@ -102,16 +106,24 @@ flist <- function(..., type = "column", lookup = NULL, simplify = TRUE) {
   x$type <- type
   x$lookup <- lookup
   x$simplify <- simplify
+  if (!is.null(lookup))
+    x$lookupname <- deparse1(substitute(lookup, env = environment()))
   
   
   return(x)
   
 }
 
+
+# Utilities ---------------------------------------------------------------
+
+
+
 #' @title Is object a formatting list
 #' @description Determines if object is a formatting list of class 'fmt_lst'.
 #' @param x Object to test.
 #' @return TRUE or FALSE, depending on class of object.
+#' @family flist
 #' @export
 #' @examples
 #' # Create flist
@@ -136,6 +148,7 @@ is.flist <- function(x) {
 #' @return A formatting list object.
 #' @inherit flist
 #' @seealso \code{\link{flist}} function documentation for additional details.
+#' @family flist
 #' @export
 #' @examples
 #' # Create flist
@@ -158,7 +171,7 @@ as.flist <- function(x, type = "column", lookup = NULL, simplify = TRUE) {
     stop (paste("Lookup parameter only allowed on type 'row'."))
   
   # Create new structure of class "fmt_lst"
-  f <- structure(list(), class = c("fmt_lst"))
+  f <- structure(list(), class = c("fmt_lst", "list"))
   
   f$formats <- x
   f$type <- type
@@ -169,37 +182,131 @@ as.flist <- function(x, type = "column", lookup = NULL, simplify = TRUE) {
 }
 
 
-
-import.flist <- function(dat) {
+#' @title Convert a formatting list to a data frame
+#' @description This function takes the information stored in a formatting 
+#' list, and converts it to a data frame.  The data frame format is 
+#' useful for storage, editing, saving to a spreadsheet, etc.  The 
+#' data frame shows the name of the formats, their type, and the format 
+#' expression.  For use-defined formats, the data frame populates 
+#' additional columns for the label and order.
+#' @param x The formatting list to convert.
+#' @param row.names Row names of the return data frame.  Default is NULL.
+#' @param optional TRUE or FALSE value indicating whether converting to
+#' syntactic variable names is desired.  In the case of formats, the 
+#' resulting data frame will always be returned with syntactic names, and 
+#' this parameter is ignored.
+#' @param ... Any follow-on parameters.
+#' @return A data frame that contains the values stored in the formatting 
+#' list.  
+#' @family flist
+#' @examples 
+#' # Create a format catalog
+#' c1 <- fcat(num_fmt  = "%.1f",
+#'            label_fmt = value(condition(x == "A", "Label A"),
+#'                              condition(x == "B", "Label B"),
+#'                              condition(TRUE, "Other")),
+#'            date_fmt = "%d%b%Y")
+#'            
+#' # Convert catalog to data frame to view the structure
+#' df <- as.data.frame(c1)
+#' print(df)
+#' 
+#' #       Name Type Expression   Label Order
+#' # 1   num_fmt    S       %.1f            NA
+#' # 2 label_fmt    U   x == "A" Label A    NA
+#' # 3 label_fmt    U   x == "B" Label B    NA
+#' # 4 label_fmt    U       TRUE   Other    NA
+#' # 5  date_fmt    S     %d%b%Y            NA
+#' 
+#' # Convert data frame back to a format catalog
+#' c2 <- as.fcat(df)
+#' @export
+as.data.frame.fmt_lst <- function(x, row.names = NULL, optional = FALSE, ...) {
+  
+  if (!"fmt_lst" %in% class(x))
+    stop("Class of object must include 'fmt_lst'")
+  fmts <- x$formats
+  tmp <- list()
+  
+  nms <- names(fmts)
+  if (is.null(nms))
+    nms <- paste0("format", seq(from = 1, to = length(fmts)))
+  
+  for (i in seq_along(fmts)) {
+    
+    nm <- nms[[i]]
+    
+    if (any(class(fmts[[i]]) == "fmt")) {
+      
+      tmp[[nm]] <- as.data.frame.fmt(fmts[[i]], name = nm)
+      
+    } else if (all(class(fmts[[i]]) == "character")) {
+      
+      if (length(fmts[[i]]) == 1 & is.null(names(fmts[[i]]))) {
+        tmp[[nm]] <- data.frame(Name = nm, 
+                                Type = "S",
+                                Expression = fmts[[i]],
+                                Label = "", 
+                                Order = NA)
+      } else {
+        tmp[[nm]] <- data.frame(Name = nm, 
+                                Type = "V",
+                                Expression = deparse1(fmts[[i]]),
+                                Label = "", 
+                                Order = NA)
+      }
+      
+    } else if (any(class(fmts[[i]]) == "function")) {
+      
+      tmp[[nm]] <-  data.frame(Name = nm, 
+                               Type = "F",
+                               Expression = deparse1(fmts[[i]]),
+                               Label = "", 
+                               Order = NA)
+      
+      
+    }
+    
+  }
   
   
+  ret <- do.call("rbind", tmp)
   
+  if (!is.null(row.names))
+    rownames(ret) <- row.names
+  else
+    rownames(ret) <- NULL
   
+  return(ret)
   
 }
 
-export.flist <- function(x) {
-  
-  
-  
-  
-}
 
-
-write.flist <- function(x) {
+#' @title Print a formatting list
+#' @param x The formatting list to print
+#' @param ... Follow-on parameters to the print function
+#' @param verbose Whether to print in summary or list-style.
+#' @family flist
+#' @export
+print.fmt_lst <- function(x, ..., verbose = FALSE) {
   
-}
-
-
-read.flist <- function(x) {
+  if (verbose == TRUE) {
+    print(unclass(x)) 
+  } else {
+    
+    grey60 <- make_style(grey60 = "#999999")
+    cat(grey60("# A formatting list: " %+% 
+                 as.character(length(x$formats)) %+% " formats\n")) 
+    cat(grey60("- type: " %+% x$type %+% "\n"))
+    if (!is.null(x$lookupname))
+      cat(grey60("- lookup: " %+% x$lookupname %+% "\n"))
+    cat(grey60("- simplify: " %+% as.character(x$simplify) %+% "\n"))
+    
+    print(as.data.frame(x))
+    
+  }
   
-  
-  
-}
-
-print.flist <- function(x) {
-  
-  
+  invisible(x)
 }
 
 

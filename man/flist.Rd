@@ -98,4 +98,11 @@ and \code{\link{as.flist}} to convert an existing list of formats
 to a formatting
 list. Also see \link{FormattingStrings} for details on how to use
 formatting strings.
+
+Other flist: 
+\code{\link{as.data.frame.fmt_lst}()},
+\code{\link{as.flist}()},
+\code{\link{is.flist}()},
+\code{\link{print.fmt_lst}()}
 }
+\concept{flist}

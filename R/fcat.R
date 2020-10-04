@@ -214,7 +214,7 @@ as.fcat.fmt_lst <- function(x) {
 
 #' @title Convert a format catalog to a data frame
 #' @description This function takes the information stored in a format 
-#' catalog, and coverts it to the data frame.  The data frame format is 
+#' catalog, and converts it to a data frame.  The data frame format is 
 #' useful for storage, editing, saving to a spreadsheet, etc.  The 
 #' data frame shows the name of the formats, their type, and the format 
 #' expression.  For use-defined formats, the data frame populates 
@@ -422,6 +422,7 @@ read.fcat <- function(file_path) {
 #'            
 #' # Print the catalog
 #' print(c1)
+#' @import crayon
 #' @export
 print.fcat <- function(x, ..., verbose = FALSE) {
   
@@ -430,6 +431,12 @@ print.fcat <- function(x, ..., verbose = FALSE) {
    print(unclass(x))  
     
   } else {
+    
+  
+   grey60 <- make_style(grey60 = "#999999")
+   cat(grey60("# A format catalog: " %+% 
+                as.character(length(x)) %+% " formats\n"))
+    
     
    dat <- as.data.frame(x)
    

@@ -370,6 +370,11 @@ print.fmt <- function(x, ..., name = deparse(substitute(x, env = environment()))
     print(unclass(x))
   } else {
 
+
+    grey60 <- make_style(grey60 = "#999999")
+    cat(grey60("# A user-defined format: " %+% 
+                 as.character(length(x)) %+% " conditions\n")) 
+    
     dat <- as.data.frame(x, name = name)
     
     print(dat)

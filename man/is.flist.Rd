@@ -21,3 +21,11 @@ flst <- flist("\%d\%b\%Y", "\%.1f")
 is.flist(flst)
 is.flist("A")
 }
+\seealso{
+Other flist: 
+\code{\link{as.data.frame.fmt_lst}()},
+\code{\link{as.flist}()},
+\code{\link{flist}()},
+\code{\link{print.fmt_lst}()}
+}
+\concept{flist}
