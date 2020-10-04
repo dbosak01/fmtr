@@ -16,8 +16,8 @@
 #' catalog using list syntax. 
 #' 
 #' A format catalog can be used to assign formats to a data frame
-#' or tibble using the \code{formats} function. See the \code{\link{formats}}
-#' function for additional details.
+#' or tibble using the \code{\link{formats}} function. Formats may be applied
+#' using the \code{\link{fdata}} and \code{\link{fapply}} functions.
 #' 
 #' A format catalog may contain any type of format except a formatting list.
 #' Allowed formats include a formatting string, a named vector lookup, a 
@@ -206,7 +206,7 @@ as.fcat.fmt_lst <- function(x) {
 
   ret <- x$formats
   
-  class(ret) <- list("fcat", "list")
+  class(ret) <- c("fcat", "list")
 
   
   return(ret)

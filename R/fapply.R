@@ -153,8 +153,8 @@ fapply <- function(x, format = NULL, width = NULL, justify = NULL) {
   
   if (!is.null(format)) {
 
-    if (!class(format) %in% c("NULL", "character", "fmt", 
-                              "fmt_lst", "function"))
+    if (!any(class(format) %in% c("NULL", "character", "fmt", 
+                              "fmt_lst", "function")))
       stop(paste0("class of format parameter value is invalid: ", 
                   class(format)))
   }

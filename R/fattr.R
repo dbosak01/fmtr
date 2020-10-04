@@ -35,8 +35,8 @@
 #' fapply(a)
 fattr <- function(x, format = NULL, width = NULL, justify = NULL, keep = TRUE) {
   
-  if (!class(format) %in% c("NULL", "character", "fmt", 
-                            "fmt_lst", "function"))
+  if (!any(class(format) %in% c("NULL", "character", "fmt", 
+                            "fmt_lst", "function")))
       stop(paste0("class of format parameter value is invalid:", 
                   class(format)))
   
@@ -94,8 +94,8 @@ fattr <- function(x, format = NULL, width = NULL, justify = NULL, keep = TRUE) {
   if (!is.null(value[["format"]])) {
     
     format <- value[["format"]]
-    if (!class(format) %in% c("NULL", "character", "fmt",
-                              "fmt_lst", "function"))
+    if (!any(class(format) %in% c("NULL", "character", "fmt",
+                              "fmt_lst", "function")))
       stop(paste0("class of format parameter value is invalid: ", 
                   class(format)))
   }

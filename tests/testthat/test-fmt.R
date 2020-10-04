@@ -11,9 +11,6 @@ test_that("value() function sets class and levels as expected", {
                 condition(x == "B", "Label B"), 
                 condition(TRUE, "Other"))
   
-  print(fmt1)
-  
-  
   expect_equal(class(fmt1), "fmt")
   expect_equal(levels(fmt1), res)
   
@@ -174,12 +171,10 @@ test_that("as.fmt.data.frame function works as expected", {
   
   dat <- data.frame(Name = "Fork", Type = "U", 
                     Expression = e, Label = l, Order = o)
-  
-  #dat 
+
   
   fmt <- as.fmt(dat)
-  
-  #print(bork)
+
   
   v1 <- c("A", "B", "C", "B")
   
@@ -216,12 +211,9 @@ test_that("as.fmt.data.frame function works as expected with caps.", {
   
   dat <- data.frame(NAME = "Fork", TyPE = "U", 
                     expression = e, LaBel = l, OrdeR = o)
-  
-  #dat 
 
   fmt <- as.fmt(dat)
   
-  #print(fmt)
   
   v1 <- c("A", "B", "C", "B")
   

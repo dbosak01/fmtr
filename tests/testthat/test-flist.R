@@ -149,3 +149,42 @@ test_that("as.data.frame.flist works as expected with no names.", {
   
 })
 
+
+
+test_that("as.fcat.fmt_lst() works as expected.", {
+  
+  # flist lookup
+  a <- list("A", 1.263, "B", as.Date("2020-07-21"), 
+            5.8732, as.Date("2020-10-17"))
+  b <- c("f1", "f2", "f1", "f3", "f2", "f3")
+  
+  fl <- flist(f1 = c(A = "Label A", B = "Label B"),
+              f2 = "%.1f",
+              f3 = "%d%b%Y",
+              type = "row",
+              lookup = b)
+  
+  expect_equal("fmt_lst" %in% class(fl), TRUE)
+  
+  ct <- as.fcat.fmt_lst(fl)
+  
+  expect_equal("fmt_lst" %in% class(ct), FALSE)
+  expect_equal("fcat" %in% class(ct), TRUE)
+  
+  fl2 <- as.flist(ct, type = "row", lookup = b)
+  
+  expect_equal("fmt_lst" %in% class(fl2), TRUE)
+  expect_equal("fcat" %in% class(fl2), FALSE)
+  
+
+  r <- fapply(a, fl2)
+  r
+  
+  expect_equal(class(r), "character")
+  expect_equal(length(r), 6)
+  expect_equal(r[[1]], "Label A")
+  expect_equal(r[[2]], "1.3")
+  expect_equal(r[[4]], "21Jul2020")
+  
+})
+

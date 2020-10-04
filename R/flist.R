@@ -100,7 +100,7 @@ flist <- function(..., type = "column", lookup = NULL, simplify = TRUE) {
     stop (paste("Lookup parameter only allowed on type 'row'."))
   
   # Create new structure of class "fmt_lst"
-  x <- structure(list(), class = c("fmt_lst"))
+  x <- structure(list(), class = c("fmt_lst", "list"))
   
   x$formats <- list(...)
   x$type <- type

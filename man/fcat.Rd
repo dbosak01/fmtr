@@ -29,8 +29,8 @@ and \code{\link{as.data.frame.fcat}} functions.  Formats are accessed in the
 catalog using list syntax. 
 
 A format catalog can be used to assign formats to a data frame
-or tibble using the \code{formats} function. See the \code{\link{formats}}
-function for additional details.
+or tibble using the \code{\link{formats}} function. Formats may be applied
+using the \code{\link{fdata}} and \code{\link{fapply}} functions.
 
 A format catalog may contain any type of format except a formatting list.
 Allowed formats include a formatting string, a named vector lookup, a 
