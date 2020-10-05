@@ -184,7 +184,7 @@ as.fcat.tbl_df <- function(x) {
 as.fcat.list <- function(x) {
   
 
-  class(x) = c("fmt_lst", class(x))
+  class(x) = c("fcat", "list")
     
   ret <- x
   
