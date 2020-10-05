@@ -18,13 +18,19 @@
 #' 
 #' When used on the receiving side of an assignment, the function will assign
 #' formats to a data frame.  The formats should be in a named list, where
-#' each name corresponds to the data frame column to assign the format to.
+#' each name corresponds to the data frame column to assign the format to. 
+#' 
+#' The \code{formats} function can also accept a format catalog as input.
+#' This feature allows you to save formats in metadata, load them into a
+#' format catalog, and quickly assign them to a data frame or tibble.  See
+#' the \code{\link{fcat}} function for additional information.
 #'     
 #' @param x A data frame or tibble.
 #' @return A named list of formats. 
 #' @seealso \code{\link{fdata}} to display formatted data, 
-#' \code{\link{value}} to create user-defined formats, and 
-#' \code{\link{fapply}} to apply formats to a vector. Also see
+#' \code{\link{value}} to create user-defined formats,  
+#' \code{\link{fapply}} to apply formats to a vector, and 
+#' \code{\link{fcat}} to create a format catalog. Also see
 #' \link{FormattingStrings} for documentation on formatting strings.
 #' @export
 #' @aliases formats<-

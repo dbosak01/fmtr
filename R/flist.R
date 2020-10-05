@@ -42,7 +42,7 @@
 #' @family flist
 #' @export
 #' @examples
-#' #' ## Example 1: Formatting List - Column Type ##
+#' ## Example 1: Formatting List - Column Type ##
 #' # Set up data
 #' v1 <- c(Sys.Date(), Sys.Date() + 30, Sys.Date() + 60)
 #' 
@@ -52,6 +52,7 @@
 #' # Apply formatting list to vector
 #' fapply(v1, fl1)
 #' 
+#' # [1] "The month is: October"  "The month is: November" "The month is: December"
 #' 
 #' ## Example 2: Formatting List - Row Type ordered ##
 #' # Set up data
@@ -66,6 +67,8 @@
 #'              "%d%b%Y")
 #' 
 #' fapply(l1, fl2)
+#' 
+#' # [1] "Label A"   "1.3"       "21Jul2020" "Label B"   "5.9"       "17Oct2020"
 #' 
 #' 
 #' ## Example 3: Formatting List - Row Type with lookup ##
@@ -86,6 +89,8 @@
 #' 
 #' # Apply formatting list to vector, using lookup
 #' fapply(l2, fl3)
+#' 
+#' # [1] "2,841.3"   "High"      "19Jun2020" "Low"       "24Apr2020" "1,382.9"
 flist <- function(..., type = "column", lookup = NULL, simplify = TRUE) {
   
   if (!type %in% c("column", "row"))
@@ -151,11 +156,16 @@ is.flist <- function(x) {
 #' @family flist
 #' @export
 #' @examples
-#' # Create flist
-#' lst <- list("%d%b%Y", "%.1f")
-#' flst <- as.flist(lst)
-#' is.flist(flst)
-#' is.flist("A")
+#' # Example 1: Create flist from list - column type
+#' lst1 <- list("%d%b%Y", "%.1f")
+#' fl1  <- as.flist(lst, type = "column")
+#' 
+#' # Example 2: Create flist from list - row type
+#' lst2 <- list(lkup = c(A = "Label A", B = "Label B"),
+#'              dec1 = "%.1f",
+#'              dt1  = "%d%b%Y")
+#' fl2 <- as.flist(lst2, type = "row")
+#'              
 as.flist <- function(x, type = "column", lookup = NULL, simplify = TRUE) {
   
   
@@ -297,10 +307,12 @@ print.fmt_lst <- function(x, ..., verbose = FALSE) {
     grey60 <- make_style(grey60 = "#999999")
     cat(grey60("# A formatting list: " %+% 
                  as.character(length(x$formats)) %+% " formats\n")) 
-    cat(grey60("- type: " %+% x$type %+% "\n"))
+    if (!is.null(x$type))
+      cat(grey60("- type: " %+% x$type %+% "\n"))
     if (!is.null(x$lookupname))
       cat(grey60("- lookup: " %+% x$lookupname %+% "\n"))
-    cat(grey60("- simplify: " %+% as.character(x$simplify) %+% "\n"))
+    if (!is.null(x$simplify))
+      cat(grey60("- simplify: " %+% as.character(x$simplify) %+% "\n"))
     
     print(as.data.frame(x))
     

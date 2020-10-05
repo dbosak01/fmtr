@@ -101,7 +101,8 @@ as.fcat <- function (x) {
 #' \itemize{
 #' \item \strong{U}: User Defined List created with the \code{\link{value}} 
 #' function.
-#' \item \strong{S}: A formatting string of formatting codes.
+#' \item \strong{S}: A formatting string of formatting codes.  
+#' See \link{FormattingStrings}.
 #' \item \strong{F}: A vectorized function.
 #' \item \strong{V}: A named vector lookup.}
 #' 
@@ -110,6 +111,7 @@ as.fcat <- function (x) {
 #' @param x The data frame to convert.
 #' @return A format catalog based on the information contained in the 
 #' input data frame.
+#' @family fcat
 #' @examples 
 #' # Create a format catalog
 #' c1 <- fcat(num_fmt  = "%.1f",
@@ -193,7 +195,7 @@ as.fcat.list <- function(x) {
 }
 
 #' @title Convert a formatting list to a format catalog
-#' #' @description The \code{as.fcat.list} function converts a list of formats
+#' @description The \code{as.fcat.list} function converts a list of formats
 #' to a format catalog.  
 #' @param x The formatting list to convert.
 #' @return A format catalog based on the formats contained in the input
@@ -217,7 +219,7 @@ as.fcat.fmt_lst <- function(x) {
 #' catalog, and converts it to a data frame.  The data frame format is 
 #' useful for storage, editing, saving to a spreadsheet, etc.  The 
 #' data frame shows the name of the formats, their type, and the format 
-#' expression.  For use-defined formats, the data frame populates 
+#' expression.  For user-defined formats, the data frame populates 
 #' additional columns for the label and order.
 #' @param x The format catalog to convert.
 #' @param row.names Row names of the return data frame.  Default is NULL.
@@ -307,7 +309,7 @@ as.data.frame.fcat <- function(x, row.names = NULL, optional = FALSE, ...) {
 
 
 #' @title Write a format catalog to the file system
-#' @description The \code{write.fcat} function writes the format catalog
+#' @description The \code{write.fcat} function writes a format catalog
 #' to the file system.  By default, the catalog will be written to the 
 #' current working directory, using the variable name as the file name.  These
 #' defaults can be overridden using the appropriate parameters.  The catalog

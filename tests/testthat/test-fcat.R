@@ -174,3 +174,21 @@ test_that("fcat can be applied to a data frame with formats function.", {
   
 })
 
+
+
+test_that("print.fcat works as expected.", {
+  
+  c1 <- fcat(AGE  = "%.1f",
+             CATEGORY = value(condition(x == "A", "Label A"),
+                              condition(x == "B", "Label B"),
+                              condition(TRUE, "Other")),
+             BDATE = "%d%b%Y")
+  
+  print(c1)
+  c1
+  print(c1, verbose = TRUE)
+  
+  expect_equal(TRUE, TRUE)
+  
+})
+

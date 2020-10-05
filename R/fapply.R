@@ -5,7 +5,7 @@
 #' Apply formatting to a vector
 #' 
 #' @description 
-#' The \code{fapply} function can be used to apply a formatting to a vector. 
+#' The \code{fapply} function applies formatting to a vector. 
 #' @details 
 #' The \code{fapply} function accepts several types of formats:  formatting
 #' strings, named vectors,
