@@ -77,7 +77,7 @@ fdata(df)
 * The `formats` and `fattr` functions to easily assign formatting attributes.
 * The `value` and `condition` functions to create a new user-defined format.
 * The `flist` function to create a formatting list.
-* The `fcat` function to create a format catalog (NEW in v1.2).
+* The `fcat` function to create a format catalog \*NEW in v1.2\*.
 * A set of formatting helper functions for statistical reports. 
 
 ## How to use fdata()
