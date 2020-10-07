@@ -16,12 +16,8 @@ unaltered
 
 # fmtr 1.1.0 (Released to CRAN)
 
-* Added Helper function for common statistical formatting:
-
-** fmt_cnt_pct()
-** fmt_range()
-** fmt_n()
-
+* Added Helper functions for common statistical formatting: fmt_cnt_pct(), 
+fmt_range(), fmt_n(), fmt_median(), fmt_mean_sd(), fmt_quantile_rng()
 * Added "order" parameter on condition() function to order labels differently
 than specified in the value() function
 * Made small change to fdata() to not call base format() function unless a
