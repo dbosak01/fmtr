@@ -1,3 +1,8 @@
+# fmtr 1.2.2
+
+* Documentation updates/improvements.
+
+
 # fmtr 1.2.1  
 
 * Improved printing of format catalogs, formats, formatting lists
