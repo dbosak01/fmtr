@@ -25,6 +25,13 @@
 #' call the base R \code{\link{format}} function on 
 #' the data frame.  Any follow on parameters will be sent to the \code{format}
 #' function.   
+#' 
+#' The \code{fdata} function will also apply any \code{width} or \code{justify}
+#' attributes assigned to the data frame columns.  These attributes can be 
+#' controlled at the column level.  Using
+#' attributes to assign formatting and \code{fdata} to apply those attributes
+#' gives you a create deal of control over how
+#' your data is presented.
 #'
 #' @param x A data frame or tibble to be formatted.
 #' @param ... Any follow-on parameters to the format function.

@@ -33,6 +33,8 @@
 #' 
 #' # Apply format attributes
 #' fapply(a)
+#' 
+#' # [1] "   1.3    " "   6.0    " "   2.4    "
 fattr <- function(x, format = NULL, width = NULL, justify = NULL, keep = TRUE) {
   
   if (!any(class(format) %in% c("NULL", "character", "fmt", 

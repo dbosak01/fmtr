@@ -33,7 +33,14 @@ function for additional information.
 After formatting each column, the \code{fdata} function will 
 call the base R \code{\link{format}} function on 
 the data frame.  Any follow on parameters will be sent to the \code{format}
-function.
+function.   
+
+The \code{fdata} function will also apply any \code{width} or \code{justify}
+attributes assigned to the data frame columns.  These attributes can be 
+controlled at the column level.  Using
+attributes to assign formatting and \code{fdata} to apply those attributes
+gives you a create deal of control over how
+your data is presented.
 }
 \examples{
 # Construct data frame from state vectors

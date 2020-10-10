@@ -26,7 +26,7 @@ can be controlled with the \code{simplify} parameter.  The default return
 type is a vector.
 }
 \description{
-A formatting list contains more than one formatting object
+A formatting list contains more than one formatting object.
 }
 \details{
 To apply more than one formatting object to a vector, use a formatting

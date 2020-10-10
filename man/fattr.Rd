@@ -43,6 +43,8 @@ a <- fattr(a, format = "\%.1f", width = 10, justify = "center")
 
 # Apply format attributes
 fapply(a)
+
+# [1] "   1.3    " "   6.0    " "   2.4    "
 }
 \seealso{
 \code{\link{fdata}} to apply formats to a data frame, 

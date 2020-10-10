@@ -4,7 +4,7 @@
 
 
 #' @title Create a formatting list
-#' @description A formatting list contains more than one formatting object
+#' @description A formatting list contains more than one formatting object.
 #' @details 
 #' To apply more than one formatting object to a vector, use a formatting
 #' list.  There are two types of formatting list: column and row.  The column

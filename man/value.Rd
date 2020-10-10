@@ -72,6 +72,6 @@ fapply(v2, fmt3)
 }
 \seealso{
 \code{\link{condition}} to define a condition,
-\code{\link{levels}} or \code{labels} to access the labels, and 
+\code{\link{levels}} or \code{\link{labels.fmt}} to access the labels, and 
 \code{\link{fapply}} to apply the format to a vector.
 }
