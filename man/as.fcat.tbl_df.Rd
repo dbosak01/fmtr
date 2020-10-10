@@ -44,7 +44,8 @@ Valid values for the "Type" column are as follows:
 \itemize{
 \item \strong{U}: User Defined List created with the \code{\link{value}} 
 function.
-\item \strong{S}: A formatting string of formatting codes.
+\item \strong{S}: A formatting string of formatting codes.  
+See \link{FormattingStrings}.
 \item \strong{F}: A vectorized function.
 \item \strong{V}: A named vector lookup.}
 
@@ -78,4 +79,16 @@ c2 <- as.fcat(df)
 fapply(123.456, c2$num_fmt)
 fapply(c("A", "B", "C", "B"), c2$label_fmt)
 fapply(Sys.Date(), c2$date_fmt)
+}
+\seealso{
+Other fcat: 
+\code{\link{as.data.frame.fcat}()},
+\code{\link{as.fcat.fmt_lst}()},
+\code{\link{as.fcat.list}()},
+\code{\link{as.fcat}()},
+\code{\link{fcat}()},
+\code{\link{is.fcat}()},
+\code{\link{print.fcat}()},
+\code{\link{read.fcat}()},
+\code{\link{write.fcat}()}
 }

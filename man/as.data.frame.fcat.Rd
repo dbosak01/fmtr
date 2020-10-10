@@ -24,10 +24,10 @@ catalog.
 }
 \description{
 This function takes the information stored in a format 
-catalog, and converts it to a data frame.  The data frame format is 
+catalog, and converts it to a data frame.  This data frame is 
 useful for storage, editing, saving to a spreadsheet, etc.  The 
 data frame shows the name of the formats, their type, and the format 
-expression.  For use-defined formats, the data frame populates 
+expression.  For user-defined formats, the data frame populates 
 additional columns for the label and order.
 }
 \examples{
@@ -54,6 +54,7 @@ c2 <- as.fcat(df)
 }
 \seealso{
 Other fcat: 
+\code{\link{as.fcat.data.frame}()},
 \code{\link{as.fcat.fmt_lst}()},
 \code{\link{as.fcat.list}()},
 \code{\link{as.fcat}()},

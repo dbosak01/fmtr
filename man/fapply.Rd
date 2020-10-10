@@ -21,7 +21,7 @@ value is NULL, meaning the vector will be variable width.}
 A vector of formatted values.
 }
 \description{
-The \code{fapply} function can be used to apply a formatting to a vector.
+The \code{fapply} function applies formatting to a vector.
 }
 \details{
 The \code{fapply} function accepts several types of formats:  formatting

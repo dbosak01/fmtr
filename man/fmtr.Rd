@@ -32,6 +32,7 @@ as follows:
 to a dataframe.}
   \item {\code{\link{fapply}}:}{ Applies formatting 
 to a vector.}
+  \item {\code{\link{fcat}}:}{ Creates a format catalog.}
   \item {\code{\link{value}}:}{ Creates a new
 user-defined format.}
   \item {\code{\link{formats}}:}{ Helps assign format attributes
@@ -45,7 +46,7 @@ user-defined format.}
 
 The formats that can be used with \strong{fmtr} include the following:
 \itemize{
-  \item Formatting string
+  \item Formatting strings
   \item Named vectors
   \item Vectorized functions
   \item User-defined formats
@@ -73,5 +74,11 @@ additional details on formatting lists.
 
 See the \code{\link{fapply}} function documentation for additional details
 on applying formats.
+
+Formats can be collected and stored as a single file, called a format
+catalog.  This functionality makes it easy to reuse formats in new
+programs, with new data, or to share them with colleagues.  
+See the \code{\link{fcat}} function for 
+additional information.
 }
 

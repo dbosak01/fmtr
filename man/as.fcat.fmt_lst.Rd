@@ -2,9 +2,7 @@
 % Please edit documentation in R/fcat.R
 \name{as.fcat.fmt_lst}
 \alias{as.fcat.fmt_lst}
-\title{Convert a formatting list to a format catalog
-#' @description The \code{as.fcat.list} function converts a list of formats
-to a format catalog.}
+\title{Convert a formatting list to a format catalog}
 \usage{
 \method{as.fcat}{fmt_lst}(x)
 }
@@ -16,13 +14,13 @@ A format catalog based on the formats contained in the input
 formatting list.
 }
 \description{
-Convert a formatting list to a format catalog
-#' @description The \code{as.fcat.list} function converts a list of formats
+The \code{as.fcat.list} function converts a list of formats
 to a format catalog.
 }
 \seealso{
 Other fcat: 
 \code{\link{as.data.frame.fcat}()},
+\code{\link{as.fcat.data.frame}()},
 \code{\link{as.fcat.list}()},
 \code{\link{as.fcat}()},
 \code{\link{fcat}()},

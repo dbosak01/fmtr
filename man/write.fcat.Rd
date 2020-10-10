@@ -24,7 +24,7 @@ extension will be added automatically.}
 The full path of the saved format catalog.
 }
 \description{
-The \code{write.fcat} function writes the format catalog
+The \code{write.fcat} function writes a format catalog
 to the file system.  By default, the catalog will be written to the 
 current working directory, using the variable name as the file name.  These
 defaults can be overridden using the appropriate parameters.  The catalog
@@ -59,6 +59,7 @@ fapply(Sys.Date(), c1$date_fmt)
 \seealso{
 Other fcat: 
 \code{\link{as.data.frame.fcat}()},
+\code{\link{as.fcat.data.frame}()},
 \code{\link{as.fcat.fmt_lst}()},
 \code{\link{as.fcat.list}()},
 \code{\link{as.fcat}()},

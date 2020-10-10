@@ -58,6 +58,7 @@ applying formats.
 
 Other fcat: 
 \code{\link{as.data.frame.fcat}()},
+\code{\link{as.fcat.data.frame}()},
 \code{\link{as.fcat.fmt_lst}()},
 \code{\link{as.fcat.list}()},
 \code{\link{as.fcat}()},
