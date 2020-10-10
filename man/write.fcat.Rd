@@ -4,11 +4,7 @@
 \alias{write.fcat}
 \title{Write a format catalog to the file system}
 \usage{
-write.fcat(
-  x,
-  dir_path = getwd(),
-  file_name = deparse(substitute(x, env = environment()))
-)
+write.fcat(x, dir_path = getwd(), file_name = NULL)
 }
 \arguments{
 \item{x}{The format catalog to write.}

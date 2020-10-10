@@ -178,7 +178,7 @@ as.fcat.tbl_df <- function(x) {
 
 #' @title Convert a list to a format catalog
 #' @description The \code{as.fcat.list} function converts a list of formats
-#' to a format catalog.  
+#' to a format catalog.  Items in the list must be named.  
 #' @param x The list to convert.  List must contained named formats.
 #' @return A format catalog based on the formats contained in the input list.
 #' @family fcat
@@ -195,15 +195,15 @@ as.fcat.list <- function(x) {
 }
 
 #' @title Convert a formatting list to a format catalog
-#' @description The \code{as.fcat.list} function converts a list of formats
-#' to a format catalog.  
+#' @description The \code{as.fcat.list} function converts a formatting list
+#' to a format catalog.  For additional information on formatting lists,
+#' see \code{\link{flist}}.
 #' @param x The formatting list to convert.
 #' @return A format catalog based on the formats contained in the input
 #' formatting list.
 #' @family fcat
 #' @export
 as.fcat.fmt_lst <- function(x) {
-  
   
 
   ret <- x$formats
@@ -348,8 +348,10 @@ as.data.frame.fcat <- function(x, row.names = NULL, optional = FALSE, ...) {
 #' fapply(c("A", "B", "C", "B"), c1$label_fmt)
 #' fapply(Sys.Date(), c1$date_fmt)
 #' @export
-write.fcat <- function(x, dir_path = getwd(), file_name = deparse(substitute(x, 
-                                              env = environment()))) {
+write.fcat <- function(x, dir_path = getwd(), file_name = NULL) {
+  
+  if (is.null(file_name))
+    file_name <- deparse(substitute(x, env = environment()))
   
   pth <- file.path(dir_path, paste0(file_name, ".fcat"))
 

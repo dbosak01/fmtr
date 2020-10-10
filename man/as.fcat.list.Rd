@@ -14,7 +14,7 @@ A format catalog based on the formats contained in the input list.
 }
 \description{
 The \code{as.fcat.list} function converts a list of formats
-to a format catalog.
+to a format catalog.  Items in the list must be named.
 }
 \seealso{
 Other fcat: 

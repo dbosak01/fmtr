@@ -184,11 +184,65 @@ test_that("print.fcat works as expected.", {
                               condition(TRUE, "Other")),
              BDATE = "%d%b%Y")
   
-  print(c1)
+  #print(c1)
   c1
-  print(c1, verbose = TRUE)
+  #print(c1, verbose = TRUE)
   
   expect_equal(TRUE, TRUE)
+  
+})
+
+
+test_that("as.fcat.fmt_lst works as expected.", {
+  
+  f1 <- flist(AGE  = "%.1f",
+             CATEGORY = value(condition(x == "A", "Label A"),
+                              condition(x == "B", "Label B"),
+                              condition(TRUE, "Other")),
+             BDATE = "%d%b%Y")
+  
+  c1 <- as.fcat(f1)
+  c1
+  
+  expect_equal(is.fcat(c1), TRUE)
+  
+
+})
+
+test_that("as.fcat.list works as expected.", {
+  
+  l1 <- list(AGE  = "%.1f",
+              CATEGORY = value(condition(x == "A", "Label A"),
+                               condition(x == "B", "Label B"),
+                               condition(TRUE, "Other")),
+              BDATE = "%d%b%Y")
+  
+  c1 <- as.fcat(l1)
+  c1
+  
+  expect_equal(is.fcat(c1), TRUE)
+  
+  
+})
+
+
+test_that("as.fcat.tbl_df works as expected.", {
+  
+  c1 <- fcat(AGE  = "%.1f",
+             CATEGORY = value(condition(x == "A", "Label A"),
+                              condition(x == "B", "Label B"),
+                              condition(TRUE, "Other")),
+             BDATE = "%d%b%Y")
+  
+  df <- as.data.frame(c1)
+  
+  tb <- tibble::as_tibble(df)
+  
+  c2 <- as.fcat(tb)
+  c2
+  
+  expect_equal(is.fcat(c2), TRUE)
+  
   
 })
 

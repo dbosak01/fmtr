@@ -14,8 +14,9 @@ A format catalog based on the formats contained in the input
 formatting list.
 }
 \description{
-The \code{as.fcat.list} function converts a list of formats
-to a format catalog.
+The \code{as.fcat.list} function converts a formatting list
+to a format catalog.  For additional information on formatting lists,
+see \code{\link{flist}}.
 }
 \seealso{
 Other fcat: 

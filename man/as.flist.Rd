@@ -47,7 +47,7 @@ Examples of column type and row type formatting lists are given below.
 \examples{
 # Example 1: Create flist from list - column type
 lst1 <- list("\%d\%b\%Y", "\%.1f")
-fl1  <- as.flist(lst, type = "column")
+fl1  <- as.flist(lst1, type = "column")
 
 # Example 2: Create flist from list - row type
 lst2 <- list(lkup = c(A = "Label A", B = "Label B"),
