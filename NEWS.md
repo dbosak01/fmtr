@@ -1,4 +1,4 @@
-# fmtr 1.2.1  (Released to CRAN)
+# fmtr 1.2.1  
 
 * Improved printing of format catalogs, formats, formatting lists
 * Added a `NEWS.md` file to track changes to the package.
@@ -14,7 +14,7 @@ no conditions were met.  Now, values that meet no conditions will fall through
 unaltered
 
 
-# fmtr 1.1.0 (Released to CRAN)
+# fmtr 1.1.0 
 
 * Added Helper functions for common statistical formatting: fmt_cnt_pct(), 
 fmt_range(), fmt_n(), fmt_median(), fmt_mean_sd(), fmt_quantile_rng()
@@ -24,7 +24,7 @@ than specified in the value() function
 parameter is specifically passed to on "...".
 
 
-# fmtr 1.0.0 (Released to CRAN)
+# fmtr 1.0.0 
 
 * Initial version
 * Added fapply() to format a vector

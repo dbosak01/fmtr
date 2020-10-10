@@ -216,7 +216,7 @@ as.fcat.fmt_lst <- function(x) {
 
 #' @title Convert a format catalog to a data frame
 #' @description This function takes the information stored in a format 
-#' catalog, and converts it to a data frame.  The data frame format is 
+#' catalog, and converts it to a data frame.  This data frame is 
 #' useful for storage, editing, saving to a spreadsheet, etc.  The 
 #' data frame shows the name of the formats, their type, and the format 
 #' expression.  For user-defined formats, the data frame populates 
