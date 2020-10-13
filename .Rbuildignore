@@ -1,2 +1,3 @@
 ^fmtr\.Rproj$
 ^\.Rproj\.user$
+^\.travis\.yml$
