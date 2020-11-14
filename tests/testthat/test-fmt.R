@@ -187,6 +187,29 @@ test_that("as.fmt.data.frame function works as expected", {
   
 })
 
+test_that("as.fmt.data.frame function with NA order works as expected", {
+  
+  o <- c(NA, NA, NA)
+  e <- c("x == \"A\"", "x == \"B\"", "TRUE")
+  l <- c("Label A", "Label B", "Other")
+  
+  dat <- data.frame(Name = "Fork", Type = "U", 
+                    Expression = e, Label = l, Order = o)
+  
+  
+  fmt <- as.fmt(dat)
+  
+  
+  v1 <- c("A", "B", "C", "B")
+  
+  res <- fapply(v1, fmt)
+  
+  expect_equal(length(res), 4)
+  expect_equal(res[1], "Label A")
+  expect_equal(res[2], "Label B")
+  expect_equal(res[3], "Other")
+  
+})
 
 test_that("print.fmt function works as expected", {
   

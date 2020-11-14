@@ -160,6 +160,7 @@ as.fcat.data.frame <- function(x) {
       ret[[nm]] <- eval(str2lang(df[1, "Expression"]))
     }
   }
+
   
   return(ret)
   
