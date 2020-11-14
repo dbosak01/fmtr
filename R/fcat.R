@@ -415,6 +415,9 @@ read.fcat <- function(file_path) {
 #' @param ... Any follow-on parameters.
 #' @param verbose Whether or not to print the format catalog in verbose style.
 #' By default, the parameter is FALSE, meaning to print in tabular style.
+#' @param row_limit A limit on the number of rows to return from the 
+#' \code{print.fcat} function.  Default is 25.  To return all the rows, 
+#' set the \code{row_limit} to NULL.
 #' @return The object, invisibly.
 #' @family fcat
 #' @examples 
@@ -429,7 +432,7 @@ read.fcat <- function(file_path) {
 #' print(c1)
 #' @import crayon
 #' @export
-print.fcat <- function(x, ..., verbose = FALSE) {
+print.fcat <- function(x, ..., verbose = FALSE, row_limit = 25) {
   
   if (verbose == TRUE) {
     
@@ -442,10 +445,18 @@ print.fcat <- function(x, ..., verbose = FALSE) {
    cat(grey60("# A format catalog: " %+% 
                 as.character(length(x)) %+% " formats\n"))
     
-    
+     
    dat <- as.data.frame(x)
-   
-   print(dat)
+   if (!is.null(row_limit)) {
+     if (nrow(dat) > row_limit) {
+       dat1 <- dat[1:row_limit, ]
+       print(dat1)
+       cat(grey60(paste("And", nrow(dat) - row_limit, "more rows...\n")))
+       
+     } else
+      print(dat)
+   } else 
+     print(dat)
    
   }
     

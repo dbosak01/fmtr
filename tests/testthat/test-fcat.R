@@ -246,3 +246,30 @@ test_that("as.fcat.tbl_df works as expected.", {
   
 })
 
+test_that("row_limit parameter works as expected", {
+  
+  
+  c1 <- fcat(lblA = value(condition(x == "A", "Label A", order = 2),
+                          condition(x == "B", "Label B", order = 1),
+                          condition(TRUE, "Other", order = 3)),
+             lblB = value(condition(x == "C", "Label C"),
+                          condition(x == "D", "Label D"),
+                          condition(TRUE, "Other")),
+             lblC = "%d%b%Y",
+             lblD = function(x) format(x, big.mark = ","),
+             lblE = c(A = "Label A", B = "Label B")
+  )
+  
+  if (FALSE) {
+    print(c1)
+    print(c1, row_limit = NULL)
+    print(c1, row_limit = 3)
+    print(c1, row_limit = 7)
+  }
+
+  expect_equal(TRUE, TRUE)
+  
+  
+})
+
+

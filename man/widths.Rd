@@ -47,7 +47,7 @@ print(df1)
 widths(df1) <- list(mpg = 12, cyl = 10) 
 
 # Display formatted data
-format(df1)
+fdata(df1)
 
 # View assigned widths
 widths(df1)
