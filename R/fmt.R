@@ -220,6 +220,11 @@ as.data.frame.fmt <- function(x, row.names = NULL, optional = FALSE, ...,
 #' @export
 as.fmt.data.frame <- function(x) {
   
+  if ("tbl_df" %in% class(x))
+    x <- as.data.frame(x)
+  
+  if (!"data.frame" %in% class(x))
+    stop("Input data must be a data frame")
   
   names(x) <- titleCase(names(x))
   
