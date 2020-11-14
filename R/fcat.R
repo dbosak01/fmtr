@@ -451,7 +451,7 @@ print.fcat <- function(x, ..., verbose = FALSE, row_limit = 25) {
      if (nrow(dat) > row_limit) {
        dat1 <- dat[1:row_limit, ]
        print(dat1)
-       cat(grey60(paste("And", nrow(dat) - row_limit, "more rows...\n")))
+       cat(grey60(paste("# ... with", nrow(dat) - row_limit, "more rows\n")))
        
      } else
       print(dat)
