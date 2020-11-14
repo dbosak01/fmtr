@@ -17,7 +17,8 @@ Assign formatting attributes to a vector
 \details{
 The \code{fattr} function is a convenience function for assigning 
 formatting attributes to a vector.  The function accepts a named list of
-formatting attributes.  Valid names are 'format', 'width', and 'justify'.
+formatting attributes.  Valid names are 'format', 'width', 'justify',
+'label' and 'description'.
 See \code{\link{fattr}} for additional details.
 }
 \examples{

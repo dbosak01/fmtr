@@ -17,6 +17,12 @@
 #' @param width The desired width of the formatted output. 
 #' @param justify Justification of the output vector. Valid values are 
 #' 'none', 'left', 'right', 'center', or 'centre'. 
+#' @param label A label string to assign to the vector.  This parameter 
+#' was added for convenience, as the label is frequently assigned at the 
+#' same time the formatting attributes are assigned.
+#' @param description A description string to assign to the vector. This parameter 
+#' was added for convenience, as the description is frequently assigned at the 
+#' same time the formatting attributes are assigned.
 #' @param keep Whether to keep any existing formatting attributes and 
 #' transfer to the new vector.  Default value is TRUE.
 #' @return The vector with formatting attributes assigned.
@@ -35,7 +41,8 @@
 #' fapply(a)
 #' 
 #' # [1] "   1.3    " "   6.0    " "   2.4    "
-fattr <- function(x, format = NULL, width = NULL, justify = NULL, keep = TRUE) {
+fattr <- function(x, format = NULL, width = NULL, justify = NULL, 
+                  label = NULL, description = NULL, keep = TRUE) {
   
   if (!any(class(format) %in% c("NULL", "character", "fmt", 
                             "fmt_lst", "function")))
@@ -64,6 +71,10 @@ fattr <- function(x, format = NULL, width = NULL, justify = NULL, keep = TRUE) {
     attr(x, "width") <- width
   if (!(is.null(justify) & keep == TRUE))
     attr(x, "justify") <- justify
+  if (!(is.null(label) & keep == TRUE))
+    attr(x, "label") <- label
+  if (!(is.null(description) & keep == TRUE))
+    attr(x, "description") <- description
   
   return(x)
   
@@ -75,7 +86,8 @@ fattr <- function(x, format = NULL, width = NULL, justify = NULL, keep = TRUE) {
 #' @details 
 #' The \code{fattr} function is a convenience function for assigning 
 #' formatting attributes to a vector.  The function accepts a named list of
-#' formatting attributes.  Valid names are 'format', 'width', and 'justify'.
+#' formatting attributes.  Valid names are 'format', 'width', 'justify',
+#' 'label' and 'description'.
 #' See \code{\link{fattr}} for additional details.  
 #' @param x The vector or data frame column to assign attributes to.
 #' @param value A named vector of attribute values.
@@ -130,6 +142,8 @@ fattr <- function(x, format = NULL, width = NULL, justify = NULL, keep = TRUE) {
     attr(x, "format") <- value[["format"]]
     attr(x, "width") <- value[["width"]]
     attr(x, "justify") <- value[["justify"]]
+    attr(x, "label") <- value[["label"]]
+    attr(x, "description") <- value[["description"]]
   
   return(x)
   

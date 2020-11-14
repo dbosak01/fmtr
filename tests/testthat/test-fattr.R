@@ -7,14 +7,17 @@ test_that("fattr() function works as expected as function.", {
   
   a <- c(1.336, 2.526, 3.825)
   
-  a <- fattr(a, format = "%.1f", width = 10, justify = "left")
+  a <- fattr(a, format = "%.1f", width = 10, justify = "left",
+             label = "Fork", description = "My fork")
 
   a
   
   expect_equal(attr(a, "format"), "%.1f")
   expect_equal(attr(a, "width"), 10)
   expect_equal(attr(a, "justify"), "left")
-  expect_equal(length(attributes(a)), 3)
+  expect_equal(attr(a, "label"), "Fork")
+  expect_equal(attr(a, "description"), "My fork")
+  expect_equal(length(attributes(a)), 5)
   
 
 })
@@ -26,14 +29,17 @@ test_that("fattr() function works as expected as assignment.", {
   
   a <- c(1.3, 2.5, 3.8)
   
-  fattr(a) <- list(format = "%.1f", width = 10, justify = "left")
+  fattr(a) <- list(format = "%.1f", width = 10, 
+                   justify = "left", label = "Fork", description = "My fork")
   
   a
   
   expect_equal(attr(a, "format"), "%.1f")
   expect_equal(attr(a, "width"), 10)
   expect_equal(attr(a, "justify"), "left")
-  expect_equal(length(attributes(a)), 3)
+  expect_equal(attr(a, "label"), "Fork")
+  expect_equal(attr(a, "description"), "My fork")
+  expect_equal(length(attributes(a)), 5)
   
 })
 

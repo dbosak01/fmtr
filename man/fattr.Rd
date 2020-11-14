@@ -4,7 +4,15 @@
 \alias{fattr}
 \title{Set formatting attributes}
 \usage{
-fattr(x, format = NULL, width = NULL, justify = NULL, keep = TRUE)
+fattr(
+  x,
+  format = NULL,
+  width = NULL,
+  justify = NULL,
+  label = NULL,
+  description = NULL,
+  keep = TRUE
+)
 }
 \arguments{
 \item{x}{The vector or data frame column to assign attributes to.}
@@ -17,6 +25,14 @@ formatting function, or a formatting list.}
 
 \item{justify}{Justification of the output vector. Valid values are 
 'none', 'left', 'right', 'center', or 'centre'.}
+
+\item{label}{A label string to assign to the vector.  This parameter 
+was added for convenience, as the label is frequently assigned at the 
+same time the formatting attributes are assigned.}
+
+\item{description}{A description string to assign to the vector. This parameter 
+was added for convenience, as the description is frequently assigned at the 
+same time the formatting attributes are assigned.}
 
 \item{keep}{Whether to keep any existing formatting attributes and 
 transfer to the new vector.  Default value is TRUE.}

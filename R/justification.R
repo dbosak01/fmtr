@@ -39,10 +39,10 @@
 #' print(df1)
 #' 
 #' # Assign justification
-#' justification(df1) <- list(mpg = "left", cyl = "center")
+#' justification(df1) <- list(mpg = "left", cyl = "right")
 #' widths(df1) <- list(mpg = 12, cyl = 10)
 #' 
-#' format(df1)
+#' fdata(df1)
 #' 
 #' 
 #' # Display justification
