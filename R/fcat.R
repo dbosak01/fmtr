@@ -415,9 +415,6 @@ read.fcat <- function(file_path) {
 #' @param ... Any follow-on parameters.
 #' @param verbose Whether or not to print the format catalog in verbose style.
 #' By default, the parameter is FALSE, meaning to print in tabular style.
-#' @param row_limit A limit on the number of rows to return from the 
-#' \code{print.fcat} function.  Default is 25.  To return all the rows, 
-#' set the \code{row_limit} to NULL.
 #' @return The object, invisibly.
 #' @family fcat
 #' @examples 
@@ -432,7 +429,7 @@ read.fcat <- function(file_path) {
 #' print(c1)
 #' @import crayon
 #' @export
-print.fcat <- function(x, ..., verbose = FALSE, row_limit = 25) {
+print.fcat <- function(x, ..., verbose = FALSE) {
   
   if (verbose == TRUE) {
     
@@ -446,22 +443,53 @@ print.fcat <- function(x, ..., verbose = FALSE, row_limit = 25) {
                 as.character(length(x)) %+% " formats\n"))
     
      
-   dat <- as.data.frame(x)
-   if (!is.null(row_limit)) {
-     if (nrow(dat) > row_limit) {
-       dat1 <- dat[1:row_limit, ]
-       print(dat1)
-       cat(grey60(paste("# ... with", nrow(dat) - row_limit, "more rows\n")))
+   #dat <- as.data.frame(x)
+   for(nm in names(x)) {
+     
+     ob <- x[[nm]]
+
+     if (any(class(ob) == "fmt")) {
+       cat(paste0("- $", nm, ": type U, ", length(ob),  " conditions\n"))
        
-     } else
-      print(dat)
-   } else 
-     print(dat)
+       
+     }  else if (any(class(x[[nm]]) == "function")) {
+        
+       cat(paste0("- $", nm, ": type F, ",  "1 function \n"))
+       
+     } else if (any(class(x[[nm]]) %in% c("character", "numeric", 
+                                          "integer", "Date", 
+                                          "POSIXct", "POSIXlt"))) {
+       
+       if (length(ob) > 1)
+         cat(paste0("- $", nm, ": type V, ", length(ob),  " elements\n"))
+       else 
+         cat(paste0("- $", nm, ": type S, \"", ob,"\"\n"))
+     }
+   }
+    
    
   }
     
   invisible(x)
 }
+
+
+# grey60 <- make_style(grey60 = "#999999")
+# cat(grey60("# A format catalog: " %+% 
+#              as.character(length(x)) %+% " formats\n"))
+# 
+# 
+# dat <- as.data.frame(x)
+# if (!is.null(row_limit)) {
+#   if (nrow(dat) > row_limit) {
+#     dat1 <- dat[1:row_limit, ]
+#     print(dat1)
+#     cat(grey60(paste("# ... with", nrow(dat) - row_limit, "more rows\n")))
+#     
+#   } else
+#     print(dat)
+# } else 
+#   print(dat)
 
 
 #' @title Class test for a format catalog

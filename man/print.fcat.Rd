@@ -4,7 +4,7 @@
 \alias{print.fcat}
 \title{Print a format catalog}
 \usage{
-\method{print}{fcat}(x, ..., verbose = FALSE, row_limit = 25)
+\method{print}{fcat}(x, ..., verbose = FALSE)
 }
 \arguments{
 \item{x}{The format catalog to print.}
@@ -13,10 +13,6 @@
 
 \item{verbose}{Whether or not to print the format catalog in verbose style.
 By default, the parameter is FALSE, meaning to print in tabular style.}
-
-\item{row_limit}{A limit on the number of rows to return from the 
-\code{print.fcat} function.  Default is 25.  To return all the rows, 
-set the \code{row_limit} to NULL.}
 }
 \value{
 The object, invisibly.
