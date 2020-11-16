@@ -157,7 +157,7 @@ as.flist <- function (x, type = "column", lookup = NULL, simplify = TRUE) {
   UseMethod("as.flist", x)
 }
 
-#' @title Convert to a formatting list
+#' @title Convert a list to a formatting list
 #' @description Converts a normal list to a formatting list.  All
 #' other parameters are the same as the \code{flist} function.
 #' @param x List to convert.
@@ -202,7 +202,7 @@ as.flist.list <- function(x, type = "column", lookup = NULL, simplify = TRUE) {
   return(f)
 }
 
-#' @title Convert to a formatting list
+#' @title Convert a data frame to a formatting list
 #' @description Converts a data frame to a formatting list.  All
 #' other parameters are the same as the \code{flist} function.
 #' @param x Data frame to convert.
@@ -237,7 +237,7 @@ as.flist.data.frame <- function(x, type = "column", lookup = NULL, simplify = TR
   return(f)
 }
 
-#' @title Convert to a formatting list
+#' @title Convert a tibble to a formatting list
 #' @description Converts a tibble to a formatting list.  All
 #' other parameters are the same as the \code{flist} function.
 #' @param x Tibble to convert.
@@ -251,7 +251,7 @@ as.flist.tbl_df <- function(x, type = "column", lookup = NULL, simplify = TRUE) 
   
 }
 
-#' @title Convert to a formatting list
+#' @title Convert a format catalog to a formatting list
 #' @description Converts a format catalog to a formatting list.  All
 #' other parameters are the same as the \code{flist} function.
 #' @param x Format catalog to convert.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/flist.R
 \name{as.flist.tbl_df}
 \alias{as.flist.tbl_df}
-\title{Convert to a formatting list}
+\title{Convert a tibble to a formatting list}
 \usage{
 \method{as.flist}{tbl_df}(x, type = "column", lookup = NULL, simplify = TRUE)
 }

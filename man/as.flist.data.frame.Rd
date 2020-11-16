@@ -2,7 +2,7 @@
 % Please edit documentation in R/flist.R
 \name{as.flist.data.frame}
 \alias{as.flist.data.frame}
-\title{Convert to a formatting list}
+\title{Convert a data frame to a formatting list}
 \usage{
 \method{as.flist}{data.frame}(x, type = "column", lookup = NULL, simplify = TRUE)
 }

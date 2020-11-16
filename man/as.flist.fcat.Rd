@@ -2,7 +2,7 @@
 % Please edit documentation in R/flist.R
 \name{as.flist.fcat}
 \alias{as.flist.fcat}
-\title{Convert to a formatting list}
+\title{Convert a format catalog to a formatting list}
 \usage{
 \method{as.flist}{fcat}(x, type = "column", lookup = NULL, simplify = TRUE)
 }
