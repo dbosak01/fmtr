@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{The formatting list to convert.}
 
-\item{row.names}{Row names of the return data frame.  Default is NULL.}
+\item{row.names}{Row names for the returned data frame.  Default is NULL.}
 
 \item{optional}{TRUE or FALSE value indicating whether converting to
 syntactic variable names is desired.  In the case of formats, the 
@@ -27,16 +27,16 @@ This function takes the information stored in a formatting
 list, and converts it to a data frame.  The data frame format is 
 useful for storage, editing, saving to a spreadsheet, etc.  The 
 data frame shows the name of the formats, their type, and the format 
-expression.  For use-defined formats, the data frame populates 
+expression.  For user-defined formats, the data frame populates 
 additional columns for the label and order.
 }
 \examples{
-# Create a format catalog
-c1 <- fcat(num_fmt  = "\%.1f",
-           label_fmt = value(condition(x == "A", "Label A"),
-                             condition(x == "B", "Label B"),
-                             condition(TRUE, "Other")),
-           date_fmt = "\%d\%b\%Y")
+# Create a formatting list
+c1 <- flist(num_fmt  = "\%.1f",
+            label_fmt = value(condition(x == "A", "Label A"),
+                              condition(x == "B", "Label B"),
+                              condition(TRUE, "Other")),
+            date_fmt = "\%d\%b\%Y")
            
 # Convert catalog to data frame to view the structure
 df <- as.data.frame(c1)
@@ -49,11 +49,15 @@ print(df)
 # 4 label_fmt    U       TRUE   Other    NA
 # 5  date_fmt    S     \%d\%b\%Y            NA
 
-# Convert data frame back to a format catalog
-c2 <- as.fcat(df)
+# Convert data frame back to a formatting list
+c2 <- as.flist(df)
 }
 \seealso{
 Other flist: 
+\code{\link{as.flist.data.frame}()},
+\code{\link{as.flist.fcat}()},
+\code{\link{as.flist.list}()},
+\code{\link{as.flist.tbl_df}()},
 \code{\link{as.flist}()},
 \code{\link{flist}()},
 \code{\link{is.flist}()},

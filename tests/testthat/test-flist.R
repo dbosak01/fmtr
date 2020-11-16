@@ -131,6 +131,26 @@ test_that("as.data.frame.flist works as expected.", {
   
 })
 
+test_that("another test for as.data.frame.flist works as expected.", {
+  
+  df <- read.table(header = TRUE, text = '
+       Name Type Expression Label Order
+        ALB    S       %.1f   NA      NA
+        ALP    S       %.0f   NA      NA
+        ALT    S       %.0f   NA      NA
+        AST    S       %.0f   NA      NA
+       BASO    S       %.2f   NA      NA
+       BILI    S       %.1f   NA      NA
+        BUN    S       %.0f   NA      NA')
+  
+  fl <- as.flist(df)
+  
+  expect_equal("fmt_lst" %in% class(fl), TRUE)
+  expect_equal(length(fl$formats), 7) 
+  
+  
+})
+
 test_that("as.data.frame.flist works as expected with no names.", {
   
   

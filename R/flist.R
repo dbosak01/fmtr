@@ -145,6 +145,17 @@ is.flist <- function(x) {
   return(ret)
 }
 
+#' @title Convert to a formatting list
+#' @description Converts an object to a formatting list.  All
+#' other parameters are the same as the \code{flist} function.
+#' @param x Object to convert.
+#' @return A formatting list object.
+#' @inherit flist
+#' @family flist
+#' @export
+as.flist <- function (x, type = "column", lookup = NULL, simplify = TRUE) {
+  UseMethod("as.flist", x)
+}
 
 #' @title Convert to a formatting list
 #' @description Converts a normal list to a formatting list.  All
@@ -166,7 +177,7 @@ is.flist <- function(x) {
 #'              dt1  = "%d%b%Y")
 #' fl2 <- as.flist(lst2, type = "row")
 #'              
-as.flist <- function(x, type = "column", lookup = NULL, simplify = TRUE) {
+as.flist.list <- function(x, type = "column", lookup = NULL, simplify = TRUE) {
   
   
   if (!type %in% c("column", "row"))
@@ -191,16 +202,79 @@ as.flist <- function(x, type = "column", lookup = NULL, simplify = TRUE) {
   return(f)
 }
 
+#' @title Convert to a formatting list
+#' @description Converts a data frame to a formatting list.  All
+#' other parameters are the same as the \code{flist} function.
+#' @param x Data frame to convert.
+#' @return A formatting list object.
+#' @inherit flist
+#' @family flist
+#' @export
+as.flist.data.frame <- function(x, type = "column", lookup = NULL, simplify = TRUE) {
+  
+  
+  if (!type %in% c("column", "row"))
+    stop (paste("Invalid value for type parameter.", 
+                "Value values are 'column' or 'row'"))
+  
+  if (!simplify %in% c(TRUE, FALSE))
+    stop (paste("Invalid value for simplify parameter.", 
+                "Valid values are TRUE or FALSE."))
+  
+  if (is.null(lookup) == FALSE & type == "column")
+    stop (paste("Lookup parameter only allowed on type 'row'."))
+  
+  # Create new structure of class "fmt_lst"
+  f <- structure(list(), class = c("fmt_lst", "list"))
+  
+  
+  f$formats <- unclass(as.fcat(x))
+  f$type <- type
+  f$lookup <- lookup
+  f$simplify <- simplify
+  
+  
+  return(f)
+}
+
+#' @title Convert to a formatting list
+#' @description Converts a tibble to a formatting list.  All
+#' other parameters are the same as the \code{flist} function.
+#' @param x Tibble to convert.
+#' @return A formatting list object.
+#' @inherit flist
+#' @family flist
+#' @export
+as.flist.tbl_df <- function(x, type = "column", lookup = NULL, simplify = TRUE) {
+  
+  return(as.flist(as.data.frame(x), type, lookup, simplify))
+  
+}
+
+#' @title Convert to a formatting list
+#' @description Converts a format catalog to a formatting list.  All
+#' other parameters are the same as the \code{flist} function.
+#' @param x Format catalog to convert.
+#' @return A formatting list object.
+#' @inherit flist
+#' @family flist
+#' @export
+as.flist.fcat <- function(x, type = "column", lookup = NULL, simplify = TRUE) {
+  
+
+  return(as.flist.list(unclass(x), type, lookup, simplify))
+  
+}
 
 #' @title Convert a formatting list to a data frame
 #' @description This function takes the information stored in a formatting 
 #' list, and converts it to a data frame.  The data frame format is 
 #' useful for storage, editing, saving to a spreadsheet, etc.  The 
 #' data frame shows the name of the formats, their type, and the format 
-#' expression.  For use-defined formats, the data frame populates 
+#' expression.  For user-defined formats, the data frame populates 
 #' additional columns for the label and order.
 #' @param x The formatting list to convert.
-#' @param row.names Row names of the return data frame.  Default is NULL.
+#' @param row.names Row names for the returned data frame.  Default is NULL.
 #' @param optional TRUE or FALSE value indicating whether converting to
 #' syntactic variable names is desired.  In the case of formats, the 
 #' resulting data frame will always be returned with syntactic names, and 
@@ -210,12 +284,12 @@ as.flist <- function(x, type = "column", lookup = NULL, simplify = TRUE) {
 #' list.  
 #' @family flist
 #' @examples 
-#' # Create a format catalog
-#' c1 <- fcat(num_fmt  = "%.1f",
-#'            label_fmt = value(condition(x == "A", "Label A"),
-#'                              condition(x == "B", "Label B"),
-#'                              condition(TRUE, "Other")),
-#'            date_fmt = "%d%b%Y")
+#' # Create a formatting list
+#' c1 <- flist(num_fmt  = "%.1f",
+#'             label_fmt = value(condition(x == "A", "Label A"),
+#'                               condition(x == "B", "Label B"),
+#'                               condition(TRUE, "Other")),
+#'             date_fmt = "%d%b%Y")
 #'            
 #' # Convert catalog to data frame to view the structure
 #' df <- as.data.frame(c1)
@@ -228,8 +302,8 @@ as.flist <- function(x, type = "column", lookup = NULL, simplify = TRUE) {
 #' # 4 label_fmt    U       TRUE   Other    NA
 #' # 5  date_fmt    S     %d%b%Y            NA
 #' 
-#' # Convert data frame back to a format catalog
-#' c2 <- as.fcat(df)
+#' # Convert data frame back to a formatting list
+#' c2 <- as.flist(df)
 #' @export
 as.data.frame.fmt_lst <- function(x, row.names = NULL, optional = FALSE, ...) {
   
