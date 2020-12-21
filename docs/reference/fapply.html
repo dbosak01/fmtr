@@ -90,6 +90,30 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/fmtr-fdata.html">Format Data Function</a>
+    </li>
+    <li>
+      <a href="../articles/fmtr-fapply.html">Format Apply Function</a>
+    </li>
+    <li>
+      <a href="../articles/fmtr-fcat.html">Format Catalogs</a>
+    </li>
+    <li>
+      <a href="../articles/fmtr-convenience.html">Convenience Functions</a>
+    </li>
+    <li>
+      <a href="../articles/fmtr-helpers.html">Helper Functions</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
@@ -261,13 +285,13 @@ and <code><a href='flist.html'>flist</a></code> to define a formatting list.  Al
 
 <span class='co'># Apply formatting list to vector</span>
 <span class='fu'>fapply</span><span class='op'>(</span><span class='va'>v3</span>, <span class='va'>lst</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "2,841.3"   "High"      "18Dec2020" "Low"       "16Feb2021" "1,382.9"  </div><div class='input'>
+</div><div class='output co'>#&gt; [1] "2,841.3"   "High"      "20Dec2020" "Low"       "18Feb2021" "1,382.9"  </div><div class='input'>
 
 <span class='co'>## Example 6: Formatting List - Column Type ##</span>
 <span class='co'># Set up data</span>
 <span class='va'>v5</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fl'>30</span>, <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fl'>60</span><span class='op'>)</span>
 <span class='va'>v5</span>
-</div><div class='output co'>#&gt; [1] "2020-12-18" "2021-01-17" "2021-02-16"</div><div class='input'>
+</div><div class='output co'>#&gt; [1] "2020-12-20" "2021-01-19" "2021-02-18"</div><div class='input'>
 <span class='co'># Create formatting list</span>
 <span class='va'>lst</span> <span class='op'>&lt;-</span> <span class='fu'><a href='flist.html'>flist</a></span><span class='op'>(</span><span class='st'>"%B"</span>, <span class='st'>"This month is: %s"</span>, type <span class='op'>=</span> <span class='st'>"column"</span><span class='op'>)</span>
 

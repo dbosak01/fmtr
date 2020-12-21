@@ -1,0 +1,16 @@
+url: https://fmtr.r-sassy.org
+
+articles:
+- title: Examples
+  navbar: ~
+  contents:
+  - fmtr-fdata
+  - fmtr-fapply
+  - fmtr-fcat
+  - fmtr-convenience
+  - fmtr-helpers
+
+navbar:
+  structure:
+    left:  [home, intro, reference, articles, news]
+    right: [github]

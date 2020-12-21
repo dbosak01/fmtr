@@ -1,0 +1,38 @@
+---
+title: "Convenience Functions"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Convenience Functions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Convenience Functions
+
+### The `formats()` function
+The formats associated with a data frame can be easily extracted or 
+assigned with the `formats()` function.  This function returns or accepts 
+a named list of formatting objects.  The names of the list items  
+correspond to the names of the columns in the data frame.  This function is
+useful when you want to assign formats to many columns.
+
+### The `fattr()` function
+The `fattr()` function helps assign formatting attributes to a vector or
+data frame column.  The `fattr()` function can assign the format, width, 
+and justify attributes all at once.  These attributes are passed in as
+arguments to the `fattr()` function, instead of as properties on a call
+to `attr()`.
+
+### Other convenience functions
+The `fmtr` package contains several other functions for setting attributes
+easily.  These include the `widths` and `justification` functions to set 
+columns widths and column justification on an entire data frame.  The package
+also includes class testing functions like `is.format` and `is.flist`.
