@@ -18,7 +18,7 @@ the documentation.  Best source is
 
 ### Installation
 
-The **fmtr** package is part of the **[sassy](http://www.r-sassy.org)** 
+The **fmtr** package is part of the **[sassy](http://sassy.r-sassy.org)** 
 meta-package.  **fmtr** will install by default if you have installed **sassy**.  
 
 However, if you wish to install the **fmtr** package individually, you
@@ -37,7 +37,7 @@ The **fmtr** package will then be loaded, and available for use in your project.
 ### Getting Help
 
 If you need help with the **sassy** family of packages, the best place 
-to turn to is the [r-sassy](http://www.r-sassy.org) web site.  
+to turn to is the [r-sassy](http://sassy.r-sassy.org) web site.  
 This web site offers many examples, and full
 documentation on every function.  
 
