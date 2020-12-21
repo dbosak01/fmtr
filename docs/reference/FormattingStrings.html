@@ -8,6 +8,13 @@
 
 <title>Formatting Strings — FormattingStrings • fmtr</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -43,6 +50,7 @@
 <meta property="og:description" content="Formatting codes for formatting strings follow the conventions 
 of the base R format and sprintf
 functions. See below for further details." />
+<meta property="og:image" content="https://fmtr.r-sassy.org/logo.png" />
 
 
 
@@ -203,7 +211,7 @@ examples of formatting other data types.</p>
 </div><div class='output co'>#&gt; [1] "20Dec2020"</div><div class='input'><span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='va'>t</span>, <span class='st'>"%y-%m"</span><span class='op'>)</span>                 <span class='co'># Two digit year - month</span>
 </div><div class='output co'>#&gt; [1] "20-12"</div><div class='input'><span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='va'>t</span>, <span class='st'>"%A, %B %d"</span><span class='op'>)</span>             <span class='co'># Weekday, unabbreviated month and date</span>
 </div><div class='output co'>#&gt; [1] "Sunday, December 20"</div><div class='input'><span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='va'>t</span>, <span class='st'>"%Y-%m%-%d %H:%M:%S %p"</span><span class='op'>)</span> <span class='co'># Common timestamp format</span>
-</div><div class='output co'>#&gt; [1] "2020-12-20 21:54:46 PM"</div><div class='input'>
+</div><div class='output co'>#&gt; [1] "2020-12-20 23:57:10 PM"</div><div class='input'>
 <span class='co'># Examples for formatting numbers</span>
 <span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fl'>1234.56789</span>
 <span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='va'>a</span>, <span class='st'>"%f"</span><span class='op'>)</span>                    <span class='co'># Floating point number</span>
