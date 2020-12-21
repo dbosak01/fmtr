@@ -11,7 +11,9 @@
 
 ### Introduction <img src="man/images/fmtr2.png" align="right" height="138" />
 
-Here is some introduction text.  Not quite sure what to put yet.
+Currently in the middle of revising 
+the documentation.  Best source is 
+[here](https://fmtr.r-sassy.org/articles/fmtr.html).
 
 
 ### Installation
