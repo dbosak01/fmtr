@@ -1,5 +1,3 @@
-# fmtr 
-
 <!-- badges: start -->
 
 [![fmtr version](https://www.r-pkg.org/badges/version/fmtr)](https://cran.r-project.org/package=fmtr)
@@ -9,7 +7,8 @@
 
 <!-- badges: end -->
 
-### Introduction <img src="man/images/fmtr2.png" align="right" height="138" />
+# Introduction to **fmtr**
+<img src="man/images/fmtr2.png" align="right" height="138" />
 
 Currently in the middle of revising 
 the documentation.  Best source is 
