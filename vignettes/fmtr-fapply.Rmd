@@ -41,6 +41,7 @@ to maintain consistency with the original data.
 
 ## What kind of formats are available
 Data can be formatted with several different types of objects:
+
   * A formatting string
   * A named vector
   * A user-defined format
