@@ -54,9 +54,9 @@ strengths and weaknesses.
 
 #### Formatting String
 The formatting functions accept formatting strings such as those associated
-with the Base R `format` and `sprintf` functions.  If the data type of the 
-vector is a date or datetime, `fapply` will use the format codes associated 
-with the `format` function.  For other data types, `fapply` will use the format
+with the Base R `format()` and `sprintf()` functions.  If the data type of the 
+vector is a date or datetime, `fapply()` will use the format codes associated 
+with the `format()` function.  For other data types, `fapply()` will use the format
 codes associated with `sprintf`.  Here is an example:
 ```{r eval=FALSE, echo=TRUE} 
 v1 <- c(1.367, 8.356, 4.583, 2.873)
@@ -87,8 +87,8 @@ fapply(v1, fmt1)
 #### User-defined formats
 The **fmtr** package provides custom functions for creating user-defined 
 formats, in a manner that is similar to a SAS® user-defined format.
-These functions are `value` and `condition`.
-The `value` function accepts one or more conditions.  The `conditions`
+These functions are `value()` and `condition()`.
+The `value()` function accepts one or more conditions.  The `condition()`
 function accepts an expression/label pair.  A user-defined format has the 
 advantage of a clear and flexible syntax.  It is excellent for categorizing
 data.  Here is an example of a user-defined 
@@ -144,7 +144,8 @@ situation is difficult to deal with in any language.
 But it can be made easy in R with the **fmtr** package and a formatting list.
 
 A formatting list is a list that contains one or more of the four types
-of formatting objects described above.  A formatting list can be applied in 
+of formatting objects described above.  It is defined with the `flist()` 
+function. A formatting list can be applied in 
 two different ways: in order, or with a lookup.  
 
 By default, the 

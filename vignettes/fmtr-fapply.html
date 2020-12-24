@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
-<meta name="date" content="2020-12-22" />
+<meta name="date" content="2020-12-24" />
 
 <title>Format Apply Function</title>
 
@@ -327,7 +327,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 <h1 class="title toc-ignore">Format Apply Function</h1>
-<h4 class="date">2020-12-22</h4>
+<h4 class="date">2020-12-24</h4>
 
 
 
@@ -361,7 +361,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>You can use the type of formatting object that is most suitable to your data and situation. Each type of formatting object has it’s own strengths and weaknesses.</p>
 <div id="formatting-string" class="section level4">
 <h4>Formatting String</h4>
-<p>The formatting functions accept formatting strings such as those associated with the Base R <code>format</code> and <code>sprintf</code> functions. If the data type of the vector is a date or datetime, <code>fapply</code> will use the format codes associated with the <code>format</code> function. For other data types, <code>fapply</code> will use the format codes associated with <code>sprintf</code>. Here is an example:</p>
+<p>The formatting functions accept formatting strings such as those associated with the Base R <code>format()</code> and <code>sprintf()</code> functions. If the data type of the vector is a date or datetime, <code>fapply()</code> will use the format codes associated with the <code>format()</code> function. For other data types, <code>fapply()</code> will use the format codes associated with <code>sprintf</code>. Here is an example:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>v1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.367</span>, <span class="fl">8.356</span>, <span class="fl">4.583</span>, <span class="fl">2.873</span>)</span>
 <span id="cb2-2"><a href="#cb2-2"></a></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="kw">fapply</span>(v1, <span class="st">&quot;%.1f%%&quot;</span>)</span>
@@ -382,7 +382,7 @@ The advantage of using a named vector for formatting is its simplicity. The disa
 </div>
 <div id="user-defined-formats" class="section level4">
 <h4>User-defined formats</h4>
-<p>The <strong>fmtr</strong> package provides custom functions for creating user-defined formats, in a manner that is similar to a SAS® user-defined format. These functions are <code>value</code> and <code>condition</code>. The <code>value</code> function accepts one or more conditions. The <code>conditions</code> function accepts an expression/label pair. A user-defined format has the advantage of a clear and flexible syntax. It is excellent for categorizing data. Here is an example of a user-defined format:</p>
+<p>The <strong>fmtr</strong> package provides custom functions for creating user-defined formats, in a manner that is similar to a SAS® user-defined format. These functions are <code>value()</code> and <code>condition()</code>. The <code>value()</code> function accepts one or more conditions. The <code>condition()</code> function accepts an expression/label pair. A user-defined format has the advantage of a clear and flexible syntax. It is excellent for categorizing data. Here is an example of a user-defined format:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>v1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="ot">NA</span>, <span class="st">&quot;C&quot;</span>)</span>
 <span id="cb4-2"><a href="#cb4-2"></a></span>
 <span id="cb4-3"><a href="#cb4-3"></a>fmt2 &lt;-<span class="st"> </span><span class="kw">value</span>(<span class="kw">condition</span>(<span class="kw">is.na</span>(x), <span class="st">&quot;Missing&quot;</span>),</span>
@@ -420,7 +420,7 @@ The advantage of using a named vector for formatting is its simplicity. The disa
 <h4>A formatting list</h4>
 <p>Sometimes data needs to be formatted differently for each row. This situation is difficult to deal with in any language.<br />
 But it can be made easy in R with the <strong>fmtr</strong> package and a formatting list.</p>
-<p>A formatting list is a list that contains one or more of the four types of formatting objects described above. A formatting list can be applied in two different ways: in order, or with a lookup.</p>
+<p>A formatting list is a list that contains one or more of the four types of formatting objects described above. It is defined with the <code>flist()</code> function. A formatting list can be applied in two different ways: in order, or with a lookup.</p>
 <p>By default, the list is applied in order. That means the first format in the list is applied to the first item in the vector, the second format in the list is applied to the second item in the vector, and so on. The list is recycled if the number of list items is shorter than the number of values in the vector.</p>
 <p>For the lookup method, the formatting object is specified by a lookup vector. The lookup vector should contain names associated with the elements in the formatting list. The lookup vector should also contain the same number of items as the data vector. For each item in the data vector, <strong>fmtr</strong> will look up the appropriate format from the formatting list, and apply that format to the corresponding data value.</p>
 <p>The following is an example of a lookup style formatting list:</p>

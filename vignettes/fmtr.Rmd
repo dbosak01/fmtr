@@ -15,18 +15,167 @@ knitr::opts_chunk$set(
 ```
 
 The **fmtr** package helps format data.  The package aims to simulate 
-the basic functionality of SAS® formats, but with R.  
+the basic functionality of SAS® formats, but with R.  The package contains
+several functions that make formatting simpler and more powerful.
 
-Formatting may be assigned
+## Key Functions
+
+**fmtr** contains the following key functions:
+
+* The `fdata()` function to apply formatting to any data frame or tibble.
+* The `fapply()` function to apply formatting to any vector.
+* The `formats()` and `fattr()` functions to easily assign formatting attributes.
+* The `value()` and `condition()` functions to create a new user-defined format.
+* The `fcat()` function to create a format catalog.
+* The `flist()` function to create a formatting list.
+
+## How to Use
+
+#### The `fapply()` Function
+The simplest introduction to the **fmtr** package is to examine the use of
+the `fapply()` function.  
+
+```
+library(fmtr)
+
+# Create sample data vector
+v1 <- c(1.483, 5.29837, 7.9472, 8.684021)
+
+# Format vector
+fapply(v1, "%1.1f")
+# [1] "1.5" "5.3" "7.9" "8.7"
+```
+As you can see from the above example, the `fapply()` function typically
+takes two parameters: a vector and a format.  In this way, the function acts
+very much like a SAS® `put` function. 
+
+Note that the format parameter can also be assigned as an attribute on 
+the vector.  The `fapply()` function will then pick up the format attribute,
+and apply it to the input vector.  The result is the same:
+
+```
+library(fmtr)
+
+# Create sample data vector
+v1 <- c(1.483, 5.29837, 7.9472, 8.684021)
+
+attr(v1, "format") <- "%1.1f"
+
+fapply(v1)
+# [1] "1.5" "5.3" "7.9" "8.7"
+```
+
+Besides the format attribute, the `fapply()` function will also recognize
+attributes for `width` and `justify`.  These parameters allow to you
+to control the width and alignment of the data in the vector.  If the 
+width parameter is larger than the width of the data, the value will be 
+padded with spaces.  Here is an example:
+
+```
+library(fmtr)
+
+# Create sample data vector
+v1 <- c(1.483, 5.29837, 7.9472, 8.684021)
+
+attr(v1, "format") <- "%1.1f"
+attr(v1, "width") <- 5
+attr(v1, "justify") <- "right"
+
+fapply(v1)
+# [1] "  1.5" "  5.3" "  7.9" "  8.7"
+```
+
+To help simplify assignment of these attributes, the **fmtr** package
+includes the `fattr()` function, which allows you to set all the above
+attributes in one function call.  Here is an example using the `fattr()`
+function, that ends with the same result as the example above.
+```
+library(fmtr)
+
+# Create sample data vector
+v1 <- c(1.483, 5.29837, 7.9472, 8.684021)
+
+v1 <- fattr(v1, format = "%1.1f", width = 5, justify = "right")
+
+fapply(v1)
+# [1] "  1.5" "  5.3" "  7.9" "  8.7"
+```
+
+Note that `fapply()` can accept several different types of formats.
+The examples above focus on a simple numeric format.  But `fapply()` also 
+accepts date formats, a lookup list, a user-defined format, 
+a vectorized function, and a formatting list.  
+
+For a brief introduction to formatting string codes, see `FormattingStrings`.
+
+And here is an example showing the use of a lookup list:
+```
+library(fmtr)
+
+# Create sample data vector
+v1 <- c("A", "B", "A", "C", "B")
+
+# Create lookup vector
+v2 <- c(A = "Group A", B = "Group B", C = "Group C")
+
+fapply(v1, v2)
+# [1] "Group A" "Group B" "Group A" "Group C" "Group B"
+```
+
+#### A User-Defined Format
+
+The weakness with using a named vector as a lookup list, 
+as in the above example, is that it will fail if there are any NA
+values in the data.  Additionally, there is no capability to include
+any sort of logic in the lookup. 
+
+For these reasons, the **fmtr** package
+provides a *user-defined format*.  This concept was taken directly from 
+SAS® software. The functions that create a user-defined format are 
+`value()` and `condition()`. 
+
+A condition accepts an expression and a label.
+The expression determines which label is assigned.  For the expression, 
+you can use logical operators like "&" and "|", and relational operators
+like ">" and "<".  The data value is identified with a variable "x". Here is
+an example:
+```
+library(fmtr)
+
+# Create sample data vector
+v1 <- c("A", "B", "E", "A", NA, "C", "D")
+
+u1 <- value(condition(x == "A", "Group A"),
+            condition(x == "B", "Group B"),
+            condition(x == "C" | x == "D", "Group C/D"), 
+            condition(TRUE, "Other"))
+            
+fapply(v1, u1)  
+# [1] "Group A" "Group B" "Other" "Group A" "Other" "Group C/D" "Group C/D"
+```
+Notice in the above example that the user-defined format allows you 
+much more capabilities than a simple lookup vector.  It allows you to 
+perform categorization and assign a default.  Additionally, the NA missing value
+does not crash the function.  The NA simply falls into the default category.
+If there is no default category, any values which do not correspond to a 
+category will fall through the format unaltered.
+
+#### The `fdata()` Function
+
+The `fdata()` function works very much the same way as `fapply()`, but
+with data frames and tibbles instead of vectors.  
+
+Like the `fapply()` function, formatting may be assigned
 to data frame columns using the **format**, **width**, and **justify** 
-attributes.  Formatting is then applied by calling the `fdata` function. 
-`fdata` returns a new data frame with the specified formatting applied. This 
-method of formatting provides much greater control over data formatting
-than the base R `format` function.
-
-Here is a example:
+attributes.  Formatting is then applied by calling the `fdata()` function, and
+passing the data frame as the first parameter.
+`fdata()` will then return a new data frame with the specified formatting applied. 
+This method of formatting provides much greater control over data formatting
+than the base R `format()` function.
 
 ```{r eval=FALSE, echo=TRUE}
+library(fmtr)
+
 # Construct data frame from state vectors
 df <- data.frame(state = state.abb, area = state.area)[1:10, ]
 
@@ -73,14 +222,98 @@ fdata(df)
 # 10     Georgia  58,876  1.6%
 
 ```
-## Key Features
+In the above example, observe that the `formats()` function assigns
+the format attribute for multiple columns.  This assignment is accomplished
+by sending a named list into the `formats()` function, where the names 
+in the list correspond to the column names of the data frame.  Also note the use
+of a lookup style format for the state names, and a vectorized format function
+for the state area.
 
-**fmtr** contains the following key features:
+#### The `fcat()` Function
 
-* The `fdata` function to apply formatting to any data frame or tibble.
-* The `fapply` function to apply formatting to any vector.
-* The `formats` and `fattr` functions to easily assign formatting attributes.
-* The `value` and `condition` functions to create a new user-defined format.
-* The `fcat` function to create a format catalog (NEW in v1.2).
-* The `flist` function to create a formatting list.
+One of the benefits of the above method of formatting is that the 
+data frame attributes can be stored with the data frame, and reapplied
+in the future.  But what if you want to apply the same set of formats to a 
+different data frame?
+
+That is where you need a *format catalog*.  
+
+The format catalog is a collection of formats that can be saved and reused.
+A format catalog is created with an `fcat()` function.  To create a format
+catalog, you call the `fcat()` function, passing a set of name/format pairs.
+In this case, the name of the format is a generic format name.  It does not
+have to correspond to a column name.  You may name the formats anything 
+you want.  The formats can be accessed in the catalog using dollar sign ("$")
+list notation.
+```
+library(fmtr)
+
+# Construct data frame from state vectors
+df <- data.frame(state = state.abb, area = state.area)[1:10, ]
+
+# Calculate percentages
+df$pct <- df$area / sum(state.area) * 100
+
+# Before formatting 
+df
+
+#    state   area         pct
+# 1     AL  51609  1.42629378
+# 2     AK 589757 16.29883824
+# 3     AZ 113909  3.14804973
+# 4     AR  53104  1.46761040
+# 5     CA 158693  4.38572418
+# 6     CO 104247  2.88102556
+# 7     CT   5009  0.13843139
+# 8     DE   2057  0.05684835
+# 9     FL  58560  1.61839532
+# 10    GA  58876  1.62712846
+
+# Create state name lookup list
+name_lookup <- state.name
+names(name_lookup) <- state.abb
+
+# Assign formats to format catalog
+cat1 <- fcat(state = name_lookup,                         
+             area  = function(x) format(x, big.mark = ","), 
+             pct   = "%.1f%%") 
+             
+# Apply a format from the catalog using fapply
+fapply(df$pct, cat1$pct)
+# [1] "1.4%"  "16.3%" "3.1%"  "1.5%"  "4.4%"  "2.9%"  "0.1%"  "0.1%"  "1.6%"  "1.6%"
+
+# Assign formats from the catalog to format attributes
+formats(df) <- cat1
+
+# Apply formats
+fdata(df)
+#          state    area   pct
+# 1      Alabama  51,609  1.4%
+# 2       Alaska 589,757 16.3%
+# 3      Arizona 113,909  3.1%
+# 4     Arkansas  53,104  1.5%
+# 5   California 158,693  4.4%
+# 6     Colorado 104,247  2.9%
+# 7  Connecticut   5,009  0.1%
+# 8     Delaware   2,057  0.1%
+# 9      Florida  58,560  1.6%
+# 10     Georgia  58,876  1.6%
+
+```
+In normal use, of course, the format catalog would likely be created 
+in a separate script and saved to a file using the `write.fcat()` function.
+The format catalog can then be read into any number of programs using 
+the `read.fcat()` function, and the formats in the catalog can be 
+applied as needed to your data.  
+
+### Next Steps
+
+For additional reinforcement of the topics presented above, please read the 
+following articles:
+
+* [Format Data Function](https://fmtr.r-sassy.org/articles/fmtr-fdata.html)
+* [Format Apply Function](https://fmtr.r-sassy.org/articles/fmtr-fapply.html)
+* [Format Catalogs](https://fmtr.r-sassy.org/articles/fmtr-fcat.html)
+* [Convenience Functions](https://fmtr.r-sassy.org/articles/fmtr-convenience.html)
+* [Helper Functions](https://fmtr.r-sassy.org/articles/fmtr-helpers.html)
 

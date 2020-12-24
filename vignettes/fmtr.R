@@ -5,6 +5,8 @@ knitr::opts_chunk$set(
 )
 
 ## ----eval=FALSE, echo=TRUE----------------------------------------------------
+#  library(fmtr)
+#  
 #  # Construct data frame from state vectors
 #  df <- data.frame(state = state.abb, area = state.area)[1:10, ]
 #  

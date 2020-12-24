@@ -70,6 +70,10 @@ reference:
   - fmt_median
   - fmt_quantile_range
   - fmt_range
+- title: Formatting Codes
+  desc: A short summary of the formatting codes for formatting strings
+  contents:
+  - FormattingStrings
   
 navbar:
   structure:
