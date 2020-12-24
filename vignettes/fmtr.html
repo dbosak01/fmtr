@@ -330,40 +330,43 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 <p>The <strong>fmtr</strong> package helps format data. The package aims to simulate the basic functionality of SAS® formats, but with R. The package contains several functions that make formatting simpler and more powerful.</p>
-<div id="key-functions" class="section level2">
-<h2>Key Functions</h2>
+<div id="key-functions" class="section level3">
+<h3>Key Functions</h3>
 <p><strong>fmtr</strong> contains the following key functions:</p>
 <ul>
 <li>The <code>fdata()</code> function to apply formatting to any data frame or tibble.</li>
 <li>The <code>fapply()</code> function to apply formatting to any vector.</li>
 <li>The <code>formats()</code> and <code>fattr()</code> functions to easily assign formatting attributes.</li>
-<li>The <code>value()</code> and <code>condition()</code> functions to create a new user-defined format.</li>
+<li>The <code>value()</code> and <code>condition()</code> functions to create a user-defined format.</li>
 <li>The <code>fcat()</code> function to create a format catalog.</li>
 <li>The <code>flist()</code> function to create a formatting list.</li>
 </ul>
 </div>
-<div id="how-to-use" class="section level2">
-<h2>How to Use</h2>
+<div id="how-to-use" class="section level3">
+<h3>How to Use</h3>
+<p>The <strong>fmtr</strong> package builds heavily on existing R formatting capabilities. For most R programmers, these functions are well-known, and widely used. The examples below make use of standard R formatting codes, such as those associated with the <code>strptime()</code> and <code>sprintf()</code> functions. The standard R formatting codes are a flexible and compact way of defining a format. If you are unfamiliar with R formatting codes, please see this summary on the <code>FormattingStrings()</code> page.</p>
 <div id="the-fapply-function" class="section level4">
 <h4>The <code>fapply()</code> Function</h4>
-<p>The simplest introduction to the <strong>fmtr</strong> package is to examine the use of the <code>fapply()</code> function.</p>
+<p>The simplest way to introduce the <strong>fmtr</strong> package is to examine the use of the <code>fapply()</code> function.</p>
 <pre><code>library(fmtr)
 
 # Create sample data vector
 v1 &lt;- c(1.483, 5.29837, 7.9472, 8.684021)
 
-# Format vector
+# Apply format
 fapply(v1, &quot;%1.1f&quot;)
 # [1] &quot;1.5&quot; &quot;5.3&quot; &quot;7.9&quot; &quot;8.7&quot;</code></pre>
-<p>As you can see from the above example, the <code>fapply()</code> function typically takes two parameters: a vector and a format. In this way, the function acts very much like a SAS® <code>put</code> function.</p>
+<p>As you can see from the above example, the <code>fapply()</code> function typically takes two parameters: a vector and a format. In this way, the <code>fapply()</code> acts very much like a SAS® <code>put</code> function.</p>
 <p>Note that the format parameter can also be assigned as an attribute on the vector. The <code>fapply()</code> function will then pick up the format attribute, and apply it to the input vector. The result is the same:</p>
 <pre><code>library(fmtr)
 
 # Create sample data vector
 v1 &lt;- c(1.483, 5.29837, 7.9472, 8.684021)
 
+# Assign format attribute
 attr(v1, &quot;format&quot;) &lt;- &quot;%1.1f&quot;
 
+# Apply format
 fapply(v1)
 # [1] &quot;1.5&quot; &quot;5.3&quot; &quot;7.9&quot; &quot;8.7&quot;</code></pre>
 <p>Besides the format attribute, the <code>fapply()</code> function will also recognize attributes for <code>width</code> and <code>justify</code>. These parameters allow to you to control the width and alignment of the data in the vector. If the width parameter is larger than the width of the data, the value will be padded with spaces. Here is an example:</p>
@@ -372,10 +375,12 @@ fapply(v1)
 # Create sample data vector
 v1 &lt;- c(1.483, 5.29837, 7.9472, 8.684021)
 
+# Assign formatting attributes
 attr(v1, &quot;format&quot;) &lt;- &quot;%1.1f&quot;
 attr(v1, &quot;width&quot;) &lt;- 5
 attr(v1, &quot;justify&quot;) &lt;- &quot;right&quot;
 
+# Apply formatting attributes
 fapply(v1)
 # [1] &quot;  1.5&quot; &quot;  5.3&quot; &quot;  7.9&quot; &quot;  8.7&quot;</code></pre>
 <p>To help simplify assignment of these attributes, the <strong>fmtr</strong> package includes the <code>fattr()</code> function, which allows you to set all the above attributes in one function call. Here is an example using the <code>fattr()</code> function, that ends with the same result as the example above.</p>
@@ -384,13 +389,14 @@ fapply(v1)
 # Create sample data vector
 v1 &lt;- c(1.483, 5.29837, 7.9472, 8.684021)
 
+# Assign formatting attributes
 v1 &lt;- fattr(v1, format = &quot;%1.1f&quot;, width = 5, justify = &quot;right&quot;)
 
+# Apply formatting attributes
 fapply(v1)
 # [1] &quot;  1.5&quot; &quot;  5.3&quot; &quot;  7.9&quot; &quot;  8.7&quot;</code></pre>
 <p>Note that <code>fapply()</code> can accept several different types of formats. The examples above focus on a simple numeric format. But <code>fapply()</code> also accepts date formats, a lookup list, a user-defined format, a vectorized function, and a formatting list.</p>
-<p>For a brief introduction to formatting string codes, see <code>FormattingStrings</code>.</p>
-<p>And here is an example showing the use of a lookup list:</p>
+<p>Here is an example showing the use of a lookup list:</p>
 <pre><code>library(fmtr)
 
 # Create sample data vector
@@ -419,12 +425,12 @@ u1 &lt;- value(condition(x == &quot;A&quot;, &quot;Group A&quot;),
             
 fapply(v1, u1)  
 # [1] &quot;Group A&quot; &quot;Group B&quot; &quot;Other&quot; &quot;Group A&quot; &quot;Other&quot; &quot;Group C/D&quot; &quot;Group C/D&quot;</code></pre>
-<p>Notice in the above example that the user-defined format allows you much more capabilities than a simple lookup vector. It allows you to perform categorization and assign a default. Additionally, the NA missing value does not crash the function. The NA simply falls into the default category. If there is no default category, any values which do not correspond to a category will fall through the format unaltered.</p>
+<p>Notice that the user-defined format gives you much more capabilities than a simple lookup vector. It allows you to perform categorization, and assign a default. Additionally, the NA missing value does not crash the function. The NA simply falls into the default category. If there is no default category, any values which do not correspond to a category will fall through the format unaltered.</p>
 </div>
 <div id="the-fdata-function" class="section level4">
 <h4>The <code>fdata()</code> Function</h4>
-<p>The <code>fdata()</code> function works very much the same way as <code>fapply()</code>, but with data frames and tibbles instead of vectors.</p>
-<p>Like the <code>fapply()</code> function, formatting may be assigned to data frame columns using the <strong>format</strong>, <strong>width</strong>, and <strong>justify</strong> attributes. Formatting is then applied by calling the <code>fdata()</code> function, and passing the data frame as the first parameter. <code>fdata()</code> will then return a new data frame with the specified formatting applied. This method of formatting provides much greater control over data formatting than the base R <code>format()</code> function.</p>
+<p>The <code>fdata()</code> function works very much the same way as <code>fapply()</code>, but with data frames and tibbles instead of vectors. In fact, under the hood, <code>fdata()</code> is simply calling <code>fapply()</code> for each column in the data frame.</p>
+<p>Like the <code>fapply()</code> function, formatting may be assigned to data frame columns using the <strong>format</strong>, <strong>width</strong>, and <strong>justify</strong> attributes. Formatting is then applied by calling the <code>fdata()</code> function, and passing the data frame as the first parameter. <code>fdata()</code> will then return a new data frame with the specified formatting applied. This method of formatting provides much greater control than the base R <code>format()</code> function.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">library</span>(fmtr)</span>
 <span id="cb7-2"><a href="#cb7-2"></a></span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="co"># Construct data frame from state vectors</span></span>
@@ -435,43 +441,41 @@ fapply(v1, u1)
 <span id="cb7-8"><a href="#cb7-8"></a></span>
 <span id="cb7-9"><a href="#cb7-9"></a><span class="co"># Before formatting </span></span>
 <span id="cb7-10"><a href="#cb7-10"></a>df</span>
-<span id="cb7-11"><a href="#cb7-11"></a></span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#    state   area         pct</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a><span class="co"># 1     AL  51609  1.42629378</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a><span class="co"># 2     AK 589757 16.29883824</span></span>
-<span id="cb7-15"><a href="#cb7-15"></a><span class="co"># 3     AZ 113909  3.14804973</span></span>
-<span id="cb7-16"><a href="#cb7-16"></a><span class="co"># 4     AR  53104  1.46761040</span></span>
-<span id="cb7-17"><a href="#cb7-17"></a><span class="co"># 5     CA 158693  4.38572418</span></span>
-<span id="cb7-18"><a href="#cb7-18"></a><span class="co"># 6     CO 104247  2.88102556</span></span>
-<span id="cb7-19"><a href="#cb7-19"></a><span class="co"># 7     CT   5009  0.13843139</span></span>
-<span id="cb7-20"><a href="#cb7-20"></a><span class="co"># 8     DE   2057  0.05684835</span></span>
-<span id="cb7-21"><a href="#cb7-21"></a><span class="co"># 9     FL  58560  1.61839532</span></span>
-<span id="cb7-22"><a href="#cb7-22"></a><span class="co"># 10    GA  58876  1.62712846</span></span>
-<span id="cb7-23"><a href="#cb7-23"></a></span>
-<span id="cb7-24"><a href="#cb7-24"></a><span class="co"># Create state name lookup list</span></span>
-<span id="cb7-25"><a href="#cb7-25"></a>name_lookup &lt;-<span class="st"> </span>state.name</span>
-<span id="cb7-26"><a href="#cb7-26"></a><span class="kw">names</span>(name_lookup) &lt;-<span class="st"> </span>state.abb</span>
-<span id="cb7-27"><a href="#cb7-27"></a></span>
-<span id="cb7-28"><a href="#cb7-28"></a><span class="co"># Assign formats</span></span>
-<span id="cb7-29"><a href="#cb7-29"></a><span class="kw">formats</span>(df) &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">state =</span> name_lookup,                         </span>
-<span id="cb7-30"><a href="#cb7-30"></a>                    <span class="dt">area  =</span> <span class="cf">function</span>(x) <span class="kw">format</span>(x, <span class="dt">big.mark =</span> <span class="st">&quot;,&quot;</span>), </span>
-<span id="cb7-31"><a href="#cb7-31"></a>                    <span class="dt">pct   =</span> <span class="st">&quot;%.1f%%&quot;</span>) </span>
-<span id="cb7-32"><a href="#cb7-32"></a></span>
-<span id="cb7-33"><a href="#cb7-33"></a><span class="co"># Apply formats</span></span>
-<span id="cb7-34"><a href="#cb7-34"></a><span class="kw">fdata</span>(df)</span>
-<span id="cb7-35"><a href="#cb7-35"></a></span>
-<span id="cb7-36"><a href="#cb7-36"></a><span class="co">#          state    area   pct</span></span>
-<span id="cb7-37"><a href="#cb7-37"></a><span class="co"># 1      Alabama  51,609  1.4%</span></span>
-<span id="cb7-38"><a href="#cb7-38"></a><span class="co"># 2       Alaska 589,757 16.3%</span></span>
-<span id="cb7-39"><a href="#cb7-39"></a><span class="co"># 3      Arizona 113,909  3.1%</span></span>
-<span id="cb7-40"><a href="#cb7-40"></a><span class="co"># 4     Arkansas  53,104  1.5%</span></span>
-<span id="cb7-41"><a href="#cb7-41"></a><span class="co"># 5   California 158,693  4.4%</span></span>
-<span id="cb7-42"><a href="#cb7-42"></a><span class="co"># 6     Colorado 104,247  2.9%</span></span>
-<span id="cb7-43"><a href="#cb7-43"></a><span class="co"># 7  Connecticut   5,009  0.1%</span></span>
-<span id="cb7-44"><a href="#cb7-44"></a><span class="co"># 8     Delaware   2,057  0.1%</span></span>
-<span id="cb7-45"><a href="#cb7-45"></a><span class="co"># 9      Florida  58,560  1.6%</span></span>
-<span id="cb7-46"><a href="#cb7-46"></a><span class="co"># 10     Georgia  58,876  1.6%</span></span></code></pre></div>
-<p>In the above example, observe that the <code>formats()</code> function assigns the format attribute for multiple columns. This assignment is accomplished by sending a named list into the <code>formats()</code> function, where the names in the list correspond to the column names of the data frame. Also note the use of a lookup style format for the state names, and a vectorized format function for the state area.</p>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#    state   area         pct</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="co"># 1     AL  51609  1.42629378</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="co"># 2     AK 589757 16.29883824</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="co"># 3     AZ 113909  3.14804973</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="co"># 4     AR  53104  1.46761040</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="co"># 5     CA 158693  4.38572418</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="co"># 6     CO 104247  2.88102556</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="co"># 7     CT   5009  0.13843139</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="co"># 8     DE   2057  0.05684835</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a><span class="co"># 9     FL  58560  1.61839532</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="co"># 10    GA  58876  1.62712846</span></span>
+<span id="cb7-22"><a href="#cb7-22"></a></span>
+<span id="cb7-23"><a href="#cb7-23"></a><span class="co"># Create state name lookup list</span></span>
+<span id="cb7-24"><a href="#cb7-24"></a>name_lookup &lt;-<span class="st"> </span>state.name</span>
+<span id="cb7-25"><a href="#cb7-25"></a><span class="kw">names</span>(name_lookup) &lt;-<span class="st"> </span>state.abb</span>
+<span id="cb7-26"><a href="#cb7-26"></a></span>
+<span id="cb7-27"><a href="#cb7-27"></a><span class="co"># Assign formats</span></span>
+<span id="cb7-28"><a href="#cb7-28"></a><span class="kw">formats</span>(df) &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">state =</span> name_lookup,                         </span>
+<span id="cb7-29"><a href="#cb7-29"></a>                    <span class="dt">area  =</span> <span class="cf">function</span>(x) <span class="kw">format</span>(x, <span class="dt">big.mark =</span> <span class="st">&quot;,&quot;</span>), </span>
+<span id="cb7-30"><a href="#cb7-30"></a>                    <span class="dt">pct   =</span> <span class="st">&quot;%.1f%%&quot;</span>) </span>
+<span id="cb7-31"><a href="#cb7-31"></a></span>
+<span id="cb7-32"><a href="#cb7-32"></a><span class="co"># Apply formats</span></span>
+<span id="cb7-33"><a href="#cb7-33"></a><span class="kw">fdata</span>(df)</span>
+<span id="cb7-34"><a href="#cb7-34"></a><span class="co">#          state    area   pct</span></span>
+<span id="cb7-35"><a href="#cb7-35"></a><span class="co"># 1      Alabama  51,609  1.4%</span></span>
+<span id="cb7-36"><a href="#cb7-36"></a><span class="co"># 2       Alaska 589,757 16.3%</span></span>
+<span id="cb7-37"><a href="#cb7-37"></a><span class="co"># 3      Arizona 113,909  3.1%</span></span>
+<span id="cb7-38"><a href="#cb7-38"></a><span class="co"># 4     Arkansas  53,104  1.5%</span></span>
+<span id="cb7-39"><a href="#cb7-39"></a><span class="co"># 5   California 158,693  4.4%</span></span>
+<span id="cb7-40"><a href="#cb7-40"></a><span class="co"># 6     Colorado 104,247  2.9%</span></span>
+<span id="cb7-41"><a href="#cb7-41"></a><span class="co"># 7  Connecticut   5,009  0.1%</span></span>
+<span id="cb7-42"><a href="#cb7-42"></a><span class="co"># 8     Delaware   2,057  0.1%</span></span>
+<span id="cb7-43"><a href="#cb7-43"></a><span class="co"># 9      Florida  58,560  1.6%</span></span>
+<span id="cb7-44"><a href="#cb7-44"></a><span class="co"># 10     Georgia  58,876  1.6%</span></span></code></pre></div>
+<p>In the above example, observe that the <code>formats()</code> function assigns the format attribute for multiple columns. This assignment is accomplished by sending a named list into the <code>formats()</code> function, where the names in the list correspond to the column names of the data frame. Also note the use of a lookup style format for the state names, and an anonymous vectorized format function for the state area.</p>
 </div>
 <div id="the-fcat-function" class="section level4">
 <h4>The <code>fcat()</code> Function</h4>
@@ -488,7 +492,6 @@ df$pct &lt;- df$area / sum(state.area) * 100
 
 # Before formatting 
 df
-
 #    state   area         pct
 # 1     AL  51609  1.42629378
 # 2     AK 589757 16.29883824
@@ -531,7 +534,8 @@ fdata(df)
 # 9      Florida  58,560  1.6%
 # 10     Georgia  58,876  1.6%
 </code></pre>
-<p>In normal use, of course, the format catalog would likely be created in a separate script and saved to a file using the <code>write.fcat()</code> function. The format catalog can then be read into any number of programs using the <code>read.fcat()</code> function, and the formats in the catalog can be applied as needed to your data.</p>
+<p>In normal use, of course, the format catalog would likely be created in a separate script and saved to a file using the <code>write.fcat()</code> function. The format catalog can then be read by any number of programs using the <code>read.fcat()</code> function, and the formats in the catalog can be applied as needed to your data.</p>
+</div>
 </div>
 <div id="next-steps" class="section level3">
 <h3>Next Steps</h3>
@@ -543,7 +547,6 @@ fdata(df)
 <li><a href="https://fmtr.r-sassy.org/articles/fmtr-convenience.html">Convenience Functions</a></li>
 <li><a href="https://fmtr.r-sassy.org/articles/fmtr-helpers.html">Helper Functions</a></li>
 </ul>
-</div>
 </div>
 
 

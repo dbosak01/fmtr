@@ -15,7 +15,6 @@ knitr::opts_chunk$set(
 #  
 #  # Before formatting
 #  df
-#  
 #  #    state   area         pct
 #  # 1     AL  51609  1.42629378
 #  # 2     AK 589757 16.29883824
@@ -39,7 +38,6 @@ knitr::opts_chunk$set(
 #  
 #  # Apply formats
 #  fdata(df)
-#  
 #  #          state    area   pct
 #  # 1      Alabama  51,609  1.4%
 #  # 2       Alaska 589,757 16.3%

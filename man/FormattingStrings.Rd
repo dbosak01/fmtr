@@ -5,7 +5,7 @@
 \title{Formatting Strings}
 \description{
 Formatting codes for formatting strings follow the conventions 
-of the base R \code{\link[base]{format}} and \code{\link[base]{sprintf}}
+of the base R \code{\link[base]{strptime}} and \code{\link[base]{sprintf}}
 functions. See below for further details.
 }
 \details{
@@ -13,7 +13,7 @@ The \strong{fmtr} packages accepts single strings as formatting
 specifications.  These formatting strings are interpreted differently 
 depending on the data type of the vector being formatted.  For 
 date and datetime vectors, the string will be interpreted as an input 
-to the base R \code{format} function.  For all other types of vectors, 
+to the base R \code{strptime} function.  For all other types of vectors, 
 the formatting string will be interpreted as an input to the \code{sprintf}
 function.  
 

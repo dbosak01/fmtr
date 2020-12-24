@@ -18,21 +18,29 @@ The **fmtr** package helps format data.  The package aims to simulate
 the basic functionality of SAS® formats, but with R.  The package contains
 several functions that make formatting simpler and more powerful.
 
-## Key Functions
+### Key Functions
 
 **fmtr** contains the following key functions:
 
 * The `fdata()` function to apply formatting to any data frame or tibble.
 * The `fapply()` function to apply formatting to any vector.
 * The `formats()` and `fattr()` functions to easily assign formatting attributes.
-* The `value()` and `condition()` functions to create a new user-defined format.
+* The `value()` and `condition()` functions to create a user-defined format.
 * The `fcat()` function to create a format catalog.
 * The `flist()` function to create a formatting list.
 
-## How to Use
+### How to Use
+The **fmtr** package builds heavily on existing R formatting capabilities.
+For most R programmers, these functions are well-known, and widely used.
+The examples below make use of standard R formatting codes, such as 
+those associated with the `strptime()` and `sprintf()` functions.  The
+standard R formatting codes are a flexible and compact way of defining 
+a format.  If you are unfamiliar with R formatting codes, please see
+this summary on the `FormattingStrings()` page.
+
 
 #### The `fapply()` Function
-The simplest introduction to the **fmtr** package is to examine the use of
+The simplest way to introduce the **fmtr** package is to examine the use of
 the `fapply()` function.  
 
 ```
@@ -41,12 +49,12 @@ library(fmtr)
 # Create sample data vector
 v1 <- c(1.483, 5.29837, 7.9472, 8.684021)
 
-# Format vector
+# Apply format
 fapply(v1, "%1.1f")
 # [1] "1.5" "5.3" "7.9" "8.7"
 ```
 As you can see from the above example, the `fapply()` function typically
-takes two parameters: a vector and a format.  In this way, the function acts
+takes two parameters: a vector and a format.  In this way, the `fapply()` acts
 very much like a SAS® `put` function. 
 
 Note that the format parameter can also be assigned as an attribute on 
@@ -59,8 +67,10 @@ library(fmtr)
 # Create sample data vector
 v1 <- c(1.483, 5.29837, 7.9472, 8.684021)
 
+# Assign format attribute
 attr(v1, "format") <- "%1.1f"
 
+# Apply format
 fapply(v1)
 # [1] "1.5" "5.3" "7.9" "8.7"
 ```
@@ -77,10 +87,12 @@ library(fmtr)
 # Create sample data vector
 v1 <- c(1.483, 5.29837, 7.9472, 8.684021)
 
+# Assign formatting attributes
 attr(v1, "format") <- "%1.1f"
 attr(v1, "width") <- 5
 attr(v1, "justify") <- "right"
 
+# Apply formatting attributes
 fapply(v1)
 # [1] "  1.5" "  5.3" "  7.9" "  8.7"
 ```
@@ -95,8 +107,10 @@ library(fmtr)
 # Create sample data vector
 v1 <- c(1.483, 5.29837, 7.9472, 8.684021)
 
+# Assign formatting attributes
 v1 <- fattr(v1, format = "%1.1f", width = 5, justify = "right")
 
+# Apply formatting attributes
 fapply(v1)
 # [1] "  1.5" "  5.3" "  7.9" "  8.7"
 ```
@@ -106,9 +120,7 @@ The examples above focus on a simple numeric format.  But `fapply()` also
 accepts date formats, a lookup list, a user-defined format, 
 a vectorized function, and a formatting list.  
 
-For a brief introduction to formatting string codes, see `FormattingStrings`.
-
-And here is an example showing the use of a lookup list:
+Here is an example showing the use of a lookup list:
 ```
 library(fmtr)
 
@@ -153,9 +165,9 @@ u1 <- value(condition(x == "A", "Group A"),
 fapply(v1, u1)  
 # [1] "Group A" "Group B" "Other" "Group A" "Other" "Group C/D" "Group C/D"
 ```
-Notice in the above example that the user-defined format allows you 
+Notice that the user-defined format gives you 
 much more capabilities than a simple lookup vector.  It allows you to 
-perform categorization and assign a default.  Additionally, the NA missing value
+perform categorization, and assign a default.  Additionally, the NA missing value
 does not crash the function.  The NA simply falls into the default category.
 If there is no default category, any values which do not correspond to a 
 category will fall through the format unaltered.
@@ -163,14 +175,15 @@ category will fall through the format unaltered.
 #### The `fdata()` Function
 
 The `fdata()` function works very much the same way as `fapply()`, but
-with data frames and tibbles instead of vectors.  
+with data frames and tibbles instead of vectors.  In fact, under the hood, 
+`fdata()` is simply calling `fapply()` for each column in the data frame.
 
 Like the `fapply()` function, formatting may be assigned
 to data frame columns using the **format**, **width**, and **justify** 
 attributes.  Formatting is then applied by calling the `fdata()` function, and
 passing the data frame as the first parameter.
 `fdata()` will then return a new data frame with the specified formatting applied. 
-This method of formatting provides much greater control over data formatting
+This method of formatting provides much greater control 
 than the base R `format()` function.
 
 ```{r eval=FALSE, echo=TRUE}
@@ -184,7 +197,6 @@ df$pct <- df$area / sum(state.area) * 100
 
 # Before formatting 
 df
-
 #    state   area         pct
 # 1     AL  51609  1.42629378
 # 2     AK 589757 16.29883824
@@ -208,7 +220,6 @@ formats(df) <- list(state = name_lookup,
 
 # Apply formats
 fdata(df)
-
 #          state    area   pct
 # 1      Alabama  51,609  1.4%
 # 2       Alaska 589,757 16.3%
@@ -226,8 +237,8 @@ In the above example, observe that the `formats()` function assigns
 the format attribute for multiple columns.  This assignment is accomplished
 by sending a named list into the `formats()` function, where the names 
 in the list correspond to the column names of the data frame.  Also note the use
-of a lookup style format for the state names, and a vectorized format function
-for the state area.
+of a lookup style format for the state names, and an anonymous vectorized 
+format function for the state area.
 
 #### The `fcat()` Function
 
@@ -256,7 +267,6 @@ df$pct <- df$area / sum(state.area) * 100
 
 # Before formatting 
 df
-
 #    state   area         pct
 # 1     AL  51609  1.42629378
 # 2     AK 589757 16.29883824
@@ -302,7 +312,7 @@ fdata(df)
 ```
 In normal use, of course, the format catalog would likely be created 
 in a separate script and saved to a file using the `write.fcat()` function.
-The format catalog can then be read into any number of programs using 
+The format catalog can then be read by any number of programs using 
 the `read.fcat()` function, and the formats in the catalog can be 
 applied as needed to your data.  
 

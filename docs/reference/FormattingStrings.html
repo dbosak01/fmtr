@@ -48,7 +48,7 @@
 
 <meta property="og:title" content="Formatting Strings — FormattingStrings" />
 <meta property="og:description" content="Formatting codes for formatting strings follow the conventions 
-of the base R format and sprintf
+of the base R strptime and sprintf
 functions. See below for further details." />
 <meta property="og:image" content="https://fmtr.r-sassy.org/logo.png" />
 
@@ -155,7 +155,7 @@ functions. See below for further details." />
 
     <div class="ref-description">
     <p>Formatting codes for formatting strings follow the conventions 
-of the base R <code><a href='https://rdrr.io/r/base/format.html'>format</a></code> and <code><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></code>
+of the base R <code><a href='https://rdrr.io/r/base/strptime.html'>strptime</a></code> and <code><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></code>
 functions. See below for further details.</p>
     </div>
 
@@ -167,7 +167,7 @@ functions. See below for further details.</p>
 specifications.  These formatting strings are interpreted differently 
 depending on the data type of the vector being formatted.  For 
 date and datetime vectors, the string will be interpreted as an input 
-to the base R <code>format</code> function.  For all other types of vectors, 
+to the base R <code>strptime</code> function.  For all other types of vectors, 
 the formatting string will be interpreted as an input to the <code>sprintf</code>
 function.</p>
 <p>The formatting codes for these functions are simple to use. For example, 
@@ -211,7 +211,7 @@ examples of formatting other data types.</p>
 </div><div class='output co'>#&gt; [1] "24Dec2020"</div><div class='input'><span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='va'>t</span>, <span class='st'>"%y-%m"</span><span class='op'>)</span>                 <span class='co'># Two digit year - month</span>
 </div><div class='output co'>#&gt; [1] "20-12"</div><div class='input'><span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='va'>t</span>, <span class='st'>"%A, %B %d"</span><span class='op'>)</span>             <span class='co'># Weekday, unabbreviated month and date</span>
 </div><div class='output co'>#&gt; [1] "Thursday, December 24"</div><div class='input'><span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='va'>t</span>, <span class='st'>"%Y-%m%-%d %H:%M:%S %p"</span><span class='op'>)</span> <span class='co'># Common timestamp format</span>
-</div><div class='output co'>#&gt; [1] "2020-12-24 05:06:07 AM"</div><div class='input'>
+</div><div class='output co'>#&gt; [1] "2020-12-24 12:28:21 PM"</div><div class='input'>
 <span class='co'># Examples for formatting numbers</span>
 <span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fl'>1234.56789</span>
 <span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='va'>a</span>, <span class='st'>"%f"</span><span class='op'>)</span>                    <span class='co'># Floating point number</span>
