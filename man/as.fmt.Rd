@@ -2,7 +2,7 @@
 % Please edit documentation in R/fmt.R
 \name{as.fmt}
 \alias{as.fmt}
-\title{Generic Casting Method for Formats}
+\title{Generic casting method for formats}
 \usage{
 as.fmt(x)
 }

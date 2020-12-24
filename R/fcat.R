@@ -59,7 +59,7 @@ fcat <- function(...) {
 
 # Conversion Functions -----------------------------------------------------
 
-#' @title Generic Casting Method for Format Catalogs
+#' @title Generic casting method for format catalogs
 #' @description A generic method for casting objects to
 #' a format catalog.  Individual objects will inherit from this function.
 #' @param x The object to cast.

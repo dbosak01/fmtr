@@ -1,3 +1,9 @@
+# fmtr 1.4.0
+
+* Added descriptions() attribute assignment functions
+* Modified fattr() functions to include description attribute
+* Added pkgdown site
+
 # fmtr 1.3.0
 
 * Added functions to convert data frames, tibble, and format catalogs to flist

@@ -10,7 +10,68 @@ articles:
   - fmtr-convenience
   - fmtr-helpers
 
+reference:
+- title: Applying Formats
+  desc: Functions to apply formatting to data.
+  contents:
+  - fdata
+  - fapply
+  - fattr
+  - "fattr<-"
+- title: Format Catalog 
+  desc: Functions to create and manage format catalogs.
+  contents:
+  - fcat
+  - read.fcat
+  - write.fcat
+  - as.fcat
+  - as.fcat.data.frame
+  - as.fcat.tbl_df
+  - as.fcat.fmt_lst
+  - as.fcat.list
+  - as.data.frame.fcat
+  - is.fcat
+  - print.fcat
+- title: Formatting List
+  desc: Functions to create a manage a formatting list.
+  contents:
+  - flist
+  - as.flist
+  - as.flist.data.frame
+  - as.flist.tbl_df
+  - as.flist.fcat
+  - as.flist.list
+  - as.data.frame.fmt_lst
+  - is.flist
+  - print.fmt_lst
+- title: User-Defined Formats
+  desc: Functions to create a user-defined format.
+  contents:
+  - value
+  - condition
+  - labels.fmt
+  - as.fmt
+  - is.format
+  - as.data.frame.fmt
+  - print.fmt
+- title: Convenience Functions
+  desc: Functions to easily apply formatting attributes to a data frame or tibble.
+  contents:
+  - formats
+  - descriptions
+  - widths
+  - justification
+- title: Helper Functions
+  desc: Functions to perform common formatting tasks on statistica reports.
+  contents:
+  - fmt_n
+  - fmt_cnt_pct
+  - fmt_mean_sd
+  - fmt_median
+  - fmt_quantile_range
+  - fmt_range
+  
 navbar:
   structure:
-    left:  [home, intro, reference, articles, news]
+    left:  [home, intro, articles, reference, news]
     right: [github]

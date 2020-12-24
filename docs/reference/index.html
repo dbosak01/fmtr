@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -93,9 +93,6 @@
 </li>
 <li>
   <a href="../articles/fmtr.html">Get started</a>
-</li>
-<li>
-  <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -120,6 +117,9 @@
       <a href="../articles/fmtr-helpers.html">Helper Functions</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -159,8 +159,8 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-applying-formats" class="hasAnchor"><a href="#section-applying-formats" class="anchor"></a>Applying Formats</h2>
+          <p class="section-desc"><p>Functions to apply formatting to data.</p></p>
         </th>
       </tr>
       
@@ -171,25 +171,74 @@
       <tr>
         
         <td>
-          <p><code><a href="as.data.frame.fcat.html">as.data.frame(<i>&lt;fcat&gt;</i>)</a></code> </p>
+          <p><code><a href="fdata.html">fdata()</a></code> </p>
         </td>
-        <td><p>Convert a format catalog to a data frame</p></td>
+        <td><p>Format a data frame or tibble</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="as.data.frame.fmt.html">as.data.frame(<i>&lt;fmt&gt;</i>)</a></code> </p>
+          <p><code><a href="fapply.html">fapply()</a></code> </p>
         </td>
-        <td><p>Casts a format to a data frame</p></td>
+        <td><p>Apply formatting to a vector</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="as.data.frame.fmt_lst.html">as.data.frame(<i>&lt;fmt_lst&gt;</i>)</a></code> </p>
+          <p><code><a href="fattr.html">fattr()</a></code> </p>
         </td>
-        <td><p>Convert a formatting list to a data frame</p></td>
+        <td><p>Set formatting attributes</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fattr-set.html">`fattr&lt;-`()</a></code> </p>
+        </td>
+        <td><p>Set formatting attributes</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-format-catalog" class="hasAnchor"><a href="#section-format-catalog" class="anchor"></a>Format Catalog</h2>
+          <p class="section-desc"><p>Functions to create and manage format catalogs.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="fcat.html">fcat()</a></code> </p>
+        </td>
+        <td><p>Create a format catalog</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="read.fcat.html">read.fcat()</a></code> </p>
+        </td>
+        <td><p>Read a format catalog from the file system</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="write.fcat.html">write.fcat()</a></code> </p>
+        </td>
+        <td><p>Write a format catalog to the file system</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="as.fcat.html">as.fcat()</a></code> </p>
+        </td>
+        <td><p>Generic casting method for format catalogs</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="as.fcat.data.frame.html">as.fcat(<i>&lt;data.frame&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Convert a data frame to a format catalog</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="as.fcat.tbl_df.html">as.fcat(<i>&lt;tbl_df&gt;</i>)</a></code> </p>
         </td>
         <td><p>Convert a data frame to a format catalog</p></td>
       </tr><tr>
@@ -207,21 +256,58 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="as.fcat.html">as.fcat()</a></code> </p>
+          <p><code><a href="as.data.frame.fcat.html">as.data.frame(<i>&lt;fcat&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Generic Casting Method for Format Catalogs</p></td>
+        <td><p>Convert a format catalog to a data frame</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="as.fcat.tbl_df.html">as.fcat(<i>&lt;tbl_df&gt;</i>)</a></code> </p>
+          <p><code><a href="is.fcat.html">is.fcat()</a></code> </p>
         </td>
-        <td><p>Convert a data frame to a format catalog</p></td>
+        <td><p>Class test for a format catalog</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="print.fcat.html">print(<i>&lt;fcat&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Print a format catalog</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-formatting-list" class="hasAnchor"><a href="#section-formatting-list" class="anchor"></a>Formatting List</h2>
+          <p class="section-desc"><p>Functions to create a manage a formatting list.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="flist.html">flist()</a></code> </p>
+        </td>
+        <td><p>Create a formatting list</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="as.flist.html">as.flist()</a></code> </p>
+        </td>
+        <td><p>Convert to a formatting list</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="as.flist.data.frame.html">as.flist(<i>&lt;data.frame&gt;</i>)</a></code> </p>
         </td>
         <td><p>Convert a data frame to a formatting list</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="as.flist.tbl_df.html">as.flist(<i>&lt;tbl_df&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Convert a tibble to a formatting list</p></td>
       </tr><tr>
         
         <td>
@@ -237,21 +323,40 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="as.flist.html">as.flist()</a></code> </p>
+          <p><code><a href="as.data.frame.fmt_lst.html">as.data.frame(<i>&lt;fmt_lst&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Convert to a formatting list</p></td>
+        <td><p>Convert a formatting list to a data frame</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="as.flist.tbl_df.html">as.flist(<i>&lt;tbl_df&gt;</i>)</a></code> </p>
+          <p><code><a href="is.flist.html">is.flist()</a></code> </p>
         </td>
-        <td><p>Convert a tibble to a formatting list</p></td>
+        <td><p>Is object a formatting list</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="as.fmt.html">as.fmt()</a></code> </p>
+          <p><code><a href="print.fmt_lst.html">print(<i>&lt;fmt_lst&gt;</i>)</a></code> </p>
         </td>
-        <td><p>Generic Casting Method for Formats</p></td>
+        <td><p>Print a formatting list</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-user-defined-formats" class="hasAnchor"><a href="#section-user-defined-formats" class="anchor"></a>User-Defined Formats</h2>
+          <p class="section-desc"><p>Functions to create a user-defined format.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="value.html">value()</a></code> </p>
+        </td>
+        <td><p>Create a user-defined format</p></td>
       </tr><tr>
         
         <td>
@@ -261,51 +366,89 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="labels.fmt.html">labels(<i>&lt;fmt&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Extract labels from a user-defined format</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="as.fmt.html">as.fmt()</a></code> </p>
+        </td>
+        <td><p>Generic casting method for formats</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="is.format.html">is.format()</a></code> </p>
+        </td>
+        <td><p>Determine whether an object is a user-defined format</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="as.data.frame.fmt.html">as.data.frame(<i>&lt;fmt&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Casts a format to a data frame</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="print.fmt.html">print(<i>&lt;fmt&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Print a format</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-convenience-functions" class="hasAnchor"><a href="#section-convenience-functions" class="anchor"></a>Convenience Functions</h2>
+          <p class="section-desc"><p>Functions to easily apply formatting attributes to a data frame or tibble.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="formats.html">formats()</a></code> <code><a href="formats.html">`formats&lt;-`()</a></code> </p>
+        </td>
+        <td><p>Get or set formats for a data frame</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="descriptions.html">descriptions()</a></code> <code><a href="descriptions.html">`descriptions&lt;-`()</a></code> </p>
         </td>
         <td><p>Get or set descriptions for data frame columns</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="fapply.html">fapply()</a></code> </p>
+          <p><code><a href="widths.html">widths()</a></code> <code><a href="widths.html">`widths&lt;-`()</a></code> </p>
         </td>
-        <td><p>Apply formatting to a vector</p></td>
+        <td><p>Get or set column widths for a data frame</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="fattr-set.html">`fattr&lt;-`()</a></code> </p>
+          <p><code><a href="justification.html">justification()</a></code> <code><a href="justification.html">`justification&lt;-`()</a></code> </p>
         </td>
-        <td><p>Set formatting attributes</p></td>
-      </tr><tr>
+        <td><p>Get or set justification for data frame columns</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-helper-functions" class="hasAnchor"><a href="#section-helper-functions" class="anchor"></a>Helper Functions</h2>
+          <p class="section-desc"><p>Functions to perform common formatting tasks on statistica reports.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
         
         <td>
-          <p><code><a href="fattr.html">fattr()</a></code> </p>
+          <p><code><a href="fmt_n.html">fmt_n()</a></code> </p>
         </td>
-        <td><p>Set formatting attributes</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="fcat.html">fcat()</a></code> </p>
-        </td>
-        <td><p>Create a format catalog</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="fdata.html">fdata()</a></code> </p>
-        </td>
-        <td><p>Format a data frame or tibble</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="flist.html">flist()</a></code> </p>
-        </td>
-        <td><p>Create a formatting list</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="fmtr.html">fmtr</a></code> </p>
-        </td>
-        <td><p>A package for formatting data</p></td>
+        <td><p>Formatted Count</p></td>
       </tr><tr>
         
         <td>
@@ -327,12 +470,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="fmt_n.html">fmt_n()</a></code> </p>
-        </td>
-        <td><p>Formatted Count</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="fmt_quantile_range.html">fmt_quantile_range()</a></code> </p>
         </td>
         <td><p>Formatted Quantile Range</p></td>
@@ -342,90 +479,6 @@
           <p><code><a href="fmt_range.html">fmt_range()</a></code> </p>
         </td>
         <td><p>Formatted Range</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="formats.html">formats()</a></code> <code><a href="formats.html">`formats&lt;-`()</a></code> </p>
-        </td>
-        <td><p>Get or set formats for a data frame</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="FormattingStrings.html">FormattingStrings</a></code> </p>
-        </td>
-        <td><p>Formatting Strings</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is.fcat.html">is.fcat()</a></code> </p>
-        </td>
-        <td><p>Class test for a format catalog</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is.flist.html">is.flist()</a></code> </p>
-        </td>
-        <td><p>Is object a formatting list</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="is.format.html">is.format()</a></code> </p>
-        </td>
-        <td><p>Determine whether an object is a user-defined format</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="justification.html">justification()</a></code> <code><a href="justification.html">`justification&lt;-`()</a></code> </p>
-        </td>
-        <td><p>Get or set justification for data frame columns</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="labels.fmt.html">labels(<i>&lt;fmt&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Extract labels from a user-defined format</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="print.fcat.html">print(<i>&lt;fcat&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Print a format catalog</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="print.fmt.html">print(<i>&lt;fmt&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Print a format</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="print.fmt_lst.html">print(<i>&lt;fmt_lst&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Print a formatting list</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read.fcat.html">read.fcat()</a></code> </p>
-        </td>
-        <td><p>Read a format catalog from the file system</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="value.html">value()</a></code> </p>
-        </td>
-        <td><p>Create a user-defined format</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="widths.html">widths()</a></code> <code><a href="widths.html">`widths&lt;-`()</a></code> </p>
-        </td>
-        <td><p>Get or set column widths for a data frame</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="write.fcat.html">write.fcat()</a></code> </p>
-        </td>
-        <td><p>Write a format catalog to the file system</p></td>
       </tr>
     </tbody>
     </table>

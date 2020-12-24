@@ -159,7 +159,7 @@ condition <- function(expr, label, order = NULL) {
 
 # Conversion Functions ----------------------------------------------------
 
-#' @title Generic Casting Method for Formats
+#' @title Generic casting method for formats
 #' @description A generic method for casting objects to
 #' a format.  Individual objects will inherit from this function.
 #' @param x The object to cast.

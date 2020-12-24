@@ -2,7 +2,7 @@
 % Please edit documentation in R/fcat.R
 \name{as.fcat}
 \alias{as.fcat}
-\title{Generic Casting Method for Format Catalogs}
+\title{Generic casting method for format catalogs}
 \usage{
 as.fcat(x)
 }
