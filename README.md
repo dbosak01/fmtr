@@ -41,21 +41,24 @@ addresses those problems in the following ways:
 1. **Two formatting functions**:  With **fmtr**, all formatting has been 
 consolidated into two formatting functions: `fapply()` and `fdata()`.  `fapply()`
 applies a format to a vector.  `fdata()` applies formats to a data
-frame or tibble.  
+frame or tibble. The implementation of the `fapply()` function is 
+reminiscent of a SAS® `put` function.
 
 2. **The format catalog**: The **fmtr** package also introduces the concept
 of a *format catalog* to R.  A format catalog is a collection of formats 
-that can be saved as a file, shared, and reused.  
+that can be saved as a file, shared, and reused. This concept was taken
+directly from SAS® software.
 
 3. **User-defined format**: The **fmtr** package also improves on the native R 
 formatting capabilities by introducing the concept of a *user-defined format*. 
 A user-defined format is an expression-driven lookup.  You can define a set 
 of logical expressions that, when true, will return a corresponding lookup 
-value. 
+value. The implementation of the user-defined format is similar to 
+a SAS® user-defined format.
 
 4. **The formatting list**: For complicated formats that require more than
 one function, the **fmtr** package also introduces the concept of a 
-formatting list.  A formatting list can perform operations that are difficult
+*formatting list*.  A formatting list can perform operations that are difficult
 to accomplish otherwise.
 
 5. **Helper and Convenience functions**: Finally, the **fmtr** package contains 
@@ -97,6 +100,9 @@ If you need additional help, please turn
 to [stackoverflow.com](https://stackoverflow.com).  The stackoverflow 
 community will be very willing to answer your questions.  
 
+If you want to look at the code for the **fmtr** package, visit the
+github page [here](https://github.com/dbosak01/fmtr).
+
 If you encounter a bug or have a feature request, please submit your
 issue [here](https://github.com/dbosak01/fmtr/issues)
 
@@ -106,3 +112,11 @@ Next, you should read the [Get started](http://fmtr.r-sassy.org/articles/fmtr.ht
 page, and look at some examples.  These examples will demonstrate the 
 extraordinary usefulness of the formatting functions, and give you many ideas
 on how and where to use the **fmtr** package.  
+
+### See Also
+
+The **fmtr** package is part of the **sassy** meta-package. 
+The **sassy** meta-package includes several packages that help make R
+easier for SAS programmers.  You can read more about the **sassy** package
+[here](http://sassy.r-sassy.org)
+

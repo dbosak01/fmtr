@@ -127,10 +127,10 @@
 <a href="#solution" class="anchor"></a>Solution</h3>
 <p>The <strong>fmtr</strong> package was developed to address the above problems. The package addresses those problems in the following ways:</p>
 <ol>
-<li><p><strong>Two formatting functions</strong>: With <strong>fmtr</strong>, all formatting has been consolidated into two formatting functions: <code><a href="reference/fapply.html">fapply()</a></code> and <code><a href="reference/fdata.html">fdata()</a></code>. <code><a href="reference/fapply.html">fapply()</a></code> applies a format to a vector. <code><a href="reference/fdata.html">fdata()</a></code> applies formats to a data frame or tibble.</p></li>
-<li><p><strong>The format catalog</strong>: The <strong>fmtr</strong> package also introduces the concept of a <em>format catalog</em> to R. A format catalog is a collection of formats that can be saved as a file, shared, and reused.</p></li>
-<li><p><strong>User-defined format</strong>: The <strong>fmtr</strong> package also improves on the native R formatting capabilities by introducing the concept of a <em>user-defined format</em>. A user-defined format is an expression-driven lookup. You can define a set of logical expressions that, when true, will return a corresponding lookup value.</p></li>
-<li><p><strong>The formatting list</strong>: For complicated formats that require more than one function, the <strong>fmtr</strong> package also introduces the concept of a formatting list. A formatting list can perform operations that are difficult to accomplish otherwise.</p></li>
+<li><p><strong>Two formatting functions</strong>: With <strong>fmtr</strong>, all formatting has been consolidated into two formatting functions: <code><a href="reference/fapply.html">fapply()</a></code> and <code><a href="reference/fdata.html">fdata()</a></code>. <code><a href="reference/fapply.html">fapply()</a></code> applies a format to a vector. <code><a href="reference/fdata.html">fdata()</a></code> applies formats to a data frame or tibble. The implementation of the <code><a href="reference/fapply.html">fapply()</a></code> function is reminiscent of a SAS® <code>put</code> function.</p></li>
+<li><p><strong>The format catalog</strong>: The <strong>fmtr</strong> package also introduces the concept of a <em>format catalog</em> to R. A format catalog is a collection of formats that can be saved as a file, shared, and reused. This concept was taken directly from SAS® software.</p></li>
+<li><p><strong>User-defined format</strong>: The <strong>fmtr</strong> package also improves on the native R formatting capabilities by introducing the concept of a <em>user-defined format</em>. A user-defined format is an expression-driven lookup. You can define a set of logical expressions that, when true, will return a corresponding lookup value. The implementation of the user-defined format is similar to a SAS® user-defined format.</p></li>
+<li><p><strong>The formatting list</strong>: For complicated formats that require more than one function, the <strong>fmtr</strong> package also introduces the concept of a <em>formatting list</em>. A formatting list can perform operations that are difficult to accomplish otherwise.</p></li>
 <li><p><strong>Helper and Convenience functions</strong>: Finally, the <strong>fmtr</strong> package contains a set of functions to help you with common formatting tasks. For instance, it has functions to assist in assigning formatting attributes to an entire data frame. It also has some ready-made functions to perform very common types of statistical formatting.</p></li>
 </ol>
 <p>All together, the above capabilities make formatting with the <strong>fmtr</strong> package both simpler and more powerful. The reuse features also make R more suitable to team programming.</p>
@@ -150,12 +150,18 @@
 <a href="#getting-help" class="anchor"></a>Getting Help</h3>
 <p>If you need help with the <strong>fmtr</strong> package, the best place to turn to is the <a href="http://fmtr.r-sassy.org">fmtr</a> web site. This web site offers many examples, and full documentation on every function.</p>
 <p>If you need additional help, please turn to <a href="https://stackoverflow.com">stackoverflow.com</a>. The stackoverflow community will be very willing to answer your questions.</p>
+<p>If you want to look at the code for the <strong>fmtr</strong> package, visit the github page <a href="https://github.com/dbosak01/fmtr">here</a>.</p>
 <p>If you encounter a bug or have a feature request, please submit your issue <a href="https://github.com/dbosak01/fmtr/issues">here</a></p>
 </div>
 <div id="next-steps" class="section level3">
 <h3 class="hasAnchor">
 <a href="#next-steps" class="anchor"></a>Next Steps</h3>
 <p>Next, you should read the <a href="http://fmtr.r-sassy.org/articles/fmtr.html">Get started</a> page, and look at some examples. These examples will demonstrate the extraordinary usefulness of the formatting functions, and give you many ideas on how and where to use the <strong>fmtr</strong> package.</p>
+</div>
+<div id="see-also" class="section level3">
+<h3 class="hasAnchor">
+<a href="#see-also" class="anchor"></a>See Also</h3>
+<p>The <strong>fmtr</strong> package is part of the <strong>sassy</strong> meta-package. The <strong>sassy</strong> meta-package includes several packages that help make R easier for SAS programmers. You can read more about the <strong>sassy</strong> package <a href="http://sassy.r-sassy.org">here</a></p>
 </div>
 </div>
 
