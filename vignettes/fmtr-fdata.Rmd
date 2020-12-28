@@ -72,3 +72,4 @@ date, etc. Internally, the `fdata()` function is using the `fapply()`
 function on each column in the data frame.  If there is no format assigned
 to a column, that column is returned unaltered.
 
+Next: [Format Apply Function](fmtr-fapply.html)

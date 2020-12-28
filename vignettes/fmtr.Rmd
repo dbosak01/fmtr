@@ -321,9 +321,9 @@ applied as needed to your data.
 For additional reinforcement of the topics presented above, please read the 
 following articles:
 
-* [Format Data Function](https://fmtr.r-sassy.org/articles/fmtr-fdata.html)
-* [Format Apply Function](https://fmtr.r-sassy.org/articles/fmtr-fapply.html)
-* [Format Catalogs](https://fmtr.r-sassy.org/articles/fmtr-fcat.html)
-* [Convenience Functions](https://fmtr.r-sassy.org/articles/fmtr-convenience.html)
-* [Helper Functions](https://fmtr.r-sassy.org/articles/fmtr-helpers.html)
+* [Format Data Function](fmtr-fdata.html)
+* [Format Apply Function](fmtr-fapply.html)
+* [Format Catalogs](fmtr-fcat.html)
+* [Convenience Functions](fmtr-convenience.html)
+* [Helper Functions](fmtr-helpers.html)
 

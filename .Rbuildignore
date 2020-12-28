@@ -4,3 +4,6 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^logo\.png$
+^doc$
+^Meta$

@@ -44,3 +44,5 @@ dat
 write.fcat(c1, tempdir())
 
 ```
+
+Next: [Convenience Functions](fmtr-convenience.html)
