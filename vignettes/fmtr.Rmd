@@ -43,7 +43,7 @@ this summary on the `FormattingStrings()` page.
 The simplest way to introduce the **fmtr** package is to examine the use of
 the `fapply()` function.  
 
-```
+```{r eval=FALSE, echo=TRUE}
 library(fmtr)
 
 # Create sample data vector
@@ -61,7 +61,7 @@ Note that the format parameter can also be assigned as an attribute on
 the vector.  The `fapply()` function will then pick up the format attribute,
 and apply it to the input vector.  The result is the same:
 
-```
+```{r eval=FALSE, echo=TRUE}
 library(fmtr)
 
 # Create sample data vector
@@ -81,7 +81,7 @@ to control the width and alignment of the data in the vector.  If the
 width parameter is larger than the width of the data, the value will be 
 padded with spaces.  Here is an example:
 
-```
+```{r eval=FALSE, echo=TRUE}
 library(fmtr)
 
 # Create sample data vector
@@ -101,7 +101,7 @@ To help simplify assignment of these attributes, the **fmtr** package
 includes the `fattr()` function, which allows you to set all the above
 attributes in one function call.  Here is an example using the `fattr()`
 function, that ends with the same result as the example above.
-```
+```{r eval=FALSE, echo=TRUE}
 library(fmtr)
 
 # Create sample data vector
@@ -121,7 +121,7 @@ accepts date formats, a lookup list, a user-defined format,
 a vectorized function, and a formatting list.  
 
 Here is an example showing the use of a lookup list:
-```
+```{r eval=FALSE, echo=TRUE}
 library(fmtr)
 
 # Create sample data vector
@@ -151,7 +151,7 @@ The expression determines which label is assigned.  For the expression,
 you can use logical operators like "&" and "|", and relational operators
 like ">" and "<".  The data value is identified with a variable "x". Here is
 an example:
-```
+```{r eval=FALSE, echo=TRUE}
 library(fmtr)
 
 # Create sample data vector
@@ -256,7 +256,7 @@ In this case, the name of the format is a generic format name.  It does not
 have to correspond to a column name.  You may name the formats anything 
 you want.  The formats can be accessed in the catalog using dollar sign ("$")
 list notation.
-```
+```{r eval=FALSE, echo=TRUE}
 library(fmtr)
 
 # Construct data frame from state vectors

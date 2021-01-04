@@ -136,65 +136,70 @@
 <h4 class="hasAnchor">
 <a href="#the-fapply-function" class="anchor"></a>The <code>fapply()</code> Function</h4>
 <p>The simplest way to introduce the <strong>fmtr</strong> package is to examine the use of the <code><a href="../reference/fapply.html">fapply()</a></code> function.</p>
-<pre><code><a href="https://github.com/dbosak01/fmtr">library(fmtr)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbosak01/fmtr">fmtr</a></span><span class="op">)</span>
 
-# Create sample data vector
-v1 &lt;- c(1.483, 5.29837, 7.9472, 8.684021)
+<span class="co"># Create sample data vector</span>
+<span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.483</span>, <span class="fl">5.29837</span>, <span class="fl">7.9472</span>, <span class="fl">8.684021</span><span class="op">)</span>
 
-# Apply format
-fapply(v1, "%1.1f")
-# [1] "1.5" "5.3" "7.9" "8.7"</a></code></pre>
+<span class="co"># Apply format</span>
+<span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="va">v1</span>, <span class="st">"%1.1f"</span><span class="op">)</span>
+<span class="co"># [1] "1.5" "5.3" "7.9" "8.7"</span></code></pre></div>
 <p>As you can see from the above example, the <code><a href="../reference/fapply.html">fapply()</a></code> function typically takes two parameters: a vector and a format. In this way, the <code><a href="../reference/fapply.html">fapply()</a></code> acts very much like a SAS® <code>put</code> function.</p>
 <p>Note that the format parameter can also be assigned as an attribute on the vector. The <code><a href="../reference/fapply.html">fapply()</a></code> function will then pick up the format attribute, and apply it to the input vector. The result is the same:</p>
-<pre><code><a href="https://github.com/dbosak01/fmtr">library(fmtr)
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbosak01/fmtr">fmtr</a></span><span class="op">)</span>
 
-# Create sample data vector
-v1 &lt;- c(1.483, 5.29837, 7.9472, 8.684021)
+<span class="co"># Create sample data vector</span>
+<span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.483</span>, <span class="fl">5.29837</span>, <span class="fl">7.9472</span>, <span class="fl">8.684021</span><span class="op">)</span>
 
-# Assign format attribute
-attr(v1, "format") &lt;- "%1.1f"
+<span class="co"># Assign format attribute</span>
+<span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">v1</span>, <span class="st">"format"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"%1.1f"</span>
 
-# Apply format
-fapply(v1)
-# [1] "1.5" "5.3" "7.9" "8.7"</a></code></pre>
+<span class="co"># Apply format</span>
+<span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="va">v1</span><span class="op">)</span>
+<span class="co"># [1] "1.5" "5.3" "7.9" "8.7"</span></code></pre></div>
 <p>Besides the format attribute, the <code><a href="../reference/fapply.html">fapply()</a></code> function will also recognize attributes for <code>width</code> and <code>justify</code>. These parameters allow to you to control the width and alignment of the data in the vector. If the width parameter is larger than the width of the data, the value will be padded with spaces. Here is an example:</p>
-<pre><code><a href="https://github.com/dbosak01/fmtr">library(fmtr)
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbosak01/fmtr">fmtr</a></span><span class="op">)</span>
 
-# Create sample data vector
-v1 &lt;- c(1.483, 5.29837, 7.9472, 8.684021)
+<span class="co"># Create sample data vector</span>
+<span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.483</span>, <span class="fl">5.29837</span>, <span class="fl">7.9472</span>, <span class="fl">8.684021</span><span class="op">)</span>
 
-# Assign formatting attributes
-attr(v1, "format") &lt;- "%1.1f"
-attr(v1, "width") &lt;- 5
-attr(v1, "justify") &lt;- "right"
+<span class="co"># Assign formatting attributes</span>
+<span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">v1</span>, <span class="st">"format"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"%1.1f"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">v1</span>, <span class="st">"width"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">5</span>
+<span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">v1</span>, <span class="st">"justify"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="st">"right"</span>
 
-# Apply formatting attributes
-fapply(v1)
-# [1] "  1.5" "  5.3" "  7.9" "  8.7"</a></code></pre>
+<span class="co"># Apply formatting attributes</span>
+<span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="va">v1</span><span class="op">)</span>
+<span class="co"># [1] "  1.5" "  5.3" "  7.9" "  8.7"</span></code></pre></div>
 <p>To help simplify assignment of these attributes, the <strong>fmtr</strong> package includes the <code><a href="../reference/fattr.html">fattr()</a></code> function, which allows you to set all the above attributes in one function call. Here is an example using the <code><a href="../reference/fattr.html">fattr()</a></code> function, that ends with the same result as the example above.</p>
-<pre><code><a href="https://github.com/dbosak01/fmtr">library(fmtr)
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbosak01/fmtr">fmtr</a></span><span class="op">)</span>
 
-# Create sample data vector
-v1 &lt;- c(1.483, 5.29837, 7.9472, 8.684021)
+<span class="co"># Create sample data vector</span>
+<span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.483</span>, <span class="fl">5.29837</span>, <span class="fl">7.9472</span>, <span class="fl">8.684021</span><span class="op">)</span>
 
-# Assign formatting attributes
-v1 &lt;- fattr(v1, format = "%1.1f", width = 5, justify = "right")
+<span class="co"># Assign formatting attributes</span>
+<span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fattr.html">fattr</a></span><span class="op">(</span><span class="va">v1</span>, format <span class="op">=</span> <span class="st">"%1.1f"</span>, width <span class="op">=</span> <span class="fl">5</span>, justify <span class="op">=</span> <span class="st">"right"</span><span class="op">)</span>
 
-# Apply formatting attributes
-fapply(v1)
-# [1] "  1.5" "  5.3" "  7.9" "  8.7"</a></code></pre>
+<span class="co"># Apply formatting attributes</span>
+<span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="va">v1</span><span class="op">)</span>
+<span class="co"># [1] "  1.5" "  5.3" "  7.9" "  8.7"</span></code></pre></div>
 <p>Note that <code><a href="../reference/fapply.html">fapply()</a></code> can accept several different types of formats. The examples above focus on a simple numeric format. But <code><a href="../reference/fapply.html">fapply()</a></code> also accepts date formats, a lookup list, a user-defined format, a vectorized function, and a formatting list.</p>
 <p>Here is an example showing the use of a lookup list:</p>
-<pre><code><a href="https://github.com/dbosak01/fmtr">library(fmtr)
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbosak01/fmtr">fmtr</a></span><span class="op">)</span>
 
-# Create sample data vector
-v1 &lt;- c("A", "B", "A", "C", "B")
+<span class="co"># Create sample data vector</span>
+<span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"B"</span><span class="op">)</span>
 
-# Create lookup vector
-v2 &lt;- c(A = "Group A", B = "Group B", C = "Group C")
+<span class="co"># Create lookup vector</span>
+<span class="va">v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>A <span class="op">=</span> <span class="st">"Group A"</span>, B <span class="op">=</span> <span class="st">"Group B"</span>, C <span class="op">=</span> <span class="st">"Group C"</span><span class="op">)</span>
 
-fapply(v1, v2)
-# [1] "Group A" "Group B" "Group A" "Group C" "Group B"</a></code></pre>
+<span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="va">v1</span>, <span class="va">v2</span><span class="op">)</span>
+<span class="co"># [1] "Group A" "Group B" "Group A" "Group C" "Group B"</span></code></pre></div>
 </div>
 <div id="a-user-defined-format" class="section level4">
 <h4 class="hasAnchor">
@@ -202,18 +207,19 @@ fapply(v1, v2)
 <p>The weakness with using a named vector as a lookup list, as in the above example, is that it will fail if there are any NA values in the data. Additionally, there is no capability to include any sort of logic in the lookup.</p>
 <p>For these reasons, the <strong>fmtr</strong> package provides a <em>user-defined format</em>. This concept was taken directly from SAS® software. The functions that create a user-defined format are <code><a href="../reference/value.html">value()</a></code> and <code><a href="../reference/condition.html">condition()</a></code>.</p>
 <p>A condition accepts an expression and a label. The expression determines which label is assigned. For the expression, you can use logical operators like “&amp;” and “|”, and relational operators like “&gt;” and “&lt;”. The data value is identified with a variable “x”. Here is an example:</p>
-<pre><code><a href="https://github.com/dbosak01/fmtr">library(fmtr)
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbosak01/fmtr">fmtr</a></span><span class="op">)</span>
 
-# Create sample data vector
-v1 &lt;- c("A", "B", "E", "A", NA, "C", "D")
+<span class="co"># Create sample data vector</span>
+<span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"E"</span>, <span class="st">"A"</span>, <span class="cn">NA</span>, <span class="st">"C"</span>, <span class="st">"D"</span><span class="op">)</span>
 
-u1 &lt;- value(condition(x == "A", "Group A"),
-            condition(x == "B", "Group B"),
-            condition(x == "C" | x == "D", "Group C/D"), 
-            condition(TRUE, "Other"))
+<span class="va">u1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/value.html">value</a></span><span class="op">(</span><span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"A"</span>, <span class="st">"Group A"</span><span class="op">)</span>,
+            <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"B"</span>, <span class="st">"Group B"</span><span class="op">)</span>,
+            <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"C"</span> <span class="op">|</span> <span class="va">x</span> <span class="op">==</span> <span class="st">"D"</span>, <span class="st">"Group C/D"</span><span class="op">)</span>, 
+            <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"Other"</span><span class="op">)</span><span class="op">)</span>
             
-fapply(v1, u1)  
-# [1] "Group A" "Group B" "Other" "Group A" "Other" "Group C/D" "Group C/D"</a></code></pre>
+<span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="va">v1</span>, <span class="va">u1</span><span class="op">)</span>  
+<span class="co"># [1] "Group A" "Group B" "Other" "Group A" "Other" "Group C/D" "Group C/D"</span></code></pre></div>
 <p>Notice that the user-defined format gives you much more capabilities than a simple lookup vector. It allows you to perform categorization, and assign a default. Additionally, the NA missing value does not crash the function. The NA simply falls into the default category. If there is no default category, any values which do not correspond to a category will fall through the format unaltered.</p>
 </div>
 <div id="the-fdata-function" class="section level4">
@@ -274,58 +280,58 @@ fapply(v1, u1)
 <p>One of the benefits of the above method of formatting is that the data frame attributes can be stored with the data frame, and reapplied in the future. But what if you want to apply the same set of formats to a different data frame?</p>
 <p>That is where you need a <em>format catalog</em>.</p>
 <p>The format catalog is a collection of formats that can be saved and reused. A format catalog is created with an <code><a href="../reference/fcat.html">fcat()</a></code> function. To create a format catalog, you call the <code><a href="../reference/fcat.html">fcat()</a></code> function, passing a set of name/format pairs. In this case, the name of the format is a generic format name. It does not have to correspond to a column name. You may name the formats anything you want. The formats can be accessed in the catalog using dollar sign (“$”) list notation.</p>
-<pre><code><a href="https://github.com/dbosak01/fmtr">library(fmtr)
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbosak01/fmtr">fmtr</a></span><span class="op">)</span>
 
-# Construct data frame from state vectors
-df &lt;- data.frame(state = state.abb, area = state.area)[1:10, ]
+<span class="co"># Construct data frame from state vectors</span>
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>state <span class="op">=</span> <span class="va">state.abb</span>, area <span class="op">=</span> <span class="va">state.area</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span>
 
-# Calculate percentages
-df$pct &lt;- df$area / sum(state.area) * 100
+<span class="co"># Calculate percentages</span>
+<span class="va">df</span><span class="op">$</span><span class="va">pct</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">area</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">state.area</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span>
 
-# Before formatting 
-df
-#    state   area         pct
-# 1     AL  51609  1.42629378
-# 2     AK 589757 16.29883824
-# 3     AZ 113909  3.14804973
-# 4     AR  53104  1.46761040
-# 5     CA 158693  4.38572418
-# 6     CO 104247  2.88102556
-# 7     CT   5009  0.13843139
-# 8     DE   2057  0.05684835
-# 9     FL  58560  1.61839532
-# 10    GA  58876  1.62712846
+<span class="co"># Before formatting </span>
+<span class="va">df</span>
+<span class="co">#    state   area         pct</span>
+<span class="co"># 1     AL  51609  1.42629378</span>
+<span class="co"># 2     AK 589757 16.29883824</span>
+<span class="co"># 3     AZ 113909  3.14804973</span>
+<span class="co"># 4     AR  53104  1.46761040</span>
+<span class="co"># 5     CA 158693  4.38572418</span>
+<span class="co"># 6     CO 104247  2.88102556</span>
+<span class="co"># 7     CT   5009  0.13843139</span>
+<span class="co"># 8     DE   2057  0.05684835</span>
+<span class="co"># 9     FL  58560  1.61839532</span>
+<span class="co"># 10    GA  58876  1.62712846</span>
 
-# Create state name lookup list
-name_lookup &lt;- state.name
-names(name_lookup) &lt;- state.abb
+<span class="co"># Create state name lookup list</span>
+<span class="va">name_lookup</span> <span class="op">&lt;-</span> <span class="va">state.name</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">name_lookup</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">state.abb</span>
 
-# Assign formats to format catalog
-cat1 &lt;- fcat(state = name_lookup,                         
-             area  = function(x) format(x, big.mark = ","), 
-             pct   = "%.1f%%") 
+<span class="co"># Assign formats to format catalog</span>
+<span class="va">cat1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fcat.html">fcat</a></span><span class="op">(</span>state <span class="op">=</span> <span class="va">name_lookup</span>,                         
+             area  <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">x</span>, big.mark <span class="op">=</span> <span class="st">","</span><span class="op">)</span>, 
+             pct   <span class="op">=</span> <span class="st">"%.1f%%"</span><span class="op">)</span> 
              
-# Apply a format from the catalog using fapply
-fapply(df$pct, cat1$pct)
-# [1] "1.4%"  "16.3%" "3.1%"  "1.5%"  "4.4%"  "2.9%"  "0.1%"  "0.1%"  "1.6%"  "1.6%"
+<span class="co"># Apply a format from the catalog using fapply</span>
+<span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">pct</span>, <span class="va">cat1</span><span class="op">$</span><span class="va">pct</span><span class="op">)</span>
+<span class="co"># [1] "1.4%"  "16.3%" "3.1%"  "1.5%"  "4.4%"  "2.9%"  "0.1%"  "0.1%"  "1.6%"  "1.6%"</span>
 
-# Assign formats from the catalog to format attributes
-formats(df) &lt;- cat1
+<span class="co"># Assign formats from the catalog to format attributes</span>
+<span class="fu"><a href="../reference/formats.html">formats</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">cat1</span>
 
-# Apply formats
-fdata(df)
-#          state    area   pct
-# 1      Alabama  51,609  1.4%
-# 2       Alaska 589,757 16.3%
-# 3      Arizona 113,909  3.1%
-# 4     Arkansas  53,104  1.5%
-# 5   California 158,693  4.4%
-# 6     Colorado 104,247  2.9%
-# 7  Connecticut   5,009  0.1%
-# 8     Delaware   2,057  0.1%
-# 9      Florida  58,560  1.6%
-# 10     Georgia  58,876  1.6%
-</a></code></pre>
+<span class="co"># Apply formats</span>
+<span class="fu"><a href="../reference/fdata.html">fdata</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
+<span class="co">#          state    area   pct</span>
+<span class="co"># 1      Alabama  51,609  1.4%</span>
+<span class="co"># 2       Alaska 589,757 16.3%</span>
+<span class="co"># 3      Arizona 113,909  3.1%</span>
+<span class="co"># 4     Arkansas  53,104  1.5%</span>
+<span class="co"># 5   California 158,693  4.4%</span>
+<span class="co"># 6     Colorado 104,247  2.9%</span>
+<span class="co"># 7  Connecticut   5,009  0.1%</span>
+<span class="co"># 8     Delaware   2,057  0.1%</span>
+<span class="co"># 9      Florida  58,560  1.6%</span>
+<span class="co"># 10     Georgia  58,876  1.6%</span></code></pre></div>
 <p>In normal use, of course, the format catalog would likely be created in a separate script and saved to a file using the <code><a href="../reference/write.fcat.html">write.fcat()</a></code> function. The format catalog can then be read by any number of programs using the <code><a href="../reference/read.fcat.html">read.fcat()</a></code> function, and the formats in the catalog can be applied as needed to your data.</p>
 </div>
 </div>

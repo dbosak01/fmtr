@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 ### The `formats()` function
 The formats associated with a data frame can be easily extracted or 
 assigned with the `formats()` function.  This function returns or accepts 
-a named list of formatting objects.  The names of the list items  
+a named list of formatting objects.  The names of the list items 
 correspond to the names of the columns in the data frame.  This function is
 useful when you want to assign formats to many columns.
 
