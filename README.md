@@ -90,7 +90,7 @@ Then put the following line at the top of your script:
 The **fmtr** package will then be loaded, and available for use in your project.
 
 For examples and usage information, please visit the **fmtr**
-documentation site [here](http://fmtr.r-sassy.org/articles/fmtr.html).
+documentation site [here](https://fmtr.r-sassy.org/articles/fmtr.html).
 These examples will demonstrate the 
 extraordinary usefulness of the formatting functions, and give you many ideas
 on how and where to use the **fmtr** package.
@@ -98,7 +98,7 @@ on how and where to use the **fmtr** package.
 ### Getting Help
 
 If you need help with the **fmtr** package, the best place 
-to turn to is the [fmtr](http://fmtr.r-sassy.org) web site. 
+to turn to is the [fmtr](https://fmtr.r-sassy.org) web site. 
 This web site offers many examples, and full
 documentation on every function.  
 
@@ -117,5 +117,5 @@ issue [here](https://github.com/dbosak01/fmtr/issues)
 The **fmtr** package is part of the **sassy** meta-package. 
 The **sassy** meta-package includes several packages that help make R
 easier for SAS® programmers.  You can read more about the **sassy** package
-[here](http://sassy.r-sassy.org).
+[here](https://sassy.r-sassy.org).
 
