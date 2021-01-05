@@ -1,4 +1,4 @@
-# fmtr 1.4.0
+# fmtr 1.4.1
 
 * Added descriptions() attribute assignment functions
 * Modified fattr() functions to include description attribute

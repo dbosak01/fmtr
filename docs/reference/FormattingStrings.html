@@ -82,7 +82,7 @@ functions. See below for further details." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.1</span>
       </span>
     </div>
 
@@ -207,11 +207,11 @@ examples of formatting other data types.</p>
     <pre class="examples"><div class='input'><span class='co'># Examples for formatting dates and times </span>
 <span class='va'>t</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='va'>t</span>, <span class='st'>"%d/%m/%Y"</span><span class='op'>)</span>              <span class='co'># Day/Month/Year</span>
-</div><div class='output co'>#&gt; [1] "24/12/2020"</div><div class='input'><span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='va'>t</span>, <span class='st'>"%d%b%Y"</span><span class='op'>)</span>                <span class='co'># Day abbreviated month year</span>
-</div><div class='output co'>#&gt; [1] "24Dec2020"</div><div class='input'><span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='va'>t</span>, <span class='st'>"%y-%m"</span><span class='op'>)</span>                 <span class='co'># Two digit year - month</span>
-</div><div class='output co'>#&gt; [1] "20-12"</div><div class='input'><span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='va'>t</span>, <span class='st'>"%A, %B %d"</span><span class='op'>)</span>             <span class='co'># Weekday, unabbreviated month and date</span>
-</div><div class='output co'>#&gt; [1] "Thursday, December 24"</div><div class='input'><span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='va'>t</span>, <span class='st'>"%Y-%m%-%d %H:%M:%S %p"</span><span class='op'>)</span> <span class='co'># Common timestamp format</span>
-</div><div class='output co'>#&gt; [1] "2020-12-24 12:28:21 PM"</div><div class='input'>
+</div><div class='output co'>#&gt; [1] "05/01/2021"</div><div class='input'><span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='va'>t</span>, <span class='st'>"%d%b%Y"</span><span class='op'>)</span>                <span class='co'># Day abbreviated month year</span>
+</div><div class='output co'>#&gt; [1] "05Jan2021"</div><div class='input'><span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='va'>t</span>, <span class='st'>"%y-%m"</span><span class='op'>)</span>                 <span class='co'># Two digit year - month</span>
+</div><div class='output co'>#&gt; [1] "21-01"</div><div class='input'><span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='va'>t</span>, <span class='st'>"%A, %B %d"</span><span class='op'>)</span>             <span class='co'># Weekday, unabbreviated month and date</span>
+</div><div class='output co'>#&gt; [1] "Tuesday, January 05"</div><div class='input'><span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='va'>t</span>, <span class='st'>"%Y-%m%-%d %H:%M:%S %p"</span><span class='op'>)</span> <span class='co'># Common timestamp format</span>
+</div><div class='output co'>#&gt; [1] "2021-01-05 00:12:48 AM"</div><div class='input'>
 <span class='co'># Examples for formatting numbers</span>
 <span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fl'>1234.56789</span>
 <span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='va'>a</span>, <span class='st'>"%f"</span><span class='op'>)</span>                    <span class='co'># Floating point number</span>

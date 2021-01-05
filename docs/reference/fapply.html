@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.1</span>
       </span>
     </div>
 
@@ -293,20 +293,20 @@ and <code><a href='flist.html'>flist</a></code> to define a formatting list.  Al
 
 <span class='co'># Apply formatting list to vector</span>
 <span class='fu'>fapply</span><span class='op'>(</span><span class='va'>v3</span>, <span class='va'>lst</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "2,841.3"   "High"      "24Dec2020" "Low"       "22Feb2021" "1,382.9"  </div><div class='input'>
+</div><div class='output co'>#&gt; [1] "2,841.3"   "High"      "05Jan2021" "Low"       "06Mar2021" "1,382.9"  </div><div class='input'>
 
 <span class='co'>## Example 6: Formatting List - Column Type ##</span>
 <span class='co'># Set up data</span>
 <span class='va'>v5</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fl'>30</span>, <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> <span class='fl'>60</span><span class='op'>)</span>
 <span class='va'>v5</span>
-</div><div class='output co'>#&gt; [1] "2020-12-24" "2021-01-23" "2021-02-22"</div><div class='input'>
+</div><div class='output co'>#&gt; [1] "2021-01-05" "2021-02-04" "2021-03-06"</div><div class='input'>
 <span class='co'># Create formatting list</span>
 <span class='va'>lst</span> <span class='op'>&lt;-</span> <span class='fu'><a href='flist.html'>flist</a></span><span class='op'>(</span><span class='st'>"%B"</span>, <span class='st'>"This month is: %s"</span>, type <span class='op'>=</span> <span class='st'>"column"</span><span class='op'>)</span>
 
 <span class='co'># Apply formatting list to vector</span>
 <span class='fu'>fapply</span><span class='op'>(</span><span class='va'>v5</span>, <span class='va'>lst</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "This month is: December" "This month is: January" 
-#&gt; [3] "This month is: February"</div></pre>
+</div><div class='output co'>#&gt; [1] "This month is: January"  "This month is: February"
+#&gt; [3] "This month is: March"   </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
