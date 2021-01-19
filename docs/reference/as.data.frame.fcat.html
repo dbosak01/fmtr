@@ -210,7 +210,7 @@ catalog.</p>
 <code><a href='write.fcat.html'>write.fcat</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Create a format catalog</span>
+    <pre class="examples"><span class='co'># Create a format catalog</span>
 <span class='va'>c1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='fcat.html'>fcat</a></span><span class='op'>(</span>num_fmt  <span class='op'>=</span> <span class='st'>"%.1f"</span>,
            label_fmt <span class='op'>=</span> <span class='fu'><a href='value.html'>value</a></span><span class='op'>(</span><span class='fu'><a href='condition.html'>condition</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>==</span> <span class='st'>"A"</span>, <span class='st'>"Label A"</span><span class='op'>)</span>,
                              <span class='fu'><a href='condition.html'>condition</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>==</span> <span class='st'>"B"</span>, <span class='st'>"Label B"</span><span class='op'>)</span>,
@@ -220,12 +220,7 @@ catalog.</p>
 <span class='co'># Convert catalog to data frame to view the structure</span>
 <span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>c1</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;        Name Type Expression   Label Order
-#&gt; 1   num_fmt    S       %.1f            NA
-#&gt; 2 label_fmt    U   x == "A" Label A    NA
-#&gt; 3 label_fmt    U   x == "B" Label B    NA
-#&gt; 4 label_fmt    U       TRUE   Other    NA
-#&gt; 5  date_fmt    S     %d%b%Y            NA</div><div class='input'>
+
 <span class='co'>#       Name Type Expression   Label Order</span>
 <span class='co'># 1   num_fmt    S       %.1f            NA</span>
 <span class='co'># 2 label_fmt    U   x == "A" Label A    NA</span>
@@ -235,7 +230,7 @@ catalog.</p>
 
 <span class='co'># Convert data frame back to a format catalog</span>
 <span class='va'>c2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='as.fcat.html'>as.fcat</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span>
-</div></pre>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
