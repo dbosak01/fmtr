@@ -1,3 +1,8 @@
+# fmtr 1.5.0
+
+* Added labels.data.frame() function to assign label attributes of a data frame
+* Small documentation fixes
+
 # fmtr 1.4.1
 
 * Added descriptions() attribute assignment functions

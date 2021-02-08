@@ -61,6 +61,7 @@ reference:
   - descriptions
   - widths
   - justification
+  - labels.data.frame
 - title: Helper Functions
   desc: Functions to perform common formatting tasks on statistica reports.
   contents:

@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.0</span>
       </span>
     </div>
 
@@ -101,7 +101,7 @@
 
       
 
-      </header><script src="fmtr_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="fmtr_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>fmtr</h1>
@@ -137,7 +137,7 @@
 <a href="#the-fapply-function" class="anchor"></a>The <code>fapply()</code> Function</h4>
 <p>The simplest way to introduce the <strong>fmtr</strong> package is to examine the use of the <code><a href="../reference/fapply.html">fapply()</a></code> function.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbosak01/fmtr">fmtr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fmtr.r-sassy.org">fmtr</a></span><span class="op">)</span>
 
 <span class="co"># Create sample data vector</span>
 <span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.483</span>, <span class="fl">5.29837</span>, <span class="fl">7.9472</span>, <span class="fl">8.684021</span><span class="op">)</span>
@@ -148,7 +148,7 @@
 <p>As you can see from the above example, the <code><a href="../reference/fapply.html">fapply()</a></code> function typically takes two parameters: a vector and a format. In this way, the <code><a href="../reference/fapply.html">fapply()</a></code> acts very much like a SAS® <code>put</code> function.</p>
 <p>Note that the format parameter can also be assigned as an attribute on the vector. The <code><a href="../reference/fapply.html">fapply()</a></code> function will then pick up the format attribute, and apply it to the input vector. The result is the same:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbosak01/fmtr">fmtr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fmtr.r-sassy.org">fmtr</a></span><span class="op">)</span>
 
 <span class="co"># Create sample data vector</span>
 <span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.483</span>, <span class="fl">5.29837</span>, <span class="fl">7.9472</span>, <span class="fl">8.684021</span><span class="op">)</span>
@@ -161,7 +161,7 @@
 <span class="co"># [1] "1.5" "5.3" "7.9" "8.7"</span></code></pre></div>
 <p>Besides the format attribute, the <code><a href="../reference/fapply.html">fapply()</a></code> function will also recognize attributes for <code>width</code> and <code>justify</code>. These parameters allow to you to control the width and alignment of the data in the vector. If the width parameter is larger than the width of the data, the value will be padded with spaces. Here is an example:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbosak01/fmtr">fmtr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fmtr.r-sassy.org">fmtr</a></span><span class="op">)</span>
 
 <span class="co"># Create sample data vector</span>
 <span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.483</span>, <span class="fl">5.29837</span>, <span class="fl">7.9472</span>, <span class="fl">8.684021</span><span class="op">)</span>
@@ -176,7 +176,7 @@
 <span class="co"># [1] "  1.5" "  5.3" "  7.9" "  8.7"</span></code></pre></div>
 <p>To help simplify assignment of these attributes, the <strong>fmtr</strong> package includes the <code><a href="../reference/fattr.html">fattr()</a></code> function, which allows you to set all the above attributes in one function call. Here is an example using the <code><a href="../reference/fattr.html">fattr()</a></code> function, that ends with the same result as the example above.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbosak01/fmtr">fmtr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fmtr.r-sassy.org">fmtr</a></span><span class="op">)</span>
 
 <span class="co"># Create sample data vector</span>
 <span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.483</span>, <span class="fl">5.29837</span>, <span class="fl">7.9472</span>, <span class="fl">8.684021</span><span class="op">)</span>
@@ -190,7 +190,7 @@
 <p>Note that <code><a href="../reference/fapply.html">fapply()</a></code> can accept several different types of formats. The examples above focus on a simple numeric format. But <code><a href="../reference/fapply.html">fapply()</a></code> also accepts date formats, a lookup list, a user-defined format, a vectorized function, and a formatting list.</p>
 <p>Here is an example showing the use of a lookup list:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbosak01/fmtr">fmtr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fmtr.r-sassy.org">fmtr</a></span><span class="op">)</span>
 
 <span class="co"># Create sample data vector</span>
 <span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"B"</span><span class="op">)</span>
@@ -208,7 +208,7 @@
 <p>For these reasons, the <strong>fmtr</strong> package provides a <em>user-defined format</em>. This concept was taken directly from SAS® software. The functions that create a user-defined format are <code><a href="../reference/value.html">value()</a></code> and <code><a href="../reference/condition.html">condition()</a></code>.</p>
 <p>A condition accepts an expression and a label. The expression determines which label is assigned. For the expression, you can use logical operators like “&amp;” and “|”, and relational operators like “&gt;” and “&lt;”. The data value is identified with a variable “x”. Here is an example:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbosak01/fmtr">fmtr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fmtr.r-sassy.org">fmtr</a></span><span class="op">)</span>
 
 <span class="co"># Create sample data vector</span>
 <span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"E"</span>, <span class="st">"A"</span>, <span class="cn">NA</span>, <span class="st">"C"</span>, <span class="st">"D"</span><span class="op">)</span>
@@ -228,7 +228,7 @@
 <p>The <code><a href="../reference/fdata.html">fdata()</a></code> function works very much the same way as <code><a href="../reference/fapply.html">fapply()</a></code>, but with data frames and tibbles instead of vectors. In fact, under the hood, <code><a href="../reference/fdata.html">fdata()</a></code> is simply calling <code><a href="../reference/fapply.html">fapply()</a></code> for each column in the data frame.</p>
 <p>Like the <code><a href="../reference/fapply.html">fapply()</a></code> function, formatting may be assigned to data frame columns using the <strong>format</strong>, <strong>width</strong>, and <strong>justify</strong> attributes. Formatting is then applied by calling the <code><a href="../reference/fdata.html">fdata()</a></code> function, and passing the data frame as the first parameter. <code><a href="../reference/fdata.html">fdata()</a></code> will then return a new data frame with the specified formatting applied. This method of formatting provides much greater control than the base R <code><a href="https://rdrr.io/r/base/format.html">format()</a></code> function.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbosak01/fmtr">fmtr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fmtr.r-sassy.org">fmtr</a></span><span class="op">)</span>
 
 <span class="co"># Construct data frame from state vectors</span>
 <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>state <span class="op">=</span> <span class="va">state.abb</span>, area <span class="op">=</span> <span class="va">state.area</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span>
@@ -281,7 +281,7 @@
 <p>That is where you need a <em>format catalog</em>.</p>
 <p>The format catalog is a collection of formats that can be saved and reused. A format catalog is created with an <code><a href="../reference/fcat.html">fcat()</a></code> function. To create a format catalog, you call the <code><a href="../reference/fcat.html">fcat()</a></code> function, passing a set of name/format pairs. In this case, the name of the format is a generic format name. It does not have to correspond to a column name. You may name the formats anything you want. The formats can be accessed in the catalog using dollar sign (“$”) list notation.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dbosak01/fmtr">fmtr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fmtr.r-sassy.org">fmtr</a></span><span class="op">)</span>
 
 <span class="co"># Construct data frame from state vectors</span>
 <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>state <span class="op">=</span> <span class="va">state.abb</span>, area <span class="op">=</span> <span class="va">state.area</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span>

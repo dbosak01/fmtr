@@ -53,7 +53,7 @@ fdata(df1)
 widths(df1)
 }
 \seealso{
-\code{\link{format}} to display formatted data, 
+\code{\link{fdata}} to display formatted data, 
 \code{\link{value}} to create user-defined formats, and 
 \code{\link{fapply}} to apply formats to a vector.
 }

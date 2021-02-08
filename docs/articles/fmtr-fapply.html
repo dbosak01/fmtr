@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.0</span>
       </span>
     </div>
 
@@ -101,12 +101,12 @@
 
       
 
-      </header><script src="fmtr-fapply_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="fmtr-fapply_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Format Apply Function</h1>
             
-            <h4 class="date">2021-01-05</h4>
+            <h4 class="date">2021-02-08</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/dbosak01/fmtr/blob/master/vignettes/fmtr-fapply.Rmd"><code>vignettes/fmtr-fapply.Rmd</code></a></small>
       <div class="hidden name"><code>fmtr-fapply.Rmd</code></div>
@@ -150,11 +150,11 @@
 <h4 class="hasAnchor">
 <a href="#formatting-string" class="anchor"></a>Formatting String</h4>
 <p>The formatting functions accept formatting strings such as those associated with the Base R <code><a href="https://rdrr.io/r/base/format.html">format()</a></code> and <code><a href="https://rdrr.io/r/base/sprintf.html">sprintf()</a></code> functions. If the data type of the vector is a date or datetime, <code><a href="../reference/fapply.html">fapply()</a></code> will use the format codes associated with the <code><a href="https://rdrr.io/r/base/format.html">format()</a></code> function. For other data types, <code><a href="../reference/fapply.html">fapply()</a></code> will use the format codes associated with <code>sprintf</code>. Here is an example:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>v1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.367</span>, <span class="fl">8.356</span>, <span class="fl">4.583</span>, <span class="fl">2.873</span>)</span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">fapply</span>(v1, <span class="st">"%.1f%%"</span>)</span>
-<span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a>[<span class="dv">1</span>] <span class="st">"1.4%"</span> <span class="st">"8.4%"</span> <span class="st">"4.6%"</span> <span class="st">"2.9%"</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.367</span>, <span class="fl">8.356</span>, <span class="fl">4.583</span>, <span class="fl">2.873</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fapply</span>(v1, <span class="st">"%.1f%%"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"1.4%"</span> <span class="st">"8.4%"</span> <span class="st">"4.6%"</span> <span class="st">"2.9%"</span></span></code></pre></div>
 </div>
 <div id="named-vectors" class="section level4">
 <h4 class="hasAnchor">

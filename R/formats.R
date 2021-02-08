@@ -47,7 +47,7 @@
 #' attr(df1$cyl, "format") <- function(x) format(x, nsmall = 1)
 #' 
 #' # Display formatted data
-#' format(df1)
+#' fdata(df1)
 #' 
 #' # Extract format list
 #' lst <- formats(df1)
@@ -59,7 +59,7 @@
 #' formats(df1) <-  lst
 #' 
 #' # Display formatted data
-#' format(df1)
+#' fdata(df1)
 formats <- function(x) {
   
   ret <- list()

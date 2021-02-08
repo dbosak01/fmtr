@@ -52,7 +52,7 @@ attr(df1$mpg, "format") <- value(condition(x >= 20, "High"),
 attr(df1$cyl, "format") <- function(x) format(x, nsmall = 1)
 
 # Display formatted data
-format(df1)
+fdata(df1)
 
 # Extract format list
 lst <- formats(df1)
@@ -64,7 +64,7 @@ lst$cyl <- function(x) format(x, nsmall = 2)
 formats(df1) <-  lst
 
 # Display formatted data
-format(df1)
+fdata(df1)
 }
 \seealso{
 \code{\link{fdata}} to display formatted data, 
