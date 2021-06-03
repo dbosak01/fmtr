@@ -197,7 +197,7 @@ as.data.frame.fmt <- function(x, row.names = NULL, optional = FALSE, ...,
   o <- c()
   
   for (cond in x) {
-    e[[length(e) + 1]] <- deparse1(cond$expression, collapse = " ")
+    e[[length(e) + 1]] <- paste(deparse(cond$expression), collapse = " ")
     l[[length(l) + 1]] <- cond$label
     o[[length(o) + 1]] <- ifelse(is.null(cond$order), NA, cond$order)
   }

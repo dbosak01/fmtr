@@ -275,7 +275,7 @@ as.data.frame.fcat <- function(x, row.names = NULL, optional = FALSE, ...) {
       } else {
         tmp[[nm]] <- data.frame(Name = nm, 
                                 Type = "V",
-                                Expression = deparse1(x[[nm]]),
+                                Expression = paste(deparse(x[[nm]]), collapse = " "),
                                 Label = "", 
                                 Order = NA)
       }
@@ -284,7 +284,7 @@ as.data.frame.fcat <- function(x, row.names = NULL, optional = FALSE, ...) {
       
       tmp[[nm]] <-  data.frame(Name = nm, 
                                Type = "F",
-                               Expression = deparse1(x[[nm]]),
+                               Expression = paste(deparse(x[[nm]]), collapse = " "),
                                Label = "", 
                                Order = NA)
         
