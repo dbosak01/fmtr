@@ -48,12 +48,22 @@ test_that("fapply() function works as expected with vectors.", {
   fapply(f, width = 10, justify = "left", format = "%.1f%%")
   fapply(d, width = 15, justify = "right", format = "%d%b%Y")
   
-  
-  
-  
 })
 
+test_that("fapply() function works as expected with vectors.", {
+  
+  
+  
+  d <- c("A", "B", "B", "UNK", "A")
+  f <- c("A"= "Abba", "B" = "Babba")
+  
+  # lookup(d, f)
+  # 
 
+  expect_equal(fapply(d, f), c("Abba", "Babba", "Babba", "UNK", "Abba"))
+  expect_equal(lookup(d, f), c("Abba", "Babba", "Babba", "UNK", "Abba"))
+  
+})
 
 test_that("fapply() function works as expected with flist", {
   

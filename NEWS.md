@@ -1,3 +1,9 @@
+# fmtr 1.5.1
+
+* Fixed bug when vector format has no corresponding input value.  Was assigning
+  an NA.  Now leaving the original value.
+* Added GitHub Actions for prior R version checks.
+
 # fmtr 1.5.0
 
 * Added labels.data.frame() function to assign label attributes of a data frame

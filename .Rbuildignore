@@ -7,3 +7,6 @@
 ^logo\.png$
 ^doc$
 ^Meta$
+^o$
+^dll$
+^\.github$

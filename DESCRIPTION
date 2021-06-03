@@ -1,7 +1,7 @@
 Package: fmtr
 Type: Package
 Title: Easily Apply Formats to Data  
-Version: 1.5.0
+Version: 1.5.1
 Author: David Bosak
 Maintainer: David Bosak <dbosak01@gmail.com>
 Description: Contains a set of functions that can be used to apply
@@ -13,7 +13,6 @@ Description: Contains a set of functions that can be used to apply
   to create a user-defined format, similar to a SAS® user-defined format.
 License: CC0
 Encoding: UTF-8
-LazyData: true
 URL: https://fmtr.r-sassy.org
 BugReports: https://github.com/dbosak01/fmtr/issues
 Depends: R (>= 4.0.0)
@@ -21,8 +20,12 @@ Suggests:
     testthat,
     knitr,
     rmarkdown
-Imports: tibble, 
-         stats, 
-         crayon
+Imports: 
+    tibble,
+    stats,
+    crayon,
+    Rcpp
 RoxygenNote: 7.1.1
 VignetteBuilder: knitr
+LinkingTo: 
+    Rcpp
