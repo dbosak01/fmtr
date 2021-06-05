@@ -35,7 +35,8 @@ test_that("as.data.frame.fcat() function works as expected", {
   
 
   dat <- as.data.frame(c1)
-  
+
+  print(dat)  
   
   expect_equal(nrow(dat), 9)
   expect_equal(dat[1, 1], "lblA")
