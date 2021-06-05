@@ -106,7 +106,7 @@ fdata <- function(x, ...) {
     # Restore any labels
     if (!is.null(attr(x[[nm]], "label"))) {
       attr(ret[[length(ret)]], "label") <- attr(x[[nm]], "label")
-      print(paste("Inside fdata:", attr(ret[[length(ret)]], "label")))
+      print(paste("Inside fdata1:", attr(ret[[length(ret)]], "label")))
     }
   }
   
@@ -115,6 +115,9 @@ fdata <- function(x, ...) {
   
   # Convert list to data frame
   ret <- as.data.frame(ret)
+  
+  if ("catc" %in% names(x)) 
+    print(paste("Inside fdata2:", attr(ret$catc, "label")))
   
   # Transfer any rownames to new data frame
   rownames(ret) <- rownames(x)
