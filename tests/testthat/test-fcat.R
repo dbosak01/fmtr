@@ -65,16 +65,16 @@ test_that("as.fcat.data.frame() function works as expected", {
   c2 <- as.fcat(dat)
   
   
-  print(c2$lblA)
-  print(fapply("B", c2$lblA))
+  print(c2[["lblA"]])
+  print(fapply("B", c2[["lblA"]]))
   
   expect_equal(length(c2), 5)
   expect_equal(c2[["lblC"]], "%d%b%Y")
   expect_equal(fapply("B", c2$lblA), "Label B")
   expect_equal(fapply("B", c2$lblB), "Other")
-  expect_equal(fapply(as.Date("2020-10-05"), c2$lblC), "05Oct2020")
-  expect_equal(fapply(1000, c2$lblD), "1,000")
-  expect_equal(fapply("B", c2$lblE), "Label B")
+  expect_equal(fapply(as.Date("2020-10-05"), c2[["lblC"]]), "05Oct2020")
+  expect_equal(fapply(1000, c2[["lblD"]]), "1,000")
+  expect_equal(fapply("B", c2[["lblE"]]), "Label B")
   
   
 })
@@ -130,9 +130,9 @@ test_that("fcat can be used for formatting vectors.", {
   res <- c("Label A", "Label B", "Other")
   
   
-  expect_equal(fapply(2, c1$num_fmt), "2.0")
-  expect_equal(fapply(c("A", "B", "C"), c1$label_fmt), res)
-  expect_equal(fapply(as.Date("2020-05-16"), c1$date_fmt), "16May2020")
+  expect_equal(fapply(2, c1[["num_fmt"]]), "2.0")
+  expect_equal(fapply(c("A", "B", "C"), c1[["label_fmt"]]), res)
+  expect_equal(fapply(as.Date("2020-05-16"), c1[["date_fmt"]]), "16May2020")
   
 })
 
