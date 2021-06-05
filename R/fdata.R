@@ -116,6 +116,16 @@ fdata <- function(x, ...) {
   # Convert list to data frame
   ret <- as.data.frame(ret)
   
+  # Restore names again as they are getting lost in R 3.6
+  for (nm in names(x)) {
+    
+    # Restore any labels
+    if (!is.null(attr(x[[nm]], "label"))) {
+      attr(ret[[nm]], "label") <- attr(x[[nm]], "label")
+      print(paste("Inside fdata3:", attr(ret[[nm]], "label")))
+    }
+  }
+  
   if ("catc" %in% names(x)) 
     print(paste("Inside fdata2:", attr(ret$catc, "label")))
   
