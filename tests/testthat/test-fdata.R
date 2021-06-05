@@ -126,6 +126,9 @@ test_that("fdata() function restores any labels.", {
   
   fmt_fb <- fdata(fb)
   
+  print(fmt_fb)
+  print(fmt_fb$catc)
+  print(attr(fmt_fb$catc, "label"))
   
   expect_equal(attr(fmt_fb$catc, "label"), "My Labels")
   
