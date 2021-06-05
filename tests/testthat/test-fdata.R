@@ -129,6 +129,9 @@ test_that("fdata() function restores any labels.", {
   print("Here I am in the fdata() check")
   print(fmt_fb)
   print(fmt_fb$catc)
+  
+  attr(fmt_fb$catn, "label") <- "My numeric label"
+  print(attr(fmt_fb$catn, "label"))
   print(attr(fmt_fb$catc, "label"))
   
   expect_equal(attr(fmt_fb$catc, "label"), "My Labels")
