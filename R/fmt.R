@@ -197,7 +197,7 @@ as.data.frame.fmt <- function(x, row.names = NULL, optional = FALSE, ...,
   o <- c()
   
   for (cond in x) {
-    e[[length(e) + 1]] <- deparse1(cond$expression, collapse = " ")
+    e[[length(e) + 1]] <- paste(deparse(cond$expression), collapse = " ")
     l[[length(l) + 1]] <- cond$label
     o[[length(o) + 1]] <- ifelse(is.null(cond$order), NA, cond$order)
   }
@@ -235,9 +235,9 @@ as.fmt.data.frame <- function(x) {
     
     y <- structure(list(), class = c("fmt_cnd"))    
     
-    y$expression <- str2lang(x[i, "Expression"])
-    y$label <- x[i, "Label"]
-    y$order <- x[i, "Order"]
+    y$expression <- str2lang(as.character(x[i, "Expression"]))
+    y$label <- as.character(x[i, "Label"])
+    y$order <- as.character(x[i, "Order"])
     
     
     ret[[length(ret) + 1]] <- y

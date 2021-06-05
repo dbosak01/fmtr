@@ -104,9 +104,9 @@ test_that("fdata() function works as expected with list of formats.", {
   ret
   
   
-  expect_equal(ret[[1, 2]], "1.3")
-  expect_equal(ret[[2, 2]], "High")
-  expect_equal(ret[[3, 2]], "20-06")
+  expect_equal(as.character(ret[1, 2]), "1.3")
+  expect_equal(as.character(ret[2, 2]), "High")
+  expect_equal(as.character(ret[3, 2]), "20-06")
 
 })
 
@@ -123,9 +123,17 @@ test_that("fdata() function restores any labels.", {
   
   attr(fb$catc, "format") <- c(A = "Label A", B = "Label B", C = "Other")
   
+  #print(is.null(attr(fb$catc, "label")))
   
   fmt_fb <- fdata(fb)
   
+  # print("Here I am in the fdata() check")
+  # print(fmt_fb)
+  # print(fmt_fb$catc)
+  # 
+  # attr(fmt_fb$catn, "label") <- "My numeric label"
+  # print(attr(fmt_fb$catn, "label"))
+  # print(attr(fmt_fb$catc, "label"))
   
   expect_equal(attr(fmt_fb$catc, "label"), "My Labels")
   

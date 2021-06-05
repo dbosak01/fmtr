@@ -3,7 +3,7 @@ using namespace Rcpp;
 
 
 // [[Rcpp::export]]
-CharacterVector lookup(CharacterVector x, CharacterVector lkp) {
+CharacterVector lkup(CharacterVector x, CharacterVector lkp) {
   
   CharacterVector ret = clone(x); 
   

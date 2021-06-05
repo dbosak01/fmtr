@@ -36,12 +36,11 @@ test_that("as.data.frame.fcat() function works as expected", {
 
   dat <- as.data.frame(c1)
   
-  
   expect_equal(nrow(dat), 9)
-  expect_equal(dat[1, 1], "lblA")
-  expect_equal(dat[4, 1], "lblB")
-  expect_equal(dat[7, 1], "lblC")
-  expect_equal(dat[7, 2], "S")
+  expect_equal(as.character(dat[1, 1]), "lblA")
+  expect_equal(as.character(dat[4, 1]), "lblB")
+  expect_equal(as.character(dat[7, 1]), "lblC")
+  expect_equal(as.character(dat[7, 2]), "S")
   
 })
 
@@ -66,13 +65,20 @@ test_that("as.fcat.data.frame() function works as expected", {
   c2 <- as.fcat(dat)
   
   
+  # print(c1$lblA)
+  # print(dat)
+  # print(c2)
+  # print(c2[["lblA"]])
+  # print(fapply("B", c2[["lblA"]]))
+  # print(c2[["lblC"]])
+  
   expect_equal(length(c2), 5)
   expect_equal(c2[["lblC"]], "%d%b%Y")
   expect_equal(fapply("B", c2$lblA), "Label B")
   expect_equal(fapply("B", c2$lblB), "Other")
-  expect_equal(fapply(as.Date("2020-10-05"), c2$lblC), "05Oct2020")
-  expect_equal(fapply(1000, c2$lblD), "1,000")
-  expect_equal(fapply("B", c2$lblE), "Label B")
+  expect_equal(fapply(as.Date("2020-10-05"), c2[["lblC"]]), "05Oct2020")
+  expect_equal(fapply(1000, c2[["lblD"]]), "1,000")
+  expect_equal(fapply("B", c2[["lblE"]]), "Label B")
   
   
 })
@@ -99,8 +105,8 @@ test_that("write.fcat and read.fcat functions work as expected.", {
 
   
   expect_equal(nrow(dat), 6)
-  expect_equal(dat[1, 1], "lblA")
-  expect_equal(dat[4, 1], "lblB")
+  expect_equal(as.character(dat[1, 1]), "lblA")
+  expect_equal(as.character(dat[4, 1]), "lblB")
   
 })
 
@@ -128,9 +134,9 @@ test_that("fcat can be used for formatting vectors.", {
   res <- c("Label A", "Label B", "Other")
   
   
-  expect_equal(fapply(2, c1$num_fmt), "2.0")
-  expect_equal(fapply(c("A", "B", "C"), c1$label_fmt), res)
-  expect_equal(fapply(as.Date("2020-05-16"), c1$date_fmt), "16May2020")
+  expect_equal(fapply(2, c1[["num_fmt"]]), "2.0")
+  expect_equal(fapply(c("A", "B", "C"), c1[["label_fmt"]]), res)
+  expect_equal(fapply(as.Date("2020-05-16"), c1[["date_fmt"]]), "16May2020")
   
 })
 
@@ -168,9 +174,9 @@ test_that("fcat can be applied to a data frame with formats function.", {
   
   fdat <- fdata(dat)
   
-  expect_equal(fdat[1, "AGE"], "25.4")
-  expect_equal(fdat[2, "CATEGORY"], "Label B")
-  expect_equal(fdat[1, "AGE"], "25.4")
+  expect_equal(as.character(fdat[1, "AGE"]), "25.4")
+  expect_equal(as.character(fdat[2, "CATEGORY"]), "Label B")
+  expect_equal(as.character(fdat[1, "AGE"]), "25.4")
   
 })
 

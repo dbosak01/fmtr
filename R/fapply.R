@@ -190,7 +190,8 @@ fapply <- function(x, format = NULL, width = NULL, justify = NULL) {
     else {
       
       # For named vectors, perform lookup
-      ret <- lookup(x, format)
+      ret <- lkup(x, format)
+      #ret <- format[x]
       names(ret) <- NULL  # Names not needed and mess up stuff
     }
     
