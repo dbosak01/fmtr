@@ -106,6 +106,7 @@ fdata <- function(x, ...) {
     # Restore any labels
     if (!is.null(attr(x[[nm]], "label"))) {
       attr(ret[[length(ret)]], "label") <- attr(x[[nm]], "label")
+      print(paste("Inside fdata:", attr(ret[[length(ret)]], "label")))
     }
   }
   
