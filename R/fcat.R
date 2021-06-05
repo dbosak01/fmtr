@@ -147,8 +147,8 @@ as.fcat.data.frame <- function(x) {
   ret <- fcat()
   for (df in s) {
     
-    nm <- df[1, "Name"]
-    typ <- df[1, "Type"]
+    nm <- as.character(df[1, "Name"])
+    typ <- as.character(df[1, "Type"])
     
     if (typ == "U") {
       ret[[nm]] <- as.fmt(df)
