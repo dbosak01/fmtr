@@ -126,6 +126,7 @@ test_that("fdata() function restores any labels.", {
   
   fmt_fb <- fdata(fb)
   
+  print("Here I am in the fdata() check")
   print(fmt_fb)
   print(fmt_fb$catc)
   print(attr(fmt_fb$catc, "label"))
