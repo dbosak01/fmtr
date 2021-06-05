@@ -67,6 +67,7 @@ test_that("as.fcat.data.frame() function works as expected", {
   
   print(c1$lblA)
   print(dat)
+  print(c2)
   print(c2[["lblA"]])
   print(fapply("B", c2[["lblA"]]))
   print(c2[["lblC"]])
