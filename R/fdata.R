@@ -104,8 +104,9 @@ fdata <- function(x, ...) {
     ret[[length(ret) + 1]] <- fapply(x[[nm]])
     
     # Restore any labels
-    if (!is.null(attr(x[[nm]], "label")))
+    if (!is.null(attr(x[[nm]], "label"))) {
       attr(ret[[length(ret)]], "label") <- attr(x[[nm]], "label")
+    }
   }
   
   # Restore names, as they are sometimes messed up

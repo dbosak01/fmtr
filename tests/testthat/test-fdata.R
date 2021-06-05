@@ -123,6 +123,7 @@ test_that("fdata() function restores any labels.", {
   
   attr(fb$catc, "format") <- c(A = "Label A", B = "Label B", C = "Other")
   
+  print(is.null(attr(fb$catc, "label")))
   
   fmt_fb <- fdata(fb)
   
