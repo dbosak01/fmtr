@@ -155,9 +155,9 @@ as.fcat.data.frame <- function(x) {
     } else if (typ == "S") {
       ret[[nm]] <- df[1, "Expression"]
     } else if (typ == "F") {
-      ret[[nm]] <- eval(str2lang(df[1, "Expression"]))
+      ret[[nm]] <- eval(parse(text = df[1, "Expression"], keep.source = FALSE))
     } else if (typ == "V") {
-      ret[[nm]] <- eval(str2lang(df[1, "Expression"]))
+      ret[[nm]] <- eval(parse(text = df[1, "Expression"], keep.source = FALSE))
     }
   }
 
