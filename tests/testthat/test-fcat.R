@@ -35,9 +35,6 @@ test_that("as.data.frame.fcat() function works as expected", {
   
 
   dat <- as.data.frame(c1)
-
-  print(dat)  
-  print(dat[1, 1])
   
   expect_equal(nrow(dat), 9)
   expect_equal(as.character(dat[1, 1]), "lblA")
@@ -101,8 +98,8 @@ test_that("write.fcat and read.fcat functions work as expected.", {
 
   
   expect_equal(nrow(dat), 6)
-  expect_equal(dat[1, 1], "lblA")
-  expect_equal(dat[4, 1], "lblB")
+  expect_equal(as.character(dat[1, 1]), "lblA")
+  expect_equal(as.character(dat[4, 1]), "lblB")
   
 })
 
@@ -170,9 +167,9 @@ test_that("fcat can be applied to a data frame with formats function.", {
   
   fdat <- fdata(dat)
   
-  expect_equal(fdat[1, "AGE"], "25.4")
-  expect_equal(fdat[2, "CATEGORY"], "Label B")
-  expect_equal(fdat[1, "AGE"], "25.4")
+  expect_equal(as.character(fdat[1, "AGE"]), "25.4")
+  expect_equal(as.character(fdat[2, "CATEGORY"]), "Label B")
+  expect_equal(as.character(fdat[1, "AGE"]), "25.4")
   
 })
 
