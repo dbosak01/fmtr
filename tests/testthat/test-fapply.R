@@ -61,7 +61,7 @@ test_that("fapply() function works as expected with vectors.", {
   # 
 
   expect_equal(fapply(d, f), c("Abba", "Babba", "Babba", "UNK", "Abba"))
-  expect_equal(lookup(d, f), c("Abba", "Babba", "Babba", "UNK", "Abba"))
+  expect_equal(lkup(d, f), c("Abba", "Babba", "Babba", "UNK", "Abba"))
   
 })
 
