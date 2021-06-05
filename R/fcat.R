@@ -153,11 +153,11 @@ as.fcat.data.frame <- function(x) {
     if (typ == "U") {
       ret[[nm]] <- as.fmt(df)
     } else if (typ == "S") {
-      ret[[nm]] <- df[1, "Expression"]
+      ret[[nm]] <- as.character(df[1, "Expression"])
     } else if (typ == "F") {
-      ret[[nm]] <- eval(parse(text = df[1, "Expression"], keep.source = FALSE))
+      ret[[nm]] <- eval(parse(text = as.character(df[1, "Expression"]), keep.source = FALSE))
     } else if (typ == "V") {
-      ret[[nm]] <- eval(parse(text = df[1, "Expression"], keep.source = FALSE))
+      ret[[nm]] <- eval(parse(text = as.character(df[1, "Expression"]), keep.source = FALSE))
     }
   }
 

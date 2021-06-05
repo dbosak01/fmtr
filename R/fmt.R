@@ -235,9 +235,9 @@ as.fmt.data.frame <- function(x) {
     
     y <- structure(list(), class = c("fmt_cnd"))    
     
-    y$expression <- parse(text = x[i, "Expression"], keep.source = FALSE)
-    y$label <- x[i, "Label"]
-    y$order <- x[i, "Order"]
+    y$expression <- parse(text = as.character(x[i, "Expression"]), keep.source = FALSE)
+    y$label <- as.character(x[i, "Label"])
+    y$order <- as.character(x[i, "Order"])
     
     
     ret[[length(ret) + 1]] <- y

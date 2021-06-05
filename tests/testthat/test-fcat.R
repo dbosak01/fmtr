@@ -40,10 +40,10 @@ test_that("as.data.frame.fcat() function works as expected", {
   print(dat[1, 1])
   
   expect_equal(nrow(dat), 9)
-  expect_equal(dat[1, 1], "lblA")
-  expect_equal(dat[4, 1], "lblB")
-  expect_equal(dat[7, 1], "lblC")
-  expect_equal(dat[7, 2], "S")
+  expect_equal(as.character(dat[1, 1]), "lblA")
+  expect_equal(as.character(dat[4, 1]), "lblB")
+  expect_equal(as.character(dat[7, 1]), "lblC")
+  expect_equal(as.character(dat[7, 2]), "S")
   
 })
 
