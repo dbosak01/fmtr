@@ -235,7 +235,7 @@ as.fmt.data.frame <- function(x) {
     
     y <- structure(list(), class = c("fmt_cnd"))    
     
-    y$expression <- parse(text = as.character(x[i, "Expression"]), keep.source = FALSE)
+    y$expression <- str2lang(as.character(x[i, "Expression"]))
     y$label <- as.character(x[i, "Label"])
     y$order <- as.character(x[i, "Order"])
     

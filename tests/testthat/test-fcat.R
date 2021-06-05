@@ -67,6 +67,7 @@ test_that("as.fcat.data.frame() function works as expected", {
   
   print(c2[["lblA"]])
   print(fapply("B", c2[["lblA"]]))
+  print(c2[["lblC"]])
   
   expect_equal(length(c2), 5)
   expect_equal(c2[["lblC"]], "%d%b%Y")
