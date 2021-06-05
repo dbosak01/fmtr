@@ -65,6 +65,9 @@ test_that("as.fcat.data.frame() function works as expected", {
   c2 <- as.fcat(dat)
   
   
+  print(c2$lblA)
+  print(fapply("B", c2$lblA))
+  
   expect_equal(length(c2), 5)
   expect_equal(c2[["lblC"]], "%d%b%Y")
   expect_equal(fapply("B", c2$lblA), "Label B")

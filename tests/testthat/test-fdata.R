@@ -104,9 +104,9 @@ test_that("fdata() function works as expected with list of formats.", {
   ret
   
   
-  expect_equal(ret[[1, 2]], "1.3")
-  expect_equal(ret[[2, 2]], "High")
-  expect_equal(ret[[3, 2]], "20-06")
+  expect_equal(as.character(ret[1, 2]), "1.3")
+  expect_equal(as.character(ret[2, 2]), "High")
+  expect_equal(as.character(ret[3, 2]), "20-06")
 
 })
 
