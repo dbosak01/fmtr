@@ -50,7 +50,7 @@ test_that("fapply() function works as expected with vectors.", {
   
 })
 
-test_that("fapply() function works as expected with vectors.", {
+test_that("fapply() function works as expected with vector formats.", {
   
   
   
