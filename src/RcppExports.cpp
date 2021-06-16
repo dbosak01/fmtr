@@ -5,21 +5,21 @@
 
 using namespace Rcpp;
 
-// lookup
-CharacterVector lookup(CharacterVector x, CharacterVector lkp);
-RcppExport SEXP _fmtr_lookup(SEXP xSEXP, SEXP lkpSEXP) {
+// lkup
+CharacterVector lkup(CharacterVector x, CharacterVector lkp);
+RcppExport SEXP _fmtr_lkup(SEXP xSEXP, SEXP lkpSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< CharacterVector >::type lkp(lkpSEXP);
-    rcpp_result_gen = Rcpp::wrap(lookup(x, lkp));
+    rcpp_result_gen = Rcpp::wrap(lkup(x, lkp));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_fmtr_lookup", (DL_FUNC) &_fmtr_lookup, 2},
+    {"_fmtr_lkup", (DL_FUNC) &_fmtr_lkup, 2},
     {NULL, NULL, 0}
 };
 

@@ -157,8 +157,8 @@ test_that("as.data.frame.fmt function works as expected", {
   ex <- as.data.frame(fmt1)
   
   expect_equal(nrow(ex), 3)
-  expect_equal(ex[1, "Order"], 2)
-  expect_equal(ex[3, "Label"], "Other")
+  expect_equal(as.character(ex[1, "Order"]), "2")
+  expect_equal(as.character(ex[3, "Label"]), "Other")
   
 })
 

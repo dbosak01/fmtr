@@ -112,7 +112,8 @@ flist <- function(..., type = "column", lookup = NULL, simplify = TRUE) {
   x$lookup <- lookup
   x$simplify <- simplify
   if (!is.null(lookup))
-    x$lookupname <- deparse1(substitute(lookup, env = environment()))
+    x$lookupname <- paste(deparse(substitute(lookup, env = environment())), 
+                          collapse = " ")
   
   
   return(x)
@@ -335,7 +336,8 @@ as.data.frame.fmt_lst <- function(x, row.names = NULL, optional = FALSE, ...) {
       } else {
         tmp[[nm]] <- data.frame(Name = nm, 
                                 Type = "V",
-                                Expression = deparse1(fmts[[i]]),
+                                Expression = paste(deparse(fmts[[i]]), 
+                                                   collapse = " "),
                                 Label = "", 
                                 Order = NA)
       }
@@ -344,7 +346,8 @@ as.data.frame.fmt_lst <- function(x, row.names = NULL, optional = FALSE, ...) {
       
       tmp[[nm]] <-  data.frame(Name = nm, 
                                Type = "F",
-                               Expression = deparse1(fmts[[i]]),
+                               Expression = paste(deparse(fmts[[i]]), 
+                                                  collapse = " "),
                                Label = "", 
                                Order = NA)
       

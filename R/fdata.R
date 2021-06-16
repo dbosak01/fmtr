@@ -104,8 +104,9 @@ fdata <- function(x, ...) {
     ret[[length(ret) + 1]] <- fapply(x[[nm]])
     
     # Restore any labels
-    if (!is.null(attr(x[[nm]], "label")))
+    if (!is.null(attr(x[[nm]], "label"))) {
       attr(ret[[length(ret)]], "label") <- attr(x[[nm]], "label")
+    }
   }
   
   # Restore names, as they are sometimes messed up
@@ -113,6 +114,16 @@ fdata <- function(x, ...) {
   
   # Convert list to data frame
   ret <- as.data.frame(ret)
+  
+  # Restore names again as they are getting lost in R 3.6
+  for (nm in names(x)) {
+    
+    # Restore any labels
+    if (!is.null(attr(x[[nm]], "label"))) {
+      attr(ret[[nm]], "label") <- attr(x[[nm]], "label")
+    }
+  }
+  
   
   # Transfer any rownames to new data frame
   rownames(ret) <- rownames(x)

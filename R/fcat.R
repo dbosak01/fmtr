@@ -147,17 +147,17 @@ as.fcat.data.frame <- function(x) {
   ret <- fcat()
   for (df in s) {
     
-    nm <- df[1, "Name"]
-    typ <- df[1, "Type"]
+    nm <- as.character(df[1, "Name"])
+    typ <- as.character(df[1, "Type"])
     
     if (typ == "U") {
       ret[[nm]] <- as.fmt(df)
     } else if (typ == "S") {
-      ret[[nm]] <- df[1, "Expression"]
+      ret[[nm]] <- as.character(df[1, "Expression"])
     } else if (typ == "F") {
-      ret[[nm]] <- eval(str2lang(df[1, "Expression"]))
+      ret[[nm]] <- eval(str2lang(as.character(df[1, "Expression"])))
     } else if (typ == "V") {
-      ret[[nm]] <- eval(str2lang(df[1, "Expression"]))
+      ret[[nm]] <- eval(str2lang(as.character(df[1, "Expression"])))
     }
   }
 
@@ -275,7 +275,7 @@ as.data.frame.fcat <- function(x, row.names = NULL, optional = FALSE, ...) {
       } else {
         tmp[[nm]] <- data.frame(Name = nm, 
                                 Type = "V",
-                                Expression = deparse1(x[[nm]]),
+                                Expression = paste(deparse(x[[nm]]), collapse = " "),
                                 Label = "", 
                                 Order = NA)
       }
@@ -284,7 +284,7 @@ as.data.frame.fcat <- function(x, row.names = NULL, optional = FALSE, ...) {
       
       tmp[[nm]] <-  data.frame(Name = nm, 
                                Type = "F",
-                               Expression = deparse1(x[[nm]]),
+                               Expression = paste(deparse(x[[nm]]), collapse = " "),
                                Label = "", 
                                Order = NA)
         
