@@ -78,6 +78,22 @@ test_that("a format object can be applied to a vector.", {
   expect_equal(a4,  c(1, 2, 3, 2))
   
   
+  fmt5 <- value(condition(x == "A", 1.2),
+                condition(x == "B", 2.3),
+                condition(TRUE, 3.4))
+  
+  a5 <- fapply(v1, fmt5)
+  expect_equal(a5,  c(1.2, 2.3, 3.4, 2.3))
+  
+  
+  
+  fmt6 <- value(condition(x == "A", as.Date("2021-04-01")),
+                condition(x == "B", as.Date("2021-04-02")),
+                condition(TRUE, as.Date("2021-04-03")))
+  
+  a6 <- fapply(v1, fmt6)
+  expect_equal(a6,  c(18718, 18719, 18720, 18719))
+  
 })
 
 test_that("labels() function works as expected", {

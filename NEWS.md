@@ -1,3 +1,10 @@
+# fmtr 1.5.2
+
+* Fixed bug on R 3.6 where fdata() function was turning all columns into factors.
+* Changed fapply() function so it will accept non-character vector formats.  Now
+works with integer, numeric, and date vectors also.
+
+
 # fmtr 1.5.1
 
 * Fixed bug when vector format has no corresponding input value.  Was assigning

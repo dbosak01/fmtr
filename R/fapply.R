@@ -153,8 +153,8 @@ fapply <- function(x, format = NULL, width = NULL, justify = NULL) {
   
   if (!is.null(format)) {
 
-    if (!any(class(format) %in% c("NULL", "character", "fmt", 
-                              "fmt_lst", "function")))
+    if (!any(class(format) %in% c("NULL", "character", "fmt", "numeric", "integer", 
+                                 "fmt_lst", "function")))
       stop(paste0("class of format parameter value is invalid: ", 
                   class(format)))
   }
@@ -189,10 +189,20 @@ fapply <- function(x, format = NULL, width = NULL, justify = NULL) {
       ret <- format_vector(x, format)
     else {
       
-      # For named vectors, perform lookup
-      ret <- lkup(x, format)
-      #ret <- format[x]
-      names(ret) <- NULL  # Names not needed and mess up stuff
+      
+      if (length(names(format)) == 0) {
+        stop("Vector formats are required to be named.")
+      } else {
+        
+        # For named vectors, perform lookup
+        if (all(class(format) == "character"))
+          ret <- lkup(x, format)
+        else 
+          ret <- format[x]
+        
+        names(ret) <- NULL  # Names not needed and mess up stuff
+      
+      }
     }
     
   }

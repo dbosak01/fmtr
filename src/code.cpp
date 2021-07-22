@@ -16,6 +16,3 @@ CharacterVector lkup(CharacterVector x, CharacterVector lkp) {
   return ret;
 }
 
-
-
-

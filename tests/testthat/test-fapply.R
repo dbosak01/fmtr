@@ -124,3 +124,32 @@ test_that("fapply() function works as expected with flist", {
    
    expect_equal(fmtd2, res)
 })
+
+
+test_that("fapply() with vector formats work as expected.", {
+  
+  catc = c("A", "B", "C", "B")
+  catn = c(1, 2, 3, 2) 
+  
+  v1 <- c(A= "Alpha", B = "Bravo", C = "Charlie")
+  
+  res1 <- fapply(catc, v1)
+  
+  expect_equal(class(res1), "character")
+  
+  v2 <- c(A= 1, B = 2, C = 3)
+  
+  res2 <- fapply(catc, v2)
+  
+  expect_equal(class(res2), "numeric")
+  
+  
+  v3 <- c(A= 1L, B = 2L, C = 3L)
+  
+  res3 <- fapply(catc, v3)
+  
+  expect_equal(class(res3), "integer")
+  
+  
+  
+})
