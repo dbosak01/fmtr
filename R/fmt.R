@@ -207,7 +207,8 @@ as.data.frame.fmt <- function(x, row.names = NULL, optional = FALSE, ...,
   o <- unlist(o)
   
   dat <- data.frame(Name = name, Type = "U", 
-                    Expression = e, Label = l, Order = o)
+                    Expression = e, Label = l, Order = o, 
+                    stringsAsFactors = FALSE)
   
   if (!is.null(row.names))
     rownames(dat) <- row.names
@@ -221,7 +222,7 @@ as.data.frame.fmt <- function(x, row.names = NULL, optional = FALSE, ...,
 as.fmt.data.frame <- function(x) {
   
   if ("tbl_df" %in% class(x))
-    x <- as.data.frame(x)
+    x <- as.data.frame(x, stringsAsFactors = FALSE)
   
   if (!"data.frame" %in% class(x))
     stop("Input data must be a data frame")
@@ -382,7 +383,7 @@ print.fmt <- function(x, ..., name = deparse(substitute(x, env = environment()))
     cat(grey60("# A user-defined format: " %+% 
                  as.character(length(x)) %+% " conditions\n")) 
     
-    dat <- as.data.frame(x, name = name)
+    dat <- as.data.frame(x, name = name, stringsAsFactors = FALSE)
     
     print(dat)
   }

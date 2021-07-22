@@ -248,7 +248,7 @@ as.flist.data.frame <- function(x, type = "column", lookup = NULL, simplify = TR
 #' @export
 as.flist.tbl_df <- function(x, type = "column", lookup = NULL, simplify = TRUE) {
   
-  return(as.flist(as.data.frame(x), type, lookup, simplify))
+  return(as.flist(as.data.frame(x, stringsAsFactors = FALSE), type, lookup, simplify))
   
 }
 
@@ -332,14 +332,14 @@ as.data.frame.fmt_lst <- function(x, row.names = NULL, optional = FALSE, ...) {
                                 Type = "S",
                                 Expression = fmts[[i]],
                                 Label = "", 
-                                Order = NA)
+                                Order = NA, stringsAsFactors = FALSE)
       } else {
         tmp[[nm]] <- data.frame(Name = nm, 
                                 Type = "V",
                                 Expression = paste(deparse(fmts[[i]]), 
                                                    collapse = " "),
                                 Label = "", 
-                                Order = NA)
+                                Order = NA, stringsAsFactors = FALSE)
       }
       
     } else if (any(class(fmts[[i]]) == "function")) {
@@ -349,7 +349,7 @@ as.data.frame.fmt_lst <- function(x, row.names = NULL, optional = FALSE, ...) {
                                Expression = paste(deparse(fmts[[i]]), 
                                                   collapse = " "),
                                Label = "", 
-                               Order = NA)
+                               Order = NA, stringsAsFactors = FALSE)
       
       
     }
@@ -391,7 +391,7 @@ print.fmt_lst <- function(x, ..., verbose = FALSE) {
     if (!is.null(x$simplify))
       cat(grey60("- simplify: " %+% as.character(x$simplify) %+% "\n"))
     
-    print(as.data.frame(x))
+    print(as.data.frame(x, stringsAsFactors = FALSE))
     
   }
   

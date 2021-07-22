@@ -113,7 +113,7 @@ fdata <- function(x, ...) {
   names(ret) <- names(x)
   
   # Convert list to data frame
-  ret <- as.data.frame(ret)
+  ret <- as.data.frame(ret, stringsAsFactors = FALSE)
   
   # Restore names again as they are getting lost in R 3.6
   for (nm in names(x)) {

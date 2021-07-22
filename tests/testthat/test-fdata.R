@@ -142,5 +142,31 @@ test_that("fdata() function restores any labels.", {
 
 
 
+test_that("fdata() function returns character data types.", {
+  
+
+  
+  fb <- data.frame(id = 100:103, 
+                   catc = c("A", "B", "C", "B"), 
+                   catn = c(1, 2, 3, 2), 
+                   stringsAsFactors = FALSE) 
+  
+  widths(fb) <- list(id = 10, catc = 10, catn = 10)
+  
+  expect_equal(class(fb$id), "integer")
+  expect_equal(class(fb$catc), "character")
+  expect_equal(class(fb$catn), "numeric")
+  
+  #print(is.null(attr(fb$catc, "label")))
+  
+  fmt_fb <- fdata(fb)
+
+  
+  expect_equal(class(fmt_fb$id), "character")
+  expect_equal(class(fmt_fb$catc), "character")
+  expect_equal(class(fmt_fb$catn), "character")
+  
+  
+})
 
 
