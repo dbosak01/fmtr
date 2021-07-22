@@ -76,7 +76,7 @@ fapply(v1)
 ```
 
 Besides the format attribute, the `fapply()` function will also recognize
-attributes for `width` and `justify`.  These parameters allow to you
+attributes for `width` and `justify`.  These parameters allow you
 to control the width and alignment of the data in the vector.  If the 
 width parameter is larger than the width of the data, the value will be 
 padded with spaces.  Here is an example:

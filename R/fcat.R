@@ -166,7 +166,7 @@ as.fcat.data.frame <- function(x) {
   
 }
 
-
+#' @title Convert a tibble to a format catalog
 #' @inherit as.fcat.data.frame
 #' @export
 as.fcat.tbl_df <- function(x) {

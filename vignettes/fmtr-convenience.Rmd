@@ -26,15 +26,18 @@ useful when you want to assign formats to many columns.
 
 ### The `fattr()` function
 The `fattr()` function helps assign formatting attributes to a vector or
-data frame column.  The `fattr()` function can assign the format, width, 
+data frame column.  The `fattr()` function can assign the format, label,
+description, width, 
 and justify attributes all at once.  These attributes are passed in as
 arguments to the `fattr()` function, instead of as properties on a call
 to `attr()`.
 
 ### Other convenience functions
 The `fmtr` package contains several other functions for setting attributes
-easily.  These include the `labels()`, `widths()` and `justification()` functions to set 
-column labels, column widths, and column justification on an entire data frame.  The package
+easily.  These include the `labels()`, `descriptions()`, `widths()` and 
+`justification()` functions to set 
+column labels, columns descriptions, column widths, and column justification 
+on an entire data frame.  The package
 also includes class testing functions like `is.format()` and `is.flist()`.
 
 Next: [Helper Functions](fmtr-helpers.html)

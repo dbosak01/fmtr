@@ -153,3 +153,19 @@ test_that("fapply() with vector formats work as expected.", {
   
   
 })
+
+test_that("fapply() returns a character vector instead of a factor", {
+  
+  # Create vector
+  a <- c(1.3243, 5.9783, 2.3848)
+  
+  # Assign format attributes
+  a <- fattr(a, format = "%.1f", width = 10, justify = "center")
+  
+  # Apply format attributes
+  f1 <- fapply(a)
+  
+  expect_equal(class(f1), "character")
+  
+  
+})

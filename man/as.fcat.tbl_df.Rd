@@ -2,7 +2,7 @@
 % Please edit documentation in R/fcat.R
 \name{as.fcat.tbl_df}
 \alias{as.fcat.tbl_df}
-\title{Convert a data frame to a format catalog}
+\title{Convert a tibble to a format catalog}
 \usage{
 \method{as.fcat}{tbl_df}(x)
 }
