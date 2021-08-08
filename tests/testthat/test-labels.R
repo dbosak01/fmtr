@@ -40,3 +40,19 @@ test_that("labels() function works as expected for tibbles.", {
   
 
 })
+
+
+test_that("labels() parameter checks work as expected.", {
+  
+  s <- "hello"
+  
+  expect_error(labels(s) <- list(a = "One"))
+  
+  dat <- mtcars
+  
+  names(dat) <- NULL
+  
+  expect_error(labels(dat) <- list(a = "One"))
+  
+  
+})

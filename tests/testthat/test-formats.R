@@ -18,6 +18,7 @@ test_that("formats() function works as expected.", {
   
   expect_equal(length(lst), 2)
   
+  expect_error(formats(df1) <- list(mpd = "%.1f"))
 
   format(df1) 
   

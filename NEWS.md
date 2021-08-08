@@ -1,3 +1,7 @@
+# fmtr 1.5.3
+
+* Added covr and codecov.
+
 # fmtr 1.5.2
 
 * Fixed bug on R 3.6 where fdata() function was turning all columns into factors.

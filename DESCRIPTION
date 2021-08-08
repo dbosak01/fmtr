@@ -1,7 +1,7 @@
 Package: fmtr
 Type: Package
 Title: Easily Apply Formats to Data  
-Version: 1.5.2
+Version: 1.5.3
 Author: David Bosak
 Maintainer: David Bosak <dbosak01@gmail.com>
 Description: Contains a set of functions that can be used to apply
@@ -19,7 +19,8 @@ Depends: R (>= 3.6.0)
 Suggests: 
     testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    covr
 Imports: 
     tibble,
     stats,

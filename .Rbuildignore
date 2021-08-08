@@ -10,3 +10,4 @@
 ^o$
 ^dll$
 ^\.github$
+^codecov\.yml$

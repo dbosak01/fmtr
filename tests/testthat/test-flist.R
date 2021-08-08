@@ -72,6 +72,15 @@ test_that("flist works as expected for row type ordered,", {
   
 })
 
+test_that("flist parameter checks work as expected.", {
+  
+  expect_error(flist(type = "fork"))
+  expect_error(flist(simplify = "fork"))
+  expect_error(flist(lookup = c(a = 1, b = 2), type = "column"))
+  
+})
+
+
 test_that("flist works as expected for column type.", {
   
   
@@ -114,6 +123,16 @@ test_that("as.flist and is.flist work as expected.", {
   
 })
 
+test_that("as.flist parameter checks work as expected.", {
+  
+  a <- list(A = "%.1f", B = "%B%m%Y")
+  
+  expect_error(as.flist(a, type = "fork"))
+  expect_error(as.flist(a, simplify = "fork"))
+  expect_error(as.flist(a, lookup = c(a = 1, b = 2), type = "column"))
+  
+})
+
 
 test_that("as.data.frame.flist works as expected.", {
   
@@ -130,6 +149,31 @@ test_that("as.data.frame.flist works as expected.", {
   expect_equal(nrow(dat), 5)
   
 })
+
+test_that("as.flist.data.frame parameter checks work as expected.", {
+  
+  
+  fl2 <- flist(fmt1 = function(x) round(x, 2), 
+               fmt2 = "$%f", 
+               fmt3 = function(x) substr(x, 1, 5),
+               fmt4 = value(condition(x == 1, "Label 1"),
+                            condition(TRUE, "Label 2")))
+  fl2
+  dat <- as.data.frame(fl2)
+  dat
+  
+  
+  
+  expect_error(as.flist(dat, type = "fork"))
+  expect_error(as.flist(dat, simplify = "fork"))
+  expect_error(as.flist(dat, lookup = c(a = 1, b = 2), type = "column"))
+  
+  # Check tibble 
+  expect_equal(is.flist(as.flist(as_tibble(dat))), TRUE)
+  
+  
+})
+
 
 test_that("another test for as.data.frame.flist works as expected.", {
   
@@ -160,13 +204,17 @@ test_that("as.data.frame.flist works as expected with no names.", {
                "$%f", 
                function(x) substr(x, 1, 5),
                value(condition(x == 1, "Label 1"),
-                            condition(TRUE, "Label 2")))
+                            condition(TRUE, "Label 2")),
+               c(a = "fmt1", b = "fmt2"))
   fl2
   dat <- as.data.frame(fl2)
   dat
   
-  expect_equal(nrow(dat), 5)
+  expect_equal(nrow(dat), 6)
+  expect_error(as.data.frame.fmt_lst(c(a = 1, b = 2)))
   
+  rs <- capture.output(print(fl2))
+  expect_equal(length(rs) > 0, TRUE)
 })
 
 

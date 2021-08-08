@@ -20,7 +20,9 @@ test_that("justification() function works as expected.", {
   expect_equal(length(lst), 2)
   
   
+  expect_error(justification(df1) <- list(mpd = "right"))
+  
+  
   format(df1) 
   
 })
-

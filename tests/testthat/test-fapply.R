@@ -169,3 +169,17 @@ test_that("fapply() returns a character vector instead of a factor", {
   
   
 })
+
+test_that("fapply() parameter checks work as expected", {
+  
+  
+  v <- c(1, 2, 3)
+  
+  expect_error(fapply(v, format = Sys.Date()))
+  expect_error(fapply(v, width = "5"))
+  expect_error(fapply(v, width = -1))
+  expect_error(fapply(v, justify = "fork"))
+  expect_error(fapply(v, v))
+  
+  
+})

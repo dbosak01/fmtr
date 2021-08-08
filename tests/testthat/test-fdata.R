@@ -169,4 +169,24 @@ test_that("fdata() function returns character data types.", {
   
 })
 
+test_that("fdata() function works as expected with tibble.", {
+  
+  dta <- as_tibble(mtcars)
+  
+  dt1 <- fdata(dta)
+  
+  expect_equal("tbl_df" %in% class(dt1), TRUE)
+  
+})
 
+test_that("fdata() parameter checks work as expected.", {
+  
+  expect_error(fdata("fork"))
+  
+  dat <- mtcars
+  
+  res <- fdata(dat, width = 10)
+  
+  expect_equal(nchar(res[1, 1]), 10)
+  
+})

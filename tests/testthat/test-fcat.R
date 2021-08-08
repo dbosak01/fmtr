@@ -285,3 +285,25 @@ test_that("row_limit parameter works as expected", {
 })
 
 
+test_that("print.fcat function works as expected", {
+  
+  
+  c1 <- fcat(lblA = value(condition(x == "A", "Label A"),
+                          condition(x == "B", "Label B"),
+                          condition(TRUE, "Other")),
+             lblB = function(x) format(x, width = 4),
+             lblC = c(A = "Label A", B = "Label B")
+  )
+  
+  
+  expect_equal(class(c1)[1], "fcat")
+  expect_equal(length(c1), 3)
+  expect_equal(names(c1)[1], "lblA")
+  
+  res <- capture.output(print(c1))
+  
+  expect_equal(length(res) > 1, TRUE)
+  
+})
+
+

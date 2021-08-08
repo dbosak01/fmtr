@@ -283,3 +283,13 @@ test_that("values function works with range.", {
   
 })
 
+test_that("fmt parameter checks work as expected.", {
+  
+  expect_error(value())
+  expect_error(as.data.frame.fmt("fork"))
+  expect_error(as.fmt.data.frame("fork"))
+  expect_error(print.fmt("fork"))
+  
+  
+})
+
