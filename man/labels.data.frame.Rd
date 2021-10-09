@@ -38,6 +38,9 @@ will not be included in the list.
 When used on the receiving side of an assignment, the function will assign
 labels to a data frame.  The labels should be in a named list, where
 each name corresponds to the data frame column to assign the label to.
+ 
+Finally, if you wish to clear out the label attributes, assign
+a NULL value to the \code{labels} function.
 }
 \examples{
 # Take subset of data
@@ -50,6 +53,12 @@ labels(df1) <- list(mpg = "Mile Per Gallon", cyl = "Cylinders")
 str(df1)
 
 # View assigned labels
+labels(df1)
+
+# Clear labels
+labels(df1) <- NULL
+
+# Display Cleared Labels
 labels(df1)
 }
 \seealso{

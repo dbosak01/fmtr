@@ -38,6 +38,9 @@ The \code{formats} function can also accept a format catalog as input.
 This feature allows you to save formats in metadata, load them into a
 format catalog, and quickly assign them to a data frame or tibble.  See
 the \code{\link{fcat}} function for additional information.
+
+Finally, if you wish to clear out format attributes, assign a NULL
+value to the \code{formats} function.
 }
 \examples{
 # Take subset of data
@@ -65,6 +68,12 @@ formats(df1) <-  lst
 
 # Display formatted data
 fdata(df1)
+
+# Clear formats
+formats(df1) <- NULL
+
+# Confirm formats are cleared 
+formats(df1)
 }
 \seealso{
 \code{\link{fdata}} to display formatted data, 

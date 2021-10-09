@@ -197,6 +197,8 @@ each name corresponds to the data frame column to assign the format to.</p>
 This feature allows you to save formats in metadata, load them into a
 format catalog, and quickly assign them to a data frame or tibble.  See
 the <code><a href='fcat.html'>fcat</a></code> function for additional information.</p>
+<p>Finally, if you wish to clear out format attributes, assign a NULL
+value to the <code>formats</code> function.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='fdata.html'>fdata</a></code> to display formatted data, 
@@ -231,6 +233,12 @@ the <code><a href='fcat.html'>fcat</a></code> function for additional informatio
 
 <span class='co'># Display formatted data</span>
 <span class='fu'><a href='fdata.html'>fdata</a></span><span class='op'>(</span><span class='va'>df1</span><span class='op'>)</span>
+
+<span class='co'># Clear formats</span>
+<span class='fu'>formats</span><span class='op'>(</span><span class='va'>df1</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='cn'>NULL</span>
+
+<span class='co'># Confirm formats are cleared </span>
+<span class='fu'>formats</span><span class='op'>(</span><span class='va'>df1</span><span class='op'>)</span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

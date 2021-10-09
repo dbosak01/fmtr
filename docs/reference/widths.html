@@ -194,7 +194,9 @@ If a column does not have a width attribute assigned, that column
 will not be included in the list.</p>
 <p>When used on the receiving side of an assignment, the function will assign
 widths to a data frame.  The widths should be in a named list, where
-each name corresponds to the data frame column to assign the width to.</p>
+each name corresponds to the data frame column to assign the width to.</p>  
+<p>Finally, if you wish to clear out the width attributes, assign
+a NULL value to the <code>widths</code> function.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='fdata.html'>fdata</a></code> to display formatted data, 
@@ -215,6 +217,12 @@ each name corresponds to the data frame column to assign the width to.</p>
 <span class='fu'><a href='fdata.html'>fdata</a></span><span class='op'>(</span><span class='va'>df1</span><span class='op'>)</span>
 
 <span class='co'># View assigned widths</span>
+<span class='fu'>widths</span><span class='op'>(</span><span class='va'>df1</span><span class='op'>)</span>
+
+<span class='co'># Clear widths</span>
+<span class='fu'>widths</span><span class='op'>(</span><span class='va'>df1</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='cn'>NULL</span>
+
+<span class='co'># Confirm widths are cleared</span>
 <span class='fu'>widths</span><span class='op'>(</span><span class='va'>df1</span><span class='op'>)</span>
 </pre>
   </div>

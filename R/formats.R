@@ -24,6 +24,9 @@
 #' This feature allows you to save formats in metadata, load them into a
 #' format catalog, and quickly assign them to a data frame or tibble.  See
 #' the \code{\link{fcat}} function for additional information.
+#' 
+#' Finally, if you wish to clear out format attributes, assign a NULL
+#' value to the \code{formats} function.  
 #'     
 #' @param x A data frame or tibble.
 #' @return A named list of formats. 
@@ -60,6 +63,12 @@
 #' 
 #' # Display formatted data
 #' fdata(df1)
+#' 
+#' # Clear formats
+#' formats(df1) <- NULL
+#' 
+#' # Confirm formats are cleared 
+#' formats(df1)
 formats <- function(x) {
   
   ret <- list()
@@ -84,12 +93,24 @@ formats <- function(x) {
 `formats<-` <- function(x, value) {
   
   
-  for (nm in names(value)) {
+  if (all(is.null(value))) {
     
-    if (is.null(x[[nm]])) 
-      stop(paste("Name not found:", nm))
-    else
-      attr(x[[nm]], "format") <- value[[nm]]
+    for (nm in names(x)) {
+      
+      attr(x[[nm]], "format") <- NULL
+    }
+    
+    
+  } else {
+  
+    for (nm in names(value)) {
+      
+      if (is.null(x[[nm]])) 
+        stop(paste("Name not found:", nm))
+      else
+        attr(x[[nm]], "format") <- value[[nm]]
+      
+    }
     
   }
   

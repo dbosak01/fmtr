@@ -18,7 +18,9 @@
 #' When used on the receiving side of an assignment, the function will assign
 #' widths to a data frame.  The widths should be in a named list, where
 #' each name corresponds to the data frame column to assign the width to.
-#'     
+#'   
+#' Finally, if you wish to clear out the width attributes, assign
+#' a NULL value to the \code{widths} function.  
 #' @param x A data frame or tibble.
 #' @return A named list of widths. The widths must be positive integers
 #' greater than zero. 
@@ -41,6 +43,12 @@
 #' fdata(df1)
 #' 
 #' # View assigned widths
+#' widths(df1)
+#' 
+#' # Clear widths
+#' widths(df1) <- NULL
+#' 
+#' # Confirm widths are cleared
 #' widths(df1)
 widths <- function(x) {
   
@@ -66,14 +74,24 @@ widths <- function(x) {
 #' @export 
 `widths<-` <- function(x, value) {
   
+  if (all(is.null(value))) {
+    
+    for (nm in names(x)) {
+      
+      attr(x[[nm]], "width") <- NULL
+    }
+    
+    
+  } else {
   
-  for (nm in names(value)) {
-    
-    if (is.null(x[[nm]])) 
-      stop(paste("Name not found:", nm))
-    else
-      attr(x[[nm]], "width") <- value[[nm]]
-    
+    for (nm in names(value)) {
+      
+      if (is.null(x[[nm]])) 
+        stop(paste("Name not found:", nm))
+      else
+        attr(x[[nm]], "width") <- value[[nm]]
+      
+    }
   }
   
   return(x)

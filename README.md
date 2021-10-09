@@ -2,8 +2,8 @@
 
 [![fmtr version](https://www.r-pkg.org/badges/version/fmtr)](https://cran.r-project.org/package=fmtr)
 [![fmtr lifecycle](https://img.shields.io/badge/lifecycle-stable-blue.svg)](https://cran.r-project.org/package=fmtr)
-[![fmtr downloads](https://cranlogs.r-pkg.org/badges/grand-total/fmtr)](https://cran.r-project.org/package=fmtr)
-[![Travis build status](https://travis-ci.com/dbosak01/fmtr.svg?branch=master)](https://travis-ci.com/dbosak01/fmtr)
+[![fmtr downloads](https://cranlogs.r-pkg.org/badges/fmtr)](https://cran.r-project.org/package=fmtr)
+[![fmtr total downloads](https://cranlogs.r-pkg.org/badges/grand-total/fmtr)](https://cran.r-project.org/package=fmtr)
 [![R-CMD-check](https://github.com/dbosak01/fmtr/workflows/R-CMD-check/badge.svg)](https://github.com/dbosak01/fmtr/actions)
 [![Codecov test coverage](https://codecov.io/gh/dbosak01/fmtr/branch/master/graph/badge.svg)](https://codecov.io/gh/dbosak01/fmtr?branch=master)
 

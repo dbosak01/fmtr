@@ -19,7 +19,9 @@
 #' When used on the receiving side of an assignment, the function will assign
 #' labels to a data frame.  The labels should be in a named list, where
 #' each name corresponds to the data frame column to assign the label to.
-#'     
+#'  
+#' Finally, if you wish to clear out the label attributes, assign
+#' a NULL value to the \code{labels} function.   
 #' @param object A data frame or tibble.
 #' @param ... Follow-on parameters.  Required for generic function.
 #' @return A named list of labels. The labels must be quoted strings. 
@@ -39,6 +41,12 @@
 #' str(df1)
 #' 
 #' # View assigned labels
+#' labels(df1)
+#' 
+#' # Clear labels
+#' labels(df1) <- NULL
+#' 
+#' # Display Cleared Labels
 #' labels(df1)
 labels.data.frame <- function(object, ...) {
   
@@ -67,12 +75,26 @@ labels.data.frame <- function(object, ...) {
   if (!"data.frame" %in% class(x))
     stop("Class list must contain 'data.frame'.")
   
-  for (nm in names(value)) {
+  
+  
+  if (all(is.null(value))) {
     
-    if (is.null(x[[nm]])) 
-      stop(paste("Name not found:", nm))
-    else
-      attr(x[[nm]], "label") <- value[[nm]]
+    for (nm in names(x)) {
+      
+      attr(x[[nm]], "label") <- NULL
+    }
+    
+    
+  } else {
+  
+    for (nm in names(value)) {
+      
+      if (is.null(x[[nm]])) 
+        stop(paste("Name not found:", nm))
+      else
+        attr(x[[nm]], "label") <- value[[nm]]
+      
+    }
     
   }
   

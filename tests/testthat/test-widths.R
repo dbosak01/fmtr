@@ -22,7 +22,12 @@ test_that("widths() function works as expected.", {
   expect_error(widths(df1) <- list(mpd = 12))
   
   
-  format(df1) 
+  fdata(df1) 
+  
+  widths(df1)
+  
+  widths(df1) <- NULL
+  expect_equal(length(widths(df1)), 0)
   
   
 })

@@ -199,6 +199,8 @@ justification to a data frame.  The justification values
 should be in a named list, where
 each name corresponds to the name of the data frame column to assign
 values to.</p>
+<p>Finally, if you wish to clear out the justification attributes, assign
+a NULL value to the <code>justification</code> function.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='fdata.html'>fdata</a></code> to display formatted data, 
@@ -218,10 +220,15 @@ values to.</p>
 
 <span class='fu'><a href='fdata.html'>fdata</a></span><span class='op'>(</span><span class='va'>df1</span><span class='op'>)</span>
 
-
 <span class='co'># Display justification</span>
 <span class='fu'>justification</span><span class='op'>(</span><span class='va'>df1</span><span class='op'>)</span>
 <span class='fu'><a href='widths.html'>widths</a></span><span class='op'>(</span><span class='va'>df1</span><span class='op'>)</span>
+
+<span class='co'># Clear justification</span>
+<span class='fu'>justification</span><span class='op'>(</span><span class='va'>df1</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='cn'>NULL</span>
+
+<span class='co'># Confirm justifications are cleared</span>
+<span class='fu'>justification</span><span class='op'>(</span><span class='va'>df1</span><span class='op'>)</span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

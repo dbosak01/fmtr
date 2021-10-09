@@ -35,6 +35,9 @@ will not be included in the list.
 When used on the receiving side of an assignment, the function will assign
 widths to a data frame.  The widths should be in a named list, where
 each name corresponds to the data frame column to assign the width to.
+  
+Finally, if you wish to clear out the width attributes, assign
+a NULL value to the \code{widths} function.
 }
 \examples{
 # Take subset of data
@@ -50,6 +53,12 @@ widths(df1) <- list(mpg = 12, cyl = 10)
 fdata(df1)
 
 # View assigned widths
+widths(df1)
+
+# Clear widths
+widths(df1) <- NULL
+
+# Confirm widths are cleared
 widths(df1)
 }
 \seealso{

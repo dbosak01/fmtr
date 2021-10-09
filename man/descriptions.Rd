@@ -38,6 +38,9 @@ descriptions to a data frame.  The description values
 should be in a named list, where
 each name corresponds to the name of the data frame column to assign
 values to.
+
+Finally, if you wish to clear out the description attributes, assign
+a NULL value to the \code{descriptions} function.
 }
 \examples{
 # Take subset of data
@@ -50,6 +53,12 @@ print(df1)
 descriptions(df1) <- list(mpg = "Miles per Gallon", cyl = "Cylinders")
 
 # Display descriptions
+descriptions(df1)
+
+# Clear descriptions
+descriptions(df1) <- NULL
+
+# Confirm descriptions are cleared
 descriptions(df1)
 }
 \seealso{

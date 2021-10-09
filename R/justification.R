@@ -23,6 +23,9 @@
 #' should be in a named list, where
 #' each name corresponds to the name of the data frame column to assign
 #' values to.
+#' 
+#' Finally, if you wish to clear out the justification attributes, assign
+#' a NULL value to the \code{justification} function.
 #'     
 #' @param x A data frame or tibble.
 #' @return A named list of justification values. 
@@ -44,10 +47,15 @@
 #' 
 #' fdata(df1)
 #' 
-#' 
 #' # Display justification
 #' justification(df1)
 #' widths(df1)
+#' 
+#' # Clear justification
+#' justification(df1) <- NULL
+#' 
+#' # Confirm justifications are cleared
+#' justification(df1)
 justification <- function(x) {
   
   ret <- list()
@@ -72,13 +80,25 @@ justification <- function(x) {
 `justification<-` <- function(x, value) {
   
   
-  for (nm in names(value)) {
+  
+  if (all(is.null(value))) {
     
-    if (is.null(x[[nm]])) 
-      stop(paste("Name not found:", nm))
-    else
-      attr(x[[nm]], "justify") <- value[[nm]]
+    for (nm in names(x)) {
+      
+      attr(x[[nm]], "justify") <- NULL
+    }
     
+    
+  } else {
+  
+    for (nm in names(value)) {
+      
+      if (is.null(x[[nm]])) 
+        stop(paste("Name not found:", nm))
+      else
+        attr(x[[nm]], "justify") <- value[[nm]]
+      
+    }
   }
   
   return(x)

@@ -20,8 +20,19 @@ test_that("formats() function works as expected.", {
   
   expect_error(formats(df1) <- list(mpd = "%.1f"))
 
-  format(df1) 
+  df1
   
+  fdata(df1) 
+  
+  formats(df1)
+  expect_equal(formats(df1)$mpg, "%.0f")
+  
+  formats(df1) <- NULL
+  
+  formats(df1)
+  
+  expect_equal(length(formats(df1)), 0)
+  expect_equal(is.null(formats(df1)$mpg), TRUE)
   
 })
 

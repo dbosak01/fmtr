@@ -199,6 +199,8 @@ descriptions to a data frame.  The description values
 should be in a named list, where
 each name corresponds to the name of the data frame column to assign
 values to.</p>
+<p>Finally, if you wish to clear out the description attributes, assign
+a NULL value to the <code>descriptions</code> function.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='fdata.html'>fdata</a></code> to display formatted data, 
@@ -216,6 +218,12 @@ values to.</p>
 <span class='fu'>descriptions</span><span class='op'>(</span><span class='va'>df1</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>mpg <span class='op'>=</span> <span class='st'>"Miles per Gallon"</span>, cyl <span class='op'>=</span> <span class='st'>"Cylinders"</span><span class='op'>)</span>
 
 <span class='co'># Display descriptions</span>
+<span class='fu'>descriptions</span><span class='op'>(</span><span class='va'>df1</span><span class='op'>)</span>
+
+<span class='co'># Clear descriptions</span>
+<span class='fu'>descriptions</span><span class='op'>(</span><span class='va'>df1</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='cn'>NULL</span>
+
+<span class='co'># Confirm descriptions are cleared</span>
 <span class='fu'>descriptions</span><span class='op'>(</span><span class='va'>df1</span><span class='op'>)</span>
 </pre>
   </div>

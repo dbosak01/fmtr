@@ -23,7 +23,9 @@
 #' should be in a named list, where
 #' each name corresponds to the name of the data frame column to assign
 #' values to.
-#'     
+#' 
+#' Finally, if you wish to clear out the description attributes, assign
+#' a NULL value to the \code{descriptions} function.    
 #' @param x A data frame or tibble.
 #' @return A named list of description values. 
 #' @seealso \code{\link{fdata}} to display formatted data, 
@@ -42,6 +44,12 @@
 #' descriptions(df1) <- list(mpg = "Miles per Gallon", cyl = "Cylinders")
 #' 
 #' # Display descriptions
+#' descriptions(df1)
+#' 
+#' # Clear descriptions
+#' descriptions(df1) <- NULL
+#' 
+#' # Confirm descriptions are cleared
 #' descriptions(df1)
 descriptions <- function(x) {
   
@@ -66,14 +74,24 @@ descriptions <- function(x) {
 #' @export 
 `descriptions<-` <- function(x, value) {
   
-  
-  for (nm in names(value)) {
+  if (all(is.null(value))) {
     
-    if (is.null(x[[nm]])) 
-      stop(paste("Name not found:", nm))
-    else
-      attr(x[[nm]], "description") <- value[[nm]]
+    for (nm in names(x)) {
+      
+      attr(x[[nm]], "description") <- NULL
+    }
     
+    
+  } else {
+    
+    for (nm in names(value)) {
+      
+      if (is.null(x[[nm]])) 
+        stop(paste("Name not found:", nm))
+      else
+        attr(x[[nm]], "description") <- value[[nm]]
+      
+    }
   }
   
   return(x)

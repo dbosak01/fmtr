@@ -38,6 +38,9 @@ justification to a data frame.  The justification values
 should be in a named list, where
 each name corresponds to the name of the data frame column to assign
 values to.
+
+Finally, if you wish to clear out the justification attributes, assign
+a NULL value to the \code{justification} function.
 }
 \examples{
 # Take subset of data
@@ -52,10 +55,15 @@ widths(df1) <- list(mpg = 12, cyl = 10)
 
 fdata(df1)
 
-
 # Display justification
 justification(df1)
 widths(df1)
+
+# Clear justification
+justification(df1) <- NULL
+
+# Confirm justifications are cleared
+justification(df1)
 }
 \seealso{
 \code{\link{fdata}} to display formatted data, 

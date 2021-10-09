@@ -21,7 +21,13 @@ test_that("descriptions() function works as expected.", {
   expect_error(descriptions(df1) <- list(mpd = "Hello"))
   
   
-  format(df1) 
+  #str(df1) 
+  
+  descriptions(df1)
+  
+  descriptions(df1) <- NULL
+  expect_equal(length(descriptions(df1)), 0)
+  
   
 })
 
