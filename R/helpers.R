@@ -176,14 +176,15 @@ fmt_median <- function(x, format = "%.1f") {
 #' @return A character vector of formatted counts and percents. 
 #' @family helpers 
 #' @examples
-#' v1 <- c(4, 3, 8, 6, 9, 5, NA, 0, 7, 4)
+#' v1 <- c(4, 3, 8, 6, 9, 5, NA, 0, 7, 4, 3, 7)
 #' 
 #' # Format count and percent
 #' fmt_cnt_pct(v1)
 #' 
 #' # Output
-#' # "4 ( 44.4%)" "3 ( 33.3%)" "8 ( 88.9%)" "6 ( 66.7%)" "9 (100.0%)" 
-#' # "5 ( 55.6%)" NA           "0 (  0.0%)" "7 ( 77.8%)" "4 ( 44.4%)"
+#' # [1] "4 ( 36.4%)" "3 ( 27.3%)" "8 ( 72.7%)" "6 ( 54.5%)"
+#' # [5] "9 ( 81.8%)" "5 ( 45.5%)" NA           "0 (  0.0%)"
+#' # [9] "7 ( 63.6%)" "4 ( 36.4%)" "3 ( 27.3%)" "7 ( 63.6%)"
 #' @export
 fmt_cnt_pct <- function(x, denom = NULL, format = "%5.1f") {
   

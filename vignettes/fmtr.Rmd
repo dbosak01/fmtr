@@ -137,9 +137,10 @@ fapply(v1, v2)
 #### A User-Defined Format
 
 The weakness with using a named vector as a lookup list, 
-as in the above example, is that it will fail if there are any NA
-values in the data.  Additionally, there is no capability to include
-any sort of logic in the lookup. 
+as in the above example, is that there is no way to include any sort of logic
+in the lookup.  For instance, if your data has NA values, you may want to handle
+those differently from the valid input values. Or you may want to define 
+a default value if the input data does not match any of the lookup keys.
 
 For these reasons, the **fmtr** package
 provides a *user-defined format*.  This concept was taken directly from 

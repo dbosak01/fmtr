@@ -210,14 +210,15 @@ as "(  0.0%)"</p>
 <code><a href='fmt_range.html'>fmt_range</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='va'>v1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>3</span>, <span class='fl'>8</span>, <span class='fl'>6</span>, <span class='fl'>9</span>, <span class='fl'>5</span>, <span class='cn'>NA</span>, <span class='fl'>0</span>, <span class='fl'>7</span>, <span class='fl'>4</span><span class='op'>)</span>
+    <pre class="examples"><span class='va'>v1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>4</span>, <span class='fl'>3</span>, <span class='fl'>8</span>, <span class='fl'>6</span>, <span class='fl'>9</span>, <span class='fl'>5</span>, <span class='cn'>NA</span>, <span class='fl'>0</span>, <span class='fl'>7</span>, <span class='fl'>4</span>, <span class='fl'>3</span>, <span class='fl'>7</span><span class='op'>)</span>
 
 <span class='co'># Format count and percent</span>
 <span class='fu'>fmt_cnt_pct</span><span class='op'>(</span><span class='va'>v1</span><span class='op'>)</span>
 
 <span class='co'># Output</span>
-<span class='co'># "4 ( 44.4%)" "3 ( 33.3%)" "8 ( 88.9%)" "6 ( 66.7%)" "9 (100.0%)" </span>
-<span class='co'># "5 ( 55.6%)" NA           "0 (  0.0%)" "7 ( 77.8%)" "4 ( 44.4%)"</span>
+<span class='co'># [1] "4 ( 36.4%)" "3 ( 27.3%)" "8 ( 72.7%)" "6 ( 54.5%)"</span>
+<span class='co'># [5] "9 ( 81.8%)" "5 ( 45.5%)" NA           "0 (  0.0%)"</span>
+<span class='co'># [9] "7 ( 63.6%)" "4 ( 36.4%)" "3 ( 27.3%)" "7 ( 63.6%)"</span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
