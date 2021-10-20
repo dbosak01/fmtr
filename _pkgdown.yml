@@ -63,7 +63,7 @@ reference:
   - justification
   - labels.data.frame
 - title: Helper Functions
-  desc: Functions to perform common formatting tasks on statistica reports.
+  desc: Functions to perform common formatting tasks on statistical reports.
   contents:
   - fmt_n
   - fmt_cnt_pct
