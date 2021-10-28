@@ -82,7 +82,7 @@ as.fcat <- function (x) {
 #' The \code{as.fcat.data.frame} converts a data frame to a format catalog. A
 #' corresponding conversion for class "tbl_df" converts a tibble.
 #' 
-#' To understand the format of the input data frame, create a format and use
+#' To understand the structure of the input data frame, create a format and use
 #' the \code{as.data.frame} method to convert the format to a data frame.
 #' Then observe the columns and organization of the data.
 #' @section Input Data Frame Specifications:

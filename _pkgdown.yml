@@ -51,6 +51,7 @@ reference:
   - condition
   - labels.fmt
   - as.fmt
+  - as.fmt.data.frame
   - is.format
   - as.data.frame.fmt
   - print.fmt

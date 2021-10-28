@@ -70,4 +70,14 @@ v2
 \code{\link{value}} to define a format,
 \code{\link{levels}} or \code{\link{labels.fmt}} to access the labels, and 
 \code{\link{fapply}} to apply the format to a vector.
+
+Other fmt: 
+\code{\link{as.data.frame.fmt}()},
+\code{\link{as.fmt.data.frame}()},
+\code{\link{as.fmt}()},
+\code{\link{is.format}()},
+\code{\link{labels.fmt}()},
+\code{\link{print.fmt}()},
+\code{\link{value}()}
 }
+\concept{fmt}

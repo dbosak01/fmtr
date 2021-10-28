@@ -17,3 +17,14 @@ input object.
 A generic method for casting objects to
 a format.  Individual objects will inherit from this function.
 }
+\seealso{
+Other fmt: 
+\code{\link{as.data.frame.fmt}()},
+\code{\link{as.fmt.data.frame}()},
+\code{\link{condition}()},
+\code{\link{is.format}()},
+\code{\link{labels.fmt}()},
+\code{\link{print.fmt}()},
+\code{\link{value}()}
+}
+\concept{fmt}

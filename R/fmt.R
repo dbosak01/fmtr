@@ -33,6 +33,7 @@
 #' @seealso \code{\link{condition}} to define a condition,
 #' \code{\link{levels}} or \code{\link{labels.fmt}} to access the labels, and 
 #' \code{\link{fapply}} to apply the format to a vector.
+#' @family fmt
 #' @export
 #' @examples 
 #' ## Example 1: Character to Character Mapping ##
@@ -130,6 +131,7 @@ value <- function(...) {
 #' \code{\link{value}} to define a format,
 #' \code{\link{levels}} or \code{\link{labels.fmt}} to access the labels, and 
 #' \code{\link{fapply}} to apply the format to a vector.
+#' @family fmt
 #' @export
 #' @examples 
 #' # Set up vector
@@ -165,6 +167,7 @@ condition <- function(expr, label, order = NULL) {
 #' @param x The object to cast.
 #' @return A formatting object, created using the information in the 
 #' input object.
+#' @family fmt
 #' @export
 as.fmt <- function (x) {
   UseMethod("as.fmt", x)
@@ -184,6 +187,7 @@ as.fmt <- function (x) {
 #' @param ... Any follow-on parameters.
 #' @param name An optional name for the format.  By default, the name of 
 #' the variable holding the format will be used.
+#' @family fmt
 #' @export
 as.data.frame.fmt <- function(x, row.names = NULL, optional = FALSE, ...,
                               name=deparse(substitute(x, 
@@ -217,7 +221,68 @@ as.data.frame.fmt <- function(x, row.names = NULL, optional = FALSE, ...,
   
 }
 
-
+#' @title Convert a data frame to a user-defined format 
+#' @description This function takes a data frame as input
+#' and converts it to a user-defined format based on the information contained
+#' in the data frame. The data frame should have 5 columns: "Name", "Type",
+#' "Expression", "Label" and "Order".  
+#' @details 
+#' The \code{as.fmt.data.frame} function converts a data frame to a 
+#' user-defined format. 
+#' 
+#' To understand the structure of the input data frame, create a user-defined 
+#' format and use the \code{as.data.frame} method to convert the format 
+#' to a data frame.
+#' Then observe the columns and organization of the data.
+#' @section Input Data Frame Specifications:
+#' The input data frame should contain the following columns:
+#' \itemize{
+#' \item \strong{Name}: The name of the format
+#' \item \strong{Type}: The type of format.  See the type codes below.
+#' \item \strong{Expression}: The formatting expression. The expression will 
+#' hold different types of values depending on the format type.  Within the
+#' data frame, this expression is stored as a character string.
+#' \item \strong{Label}: The label for user-defined, "U" type formats.
+#' \item \strong{Order}: The order for user-defined, "U" type formats. 
+#' }
+#' Any additional columns will be ignored.  Column names are case-insensitive.
+#' 
+#' Valid values for the "Type" column are as follows:
+#' \itemize{
+#' \item \strong{U}: User Defined List created with the \code{\link{value}} 
+#' function.
+#' \item \strong{S}: A formatting string of formatting codes.  
+#' See \link{FormattingStrings}.
+#' \item \strong{F}: A vectorized function.
+#' \item \strong{V}: A named vector lookup.}
+#' 
+#' The "Label" and "Order" columns are used only for a type "U", user-defined
+#' format created with the \code{\link{value}} function.
+#' @param x The data frame to convert.
+#' @return A format catalog based on the information contained in the 
+#' input data frame.
+#' @examples 
+#' # Create a user-defined format 
+#' f1 <- value(condition(x == "A", "Label A"),
+#'             condition(x == "B", "Label B"),
+#'             condition(TRUE, "Other"))
+#'            
+#' # Convert user-defined format to data frame to view the structure
+#' df <- as.data.frame(f1)
+#' print(df)
+#' 
+#' # Name Type Expression   Label Order
+#' # 1 f1    U   x == "A" Label A    NA
+#' # 2 f1    U   x == "B" Label B    NA
+#' # 3 f1    U       TRUE   Other    NA
+#' 
+#' # Convert data frame back to a user-defined format 
+#' f2 <- as.fmt(df)
+#' 
+#' # Use re-converted format
+#' fapply(c("A", "B", "C", "B"), f2)
+#' # [1] "Label A" "Label B" "Other"   "Label B"
+#' @family fmt
 #' @export
 as.fmt.data.frame <- function(x) {
   
@@ -254,6 +319,7 @@ as.fmt.data.frame <- function(x) {
 }
 
 
+
 # Utilities ---------------------------------------------------------------
 
 #' @title
@@ -277,6 +343,7 @@ as.fmt.data.frame <- function(x) {
 #' @seealso \code{\link{value}} to define a format,
 #' \code{\link{condition}} to define the conditions for a format, and 
 #' \code{\link{fapply}} to apply the format to a vector.
+#' @family fmt
 #' @export
 #' @examples 
 #' 
@@ -336,6 +403,7 @@ labels.fmt <- function(object, ...) {
 #' @seealso \code{\link{value}} to define a format,
 #' \code{\link{condition}} to define the conditions for a format, and 
 #' \code{\link{fapply}} to apply the format to a vector.
+#' @family fmt
 #' @export
 #' @examples 
 #' 
@@ -367,6 +435,7 @@ is.format <- function(x) {
 #' name that holds the format will be used.
 #' @param verbose Turn on or off verbose printing mode.  Verbose mode will
 #' print object as a list.  Otherwise, the object will be printed as a table.
+#' @family fmt
 #' @export
 print.fmt <- function(x, ..., name = deparse(substitute(x, env = environment())), 
                       verbose = FALSE) {

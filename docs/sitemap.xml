@@ -43,7 +43,13 @@
     <loc>https://fmtr.r-sassy.org/reference/as.flist.tbl_df.html</loc>
   </url>
   <url>
+    <loc>https://fmtr.r-sassy.org/reference/as.fmt.data.frame.html</loc>
+  </url>
+  <url>
     <loc>https://fmtr.r-sassy.org/reference/as.fmt.html</loc>
+  </url>
+  <url>
+    <loc>https://fmtr.r-sassy.org/reference/as.fmt.tbl_df.html</loc>
   </url>
   <url>
     <loc>https://fmtr.r-sassy.org/reference/condition.html</loc>

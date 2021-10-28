@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Determine whether an object is a user-defined format — is.format • fmtr</title>
+<title>Convert a data frame to a user-defined format — as.fmt.data.frame • fmtr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,9 +48,11 @@
   
   <script src="../extra.js"></script>
 
-<meta property="og:title" content="Determine whether an object is a user-defined format — is.format" />
-<meta property="og:description" content="The is.format function can be used to determine if an object is a 
-user-defined format of class &quot;fmt&quot;." />
+<meta property="og:title" content="Convert a data frame to a user-defined format — as.fmt.data.frame" />
+<meta property="og:description" content="This function takes a data frame as input
+and converts it to a user-defined format based on the information contained
+in the data frame. The data frame should have 5 columns: &quot;Name&quot;, &quot;Type&quot;,
+&quot;Expression&quot;, &quot;Label&quot; and &quot;Order&quot;." />
 <meta property="og:image" content="https://fmtr.r-sassy.org/logo.png" />
 
 
@@ -150,60 +152,98 @@ user-defined format of class &quot;fmt&quot;." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Determine whether an object is a user-defined format</h1>
+    <h1>Convert a data frame to a user-defined format</h1>
     <small class="dont-index">Source: <a href='https://github.com/dbosak01/fmtr/blob/master/R/fmt.R'><code>R/fmt.R</code></a></small>
-    <div class="hidden name"><code>is.format.Rd</code></div>
+    <div class="hidden name"><code>as.fmt.data.frame.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The <code>is.format</code> function can be used to determine if an object is a 
-user-defined format of class "fmt".</p>
+    <p>This function takes a data frame as input
+and converts it to a user-defined format based on the information contained
+in the data frame. The data frame should have 5 columns: "Name", "Type",
+"Expression", "Label" and "Order".</p>
     </div>
 
-    <pre class="usage"><span class='fu'>is.format</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='co'># S3 method for data.frame</span>
+<span class='fu'><a href='as.fmt.html'>as.fmt</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A user-defined format of class "fmt".</p></td>
+      <td><p>The data frame to convert.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A logical value or TRUE or FALSE.</p>
+    <p>A format catalog based on the information contained in the 
+input data frame.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The <code>is.format</code> function returns TRUE if the object passed is a 
-user-defined format.  User-defined formats are defined using the <code>value</code>
-function. See the <code><a href='value.html'>value</a></code>
-function help for further details.</p>
+    <p>The <code>as.fmt.data.frame</code> function converts a data frame to a 
+user-defined format.</p>
+<p>To understand the structure of the input data frame, create a user-defined 
+format and use the <code>as.data.frame</code> method to convert the format 
+to a data frame.
+Then observe the columns and organization of the data.</p>
+    <h2 class="hasAnchor" id="input-data-frame-specifications"><a class="anchor" href="#input-data-frame-specifications"></a>Input Data Frame Specifications</h2>
+
+    
+
+<p>The input data frame should contain the following columns:</p><ul>
+<li><p><strong>Name</strong>: The name of the format</p></li>
+<li><p><strong>Type</strong>: The type of format.  See the type codes below.</p></li>
+<li><p><strong>Expression</strong>: The formatting expression. The expression will 
+hold different types of values depending on the format type.  Within the
+data frame, this expression is stored as a character string.</p></li>
+<li><p><strong>Label</strong>: The label for user-defined, "U" type formats.</p></li>
+<li><p><strong>Order</strong>: The order for user-defined, "U" type formats.</p></li>
+</ul><p>Any additional columns will be ignored.  Column names are case-insensitive.</p>
+<p>Valid values for the "Type" column are as follows:</p><ul>
+<li><p><strong>U</strong>: User Defined List created with the <code><a href='value.html'>value</a></code> 
+function.</p></li>
+<li><p><strong>S</strong>: A formatting string of formatting codes.  
+See <a href='FormattingStrings.html'>FormattingStrings</a>.</p></li>
+<li><p><strong>F</strong>: A vectorized function.</p></li>
+<li><p><strong>V</strong>: A named vector lookup.</p></li>
+</ul>
+
+<p>The "Label" and "Order" columns are used only for a type "U", user-defined
+format created with the <code><a href='value.html'>value</a></code> function.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='value.html'>value</a></code> to define a format,
-<code><a href='condition.html'>condition</a></code> to define the conditions for a format, and 
-<code><a href='fapply.html'>fapply</a></code> to apply the format to a vector.</p>
-<p>Other fmt: 
+    <div class='dont-index'><p>Other fmt: 
 <code><a href='as.data.frame.fmt.html'>as.data.frame.fmt</a>()</code>,
-<code><a href='as.fmt.data.frame.html'>as.fmt.data.frame</a>()</code>,
 <code><a href='as.fmt.html'>as.fmt</a>()</code>,
 <code><a href='condition.html'>condition</a>()</code>,
+<code><a href='is.format.html'>is.format</a>()</code>,
 <code><a href='labels.fmt.html'>labels.fmt</a>()</code>,
 <code><a href='print.fmt.html'>print.fmt</a>()</code>,
 <code><a href='value.html'>value</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples">
-<span class='co'># Define format</span>
-<span class='va'>fmt1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='value.html'>value</a></span><span class='op'>(</span><span class='fu'><a href='condition.html'>condition</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>==</span> <span class='st'>"A"</span>, <span class='st'>"Label A"</span><span class='op'>)</span>,
-              <span class='fu'><a href='condition.html'>condition</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>==</span> <span class='st'>"B"</span>, <span class='st'>"Label B"</span><span class='op'>)</span>, 
-              <span class='fu'><a href='condition.html'>condition</a></span><span class='op'>(</span><span class='cn'>TRUE</span>, <span class='st'>"Other"</span><span class='op'>)</span><span class='op'>)</span>
-              
-<span class='co'># Check for format</span>
-<span class='fu'>is.format</span><span class='op'>(</span><span class='va'>fmt1</span><span class='op'>)</span>
-<span class='fu'>is.format</span><span class='op'>(</span><span class='st'>"A"</span><span class='op'>)</span>
+    <pre class="examples"><span class='co'># Create a user-defined format </span>
+<span class='va'>f1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='value.html'>value</a></span><span class='op'>(</span><span class='fu'><a href='condition.html'>condition</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>==</span> <span class='st'>"A"</span>, <span class='st'>"Label A"</span><span class='op'>)</span>,
+            <span class='fu'><a href='condition.html'>condition</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>==</span> <span class='st'>"B"</span>, <span class='st'>"Label B"</span><span class='op'>)</span>,
+            <span class='fu'><a href='condition.html'>condition</a></span><span class='op'>(</span><span class='cn'>TRUE</span>, <span class='st'>"Other"</span><span class='op'>)</span><span class='op'>)</span>
+           
+<span class='co'># Convert user-defined format to data frame to view the structure</span>
+<span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>f1</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span>
+
+<span class='co'># Name Type Expression   Label Order</span>
+<span class='co'># 1 f1    U   x == "A" Label A    NA</span>
+<span class='co'># 2 f1    U   x == "B" Label B    NA</span>
+<span class='co'># 3 f1    U       TRUE   Other    NA</span>
+
+<span class='co'># Convert data frame back to a user-defined format </span>
+<span class='va'>f2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='as.fmt.html'>as.fmt</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span>
+
+<span class='co'># Use re-converted format</span>
+<span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"C"</span>, <span class='st'>"B"</span><span class='op'>)</span>, <span class='va'>f2</span><span class='op'>)</span>
+<span class='co'># [1] "Label A" "Label B" "Other"   "Label B"</span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

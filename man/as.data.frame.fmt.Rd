@@ -32,3 +32,14 @@ Cast a format object to a data frame.  This function is
 a class-specific implementation of the the generic \code{as.data.frame} 
 method.
 }
+\seealso{
+Other fmt: 
+\code{\link{as.fmt.data.frame}()},
+\code{\link{as.fmt}()},
+\code{\link{condition}()},
+\code{\link{is.format}()},
+\code{\link{labels.fmt}()},
+\code{\link{print.fmt}()},
+\code{\link{value}()}
+}
+\concept{fmt}
