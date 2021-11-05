@@ -104,10 +104,6 @@ to turn to is the [fmtr](https://fmtr.r-sassy.org) web site.
 This web site offers many examples, and full
 documentation on every function.  
 
-If you need additional help, please turn 
-to [stackoverflow.com](https://stackoverflow.com).  The stackoverflow 
-community will be very willing to answer your questions.  
-
 If you want to look at the code for the **fmtr** package, visit the
 github page [here](https://github.com/dbosak01/fmtr).
 
