@@ -140,7 +140,7 @@
 <li><a href="#input">Can I create an input format?</a></li>
 <li><a href="#numeric">Can I create a numeric user-defined format?</a></li>
 <li><a href="#path">Is there a way to set up a search path for a format catalog?</a></li>
-<li><a href="#sas7bcat">Is there a way to read in a format catalog from SAS?</a></li>
+<li><a href="#sas7bcat">Is there a way to read in a format catalog from SAS®?</a></li>
 </ul>
 </div>
 <div id="content" class="section level2">
@@ -186,7 +186,7 @@
 </div>
 <div id="fapply" class="section level3">
 <h3 class="hasAnchor">
-<a href="#fapply" class="anchor"></a>How can I add a new, formatted column to my dataframe??</h3>
+<a href="#fapply" class="anchor"></a>How can I add a new, formatted column to my dataframe?</h3>
 <p><strong>Q:</strong> I want to add a new column to my data frame using a format. This column will be a categorization of an existing continuous column. I want to add it directly to my existing data frame, not create a new one. How can I do that?</p>
 <p><strong>A:</strong> First create a categorization format:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -295,7 +295,7 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Create list out of metadata vectors</span>
 <span class="va">lst</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="va">mdat</span><span class="op">$</span><span class="va">fmt</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/names.html">names</a></span><span class="op">(</span><span class="va">lst</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">mdat</span><span class="op">$</span><span class="va">var</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">lst</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">mdat</span><span class="op">$</span><span class="va">var</span>
 
 <span class="co"># View List</span>
 <span class="va">lst</span>
@@ -504,7 +504,7 @@ SUBJ     AGE GENDER
 '</span><span class="op">)</span>
 
 <span class="co"># Reassign format names in catalog</span>
-<span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/names.html">names</a></span><span class="op">(</span><span class="va">fmts</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AGE"</span>, <span class="st">"GENDER"</span>, <span class="st">"VAR"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">fmts</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AGE"</span>, <span class="st">"GENDER"</span>, <span class="st">"VAR"</span><span class="op">)</span>
 
 <span class="co"># Assign formats from catalog to data frame</span>
 <span class="fu"><a href="../reference/formats.html">formats</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">fmts</span>
@@ -581,8 +581,7 @@ SUBJECT AGECAT  SEX
 <div id="export" class="section level3">
 <h3 class="hasAnchor">
 <a href="#export" class="anchor"></a>How do I export my format catalog to a spreadsheet?</h3>
-<p><strong>Q:</strong> I have a format catalog I created in R with the <strong>fmtr</strong> package. I want to store that catalog in a spreadsheet for documentation purposes.<br>
-How can I do that?</p>
+<p><strong>Q:</strong> I have a format catalog I created in R with the <strong>fmtr</strong> package. I want to store that catalog in a spreadsheet for documentation purposes. How can I do that?</p>
 <p><strong>A:</strong> There is a Base R function <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> that can be used to convert a <strong>fmtr</strong> user-defined format or a format catalog to a data frame. From there, it is easy to export to Excel or any other file format you like. Here is an example:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fmtr.r-sassy.org">fmtr</a></span><span class="op">)</span>
@@ -669,7 +668,7 @@ How can I do that?</p>
 <div id="input" class="section level3">
 <h3 class="hasAnchor">
 <a href="#input" class="anchor"></a>Can I create an input format?</h3>
-<p><strong>Q:</strong> SAS distinguishes between an input format and an output format. Is there a similar distinction in the <strong>fmtr</strong> package?</p>
+<p><strong>Q:</strong> SAS® distinguishes between an input format and an output format. Is there a similar distinction in the <strong>fmtr</strong> package?</p>
 <p><strong>A:</strong> No. All <strong>fmtr</strong> formats are output formats.</p>
 <p><a href="#top">top</a></p>
 <hr>
@@ -694,16 +693,16 @@ How can I do that?</p>
 <div id="path" class="section level3">
 <h3 class="hasAnchor">
 <a href="#path" class="anchor"></a>Is there a way to set up a search path for a format catalog?</h3>
-<p><strong>Q:</strong> In SAS you can set up a search path for a format catalog, so you don’t need to read it. You can just reference the format names and it will work. Is there a similar functionality in the <strong>fmtr</strong> package?</p>
+<p><strong>Q:</strong> In SAS® you can set up a search path for a format catalog, so you don’t need to read it. You can just reference the format names and it will work. Is there a similar functionality in the <strong>fmtr</strong> package?</p>
 <p><strong>A:</strong> No. This issue has been raised, and is under consideration as a future enhancement.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
 <div id="sas7bcat" class="section level3">
 <h3 class="hasAnchor">
-<a href="#sas7bcat" class="anchor"></a>Is there a way to read in a format catalog from SAS?</h3>
-<p><strong>Q:</strong> I have an existing format catalog from SAS that I want to convert to R. Does the <strong>fmtr</strong> package provide a way to read in a SAS format catalog?</p>
-<p><strong>A:</strong> No. This issue has been raised, but is probably not feasible. SAS provides a lot of functionality to their formats that cannot be reproduced in <strong>fmtr</strong>, even if the mechanics of reading the SAS format catalog could be worked out.</p>
+<a href="#sas7bcat" class="anchor"></a>Is there a way to read in a format catalog from SAS®?</h3>
+<p><strong>Q:</strong> I have an existing format catalog from SAS® that I want to convert to R. Does the <strong>fmtr</strong> package provide a way to read in a SAS® format catalog?</p>
+<p><strong>A:</strong> No. This issue has been raised, but is probably not feasible. SAS® provides a lot of functionality to their formats that cannot be reproduced in <strong>fmtr</strong>, even if the mechanics of reading the SAS® format catalog could be worked out.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>

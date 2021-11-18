@@ -161,7 +161,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="#input">Can I create an input format?</a></li>
 <li><a href="#numeric">Can I create a numeric user-defined format?</a></li>
 <li><a href="#path">Is there a way to set up a search path for a format catalog?</a></li>
-<li><a href="#sas7bcat">Is there a way to read in a format catalog from SAS?</a></li>
+<li><a href="#sas7bcat">Is there a way to read in a format catalog from SAS®?</a></li>
 </ul>
 </div>
 <div id="content" class="section level2">
@@ -203,7 +203,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <hr />
 </div>
 <div id="fapply" class="section level3">
-<h3>How can I add a new, formatted column to my dataframe??</h3>
+<h3>How can I add a new, formatted column to my dataframe?</h3>
 <p><strong>Q:</strong> I want to add a new column to my data frame using a format. This column will be a categorization of an existing continuous column. I want to add it directly to my existing data frame, not create a new one. How can I do that?</p>
 <p><strong>A:</strong> First create a categorization format:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fmt <span class="ot">&lt;-</span> <span class="fu">value</span>(<span class="fu">condition</span>(x <span class="sc">&lt;</span> <span class="dv">5</span>, <span class="st">&quot;A&quot;</span>),</span>
@@ -572,8 +572,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="export" class="section level3">
 <h3>How do I export my format catalog to a spreadsheet?</h3>
-<p><strong>Q:</strong> I have a format catalog I created in R with the <strong>fmtr</strong> package. I want to store that catalog in a spreadsheet for documentation purposes.<br />
-How can I do that?</p>
+<p><strong>Q:</strong> I have a format catalog I created in R with the <strong>fmtr</strong> package. I want to store that catalog in a spreadsheet for documentation purposes. How can I do that?</p>
 <p><strong>A:</strong> There is a Base R function <code>as.data.frame()</code> that can be used to convert a <strong>fmtr</strong> user-defined format or a format catalog to a data frame. From there, it is easy to export to Excel or any other file format you like. Here is an example:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fmtr)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
@@ -656,7 +655,7 @@ How can I do that?</p>
 </div>
 <div id="input" class="section level3">
 <h3>Can I create an input format?</h3>
-<p><strong>Q:</strong> SAS distinguishes between an input format and an output format. Is there a similar distinction in the <strong>fmtr</strong> package?</p>
+<p><strong>Q:</strong> SAS® distinguishes between an input format and an output format. Is there a similar distinction in the <strong>fmtr</strong> package?</p>
 <p><strong>A:</strong> No. All <strong>fmtr</strong> formats are output formats.</p>
 <p><a href="#top">top</a></p>
 <hr />
@@ -678,15 +677,15 @@ How can I do that?</p>
 </div>
 <div id="path" class="section level3">
 <h3>Is there a way to set up a search path for a format catalog?</h3>
-<p><strong>Q:</strong> In SAS you can set up a search path for a format catalog, so you don’t need to read it. You can just reference the format names and it will work. Is there a similar functionality in the <strong>fmtr</strong> package?</p>
+<p><strong>Q:</strong> In SAS® you can set up a search path for a format catalog, so you don’t need to read it. You can just reference the format names and it will work. Is there a similar functionality in the <strong>fmtr</strong> package?</p>
 <p><strong>A:</strong> No. This issue has been raised, and is under consideration as a future enhancement.</p>
 <p><a href="#top">top</a></p>
 <hr />
 </div>
 <div id="sas7bcat" class="section level3">
-<h3>Is there a way to read in a format catalog from SAS?</h3>
-<p><strong>Q:</strong> I have an existing format catalog from SAS that I want to convert to R. Does the <strong>fmtr</strong> package provide a way to read in a SAS format catalog?</p>
-<p><strong>A:</strong> No. This issue has been raised, but is probably not feasible. SAS provides a lot of functionality to their formats that cannot be reproduced in <strong>fmtr</strong>, even if the mechanics of reading the SAS format catalog could be worked out.</p>
+<h3>Is there a way to read in a format catalog from SAS®?</h3>
+<p><strong>Q:</strong> I have an existing format catalog from SAS® that I want to convert to R. Does the <strong>fmtr</strong> package provide a way to read in a SAS® format catalog?</p>
+<p><strong>A:</strong> No. This issue has been raised, but is probably not feasible. SAS® provides a lot of functionality to their formats that cannot be reproduced in <strong>fmtr</strong>, even if the mechanics of reading the SAS® format catalog could be worked out.</p>
 <p><a href="#top">top</a></p>
 <hr />
 </div>
