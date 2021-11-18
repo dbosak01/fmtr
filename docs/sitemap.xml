@@ -49,9 +49,6 @@
     <loc>https://fmtr.r-sassy.org/reference/as.fmt.html</loc>
   </url>
   <url>
-    <loc>https://fmtr.r-sassy.org/reference/as.fmt.tbl_df.html</loc>
-  </url>
-  <url>
     <loc>https://fmtr.r-sassy.org/reference/condition.html</loc>
   </url>
   <url>
@@ -145,7 +142,13 @@
     <loc>https://fmtr.r-sassy.org/articles/fmtr-convenience.html</loc>
   </url>
   <url>
+    <loc>https://fmtr.r-sassy.org/articles/fmtr-example1.html</loc>
+  </url>
+  <url>
     <loc>https://fmtr.r-sassy.org/articles/fmtr-fapply.html</loc>
+  </url>
+  <url>
+    <loc>https://fmtr.r-sassy.org/articles/fmtr-faq.html</loc>
   </url>
   <url>
     <loc>https://fmtr.r-sassy.org/articles/fmtr-fcat.html</loc>

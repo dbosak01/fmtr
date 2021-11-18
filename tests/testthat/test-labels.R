@@ -58,7 +58,8 @@ test_that("labels() parameter checks work as expected.", {
   
   names(dat) <- NULL
   
-  expect_error(labels(dat) <- list(a = "One"))
+  # No error generated now
+  labels(dat) <- list(a = "One")
   
   
 })

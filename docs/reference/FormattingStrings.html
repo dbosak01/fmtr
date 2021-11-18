@@ -84,7 +84,7 @@ functions. See below for further details." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.4</span>
       </span>
     </div>
 
@@ -124,10 +124,16 @@ functions. See below for further details." />
     <li>
       <a href="../articles/fmtr-helpers.html">Helper Functions</a>
     </li>
+    <li>
+      <a href="../articles/fmtr-example1.html">Complete Example</a>
+    </li>
   </ul>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href=".././articles/fmtr-faq.html">FAQ</a>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -174,9 +180,9 @@ to the base R <code>strptime</code> function.  For all other types of vectors,
 the formatting string will be interpreted as an input to the <code>sprintf</code>
 function.</p>
 <p>The formatting codes for these functions are simple to use. For example, 
-the code <code><a href='fapply.html'>fapply(as.Date("1970-01-01"), "%B %d, %Y")</a></code> will produce
+the code <code>fapply(as.Date("1970-01-01"), "%B %d, %Y")</code> will produce
 the output <code>"January 01, 1970"</code>.  The code 
-<code><a href='fapply.html'>fapply(1.2345, "%.1f")</a></code> will produce the output <code>"1.2"</code>.</p>
+<code>fapply(1.2345, "%.1f")</code> will produce the output <code>"1.2"</code>.</p>
 <p>Below are some commonly used formatting codes for dates:</p><ul>
 <li><p>%d = day as a number</p></li>
 <li><p>%a = abbreviated weekday</p></li>

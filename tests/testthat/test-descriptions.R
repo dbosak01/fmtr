@@ -18,7 +18,8 @@ test_that("descriptions() function works as expected.", {
   
   expect_equal(length(lst), 2)
   
-  expect_error(descriptions(df1) <- list(mpd = "Hello"))
+  # No error now
+  descriptions(df1) <- list(mpd = "Hello")
   
   
   #str(df1) 

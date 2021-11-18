@@ -18,8 +18,8 @@ test_that("widths() function works as expected.", {
   expect_equal(length(lst), 2)
   
   
-  
-  expect_error(widths(df1) <- list(mpd = 12))
+  # No error
+  widths(df1) <- list(mpd = 12)
   
   
   fdata(df1) 

@@ -1,3 +1,12 @@
+# fmtr 1.5.4
+
+* Added FAQ and Complete Example to vignettes.
+* Took out errors on convenience functions if data frame does not have a variable
+specified on the incoming list.  Now this situation is ignored, and no error
+is generated. The error was removed to allow the list to contain more 
+formats/labels/etc. than exist on the data frame, but still assign the matching
+items.
+
 # fmtr 1.5.3
 
 * Added covr and codecov.

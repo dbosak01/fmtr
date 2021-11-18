@@ -93,9 +93,7 @@ justification <- function(x) {
   
     for (nm in names(value)) {
       
-      if (is.null(x[[nm]])) 
-        stop(paste("Name not found:", nm))
-      else
+      if (!is.null(x[[nm]])) 
         attr(x[[nm]], "justify") <- value[[nm]]
       
     }

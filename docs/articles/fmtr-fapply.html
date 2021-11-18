@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.4</span>
       </span>
     </div>
 
@@ -76,10 +76,16 @@
     <li>
       <a href="../articles/fmtr-helpers.html">Helper Functions</a>
     </li>
+    <li>
+      <a href="../articles/fmtr-example1.html">Complete Example</a>
+    </li>
   </ul>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href=".././articles/fmtr-faq.html">FAQ</a>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -105,7 +111,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Format Apply Function</h1>
             
-            <h4 class="date">2021-10-28</h4>
+            <h4 class="date">2021-11-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/dbosak01/fmtr/blob/master/vignettes/fmtr-fapply.Rmd"><code>vignettes/fmtr-fapply.Rmd</code></a></small>
       <div class="hidden name"><code>fmtr-fapply.Rmd</code></div>
@@ -196,7 +202,7 @@ The advantage of using a named vector for formatting is its simplicity. The disa
     
     <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> 
       <span class="va">ret</span> <span class="op">&lt;-</span> <span class="st">"Missing"</span>
-    <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span><span class="op">)</span>
+    <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span><span class="op">)</span>
       <span class="va">ret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Label"</span>, <span class="va">x</span><span class="op">)</span>
     <span class="kw">else</span> 
       <span class="va">ret</span> <span class="op">&lt;-</span> <span class="st">"Other"</span>

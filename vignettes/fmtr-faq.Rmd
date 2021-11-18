@@ -1,0 +1,761 @@
+---
+title: "Frequently Asked Questions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{FAQ}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+options(rmarkdown.html_vignette.check_title = FALSE)
+
+```
+
+Below are some frequently asked questions about the **fmtr** package. Click
+on the links below to navigate to the full question and answer content.
+
+## Index{#top}
+
+* [How do I format a data frame?](#fdata)
+* [How can I add a new, formatted column to my dataframe?](#fapply)
+* [How do I use a format as a lookup?](#lookup)
+* [Where is the documentation for the formatting codes?](#documentation)
+* [How do I assign formats from metadata to my data frame?](#formats)
+* [How do I assign labels from metadata to my data frame?](#labels)
+* [How do I assign descriptions from metadata to my data frame?](#descriptions)
+* [How do I create a format catalog?](#fcat)
+* [How do I use formats from a format catalog?](#usefmt)
+* [How do I assign formats from a catalog to a data frame?](#assign)
+* [How do I create a format catalog from an Excel spreadsheet?](#excel)
+* [How do I export my format catalog to a spreadsheet?](#export)
+* [Can I create a user-defined format from data?](#asfmt)
+* [Can I create an input format?](#input)
+* [Can I create a numeric user-defined format?](#numeric)
+* [Is there a way to set up a search path for a format catalog?](#path)
+* [Is there a way to read in a format catalog from SAS®?](#sas7bcat)
+
+
+## Content
+
+### How do I format a data frame? {#fdata}
+
+**Q:** I have a data frame with different types of variables:
+numbers, dates, character values.  How can I format them without messing
+up the original data?
+
+
+**A:** With the **fmtr** package you can assign the formats to the 
+"format" attribute of the dataframe, and the apply the formats using the 
+`fdata()` function, returning the result to a new data frame.  Here is 
+a simple example:
+```{r eval=FALSE, echo=TRUE}
+# Create sample data
+dat <- data.frame(SUBJ = c(1, 2, 3),
+                  BDATE = c(as.Date("1945-10-17"), 
+                            as.Date("1967-09-04"),
+                            as.Date("1998-04-28")),
+                  SEX = c("M", "F", "M"),
+                  WEIGHT = c(77.1107, 64.2848, 85.9842))
+                  
+# View data                  
+dat
+#   SUBJ      BDATE SEX  WEIGHT
+# 1    1 1945-10-17   M 77.1107
+# 2    2 1967-09-04   F 64.2848
+# 3    3 1998-04-28   M 85.9842
+
+# Assign formats
+formats(dat) <- list(BDATE = "%Y/%m/%d",
+                     SEX = c("M" = "Male", "F" = "Female"),
+                     WEIGHT = "%1.1f kg")
+
+# Apply formats to new data frame
+dat2 <- fdata(dat)
+
+# View new data frame
+dat2
+#   SUBJ      BDATE    SEX  WEIGHT
+# 1    1 1945/10/17   Male 77.1 kg
+# 2    2 1967/09/04 Female 64.3 kg
+# 3    3 1998/04/28   Male 86.0 kg
+```
+[top](#top) 
+
+******
+
+
+### How can I add a new, formatted column to my dataframe? {#fapply}
+
+**Q:** I want to add a new column to my data frame using a format.  This
+column will be a categorization of an existing continuous column.  I want
+to add it directly to my existing data frame, not create a new one.  How
+can I do that?
+
+**A:** First create a categorization format:  
+```{r eval=FALSE, echo=TRUE}
+fmt <- value(condition(x < 5, "A"),
+             condition(x >= 5, "B"))
+
+
+```
+Then we'll create some sample data:
+```{r eval=FALSE, echo=TRUE}
+dat <- data.frame(ID = c(1, 2, 3),
+                  NUM = c(2, 3, 7))
+```
+Then you can apply the format to your data frame
+using either Base R or **tidyverse**.  
+```{r eval=FALSE, echo=TRUE}
+# Base R method
+dat$CAT <- fapply(dat$NUM, fmt)
+
+# View result
+dat
+#   ID NUM CAT
+# 1  1   2   A
+# 2  2   3   A
+# 3  3   7   B
+
+# tidyverse method
+dat <- dat %>% 
+       mutate(CAT = fapply(NUM, fmt))
+       
+dat
+#   ID NUM CAT
+# 1  1   2   A
+# 2  2   3   A
+# 3  3   7   B
+
+```
+
+[top](#top)
+
+******
+
+### How do I use a format as a lookup? {#lookup}
+
+**Q:** I have a decode lookup I want to use on a variable in my dataframe.
+How can I do this with the **fmtr** package?
+
+**A:** There are two common ways to apply a lookup decode 
+with the **fmtr** package. One is to create a named vector from the decode.
+The other is to create a user-defined format.
+```{r eval=FALSE, echo=TRUE}
+# Create sample data frame
+dat <- data.frame(ID = c(1, 2, 3, 4),
+                  CODE = c("A", "C", "B", NA))
+
+# Create decode vector
+v1 <- c(A = "Value A", B = "Value B", C = "Value C")
+
+# Create user-defined format
+fmt1 <- value(condition(x == "A", "Value A"),
+              condition(x == "B", "Value B"),
+              condition(x == "C", "Value C"),
+              condition(TRUE, "Other"))
+              
+# Apply decode vector
+fapply(dat$CODE, v1)
+# [1] "Value A" "Value C" "Value B" NA 
+
+# Apply user-defined format
+fapply(dat$CODE, fmt1)
+# [1] "Value A" "Value C" "Value B" "Other"
+```
+As you can see, both the named vector and the user-defined format can
+decode the data.  The advantage of the user-defined format is that it allows
+you to handle NA values and assign defaults in a controlled way. 
+
+The named vector is easy to create.  But there is no way to control what happens
+to any data value that is not in the lookup.  Which method to use depends on your
+data and the context in which you are applying the decode.  
+
+Note that you may also write a vectorized function to perform the lookup.
+See "Example 4" in the documentation on `fapply()` for a 
+vectorized function example.
+
+[top](#top) 
+
+******
+
+
+### Where is the documentation for the formatting codes? {#documentation}
+
+**Q:** I'm trying to create some formats for dates and numbers, but am 
+not sure what codes are available.  Where is the documentation for the
+possible codes?
+
+**A:** Some commonly used codes are documented as part of the **fmtr**
+documentation [here](https://fmtr.r-sassy.org/reference/FormattingStrings.html).
+Additional documentation on the possible codes for dates is 
+[here](https://rdrr.io/r/base/strptime.html), and for numbers 
+[here](https://rdrr.io/r/base/sprintf.html).
+
+[top](#top)
+
+******
+
+### How do I assign formats from metadata to my data frame? {#formats}
+
+**Q:** I have metadata for my datasets that includes the desired format
+for each variable.  How can I apply these formats to my data?  
+
+**A:** The metadata must ultimately map the variable name to the desired
+format for that variable.  So we can imagine there are at least two columns 
+in the metadata: the variable name and the format.
+```{r eval=FALSE, echo=TRUE}
+# Sample metadata
+mdat <- data.frame(var = c("col1", "col2", "col3"),
+                   fmt = c("%1.1f", "%m-%d-%Y", "%1.2f%%"))
+
+# View metadata
+mdat
+#    var      fmt
+# 1 col1    %1.1f
+# 2 col2 %m-%d-%Y
+# 3 col3  %1.2f%%
+
+```
+Then imagine another data frame that needs formatting:
+```{r eval=FALSE, echo=TRUE}
+# Sample data
+dat <- data.frame(col1 = c(1.235, 3.3947, 7.2842),
+                  col2 = c(as.Date("2021-11-01"),
+                           as.Date("2021-11-02"),
+                           as.Date("2021-11-03")),
+                  col3 = c(23.325, 87.2746, 64.2184))
+
+# View sample data
+dat
+#     col1       col2    col3
+# 1 1.2350 2021-11-01 23.3250
+# 2 3.3947 2021-11-02 87.2746
+# 3 7.2842 2021-11-03 64.2184
+```
+Now we can put the format metadata into a list:
+```{r eval=FALSE, echo=TRUE}
+# Create list out of metadata vectors
+lst <- as.list(mdat$fmt)
+names(lst) <- mdat$var
+
+# View List
+lst
+# $col1
+# [1] "%1.1f"
+#
+# $col2
+# [1] "%m-%d-%Y"
+# 
+# $col3
+# [1] "%1.2f%%"
+
+```
+Now we can assign the list of formats to the dataframe format attributes 
+using the `formats()` function:
+```{r eval=FALSE, echo=TRUE}
+# Assign formats to data
+formats(dat) <- lst
+
+# Data not formatted yet
+dat
+#     col1       col2    col3
+# 1 1.2350 2021-11-01 23.3250
+# 2 3.3947 2021-11-02 87.2746
+# 3 7.2842 2021-11-03 64.2184
+
+```
+Then apply the formats using `fdata()`:
+```{r eval=FALSE, echo=TRUE}
+# Apply the formats to entire data frame
+fdata(dat)
+#   col1       col2   col3
+# 1  1.2 11-01-2021 23.32%
+# 2  3.4 11-02-2021 87.27%
+# 3  7.3 11-03-2021 64.22%
+```
+[top](#top) 
+
+******
+
+
+### How do I assign labels from metadata to my data frame? {#labels}
+
+**Q:** I have metadata for my datasets that includes the desired label
+for each variable.  How can I apply these labels to my data?  
+
+**A:** This question is similar to the above question concerning formats in
+metadata.  The process for applying labels from metadata will be nearly identical
+to the process for formats.  You will create a named list of labels from the 
+metadata, then assign it to the dataframe, and apply it with `fdata()`.  The 
+difference is that in the case of labels, you will assign them with the 
+`labels()` function instead of the `formats()` function.  Like this:
+```{r eval=FALSE, echo=TRUE}
+# Create sample list of labels
+lst <- list(col1 = "My First Columns",
+            col2 = "My Second Column", 
+            col3 = "My Third Column")
+            
+# Create sample data frame
+dat <- data.frame(col1 = c(1.235, 3.3947, 7.2842),
+                  col2 = c(as.Date("2021-11-01"),
+                           as.Date("2021-11-02"),
+                           as.Date("2021-11-03")),
+                  col3 = c(23.325, 87.2746, 64.2184))
+
+# Assign labels to data frame
+labels(dat) <- lst
+
+# View label attributes
+labels(dat)
+# $col1
+# [1] "My First Columns"
+# 
+# $col2
+# [1] "My Second Column"
+# 
+# $col3
+# [1] "My Third Column"
+
+```
+
+[top](#top)
+
+******
+
+### How do I assign descriptions from metadata to my data frame? {#descriptions}
+
+**Q:** I have metadata for my datasets that includes the desired descriptions
+for each variable.  How can I apply these descriptions to my data?
+
+
+**A:** This question is similar to the questions on applying formats from
+metadata, and applying labels from metadata.  The only difference is that 
+you will use the `descriptions()` function.
+```{r eval=FALSE, echo=TRUE}
+# Assign descriptions
+descriptions(dat) <- list(col1 = "Here is my description for col1.",
+                          col2 = "Here is my description for col2.",
+                          col3 = "Here is my description for col3.")
+
+# View descriptions
+descriptions(dat)
+# $col1
+# [1] "Here is my description for col1."
+# 
+# $col2
+# [1] "Here is my description for col2."
+# 
+# $col3
+# [1] "Here is my description for col3."
+
+```
+
+[top](#top) 
+
+******
+
+
+### How do I create a format catalog? {#fcat}
+
+**Q:** I want to create a format catalog, save that catalog, and reuse it
+later.  How can I do that?
+
+**A:** The **fmtr** package provides all the functions necessary to do what
+you want.  Here is an example:
+```{r eval=FALSE, echo=TRUE}
+library(fmtr)
+
+# Create format catalog
+fmts <- fcat(AGECAT = value(condition(x >= 18 & x <= 24, "18 to 24"),
+                            condition(x >= 25 & x <= 44, "25 to 44"),
+                            condition(x >= 45 & x <= 64, "45 to 64"),
+                            condition(x >= 65, ">= 65"),
+                            condition(TRUE, "Other")),
+             SEX = value(condition(is.na(x), "Missing"),
+                         condition(x == "M", "Male"),
+                         condition(x == "F", "Female"),
+                         condition(TRUE, "Other")),
+             VAR = c("AGE" = "Age", 
+                     "AGECAT" = "Age Group", 
+                     "SEX" = "Sex")) 
+
+# Save format catalog
+write.fcat(fmts, "c:/mypath")
+
+# Read format catalog back in
+fmts <- read.fcat("c:/mypath/fmts.fcat")
+
+# View format catalog
+fmts
+# # A format catalog: 3 formats
+# - $AGECAT: type U, 5 conditions
+# - $SEX: type U, 4 conditions
+# - $VAR: type V, 3 elements
+
+# Use restored formats
+fapply(c(55, 27, 19), fmts$AGECAT)
+# [1] "45 to 64" "25 to 44" "18 to 24"
+```
+
+[top](#top)
+
+******
+
+### How do I use formats from a format catalog? {#usefmt}
+
+**Q:** My colleague gave me a format catalog.  How can I use it?
+
+**A:** First read the format catalog into R using `read.fcat()`.  Then
+you can begin using the formats in the catalog using dollar sign ($) notation.
+Here is an example:
+```{r eval=FALSE, echo=TRUE}
+# Read format catalog back in
+fmts <- read.fcat("c:/mypath/fmts.fcat")
+
+# View format catalog
+fmts
+# # A format catalog: 3 formats
+# - $AGECAT: type U, 5 conditions
+# - $SEX: type U, 4 conditions
+# - $VAR: type V, 3 elements
+
+# Use restored formats
+fapply(c(55, 27, 19), fmts$AGECAT)
+# [1] "45 to 64" "25 to 44" "18 to 24"
+
+
+```
+
+[top](#top) 
+
+******
+
+
+### How do I assign formats from a catalog to a data frame? {#assign}
+
+**Q:** I have a format catalog that I use to store formats.  The formats are 
+shared between several datasets.  How can I assign formats from the 
+catalog to one of my datasets?
+
+**A:** Read the format catalog in using `read.fcat()`, then assign the formats
+using the `formats()` function.  Like this:
+```{r eval=FALSE, echo=TRUE}
+# Read format catalog in
+fmts <- read.fcat("c:/mypath/fmts.fcat")
+
+# View format catalog
+fmts
+# # A format catalog: 3 formats
+# - $AGECAT: type U, 5 conditions
+# - $SEX: type U, 4 conditions
+# - $VAR: type V, 3 elements
+
+# Create sample data frame
+dat <- read.table(header = TRUE, text = '
+SUBJECT  AGECAT SEX
+101       35      F
+102       19      F
+103       57      M
+')
+
+# Assign formats from catalog to data frame
+formats(dat) <- fmts
+
+# View formatted data
+fdata(dat)
+#   SUBJECT   AGECAT    SEX
+# 1     101 25 to 44 Female
+# 2     102 18 to 24 Female
+# 3     103 45 to 64   Male
+
+```
+Note that this only works when the format names in the catalog correspond
+to the column names in the dataframe.  If the names in the catalog do not
+correspond to the column names, it is best to manipulate the names of
+the format catalog using the `names()` function so that they 
+match the column names in the dataframe. Then proceed as above. 
+Like this:
+```{r eval=FALSE, echo=TRUE}
+# Read format catalog in
+fmts <- read.fcat("c:/packages/fmts.fcat")
+
+# View format catalog
+fmts
+# # A format catalog: 3 formats
+# - $AGECAT: type U, 5 conditions
+# - $SEX: type U, 4 conditions
+# - $VAR: type V, 3 elements
+
+# Create sample data frame
+dat <- read.table(header = TRUE, text = '
+SUBJ     AGE GENDER
+101       35      F
+102       19      F
+103       57      M
+')
+
+# Reassign format names in catalog
+names(fmts) <- c("AGE", "GENDER", "VAR")
+
+# Assign formats from catalog to data frame
+formats(dat) <- fmts
+
+# View formatted data
+fdata(dat)
+#   SUBJECT   AGECAT    SEX
+# 1     101 25 to 44 Female
+# 2     102 18 to 24 Female
+# 3     103 45 to 64   Male
+```
+[top](#top)
+
+******
+
+### How do I create a format catalog from an Excel spreadsheet? {#excel}
+
+**Q:** I have format information stored in an Excel spreadsheet.  Can I use
+that to create a format catalog and format my data?
+
+**A:** Yes, provided the data is either in the correct structure or 
+can be put in the correct structure to create a format catalog.  The correct
+structure includes the following columns: Name, Type, Expression, Label and Order.
+See the documentation on `as.fcat.data.frame()` for further description of the 
+needed column values.
+
+Here is an example showing Excel data that is already in the correct structure:
+```{r eval=FALSE, echo=TRUE}
+library(fmtr)
+library(readxl)
+
+# Read data from Excel
+xldat <- read_excel("c:\\packages\\myxlfile.xlsx")
+
+# View data frame
+xldat
+# # A tibble: 10 x 5
+# Name   Type  Expression                                                Label    Order
+# <chr>  <chr> <chr>                                                     <chr>    <lgl>
+# 1  AGECAT U     "x >= 18 & x <= 24"                                       18 to 24 NA   
+# 2  AGECAT U     "x >= 25 & x <= 44"                                       25 to 44 NA   
+# 3  AGECAT U     "x >= 45 & x <= 64"                                       45 to 64 NA   
+# 4  AGECAT U     "x >= 65"                                                 >= 65    NA   
+# 5  AGECAT U     "TRUE"                                                    Other    NA   
+# 6  SEX    U     "is.na(x)"                                                Missing  NA   
+# 7  SEX    U     "x == \"M\""                                              Male     NA   
+# 8  SEX    U     "x == \"F\""                                              Female   NA   
+# 9  SEX    U     "TRUE"                                                    Other    NA   
+# 10 VAR    V     "c(AGE = \"Age\", AGECAT = \"Age Group\", SEX = \"Sex\")" NA       NA 
+
+# Convert dataframe to format catalog
+fmts <- as.fcat(xldat)
+
+# View format catalog                     
+fmts
+# # A format catalog: 3 formats
+# - $AGECAT: type U, 5 conditions
+# - $SEX: type U, 4 conditions
+# - $VAR: type V, 3 element
+
+
+# Create sample data frame
+dat <- read.table(header = TRUE, text = '
+SUBJECT AGECAT  SEX
+101       35      F
+102       19      F
+103       57      M
+')
+
+# Assign formats from catalog
+formats(dat) <- fmts
+
+# Apply formats
+fdata(dat)
+#   SUBJECT   AGECAT    SEX
+# 1     101 25 to 44 Female
+# 2     102 18 to 24 Female
+# 3     103 45 to 64   Male
+```
+
+[top](#top) 
+
+******
+
+
+### How do I export my format catalog to a spreadsheet? {#export}
+
+**Q:** I have a format catalog I created in R with the **fmtr** package. 
+I want to store that catalog in a spreadsheet for documentation purposes. 
+How can I do that?
+
+**A:** There is a Base R function `as.data.frame()` that can be used to 
+convert a **fmtr** user-defined format or a format catalog to a data frame.
+From there, it is easy to export to Excel or any other file format you like.
+Here is an example:
+```{r eval=FALSE, echo=TRUE}
+library(fmtr)
+library(openxlsx)
+
+# Create sample format catlog
+fmts <- fcat(AGECAT = value(condition(x >= 18 & x <= 24, "18 to 24"),
+                            condition(x >= 25 & x <= 44, "25 to 44"),
+                            condition(x >= 45 & x <= 64, "45 to 64"),
+                            condition(x >= 65, ">= 65"),
+                            condition(TRUE, "Other")),
+             SEX = value(condition(is.na(x), "Missing"),
+                         condition(x == "M", "Male"),
+                         condition(x == "F", "Female"),
+                         condition(TRUE, "Other")),
+             VAR = c("AGE" = "Age", 
+                     "AGECAT" = "Age Group", 
+                     "SEX" = "Sex")) 
+                     
+# View format catalog                     
+fmts
+# # A format catalog: 3 formats
+# - $AGECAT: type U, 5 conditions
+# - $SEX: type U, 4 conditions
+# - $VAR: type V, 3 element
+
+# Convert format catalog to data frame
+dat <- as.data.frame(fmts)
+
+# Write data frame to Excel using openxlsx
+write.xlsx(dat, "c:\\mypath\\myxlfile.xlsx")
+```
+
+[top](#top)
+
+******
+
+### Can I create a user-defined format from data? {#asfmt}
+
+**Q:** I have a dataset with a code list that I want to create a 
+user-defined format from.  Is there a way to do that?
+
+
+**A:** Yes.  There is a function `as.fmt()` that allows you to convert a 
+data frame into a user-defined format.  But the input dataframe needs a 
+specific structure.  Here is an example:
+
+```{r eval=FALSE, echo=TRUE}
+library(fmtr)
+
+# Create sample input data 
+dat <- read.table(header = TRUE, text ='
+        Col1  Col2 
+        A    "Label A"
+        B    "Label B"
+        C    "Label C"')
+
+# Create main conditions
+df1 <- data.frame(Name = "myfmt", 
+                  Type = "U", 
+                  Expression = paste0("x == '", dat$Col1, "'"),
+                  Label = dat$Col2,
+                  Order = NA)
+
+# Create default condition
+df2 <- data.frame(Name = "myfmt", 
+                  Type = "U", 
+                  Expression = "TRUE",
+                  Label = "Other",
+                  Order = NA)
+
+# Append default condition
+df <- rbind(df, df2)
+
+# View input data
+df
+#    Name Type Expression   Label Order
+# 1 myfmt    U   x == 'A' Label A    NA
+# 2 myfmt    U   x == 'B' Label B    NA
+# 3 myfmt    U   x == 'C' Label C    NA
+# 4 myfmt    U       TRUE   Other    NA
+
+# Convert data frame to user-defined format 
+fmt <- as.fmt(df)
+
+# Apply the format
+fapply(c("A", "B", "C", NA), fmt)
+# [1] "Label A" "Label B" "Label C" "Other" 
+
+```
+
+[top](#top) 
+
+******
+
+
+### Can I create an input format? {#input}
+
+**Q:** SAS® distinguishes between an input format and an output format.  Is
+there a similar distinction in the **fmtr** package?
+
+**A:** No.  All **fmtr** formats are output formats.
+
+[top](#top)
+
+******
+
+### Can I create a numeric user-defined format? {#numeric}
+
+**Q:** I have a column of data with some character values that I want
+to convert to a number.  I'd like to create a format to do that.  Can 
+I create a user-defined format that returns a number instead of a text string?
+
+**A:** Yes. The second parameter of the `condition()` function accepts
+a character or numeric value.  That means a **fmtr** user-defined format
+can be used to translate incoming values, whether character or numeric, 
+to a number.  Here is an example:
+
+```{r eval=FALSE, echo=TRUE}
+library(fmtr)
+
+nfmt <- value(condition(x == "A", 1),
+              condition(x == "B", 2),
+              condition(TRUE, 3))
+
+fapply(c("A", "B", "C"), nfmt)
+# [1] 1 2 3
+
+```
+
+[top](#top) 
+
+******
+
+### Is there a way to set up a search path for a format catalog? {#path}
+
+**Q:** In SAS® you can set up a search path for a format catalog, so 
+you don't need to read it.  You can just reference the format names
+and it will work.  Is there a similar functionality in the **fmtr** package?
+
+**A:** No.  This issue has been raised, and is under consideration as 
+a future enhancement. 
+
+[top](#top) 
+
+******
+
+
+### Is there a way to read in a format catalog from SAS®? {#sas7bcat}
+
+**Q:** I have an existing format catalog from SAS® that I want to convert
+to R.  Does the **fmtr** package provide a way to read in a SAS® format
+catalog? 
+
+**A:** No.  This issue has been raised, but is probably not feasible. 
+SAS® provides a lot of functionality to their formats that cannot be reproduced
+in **fmtr**, even if the mechanics of reading the SAS® format catalog could
+be worked out.
+
+[top](#top)
+
+******
+
