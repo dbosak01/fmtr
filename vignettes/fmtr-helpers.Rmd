@@ -34,3 +34,4 @@ documentation for additional details:
 * `fmt_cnt_pct()`
 * `fmt_mean_sd()`
 
+Next: [Complete Example](fmtr-example1.html)
