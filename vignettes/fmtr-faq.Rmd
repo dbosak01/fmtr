@@ -297,7 +297,7 @@ difference is that in the case of labels, you will assign them with the
 `labels()` function instead of the `formats()` function.  Like this:
 ```{r eval=FALSE, echo=TRUE}
 # Create sample list of labels
-lst <- list(col1 = "My First Columns",
+lst <- list(col1 = "My First Column",
             col2 = "My Second Column", 
             col3 = "My Third Column")
             
@@ -314,7 +314,7 @@ labels(dat) <- lst
 # View label attributes
 labels(dat)
 # $col1
-# [1] "My First Columns"
+# [1] "My First Column"
 # 
 # $col2
 # [1] "My Second Column"

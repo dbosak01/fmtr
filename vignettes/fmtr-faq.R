@@ -159,7 +159,7 @@ options(rmarkdown.html_vignette.check_title = FALSE)
 
 ## ----eval=FALSE, echo=TRUE----------------------------------------------------
 #  # Create sample list of labels
-#  lst <- list(col1 = "My First Columns",
+#  lst <- list(col1 = "My First Column",
 #              col2 = "My Second Column",
 #              col3 = "My Third Column")
 #  
@@ -176,7 +176,7 @@ options(rmarkdown.html_vignette.check_title = FALSE)
 #  # View label attributes
 #  labels(dat)
 #  # $col1
-#  # [1] "My First Columns"
+#  # [1] "My First Column"
 #  #
 #  # $col2
 #  # [1] "My Second Column"

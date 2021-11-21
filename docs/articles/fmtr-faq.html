@@ -336,7 +336,7 @@
 <p><strong>A:</strong> This question is similar to the above question concerning formats in metadata. The process for applying labels from metadata will be nearly identical to the process for formats. You will create a named list of labels from the metadata, then assign it to the dataframe, and apply it with <code><a href="../reference/fdata.html">fdata()</a></code>. The difference is that in the case of labels, you will assign them with the <code><a href="https://rdrr.io/r/base/labels.html">labels()</a></code> function instead of the <code><a href="../reference/formats.html">formats()</a></code> function. Like this:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Create sample list of labels</span>
-<span class="va">lst</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>col1 <span class="op">=</span> <span class="st">"My First Columns"</span>,
+<span class="va">lst</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>col1 <span class="op">=</span> <span class="st">"My First Column"</span>,
             col2 <span class="op">=</span> <span class="st">"My Second Column"</span>, 
             col3 <span class="op">=</span> <span class="st">"My Third Column"</span><span class="op">)</span>
             
@@ -353,7 +353,7 @@
 <span class="co"># View label attributes</span>
 <span class="fu"><a href="https://rdrr.io/r/base/labels.html">labels</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>
 <span class="co"># $col1</span>
-<span class="co"># [1] "My First Columns"</span>
+<span class="co"># [1] "My First Column"</span>
 <span class="co"># </span>
 <span class="co"># $col2</span>
 <span class="co"># [1] "My Second Column"</span>
