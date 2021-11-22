@@ -159,7 +159,8 @@ options(rmarkdown.html_vignette.check_title = FALSE)
 #    define(`ARM C`,  label = "Treatment Group 3", n = arm_pop["ARM C"]) %>%
 #    define(`ARM D`,  label = "Treatment Group 4", n = arm_pop["ARM D"])
 #  
-#  rpt <- create_report("output/example1.rtf", output_type = "RTF", font = "Arial") %>%
+#  rpt <- create_report(file.path(tmp, "output/example1.rtf"),
+#                       output_type = "RTF", font = "Arial") %>%
 #    set_margins(top = 1, bottom = 1) %>%
 #    page_header("Sponsor: Company", "Study: ABC") %>%
 #    titles("Table 1.0", bold = TRUE, blank_row = "none") %>%

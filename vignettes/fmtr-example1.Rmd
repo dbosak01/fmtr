@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 options(rmarkdown.html_vignette.check_title = FALSE)
 
 ```
+## Program
 
 The previous examples in the **fmtr** documentation were intentionally
 simplified to focus on the workings of a particular function.  It is helpful 
@@ -179,7 +180,8 @@ tbl <- create_table(final, first_row_blank = TRUE, borders = c("top", "bottom"))
   define(`ARM C`,  label = "Treatment Group 3", n = arm_pop["ARM C"]) %>% 
   define(`ARM D`,  label = "Treatment Group 4", n = arm_pop["ARM D"]) 
 
-rpt <- create_report("output/example1.rtf", output_type = "RTF", font = "Arial") %>% 
+rpt <- create_report(file.path(tmp, "output/example1.rtf"), 
+                     output_type = "RTF", font = "Arial") %>% 
   set_margins(top = 1, bottom = 1) %>% 
   page_header("Sponsor: Company", "Study: ABC") %>% 
   titles("Table 1.0", bold = TRUE, blank_row = "none") %>% 
@@ -212,6 +214,8 @@ writeLines(readLines(lf, encoding = "UTF-8"))
 
 
 ```
+
+## Log
 
 Here is the log produced by the above sample program:
 
@@ -433,6 +437,8 @@ Log End Time: 2021-11-17 10:32:36
 Log Elapsed Time: 0 00:00:00
 =========================================================================
 ```
+
+## Output
 
 Here is the report produced by the above sample program:
 
