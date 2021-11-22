@@ -209,8 +209,8 @@
 <span class="co"># 3  3   7   B</span>
 
 <span class="co"># tidyverse method</span>
-<span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op">%&gt;%</span> 
-       <span class="fu">mutate</span><span class="op">(</span>CAT <span class="op">=</span> <span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="va">NUM</span>, <span class="va">fmt</span><span class="op">)</span><span class="op">)</span>
+<span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+       <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>CAT <span class="op">=</span> <span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="va">NUM</span>, <span class="va">fmt</span><span class="op">)</span><span class="op">)</span>
        
 <span class="va">dat</span>
 <span class="co">#   ID NUM CAT</span>
@@ -646,7 +646,7 @@ SUBJECT AGECAT  SEX
                   Order <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span>
 
 <span class="co"># Append default condition</span>
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">df2</span><span class="op">)</span>
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">df1</span>, <span class="va">df2</span><span class="op">)</span>
 
 <span class="co"># View input data</span>
 <span class="va">df</span>

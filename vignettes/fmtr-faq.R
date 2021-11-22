@@ -424,7 +424,7 @@ options(rmarkdown.html_vignette.check_title = FALSE)
 #                    Order = NA)
 #  
 #  # Append default condition
-#  df <- rbind(df, df2)
+#  df <- rbind(df1, df2)
 #  
 #  # View input data
 #  df

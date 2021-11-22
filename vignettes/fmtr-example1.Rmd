@@ -398,7 +398,7 @@ Create and print report
 =========================================================================
 
 # A report specification: 1 pages
-- file_path: 'output/sassy3.rtf'
+- file_path: 'output/example1.rtf'
 - output_type: RTF
 - units: inches
 - orientation: landscape

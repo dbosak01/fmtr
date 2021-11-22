@@ -668,7 +668,7 @@ df2 <- data.frame(Name = "myfmt",
                   Order = NA)
 
 # Append default condition
-df <- rbind(df, df2)
+df <- rbind(df1, df2)
 
 # View input data
 df
