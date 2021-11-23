@@ -710,7 +710,7 @@ to convert to a number.  I'd like to create a format to do that.  Can
 I create a user-defined format that returns a number instead of a text string?
 
 **A:** Yes. The second parameter of the `condition()` function accepts
-a character or numeric value.  That means a **fmtr** user-defined format
+a character, numeric, or logical value.  That means a **fmtr** user-defined format
 can be used to translate incoming values, whether character or numeric, 
 to a number.  Here is an example:
 

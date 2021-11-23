@@ -663,7 +663,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="numeric" class="section level3">
 <h3>Can I create a numeric user-defined format?</h3>
 <p><strong>Q:</strong> I have a column of data with some character values that I want to convert to a number. I’d like to create a format to do that. Can I create a user-defined format that returns a number instead of a text string?</p>
-<p><strong>A:</strong> Yes. The second parameter of the <code>condition()</code> function accepts a character or numeric value. That means a <strong>fmtr</strong> user-defined format can be used to translate incoming values, whether character or numeric, to a number. Here is an example:</p>
+<p><strong>A:</strong> Yes. The second parameter of the <code>condition()</code> function accepts a character, numeric, or logical value. That means a <strong>fmtr</strong> user-defined format can be used to translate incoming values, whether character or numeric, to a number. Here is an example:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fmtr)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>nfmt <span class="ot">&lt;-</span> <span class="fu">value</span>(<span class="fu">condition</span>(x <span class="sc">==</span> <span class="st">&quot;A&quot;</span>, <span class="dv">1</span>),</span>

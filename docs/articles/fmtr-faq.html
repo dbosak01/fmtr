@@ -209,8 +209,8 @@
 <span class="co"># 3  3   7   B</span>
 
 <span class="co"># tidyverse method</span>
-<span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-       <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>CAT <span class="op">=</span> <span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="va">NUM</span>, <span class="va">fmt</span><span class="op">)</span><span class="op">)</span>
+<span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op">%&gt;%</span> 
+       <span class="fu">mutate</span><span class="op">(</span>CAT <span class="op">=</span> <span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="va">NUM</span>, <span class="va">fmt</span><span class="op">)</span><span class="op">)</span>
        
 <span class="va">dat</span>
 <span class="co">#   ID NUM CAT</span>
@@ -677,7 +677,7 @@ SUBJECT AGECAT  SEX
 <h3 class="hasAnchor">
 <a href="#numeric" class="anchor"></a>Can I create a numeric user-defined format?</h3>
 <p><strong>Q:</strong> I have a column of data with some character values that I want to convert to a number. I’d like to create a format to do that. Can I create a user-defined format that returns a number instead of a text string?</p>
-<p><strong>A:</strong> Yes. The second parameter of the <code><a href="../reference/condition.html">condition()</a></code> function accepts a character or numeric value. That means a <strong>fmtr</strong> user-defined format can be used to translate incoming values, whether character or numeric, to a number. Here is an example:</p>
+<p><strong>A:</strong> Yes. The second parameter of the <code><a href="../reference/condition.html">condition()</a></code> function accepts a character, numeric, or logical value. That means a <strong>fmtr</strong> user-defined format can be used to translate incoming values, whether character or numeric, to a number. Here is an example:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fmtr.r-sassy.org">fmtr</a></span><span class="op">)</span>
 
