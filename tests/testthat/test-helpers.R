@@ -90,9 +90,12 @@ test_that("fmt_mean_sd() function works as expected.", {
   
   res1 <- fmt_mean_sd(v)
   res2 <- fmt_mean_sd(v, format = "%.2f")
+  res3 <- fmt_mean_sd(v, format = "%.2f", sd_format = "%.1f")
   
   expect_equal(res1, "6.3 (4.5)")
   expect_equal(res2, "6.33 (4.46)")
+  expect_equal(res3, "6.33 (4.5)")
+  
   
   
 })

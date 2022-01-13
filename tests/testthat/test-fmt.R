@@ -293,3 +293,28 @@ test_that("fmt parameter checks work as expected.", {
   
 })
 
+test_that("as.fmt.data.frame function works as expected with numeric labels", {
+  
+  o <- c(2, 1, NA)
+  e <- c("x == \"A\"", "x == \"B\"", "TRUE")
+  l <- c(1, 2, NA)
+  
+  dat <- data.frame(Name = "Fork", Type = "U", 
+                    Expression = e, Label = l, Order = o)
+  
+  
+  fmt <- as.fmt(dat)
+  
+  
+  v1 <- c("A", "B", "C", "B")
+  
+  res <- fapply(v1, fmt)
+  
+  expect_equal(length(res), 4)
+  expect_equal(res[1], 1)
+  expect_equal(res[2], 2)
+  expect_equal(is.na(res[3]), TRUE)
+  
+})
+
+

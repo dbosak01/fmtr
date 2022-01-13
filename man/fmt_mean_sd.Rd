@@ -4,7 +4,7 @@
 \alias{fmt_mean_sd}
 \title{Formatted mean and standard deviation}
 \usage{
-fmt_mean_sd(x, format = "\%.1f")
+fmt_mean_sd(x, format = "\%.1f", sd_format = NULL)
 }
 \arguments{
 \item{x}{The input data vector or data frame column.}
@@ -13,6 +13,10 @@ fmt_mean_sd(x, format = "\%.1f")
 \code{\link[base]{sprintf}} function.  By default, this format is
 defined as "\%.1f", which displays the mean and standard deviation with 
 one decimal place.}
+
+\item{sd_format}{An optional format for the standard deviation.  If this 
+parameter is not supplied, the standard deviation will be formatted
+the same as the mean, according to the `format` parameter.}
 }
 \value{
 The formatted mean and standard deviation.

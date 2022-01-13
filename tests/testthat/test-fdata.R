@@ -190,3 +190,5 @@ test_that("fdata() parameter checks work as expected.", {
   expect_equal(nchar(res[1, 1]), 10)
   
 })
+
+

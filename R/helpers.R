@@ -222,6 +222,9 @@ fmt_cnt_pct <- function(x, denom = NULL, format = "%5.1f") {
 #' \code{\link[base]{sprintf}} function.  By default, this format is
 #' defined as "\%.1f", which displays the mean and standard deviation with 
 #' one decimal place.
+#' @param sd_format An optional format for the standard deviation.  If this 
+#' parameter is not supplied, the standard deviation will be formatted
+#' the same as the mean, according to the `format` parameter.
 #' @return The formatted mean and standard deviation.
 #' @family helpers 
 #' @examples 
@@ -233,13 +236,15 @@ fmt_cnt_pct <- function(x, denom = NULL, format = "%5.1f") {
 #' # Output
 #' # "5.7 (2.7)"
 #' @export
-fmt_mean_sd <- function(x, format = "%.1f") {
+fmt_mean_sd <- function(x, format = "%.1f", sd_format = NULL) {
   
   m <- mean(x, na.rm = TRUE)
   sd <- sd(x, na.rm = TRUE)
   
+  sd_format <- ifelse(is.null(sd_format), format, sd_format)
+  
   # Format result
-  ret <- sprintf(paste0(format, " (", format, ")"), m, sd)
+  ret <- sprintf(paste0(format, " (", sd_format, ")"), m, sd)
   
   return(ret)
 }

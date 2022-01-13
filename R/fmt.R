@@ -302,8 +302,18 @@ as.fmt.data.frame <- function(x) {
     y <- structure(list(), class = c("fmt_cnd"))    
     
     y$expression <- str2lang(as.character(x[i, "Expression"]))
-    y$label <- as.character(x[i, "Label"])
-    y$order <- as.character(x[i, "Order"])
+    if (all(class(x[i, "Label"]) %in% 
+            c("character", "numeric", "integer", "logical", "Date"))) {
+      y$label <- x[i, "Label"]
+    } else {
+      y$label <- as.character(x[i, "Label"])
+    }
+    if (all(class(x[i, "Order"]) %in% 
+            c("character", "numeric", "integer"))) {
+      y$order <- x[i, "Order"]
+    } else  {
+      y$order <- as.character(x[i, "Order"]) 
+    }
     
     
     ret[[length(ret) + 1]] <- y

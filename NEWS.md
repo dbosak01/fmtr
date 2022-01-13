@@ -1,3 +1,11 @@
+# fmtr 1.5.5
+
+* Fixed bug in `as.fmt.data.frame()` that was converting all label and order
+values to character. Now it will return the stored data type.
+* Added **sd_format** parameter to the `fmt_mean_sd()` function to format the 
+standard deviation separately if desired.
+* Documentation fixes/updates.
+
 # fmtr 1.5.4
 
 * Added FAQ and Complete Example to vignettes.
