@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.5</span>
       </span>
     </div>
 
@@ -209,8 +209,8 @@
 <span class="co"># 3  3   7   B</span>
 
 <span class="co"># tidyverse method</span>
-<span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op">%&gt;%</span> 
-       <span class="fu">mutate</span><span class="op">(</span>CAT <span class="op">=</span> <span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="va">NUM</span>, <span class="va">fmt</span><span class="op">)</span><span class="op">)</span>
+<span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+       <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>CAT <span class="op">=</span> <span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="va">NUM</span>, <span class="va">fmt</span><span class="op">)</span><span class="op">)</span>
        
 <span class="va">dat</span>
 <span class="co">#   ID NUM CAT</span>

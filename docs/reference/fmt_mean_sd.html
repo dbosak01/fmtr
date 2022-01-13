@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.5</span>
       </span>
     </div>
 
@@ -164,7 +164,7 @@
     <p>A function to calculate and format a mean and standard deviation.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fmt_mean_sd</span><span class='op'>(</span><span class='va'>x</span>, format <span class='op'>=</span> <span class='st'>"%.1f"</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>fmt_mean_sd</span><span class='op'>(</span><span class='va'>x</span>, format <span class='op'>=</span> <span class='st'>"%.1f"</span>, sd_format <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -179,6 +179,12 @@
 <code><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></code> function.  By default, this format is
 defined as "%.1f", which displays the mean and standard deviation with 
 one decimal place.</p></td>
+    </tr>
+    <tr>
+      <th>sd_format</th>
+      <td><p>An optional format for the standard deviation.  If this 
+parameter is not supplied, the standard deviation will be formatted
+the same as the mean, according to the `format` parameter.</p></td>
     </tr>
     </table>
 
