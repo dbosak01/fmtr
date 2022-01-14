@@ -192,7 +192,7 @@
 <a href="#fmtr-152" class="anchor"></a>fmtr 1.5.2<small> 2021-07-25 </small>
 </h1>
 <ul>
-<li>Fixed bug on R 3.6 where fdata() function was turning all columns into factors.</li>
+<li>Fixed bug on R 3.6 where <code><a href="../reference/fdata.html">fdata()</a></code> function was turning all columns into factors.</li>
 <li>Changed fapply() function so it will accept non-character vector formats. Now works with integer, numeric, and date vectors also.</li>
 </ul>
 </div>
@@ -202,8 +202,8 @@
 </h1>
 <ul>
 <li>Fixed bug when vector format has no corresponding input value. Was assigning an NA. Now leaving the original value.</li>
-<li>Made code compatible back to R version 3.6.0.</li>
-<li>Added GitHub Actions for prior R version checks.</li>
+<li>Made code compatible back to R version 3.6.0</li>
+<li>Added GitHub Actions for prior R version checks</li>
 </ul>
 </div>
     <div id="fmtr-150" class="section level1">
@@ -211,7 +211,7 @@
 <a href="#fmtr-150" class="anchor"></a>fmtr 1.5.0<small> 2021-02-22 </small>
 </h1>
 <ul>
-<li>Added labels.data.frame() function to assign label attributes of a data frame</li>
+<li>Added <code><a href="../reference/labels.data.frame.html">labels.data.frame()</a></code> function to assign label attributes of a data frame</li>
 <li>Small documentation fixes</li>
 </ul>
 </div>
@@ -220,8 +220,8 @@
 <a href="#fmtr-141" class="anchor"></a>fmtr 1.4.1<small> 2021-01-06 </small>
 </h1>
 <ul>
-<li>Added descriptions() attribute assignment functions</li>
-<li>Modified fattr() functions to include description attribute</li>
+<li>Added <code><a href="../reference/descriptions.html">descriptions()</a></code> attribute assignment functions</li>
+<li>Modified <code><a href="../reference/fattr.html">fattr()</a></code> functions to include description attribute</li>
 <li>Added pkgdown site</li>
 </ul>
 </div>
@@ -232,10 +232,10 @@
 <ul>
 <li>Added functions to convert data frames, tibble, and format catalogs to flist</li>
 <li>Print summarized list of fcat contents</li>
-<li>Fixed bug on as.fmt() when input data is a tibble</li>
+<li>Fixed bug on <code><a href="../reference/as.fmt.html">as.fmt()</a></code> when input data is a tibble</li>
 <li>Added label and description parameters to fattr()</li>
-<li>Added descriptions() function to set descriptions for data frame</li>
-<li>Fixed bug on levels() and labels() functions when formats read from data frame</li>
+<li>Added <code><a href="../reference/descriptions.html">descriptions()</a></code> function to set descriptions for data frame</li>
+<li>Fixed bug on <code><a href="https://rdrr.io/r/base/levels.html">levels()</a></code> and <code><a href="https://rdrr.io/r/base/labels.html">labels()</a></code> functions when formats read from data frame</li>
 <li>Made a few documentation fixes</li>
 </ul>
 </div>
@@ -261,9 +261,9 @@
 <a href="#fmtr-120" class="anchor"></a>fmtr 1.2.0<small> Unreleased </small>
 </h1>
 <ul>
-<li>Added fcat() function to create a format catalog</li>
+<li>Added <code><a href="../reference/fcat.html">fcat()</a></code> function to create a format catalog</li>
 <li>Added associated utility functions for format catalogs for reading, writing, printing, and converting from/to data frames</li>
-<li>Fixed bug on fapply() with user-define format, which was throwing an error when no conditions were met. Now, values that meet no conditions will fall through unaltered</li>
+<li>Fixed bug on <code><a href="../reference/fapply.html">fapply()</a></code> with user-define format, which was throwing an error when no conditions were met. Now, values that meet no conditions will fall through unaltered</li>
 </ul>
 </div>
     <div id="fmtr-110" class="section level1">
@@ -271,9 +271,10 @@
 <a href="#fmtr-110" class="anchor"></a>fmtr 1.1.0<small> 2020-09-11 </small>
 </h1>
 <ul>
-<li>Added Helper functions for common statistical formatting: fmt_cnt_pct(), fmt_range(), fmt_n(), fmt_median(), fmt_mean_sd(), fmt_quantile_rng()</li>
-<li>Added “order” parameter on condition() function to order labels differently than specified in the value() function</li>
-<li>Made small change to fdata() to not call base format() function unless a parameter is specifically passed to on “…”.</li>
+<li>Added Helper functions for common statistical formatting: <code><a href="../reference/fmt_cnt_pct.html">fmt_cnt_pct()</a></code>, <code><a href="../reference/fmt_range.html">fmt_range()</a></code>, <code><a href="../reference/fmt_n.html">fmt_n()</a></code>, <code><a href="../reference/fmt_median.html">fmt_median()</a></code>, <code><a href="../reference/fmt_mean_sd.html">fmt_mean_sd()</a></code>, <code>fmt_quantile_rng()</code>
+</li>
+<li>Added “order” parameter on <code><a href="../reference/condition.html">condition()</a></code> function to order labels differently than specified in the <code><a href="../reference/value.html">value()</a></code> function</li>
+<li>Made small change to <code><a href="../reference/fdata.html">fdata()</a></code> to not call base <code><a href="https://rdrr.io/r/base/format.html">format()</a></code> function unless a parameter is specifically passed to on “…”</li>
 </ul>
 </div>
     <div id="fmtr-100" class="section level1">
@@ -282,12 +283,12 @@
 </h1>
 <ul>
 <li>Initial version</li>
-<li>Added fapply() to format a vector</li>
-<li>Added fdata() to format an entire data frame/tibble</li>
-<li>Added value() and condition() functions to create a user-defined format</li>
-<li>Added flist() function to create a formatting list</li>
-<li>Added fattr() to assign format information to a vector</li>
-<li>Added formats(), widths(), and justification() functions to assign formatting formation to multiple columns in a data frame</li>
+<li>Added <code><a href="../reference/fapply.html">fapply()</a></code> to format a vector</li>
+<li>Added <code><a href="../reference/fdata.html">fdata()</a></code> to format an entire data frame/tibble</li>
+<li>Added <code><a href="../reference/value.html">value()</a></code> and condition() functions to create a user-defined format</li>
+<li>Added <code><a href="../reference/flist.html">flist()</a></code> function to create a formatting list</li>
+<li>Added <code><a href="../reference/fattr.html">fattr()</a></code> to assign format information to a vector</li>
+<li>Added <code><a href="../reference/formats.html">formats()</a></code>, <code><a href="../reference/widths.html">widths()</a></code>, and <code><a href="../reference/justification.html">justification()</a></code> functions to assign formatting formation to multiple columns in a data frame</li>
 <li>Created package infrastructure, including testthat tests, description file, readme file, vignette, and man pages</li>
 </ul>
 </div>
