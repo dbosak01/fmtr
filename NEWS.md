@@ -1,4 +1,4 @@
-# fmtr 1.5.6
+# fmtr 1.5.7
 
 * Fixed fapply so that NA values in data are returned as NA instead of 
 a string "NA".
