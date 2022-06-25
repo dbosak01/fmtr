@@ -370,7 +370,7 @@ flist_column_apply <- function(lst, vect) {
   # Unlist if requested  
   if(lst$simplify == TRUE)
     ret <- unlist(ret)
-  else if (lst$simplify == FALSE & class(ret) != "list")
+  else if (lst$simplify == FALSE & typeof(ret) != "list")
     ret <- as.list(ret)
 
   return(ret)
