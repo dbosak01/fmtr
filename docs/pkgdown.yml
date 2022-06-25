@@ -1,5 +1,5 @@
 pandoc: 2.14.0.3
-pkgdown: 1.6.1
+pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   fmtr-convenience: fmtr-convenience.html
@@ -10,7 +10,7 @@ articles:
   fmtr-fdata: fmtr-fdata.html
   fmtr-helpers: fmtr-helpers.html
   fmtr: fmtr.html
-last_built: 2022-01-14T11:38Z
+last_built: 2022-01-17T15:18Z
 urls:
   reference: https://fmtr.r-sassy.org/reference
   article: https://fmtr.r-sassy.org/articles

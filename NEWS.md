@@ -1,3 +1,8 @@
+# fmtr 1.5.6
+
+* Fixed fapply so that NA values in data are returned as NA instead of 
+a string "NA".
+
 # fmtr 1.5.5
 
 * Fixed bug in `as.fmt.data.frame()` that was converting all label and order

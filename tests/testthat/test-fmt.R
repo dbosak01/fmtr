@@ -317,4 +317,27 @@ test_that("as.fmt.data.frame function works as expected with numeric labels", {
   
 })
 
+test_that("NA values in numeric format fall through unaltered.", {
+  
+  v1 <- c(1.287, 2.3847, 3.2847, 4.847, NA, 1.387)
+  
+  fmtd <- fapply(v1, "%.1f")
+  
+  expect_equal(is.na(fmtd[5]) , TRUE)
+  
+  
+})
+
+
+test_that("NA values in date format fall through unaltered.", {
+  
+  v1 <- c(Sys.Date(), Sys.Date() + 2, NA, Sys.Date() + 3)
+  
+  fmtd <- fapply(v1, "%m %d %Y")
+  
+  expect_equal(is.na(fmtd[3]) , TRUE)
+  
+  
+})
+
 

@@ -276,6 +276,12 @@ format_vector <- function(x, fmt) {
     
     # For numerics, call sprintf
     ret <- sprintf(fmt, x)
+    
+    # Find NA strings
+    nas <- ret == "NA"
+    
+    # Turn NA strings back into real NA
+    ret <- replace(ret, nas, NA)
    
   }
   
