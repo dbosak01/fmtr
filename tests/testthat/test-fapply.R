@@ -21,6 +21,7 @@ test_that("fapply() function works as expected with vectors.", {
   expect_equal(fapply(n, width = 5), c("    1","    2","    3","   10","11838"))
   expect_equal(fapply(f, width = 9), c("    1.200", "    2.000",
                                        "    3.377","   10.388"," 1138.300"))
+  expect_equal(fapply(t, l), c("Var A", "Var B", "Var B", "Unknown", "Var A"))
   fapply(d, width = 15)  
   
   format(f, width = 9)
