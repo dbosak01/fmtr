@@ -85,7 +85,7 @@ in the data frame. The data frame should have 5 columns: &quot;Name&quot;, &quot
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.7</span>
       </span>
     </div>
 
@@ -104,7 +104,7 @@ in the data frame. The data frame should have 5 columns: &quot;Name&quot;, &quot
   <a href="../articles/fmtr.html">Get started</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -170,8 +170,8 @@ in the data frame. The data frame should have 5 columns: "Name", "Type",
 "Expression", "Label" and "Order".</p>
     </div>
 
-    <pre class="usage"><span class='co'># S3 method for tbl_df</span>
-<span class='fu'><a href='as.fcat.html'>as.fcat</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+    <pre class="usage"><span><span class='co'># S3 method for tbl_df</span></span>
+<span><span class='fu'><a href='as.fcat.html'>as.fcat</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -230,32 +230,31 @@ format created with the <code><a href='value.html'>value</a></code> function.</p
 <code><a href='write.fcat.html'>write.fcat</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># Create a format catalog</span>
-<span class='va'>c1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='fcat.html'>fcat</a></span><span class='op'>(</span>num_fmt  <span class='op'>=</span> <span class='st'>"%.1f"</span>,
-           label_fmt <span class='op'>=</span> <span class='fu'><a href='value.html'>value</a></span><span class='op'>(</span><span class='fu'><a href='condition.html'>condition</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>==</span> <span class='st'>"A"</span>, <span class='st'>"Label A"</span><span class='op'>)</span>,
-                             <span class='fu'><a href='condition.html'>condition</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>==</span> <span class='st'>"B"</span>, <span class='st'>"Label B"</span><span class='op'>)</span>,
-                             <span class='fu'><a href='condition.html'>condition</a></span><span class='op'>(</span><span class='cn'>TRUE</span>, <span class='st'>"Other"</span><span class='op'>)</span><span class='op'>)</span>,
-           date_fmt <span class='op'>=</span> <span class='st'>"%d-%b-%Y"</span><span class='op'>)</span>
-           
-<span class='co'># Convert catalog to data frame to view the structure</span>
-<span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>c1</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span>
-
-<span class='co'>#       Name Type Expression   Label Order</span>
-<span class='co'># 1   num_fmt    S       %.1f            NA</span>
-<span class='co'># 2 label_fmt    U   x == "A" Label A    NA</span>
-<span class='co'># 3 label_fmt    U   x == "B" Label B    NA</span>
-<span class='co'># 4 label_fmt    U       TRUE   Other    NA</span>
-<span class='co'># 5  date_fmt    S   %d-%b-%Y            NA</span>
-
-<span class='co'># Convert data frame back to a format catalog</span>
-<span class='va'>c2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='as.fcat.html'>as.fcat</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span>
-
-<span class='co'># Use re-converted catalog</span>
-<span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='fl'>123.456</span>, <span class='va'>c2</span><span class='op'>$</span><span class='va'>num_fmt</span><span class='op'>)</span>
-<span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"C"</span>, <span class='st'>"B"</span><span class='op'>)</span>, <span class='va'>c2</span><span class='op'>$</span><span class='va'>label_fmt</span><span class='op'>)</span>
-<span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>c2</span><span class='op'>$</span><span class='va'>date_fmt</span><span class='op'>)</span>
-</pre>
+    <pre class="examples"><span><span class='co'># Create a format catalog</span></span>
+<span><span class='va'>c1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='fcat.html'>fcat</a></span><span class='op'>(</span>num_fmt  <span class='op'>=</span> <span class='st'>"%.1f"</span>,</span>
+<span>           label_fmt <span class='op'>=</span> <span class='fu'><a href='value.html'>value</a></span><span class='op'>(</span><span class='fu'><a href='condition.html'>condition</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>==</span> <span class='st'>"A"</span>, <span class='st'>"Label A"</span><span class='op'>)</span>,</span>
+<span>                             <span class='fu'><a href='condition.html'>condition</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>==</span> <span class='st'>"B"</span>, <span class='st'>"Label B"</span><span class='op'>)</span>,</span>
+<span>                             <span class='fu'><a href='condition.html'>condition</a></span><span class='op'>(</span><span class='cn'>TRUE</span>, <span class='st'>"Other"</span><span class='op'>)</span><span class='op'>)</span>,</span>
+<span>           date_fmt <span class='op'>=</span> <span class='st'>"%d-%b-%Y"</span><span class='op'>)</span></span>
+<span>           </span>
+<span><span class='co'># Convert catalog to data frame to view the structure</span></span>
+<span><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>c1</span><span class='op'>)</span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'>#       Name Type Expression   Label Order</span></span>
+<span><span class='co'># 1   num_fmt    S       %.1f            NA</span></span>
+<span><span class='co'># 2 label_fmt    U   x == "A" Label A    NA</span></span>
+<span><span class='co'># 3 label_fmt    U   x == "B" Label B    NA</span></span>
+<span><span class='co'># 4 label_fmt    U       TRUE   Other    NA</span></span>
+<span><span class='co'># 5  date_fmt    S   %d-%b-%Y            NA</span></span>
+<span></span>
+<span><span class='co'># Convert data frame back to a format catalog</span></span>
+<span><span class='va'>c2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='as.fcat.html'>as.fcat</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'># Use re-converted catalog</span></span>
+<span><span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='fl'>123.456</span>, <span class='va'>c2</span><span class='op'>$</span><span class='va'>num_fmt</span><span class='op'>)</span></span>
+<span><span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"C"</span>, <span class='st'>"B"</span><span class='op'>)</span>, <span class='va'>c2</span><span class='op'>$</span><span class='va'>label_fmt</span><span class='op'>)</span></span>
+<span><span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>c2</span><span class='op'>$</span><span class='va'>date_fmt</span><span class='op'>)</span></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

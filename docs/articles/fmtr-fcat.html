@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.7</span>
       </span>
     </div>
 
@@ -55,7 +55,7 @@
   <a href="../articles/fmtr.html">Get started</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -106,12 +106,12 @@
 
       
 
-      </header><script src="fmtr-fcat_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><script src="fmtr-fcat_files/header-attrs-2.14/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Format Catalogs</h1>
             
-            <h4 class="date">2022-01-13</h4>
+            <h4 class="date">2022-06-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/dbosak01/fmtr/blob/master/vignettes/fmtr-fcat.Rmd"><code>vignettes/fmtr-fcat.Rmd</code></a></small>
       <div class="hidden name"><code>fmtr-fcat.Rmd</code></div>
@@ -123,37 +123,44 @@
 <div id="the-fcat-function" class="section level3">
 <h3 class="hasAnchor">
 <a href="#the-fcat-function" class="anchor"></a>The <code>fcat()</code> function</h3>
-<p>As of <strong>fmtr</strong> version 1.2, you can now create a format catalog. A format catalog is a collection of formats that can be saved, shared, and reused. The format catalog is created with the <code><a href="../reference/fcat.html">fcat()</a></code> function. A format catalog can also be converted to and from a data frame using the <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> and <code><a href="../reference/as.fcat.html">as.fcat()</a></code> functions. These functions make it easy to store formatting information as tabular metadata, such as in database tables or Excel spreadsheets. Here is an example:</p>
+<p>As of <strong>fmtr</strong> version 1.2, you can now create a format
+catalog. A format catalog is a collection of formats that can be saved,
+shared, and reused. The format catalog is created with the
+<code><a href="../reference/fcat.html">fcat()</a></code> function. A format catalog can also be converted to
+and from a data frame using the <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> and
+<code><a href="../reference/as.fcat.html">as.fcat()</a></code> functions. These functions make it easy to store
+formatting information as tabular metadata, such as in database tables
+or Excel spreadsheets. Here is an example:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Create format catalog</span>
-<span class="va">c1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fcat.html">fcat</a></span><span class="op">(</span>num_fmt  <span class="op">=</span> <span class="st">"%.1f"</span>,
-           label_fmt <span class="op">=</span> <span class="fu"><a href="../reference/value.html">value</a></span><span class="op">(</span><span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"A"</span>, <span class="st">"Label A"</span><span class="op">)</span>,
-                             <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"B"</span>, <span class="st">"Label B"</span><span class="op">)</span>,
-                             <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"Other"</span><span class="op">)</span><span class="op">)</span>,
-           date_fmt <span class="op">=</span> <span class="st">"%d%b%Y"</span><span class="op">)</span>
- 
-<span class="co"># Use formats in the catalog</span>
-<span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="fl">2</span>, <span class="va">c1</span><span class="op">$</span><span class="va">num_fmt</span><span class="op">)</span>
-<span class="co"># [1] "2.0"</span>
-
-<span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"B"</span><span class="op">)</span>, <span class="va">c1</span><span class="op">$</span><span class="va">label_fmt</span><span class="op">)</span>
-<span class="co"># [1] "Label A" "Label B" "Other"   "Label B"</span>
-
-<span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">c1</span><span class="op">$</span><span class="va">date_fmt</span><span class="op">)</span>
-<span class="co"># [1] "22Jul2021"</span>
-
-<span class="co"># Convert to a data frame</span>
-<span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">c1</span><span class="op">)</span>
-<span class="va">dat</span>
-<span class="co">#        Name Type Expression   Label Order</span>
-<span class="co"># 1   num_fmt    S       %.1f            NA</span>
-<span class="co"># 2 label_fmt    U   x == "A" Label A    NA</span>
-<span class="co"># 3 label_fmt    U   x == "B" Label B    NA</span>
-<span class="co"># 4 label_fmt    U       TRUE   Other    NA</span>
-<span class="co"># 5  date_fmt    S     %d%b%Y            NA</span>
-
-<span class="co"># Save format catalog for later use</span>
-<span class="fu"><a href="../reference/write.fcat.html">write.fcat</a></span><span class="op">(</span><span class="va">c1</span>, <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Create format catalog</span></span>
+<span><span class="va">c1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fcat.html">fcat</a></span><span class="op">(</span>num_fmt  <span class="op">=</span> <span class="st">"%.1f"</span>,</span>
+<span>           label_fmt <span class="op">=</span> <span class="fu"><a href="../reference/value.html">value</a></span><span class="op">(</span><span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"A"</span>, <span class="st">"Label A"</span><span class="op">)</span>,</span>
+<span>                             <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"B"</span>, <span class="st">"Label B"</span><span class="op">)</span>,</span>
+<span>                             <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"Other"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>           date_fmt <span class="op">=</span> <span class="st">"%d%b%Y"</span><span class="op">)</span></span>
+<span> </span>
+<span><span class="co"># Use formats in the catalog</span></span>
+<span><span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="fl">2</span>, <span class="va">c1</span><span class="op">$</span><span class="va">num_fmt</span><span class="op">)</span></span>
+<span><span class="co"># [1] "2.0"</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"B"</span><span class="op">)</span>, <span class="va">c1</span><span class="op">$</span><span class="va">label_fmt</span><span class="op">)</span></span>
+<span><span class="co"># [1] "Label A" "Label B" "Other"   "Label B"</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">c1</span><span class="op">$</span><span class="va">date_fmt</span><span class="op">)</span></span>
+<span><span class="co"># [1] "22Jul2021"</span></span>
+<span></span>
+<span><span class="co"># Convert to a data frame</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">c1</span><span class="op">)</span></span>
+<span><span class="va">dat</span></span>
+<span><span class="co">#        Name Type Expression   Label Order</span></span>
+<span><span class="co"># 1   num_fmt    S       %.1f            NA</span></span>
+<span><span class="co"># 2 label_fmt    U   x == "A" Label A    NA</span></span>
+<span><span class="co"># 3 label_fmt    U   x == "B" Label B    NA</span></span>
+<span><span class="co"># 4 label_fmt    U       TRUE   Other    NA</span></span>
+<span><span class="co"># 5  date_fmt    S     %d%b%Y            NA</span></span>
+<span></span>
+<span><span class="co"># Save format catalog for later use</span></span>
+<span><span class="fu"><a href="../reference/write.fcat.html">write.fcat</a></span><span class="op">(</span><span class="va">c1</span>, <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Next: <a href="fmtr-convenience.html">Convenience Functions</a></p>
 </div>
   </div>

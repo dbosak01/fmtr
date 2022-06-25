@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.7</span>
       </span>
     </div>
 
@@ -55,7 +55,7 @@
   <a href="../articles/fmtr.html">Get started</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -106,12 +106,12 @@
 
       
 
-      </header><script src="fmtr-helpers_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><script src="fmtr-helpers_files/header-attrs-2.14/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Helper Functions</h1>
             
-            <h4 class="date">2022-01-13</h4>
+            <h4 class="date">2022-06-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/dbosak01/fmtr/blob/master/vignettes/fmtr-helpers.Rmd"><code>vignettes/fmtr-helpers.Rmd</code></a></small>
       <div class="hidden name"><code>fmtr-helpers.Rmd</code></div>
@@ -123,8 +123,15 @@
 <div id="formatting-helper-functions" class="section level3">
 <h3 class="hasAnchor">
 <a href="#formatting-helper-functions" class="anchor"></a>Formatting Helper Functions</h3>
-<p>The <strong>fmtr</strong> package also contains several formatting helper functions. These functions help with common formatting styles seen in statistical reports. For example, a range from 1 to 10 is commonly displayed as “1 - 10”, with a hyphen separating the minimum from the maximum. To accomplish this formatting easily, the package provides a <code><a href="../reference/fmt_range.html">fmt_range()</a></code> function that both calculates the range and formats it in the desired manner.</p>
-<p>Below is a complete list of the formatting helper functions. See the help documentation for additional details:</p>
+<p>The <strong>fmtr</strong> package also contains several formatting
+helper functions. These functions help with common formatting styles
+seen in statistical reports. For example, a range from 1 to 10 is
+commonly displayed as “1 - 10”, with a hyphen separating the minimum
+from the maximum. To accomplish this formatting easily, the package
+provides a <code><a href="../reference/fmt_range.html">fmt_range()</a></code> function that both calculates the
+range and formats it in the desired manner.</p>
+<p>Below is a complete list of the formatting helper functions. See the
+help documentation for additional details:</p>
 <ul>
 <li><code><a href="../reference/fmt_range.html">fmt_range()</a></code></li>
 <li><code><a href="../reference/fmt_n.html">fmt_n()</a></code></li>

@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.7</span>
       </span>
     </div>
 
@@ -101,7 +101,7 @@
   <a href="../articles/fmtr.html">Get started</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -164,15 +164,15 @@
     <p>Assign formatting attributes to a vector.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fattr</span><span class='op'>(</span>
-  <span class='va'>x</span>,
-  format <span class='op'>=</span> <span class='cn'>NULL</span>,
-  width <span class='op'>=</span> <span class='cn'>NULL</span>,
-  justify <span class='op'>=</span> <span class='cn'>NULL</span>,
-  label <span class='op'>=</span> <span class='cn'>NULL</span>,
-  description <span class='op'>=</span> <span class='cn'>NULL</span>,
-  keep <span class='op'>=</span> <span class='cn'>TRUE</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span><span class='fu'>fattr</span><span class='op'>(</span></span>
+<span>  <span class='va'>x</span>,</span>
+<span>  format <span class='op'>=</span> <span class='cn'>NULL</span>,</span>
+<span>  width <span class='op'>=</span> <span class='cn'>NULL</span>,</span>
+<span>  justify <span class='op'>=</span> <span class='cn'>NULL</span>,</span>
+<span>  label <span class='op'>=</span> <span class='cn'>NULL</span>,</span>
+<span>  description <span class='op'>=</span> <span class='cn'>NULL</span>,</span>
+<span>  keep <span class='op'>=</span> <span class='cn'>TRUE</span></span>
+<span><span class='op'>)</span></span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -232,17 +232,16 @@ can be applied using <code><a href='fapply.html'>fapply</a></code> or
 <a href='FormattingStrings.html'>FormattingStrings</a> for documentation on formatting strings.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># Create vector</span>
-<span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1.3243</span>, <span class='fl'>5.9783</span>, <span class='fl'>2.3848</span><span class='op'>)</span>
-
-<span class='co'># Assign format attributes</span>
-<span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'>fattr</span><span class='op'>(</span><span class='va'>a</span>, format <span class='op'>=</span> <span class='st'>"%.1f"</span>, width <span class='op'>=</span> <span class='fl'>10</span>, justify <span class='op'>=</span> <span class='st'>"center"</span><span class='op'>)</span>
-
-<span class='co'># Apply format attributes</span>
-<span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span>
-
-<span class='co'># [1] "   1.3    " "   6.0    " "   2.4    "</span>
-</pre>
+    <pre class="examples"><span><span class='co'># Create vector</span></span>
+<span><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1.3243</span>, <span class='fl'>5.9783</span>, <span class='fl'>2.3848</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'># Assign format attributes</span></span>
+<span><span class='va'>a</span> <span class='op'>&lt;-</span> <span class='fu'>fattr</span><span class='op'>(</span><span class='va'>a</span>, format <span class='op'>=</span> <span class='st'>"%.1f"</span>, width <span class='op'>=</span> <span class='fl'>10</span>, justify <span class='op'>=</span> <span class='st'>"center"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'># Apply format attributes</span></span>
+<span><span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='va'>a</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'># [1] "   1.3    " "   6.0    " "   2.4    "</span></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

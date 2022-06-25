@@ -32,8 +32,6 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-home">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -46,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.7</span>
       </span>
     </div>
 
@@ -54,10 +52,16 @@
       <ul class="nav navbar-nav"></ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
+  <a href="index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="articles/fmtr.html">Get started</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -93,7 +97,7 @@
   <a href="news/index.html">Changelog</a>
 </li>
 <li>
-  <a href="https://github.com/dbosak01/fmtr/" class="external-link">
+  <a href="https://github.com/dbosak01/fmtr/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -113,51 +117,113 @@
 
 
 <!-- badges: end -->
-<div class="section level1">
-<div class="page-header"><h1 id="introduction-to-fmtr">Introduction to <strong>fmtr</strong>
-<a class="anchor" aria-label="anchor" href="#introduction-to-fmtr"></a>
+<div id="introduction-to-fmtr" class="section level1">
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#introduction-to-fmtr" class="anchor"></a>Introduction to <strong>fmtr</strong>
 </h1></div>
 <p><img src="man/images/fmtr2.png" align="left" height="138px" style="height:138px;margin-right:10px"></p>
-<p>R has a variety of ways to format data. There are functions for formatting dates, several functions to format numbers, plus you can always do a lookup with a named vector, or write your own vectorized function. Yet there are several problems with the way R handles formatting.</p>
-<p>One problem is that there are <em>too many</em> formatting functions. It is not easy to remember which functions do what, and the differences between them. One goal of the <strong>fmtr</strong> package is to consolidate R’s formatting capabilities into a smaller number of functions.</p>
-<p>Another problem is when you want to <em>reuse</em> a format. While there are many ways to format data, there is no mechanism to save a format and reuse it later. Therefore, another goal of the <strong>fmtr</strong> package is to promote format reuse.</p>
-<p>A third problem is when you have a complex format that can only be accomplished with multiple formatting functions. It would be nice to have a way to keep these multiple formats together, and assign them all at once.</p>
-<p>Finally, there are some formatting activities that are so common, it seems like there should be a function for it. The <strong>fmtr</strong> package also contains several functions that fall into this category.</p>
-<div class="section level3">
-<h3 id="solution">Solution<a class="anchor" aria-label="anchor" href="#solution"></a>
-</h3>
-<p>The <strong>fmtr</strong> package was developed to address the above problems. The package addresses those problems in the following ways:</p>
-<ol style="list-style-type: decimal">
-<li><p><strong>Two formatting functions</strong>: With <strong>fmtr</strong>, all formatting has been consolidated into two formatting functions: <code><a href="reference/fapply.html">fapply()</a></code> and <code><a href="reference/fdata.html">fdata()</a></code>. <code><a href="reference/fapply.html">fapply()</a></code> applies a format to a vector. <code><a href="reference/fdata.html">fdata()</a></code> applies formats to a data frame or tibble. The implementation of the <code><a href="reference/fapply.html">fapply()</a></code> function is reminiscent of a SAS® <code>put</code> function.</p></li>
-<li><p><strong>The format catalog</strong>: The <strong>fmtr</strong> package also introduces the concept of a <em>format catalog</em> to R. A format catalog is a collection of formats that can be saved as a file, shared, and reused. This concept was taken directly from SAS® software.</p></li>
-<li><p><strong>User-defined format</strong>: The <strong>fmtr</strong> package also improves on the native R formatting capabilities by introducing the concept of a <em>user-defined format</em>. A user-defined format is an expression-driven lookup. You can define a set of logical expressions that, when true, will return a corresponding lookup value. The implementation of the user-defined format is similar to a SAS® user-defined format.</p></li>
-<li><p><strong>The formatting list</strong>: For complicated formats that require more than one function, the <strong>fmtr</strong> package also introduces the concept of a <em>formatting list</em>. A formatting list can perform operations that are difficult to accomplish otherwise.</p></li>
-<li><p><strong>Helper and Convenience functions</strong>: Finally, the <strong>fmtr</strong> package contains a set of functions to help you with common formatting tasks. For instance, it has functions to assist in assigning formatting attributes to an entire data frame. It also has some ready-made functions to perform very common types of statistical formatting.</p></li>
+<p>R has a variety of ways to format data. There are functions for
+formatting dates, several functions to format numbers, plus you can
+always do a lookup with a named vector, or write your own vectorized
+function. Yet there are several problems with the way R handles
+formatting.</p>
+<p>One problem is that there are <em>too many</em> formatting functions.
+It is not easy to remember which functions do what, and the differences
+between them. One goal of the <strong>fmtr</strong> package is to
+consolidate R’s formatting capabilities into a smaller number of
+functions.</p>
+<p>Another problem is when you want to <em>reuse</em> a format. While
+there are many ways to format data, there is no mechanism to save a
+format and reuse it later. Therefore, another goal of the
+<strong>fmtr</strong> package is to promote format reuse.</p>
+<p>A third problem is when you have a complex format that can only be
+accomplished with multiple formatting functions. It would be nice to
+have a way to keep these multiple formats together, and assign them all
+at once.</p>
+<p>Finally, there are some formatting activities that are so common, it
+seems like there should be a function for it. The <strong>fmtr</strong>
+package also contains several functions that fall into this
+category.</p>
+<div id="solution" class="section level3">
+<h3 class="hasAnchor">
+<a href="#solution" class="anchor"></a>Solution</h3>
+<p>The <strong>fmtr</strong> package was developed to address the above
+problems. The package addresses those problems in the following
+ways:</p>
+<ol>
+<li><p><strong>Two formatting functions</strong>: With
+<strong>fmtr</strong>, all formatting has been consolidated into two
+formatting functions: <code><a href="reference/fapply.html">fapply()</a></code> and <code><a href="reference/fdata.html">fdata()</a></code>.
+<code><a href="reference/fapply.html">fapply()</a></code> applies a format to a vector. <code><a href="reference/fdata.html">fdata()</a></code>
+applies formats to a data frame or tibble. The implementation of the
+<code><a href="reference/fapply.html">fapply()</a></code> function is reminiscent of a SAS® <code>put</code>
+function.</p></li>
+<li><p><strong>The format catalog</strong>: The <strong>fmtr</strong>
+package also introduces the concept of a <em>format catalog</em> to R. A
+format catalog is a collection of formats that can be saved as a file,
+shared, and reused. This concept was taken directly from SAS®
+software.</p></li>
+<li><p><strong>User-defined format</strong>: The <strong>fmtr</strong>
+package also improves on the native R formatting capabilities by
+introducing the concept of a <em>user-defined format</em>. A
+user-defined format is an expression-driven lookup. You can define a set
+of logical expressions that, when true, will return a corresponding
+lookup value. The implementation of the user-defined format is similar
+to a SAS® user-defined format.</p></li>
+<li><p><strong>The formatting list</strong>: For complicated formats
+that require more than one function, the <strong>fmtr</strong> package
+also introduces the concept of a <em>formatting list</em>. A formatting
+list can perform operations that are difficult to accomplish
+otherwise.</p></li>
+<li><p><strong>Helper and Convenience functions</strong>: Finally, the
+<strong>fmtr</strong> package contains a set of functions to help you
+with common formatting tasks. For instance, it has functions to assist
+in assigning formatting attributes to an entire data frame. It also has
+some ready-made functions to perform very common types of statistical
+formatting.</p></li>
 </ol>
-<p>All together, the above capabilities make formatting with the <strong>fmtr</strong> package both simpler and more powerful. The reuse features also make R more suitable to team programming.</p>
-<p>For additional reading, examples, and a complete function reference, refer to the <strong>fmtr</strong> documentation site <a href="https://fmtr.r-sassy.org/articles/fmtr.html">here</a>.</p>
+<p>All together, the above capabilities make formatting with the
+<strong>fmtr</strong> package both simpler and more powerful. The reuse
+features also make R more suitable to team programming.</p>
+<p>For additional reading, examples, and a complete function reference,
+refer to the <strong>fmtr</strong> documentation site <a href="https://fmtr.r-sassy.org/articles/fmtr.html">here</a>.</p>
 </div>
-<div class="section level3">
-<h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h3>
-<p>To install the <strong>fmtr</strong> package, you may do so by running the following command from your R console:</p>
+<div id="installation" class="section level3">
+<h3 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h3>
+<p>To install the <strong>fmtr</strong> package, you may do so by
+running the following command from your R console:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"fmtr"</span>)</span></code></pre></div>
 <p>Then put the following line at the top of your script:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fmtr)</span></code></pre></div>
-<p>The <strong>fmtr</strong> package will then be loaded, and available for use in your project.</p>
-<p>For examples and usage information, please visit the <strong>fmtr</strong> documentation site <a href="https://fmtr.r-sassy.org/articles/fmtr.html">here</a>. These examples will demonstrate the extraordinary usefulness of the formatting functions, and give you many ideas on how and where to use the <strong>fmtr</strong> package.</p>
+<p>The <strong>fmtr</strong> package will then be loaded, and available
+for use in your project.</p>
+<p>For examples and usage information, please visit the
+<strong>fmtr</strong> documentation site <a href="https://fmtr.r-sassy.org/articles/fmtr.html">here</a>. These
+examples will demonstrate the extraordinary usefulness of the formatting
+functions, and give you many ideas on how and where to use the
+<strong>fmtr</strong> package.</p>
 </div>
-<div class="section level3">
-<h3 id="getting-help">Getting Help<a class="anchor" aria-label="anchor" href="#getting-help"></a>
-</h3>
-<p>If you need help with the <strong>fmtr</strong> package, the best place to turn to is the <a href="https://fmtr.r-sassy.org">fmtr</a> web site. This web site offers many examples, and full documentation on every function.</p>
-<p>If you want to look at the code for the <strong>fmtr</strong> package, visit the github page <a href="https://github.com/dbosak01/fmtr" class="external-link">here</a>.</p>
-<p>If you encounter a bug or have a feature request, please submit your issue <a href="https://github.com/dbosak01/fmtr/issues" class="external-link">here</a></p>
+<div id="getting-help" class="section level3">
+<h3 class="hasAnchor">
+<a href="#getting-help" class="anchor"></a>Getting Help</h3>
+<p>If you need help with the <strong>fmtr</strong> package, the best
+place to turn to is the <a href="https://fmtr.r-sassy.org">fmtr</a> web
+site. This web site offers many examples, and full documentation on
+every function.</p>
+<p>If you want to look at the code for the <strong>fmtr</strong>
+package, visit the github page <a href="https://github.com/dbosak01/fmtr">here</a>.</p>
+<p>If you encounter a bug or have a feature request, please submit your
+issue <a href="https://github.com/dbosak01/fmtr/issues">here</a></p>
 </div>
-<div class="section level3">
-<h3 id="see-also">See Also<a class="anchor" aria-label="anchor" href="#see-also"></a>
-</h3>
-<p>The <strong>fmtr</strong> package is part of the <strong>sassy</strong> meta-package. The <strong>sassy</strong> meta-package includes several packages that help make R easier for SAS® programmers. You can read more about the <strong>sassy</strong> package <a href="https://sassy.r-sassy.org" class="external-link">here</a>.</p>
+<div id="see-also" class="section level3">
+<h3 class="hasAnchor">
+<a href="#see-also" class="anchor"></a>See Also</h3>
+<p>The <strong>fmtr</strong> package is part of the
+<strong>sassy</strong> meta-package. The <strong>sassy</strong>
+meta-package includes several packages that help make R easier for SAS®
+programmers. You can read more about the <strong>sassy</strong> package
+<a href="https://sassy.r-sassy.org">here</a>.</p>
 </div>
 </div>
 
@@ -165,60 +231,50 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2 data-toc-skip>Links</h2>
+<h2>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://cloud.r-project.org/package=fmtr" class="external-link">View on CRAN</a></li>
-<li><a href="https://github.com/dbosak01/fmtr/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/dbosak01/fmtr/issues" class="external-link">Report a bug</a></li>
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=fmtr">https://​cloud.r-project.org/​package=fmtr</a>
+</li>
+<li>Browse source code at <br><a href="https://github.com/dbosak01/fmtr/">https://​github.com/​dbosak01/​fmtr/​</a>
+</li>
+<li>Report a bug at <br><a href="https://github.com/dbosak01/fmtr/issues">https://​github.com/​dbosak01/​fmtr/​issues</a>
+</li>
 </ul>
 </div>
-
 <div class="license">
-<h2 data-toc-skip>License</h2>
+<h2>License</h2>
 <ul class="list-unstyled">
 <li>CC0</li>
 </ul>
 </div>
-
-
-<div class="citation">
-<h2 data-toc-skip>Citation</h2>
-<ul class="list-unstyled">
-<li><a href="authors.html#citation">Citing fmtr</a></li>
-</ul>
-</div>
-
 <div class="developers">
-<h2 data-toc-skip>Developers</h2>
+<h2>Developers</h2>
 <ul class="list-unstyled">
 <li>David Bosak <br><small class="roles"> Maintainer </small>  </li>
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
+  <div class="dev-status">
+<h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://cran.r-project.org/package=fmtr" class="external-link"><img src="https://www.r-pkg.org/badges/version/fmtr" alt="fmtr version"></a></li>
-<li><a href="https://cran.r-project.org/package=fmtr" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-blue.svg" alt="fmtr lifecycle"></a></li>
-<li><a href="https://cran.r-project.org/package=fmtr" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/fmtr" alt="fmtr downloads"></a></li>
-<li><a href="https://cran.r-project.org/package=fmtr" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/fmtr" alt="fmtr total downloads"></a></li>
-<li><a href="https://github.com/dbosak01/fmtr/actions" class="external-link"><img src="https://github.com/dbosak01/fmtr/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://app.codecov.io/gh/dbosak01/fmtr?branch=master" class="external-link"><img src="https://codecov.io/gh/dbosak01/fmtr/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://cran.r-project.org/package=fmtr"><img src="https://www.r-pkg.org/badges/version/fmtr" alt="fmtr version"></a></li>
+<li><a href="https://cran.r-project.org/package=fmtr"><img src="https://img.shields.io/badge/lifecycle-stable-blue.svg" alt="fmtr lifecycle"></a></li>
+<li><a href="https://cran.r-project.org/package=fmtr"><img src="https://cranlogs.r-pkg.org/badges/fmtr" alt="fmtr downloads"></a></li>
+<li><a href="https://cran.r-project.org/package=fmtr"><img src="https://cranlogs.r-pkg.org/badges/grand-total/fmtr" alt="fmtr total downloads"></a></li>
+<li><a href="https://github.com/dbosak01/fmtr/actions"><img src="https://github.com/dbosak01/fmtr/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://app.codecov.io/gh/dbosak01/fmtr?branch=master"><img src="https://codecov.io/gh/dbosak01/fmtr/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
-
-  </div>
+</div>
 </div>
 
 
       <footer><div class="copyright">
-  <p></p>
-<p>Developed by David Bosak.</p>
+  <p>Developed by David Bosak.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
@@ -226,8 +282,6 @@
 
   
 
-
-  
 
   </body>
 </html>

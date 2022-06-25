@@ -82,7 +82,6 @@ navbar:
   type: inverse
   structure:
     right: [home, intro, articles, reference, faq, news, github]
-    left: [ ]
   components:
     faq:
       text: FAQ

@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.7</span>
       </span>
     </div>
 
@@ -55,7 +55,7 @@
   <a href="../articles/fmtr.html">Get started</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -106,12 +106,12 @@
 
       
 
-      </header><script src="fmtr-fdata_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><script src="fmtr-fdata_files/header-attrs-2.14/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Format Data Function</h1>
             
-            <h4 class="date">2022-01-13</h4>
+            <h4 class="date">2022-06-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/dbosak01/fmtr/blob/master/vignettes/fmtr-fdata.Rmd"><code>vignettes/fmtr-fdata.Rmd</code></a></small>
       <div class="hidden name"><code>fmtr-fdata.Rmd</code></div>
@@ -123,20 +123,23 @@
 <div id="how-to-use-fdata" class="section level3">
 <h3 class="hasAnchor">
 <a href="#how-to-use-fdata" class="anchor"></a>How to use fdata()</h3>
-<p>Data can be formatted by assigning formats to the <strong>format</strong> attribute of the columns in your dataframe or tibble, and then by calling the <code><a href="../reference/fdata.html">fdata()</a></code> function on that data. A sample program is as follows:</p>
+<p>Data can be formatted by assigning formats to the
+<strong>format</strong> attribute of the columns in your dataframe or
+tibble, and then by calling the <code><a href="../reference/fdata.html">fdata()</a></code> function on that
+data. A sample program is as follows:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Set up data frame</span>
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"cyl"</span><span class="op">)</span><span class="op">]</span>
-<span class="va">df</span>
-
-<span class="co"># Define and assign formats</span>
-<span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">mpg</span>, <span class="st">"format"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/value.html">value</a></span><span class="op">(</span><span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">20</span>, <span class="st">"High"</span><span class="op">)</span>,
-                                <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">20</span>, <span class="st">"Low"</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">cyl</span>, <span class="st">"format"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">x</span>, nsmall <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-
-<span class="co"># Apply formatting</span>
-<span class="fu"><a href="../reference/fdata.html">fdata</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Set up data frame</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"cyl"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">df</span></span>
+<span></span>
+<span><span class="co"># Define and assign formats</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">mpg</span>, <span class="st">"format"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/value.html">value</a></span><span class="op">(</span><span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">20</span>, <span class="st">"High"</span><span class="op">)</span>,</span>
+<span>                                <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">20</span>, <span class="st">"Low"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">cyl</span>, <span class="st">"format"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">x</span>, nsmall <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Apply formatting</span></span>
+<span><span class="fu"><a href="../reference/fdata.html">fdata</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <p>Here is the mtcars subset before formatting:</p>
 <pre><code>#                    mpg cyl
 # Mazda RX4         21.0   6
@@ -162,7 +165,11 @@
 # Merc 230          High 4.0
 # Merc 280          Low  6.0
 </code></pre>
-<p>You may apply formatting to variables of any data type: character, numeric, date, etc. Internally, the <code><a href="../reference/fdata.html">fdata()</a></code> function is using the <code><a href="../reference/fapply.html">fapply()</a></code> function on each column in the data frame. If there is no format assigned to a column, that column is returned unaltered.</p>
+<p>You may apply formatting to variables of any data type: character,
+numeric, date, etc. Internally, the <code><a href="../reference/fdata.html">fdata()</a></code> function is
+using the <code><a href="../reference/fapply.html">fapply()</a></code> function on each column in the data
+frame. If there is no format assigned to a column, that column is
+returned unaltered.</p>
 <p>Next: <a href="fmtr-fapply.html">Format Apply Function</a></p>
 </div>
   </div>
