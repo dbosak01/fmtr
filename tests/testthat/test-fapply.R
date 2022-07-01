@@ -184,3 +184,38 @@ test_that("fapply() parameter checks work as expected", {
   
   
 })
+
+
+test_that("fapply2() works as expected.", {
+  
+  # Create vector
+  a <- c(1.3243, 5.9783, 2.3848)
+  b <- c(4.284, 3.383, 1.848)
+  
+  # Check basic fapply2
+  f1 <- fapply2(a, b, "%1.1f", "(%1.2f)", sep = " ")
+  
+  expect_equal(f1[1], "1.3 (4.28)")
+  
+  # Check width
+  f2 <- fapply2(a, b, "%1.1f", "(%1.2f)", sep = " ", width = 13)
+  
+  expect_equal(f2[1], "1.3 (4.28)   ")
+  
+  # Check width and justify
+  f3 <- fapply2(a, b, "%1.1f", "(%1.2f)", sep = " ", width = 13, 
+                justify = "right")
+  
+  expect_equal(f3[1], "   1.3 (4.28)")
+  
+  # Check if formatting attributes work
+  fattr(a) <- list(format = "%1.1f")
+  fattr(b) <- list(format = "(%1.2f)")
+  
+  f4 <- fapply2(a, b, sep = " ")
+  
+  expect_equal(f4[1], "1.3 (4.28)")
+  
+  
+})
+

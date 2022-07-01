@@ -1,6 +1,14 @@
+# fmtr 1.5.8
+
+* Fixed bug on `fapply()` that was causing it to pick up and apply
+haven format attributes. 
+* Added `fapply2()` function to format and combine two variables.
+* Added `zero_denom` parameter to `fmt_cnt_pct()` to apply specified string 
+in cases where the denominator is zero.  
+
 # fmtr 1.5.7
 
-* Fixed fapply so that NA values in data are returned as NA instead of 
+* Fixed `fapply()` so that NA values in data are returned as NA instead of 
 a string "NA".
 
 # fmtr 1.5.5

@@ -241,6 +241,89 @@ fapply <- function(x, format = NULL, width = NULL, justify = NULL) {
 }
 
 
+
+
+#' @title
+#' Apply formatting to two vectors and combine them into one vector.
+#' @description 
+#' The \code{fapply2} function applies formatting to two different vectors, and 
+#' combines them into a single vector.  This function is useful in cases
+#' where your data is in two different variables, and you would like them
+#' displayed as a single column for reporting purposes. For example, if you
+#' wish to create one column to display mean and standard deviation.
+#' @details 
+#' The \code{fapply2} function works nearly the same as \code{\link{fapply}}.
+#' The difference is it has parameters for two vectors and formats instead of one.  
+#' The output of the function
+#' is a single vector. The function essentially calls \code{\link{fapply}} 
+#' on each vector and pastes them together afterwards.
+#' 
+#' There is an additional \code{sep} parameter so you can
+#' define a separator between the two formatted values. 
+#' The \code{width} and \code{justify} parameters
+#' will apply to the single vector result.  The function will also
+#' pick up format attributes on the supplied vectors.  
+#' 
+#' The \code{fapply2} function accepts any of the format types 
+#' that \code{\link{fapply}} accepts.
+#' See \code{\link{fapply}} for additional information on the types
+#' of formats that can be applied.
+#' 
+#' Parameters may also be passed as attributes on the vector.  See 
+#' the \code{\link{fattr}} function for additional information on setting
+#' formatting attributes. 
+#' 
+#' @param x1 A vector, factor, or list to apply the format1 to.
+#' @param x2 A second vector, factor, or list to which format2 will be applied.
+#' @param format1 A format to be applied to the first input.
+#' @param format2 A format to be applied to the second input.
+#' @param sep A separator to use between the two formatted values.  Default
+#' is an empty string (""), meaning there is no separator.
+#' @param width The desired character width of the formatted vector.  Default
+#' value is NULL, meaning the vector will be variable width.
+#' @param justify Whether to justify the return vector.  Valid values are 
+#' 'left', 'right', 'center', 'centre', or 'none'. 
+#' @return A vector of formatted values.
+#' @seealso \code{\link{fapply}} to format a single input,
+#' \code{\link{fcat}} to create a format catalog,
+#' \code{\link{value}} to define a format, 
+#' \code{\link{fattr}} to easily set the formatting attributes of a vector, 
+#' and \code{\link{flist}} to define a formatting list.  Also see 
+#' \code{\link{fdata}} to apply formats to an entire data frame, and 
+#' \link{FormattingStrings} for how to define a formatting string.
+#' @export
+#' @examples 
+#' # Create sample data
+#' dt <- c(2.1, 5, 6, 9, 2, 7, 3)
+#' 
+#' # Calculate mean and standard deviation
+#' v1 <- mean(dt)
+#' v2 <- sd(dt)
+#' 
+#' # Apply formats and combine
+#' fapply2(v1, v2, "%.1f", "(%.2f)", sep = " ")
+#' # [1] "4.9 (2.66)"
+fapply2 <- function(x1, x2, format1 = NULL, format2 = NULL, sep = "",
+                    width = NULL, justify = NULL) {
+  
+  
+  res1 <- fapply(x1, format1)
+  res2 <- fapply(x2, format2)
+  
+  ret <- paste0(res1, sep, res2)
+  
+  if (!is.null(width) | !is.null(justify))
+    ret <- justify_vector(ret, width, justify)
+  
+  
+  return(ret)
+}
+
+
+# Utilities ---------------------------------------------------------------
+
+
+
 #' @noRd
 eval_conditions <- function(x, conds) {
   
