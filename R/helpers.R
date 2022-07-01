@@ -173,6 +173,12 @@ fmt_median <- function(x, format = "%.1f") {
 #' @param format A formatting string suitable for input into the 
 #' \code{\link[base]{sprintf}} function.  By default, this format is
 #' defined as "\%5.1f", which displays the value with one decimal place.
+#' @param na The value to return for any NA value encountered in the input
+#' vector.  Usually this parameter is passed as a string, such as 
+#' "-", yet any value can be supplied.  
+#' @param zero The value to return for any zero values encountered
+#' in the input vector.  Usually this value is supplied as string
+#' such as "0 (-)".
 #' @return A character vector of formatted counts and percents. 
 #' @family helpers 
 #' @examples
@@ -185,8 +191,17 @@ fmt_median <- function(x, format = "%.1f") {
 #' # [1] "4 ( 36.4%)" "3 ( 27.3%)" "8 ( 72.7%)" "6 ( 54.5%)"
 #' # [5] "9 ( 81.8%)" "5 ( 45.5%)" NA           "0 (  0.0%)"
 #' # [9] "7 ( 63.6%)" "4 ( 36.4%)" "3 ( 27.3%)" "7 ( 63.6%)"
+#' 
+#' # Custom values for NA and zero
+#' fmt_cnt_pct(v1, na = "N/A", zero = "0 (-)")
+#' 
+#' # Custom NA and zero output
+#' # [1] "4 ( 36.4%)" "3 ( 27.3%)" "8 ( 72.7%)" "6 ( 54.5%)"
+#' # [5] "9 ( 81.8%)" "5 ( 45.5%)" "N/A"        "0 (-)"
+#' # [9] "7 ( 63.6%)" "4 ( 36.4%)" "3 ( 27.3%)" "7 ( 63.6%)"
 #' @export
-fmt_cnt_pct <- function(x, denom = NULL, format = "%5.1f") {
+fmt_cnt_pct <- function(x, denom = NULL, format = "%5.1f", 
+                        na = NULL, zero = NULL) {
   
   # Default denominator is count of non-missing values
   if (is.null(denom))
@@ -203,11 +218,20 @@ fmt_cnt_pct <- function(x, denom = NULL, format = "%5.1f") {
   # Format result
   ret <- sprintf("%d (%s%%)", x, pctf)
   
+  # Deal with Zero Values
+  if (!is.null(zero)) {
+    ret <- ifelse(x == 0, zero, ret) 
+  }
+  
   # Deal with NA values
-  ret <- ifelse(substring(ret, 1, 2) == "NA", NA, ret)
+  if (!is.null(na))
+    ret <- ifelse(is.na(ret), na, ret)
+  else
+    ret <- ifelse(substring(ret, 1, 2) == "NA", NA, ret)
   
   return(ret)
 }
+
 
 #' @title Formatted mean and standard deviation
 #' @description A function to calculate and format a mean and standard deviation.

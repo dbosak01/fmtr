@@ -4,7 +4,7 @@
 \alias{fmt_cnt_pct}
 \title{Formatted count and percent}
 \usage{
-fmt_cnt_pct(x, denom = NULL, format = "\%5.1f")
+fmt_cnt_pct(x, denom = NULL, format = "\%5.1f", na = NULL, zero = NULL)
 }
 \arguments{
 \item{x}{The input data vector or data frame column.}
@@ -17,6 +17,14 @@ Otherwise, supply the denominator as a numeric value.}
 \item{format}{A formatting string suitable for input into the 
 \code{\link[base]{sprintf}} function.  By default, this format is
 defined as "\%5.1f", which displays the value with one decimal place.}
+
+\item{na}{The value to return for any NA value encountered in the input
+vector.  Usually this parameter is passed as a string, such as 
+"-", yet any value can be supplied.}
+
+\item{zero}{The value to return for any zero values encountered
+in the input vector.  Usually this value is supplied as string
+such as "0 (-)".}
 }
 \value{
 A character vector of formatted counts and percents.
@@ -50,6 +58,14 @@ fmt_cnt_pct(v1)
 # Output
 # [1] "4 ( 36.4\%)" "3 ( 27.3\%)" "8 ( 72.7\%)" "6 ( 54.5\%)"
 # [5] "9 ( 81.8\%)" "5 ( 45.5\%)" NA           "0 (  0.0\%)"
+# [9] "7 ( 63.6\%)" "4 ( 36.4\%)" "3 ( 27.3\%)" "7 ( 63.6\%)"
+
+# Custom values for NA and zero
+fmt_cnt_pct(v1, na = "N/A", zero = "0 (-)")
+
+# Custom NA and zero output
+# [1] "4 ( 36.4\%)" "3 ( 27.3\%)" "8 ( 72.7\%)" "6 ( 54.5\%)"
+# [5] "9 ( 81.8\%)" "5 ( 45.5\%)" "N/A"        "0 (-)"
 # [9] "7 ( 63.6\%)" "4 ( 36.4\%)" "3 ( 27.3\%)" "7 ( 63.6\%)"
 }
 \seealso{

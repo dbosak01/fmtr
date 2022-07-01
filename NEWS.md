@@ -3,8 +3,8 @@
 * Fixed bug on `fapply()` that was causing it to pick up and apply
 haven format attributes. 
 * Added `fapply2()` function to format and combine two variables.
-* Added `zero_denom` parameter to `fmt_cnt_pct()` to apply specified string 
-in cases where the denominator is zero.  
+* Added `na` and `zero` parameters to `fmt_cnt_pct()` to apply specified string 
+in cases where the count is NA or zero.  
 
 # fmtr 1.5.7
 

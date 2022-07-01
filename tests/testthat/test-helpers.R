@@ -73,12 +73,15 @@ test_that("fmt_cnt_pct() function works as expected.", {
   res1 <- fmt_cnt_pct(v)
   res2 <- fmt_cnt_pct(v, 110)
   res3 <- fmt_cnt_pct(v, 110, format = "%6.2f")
+  res4 <- fmt_cnt_pct(v, na = "N/A", zero = "0 (-)")
   
   expect_equal(res1[1], "1 ( 16.7%)")
   expect_equal(res1[3], "0 (  0.0%)")
   expect_equal(is.na(res1[7]), TRUE)
   expect_equal(res2[1], "1 (< 1.0%)")
   expect_equal(res3[1], "1 (< 1.00%)")
+  expect_equal(res4[3], "0 (-)")
+  expect_equal(res4[7], "N/A")
   
   
 })
