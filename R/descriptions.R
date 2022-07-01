@@ -57,8 +57,8 @@ descriptions <- function(x) {
   
   for (nm in names(x)) {
     
-    if (!is.null(attr(x[[nm]], "description"))) {
-      ret[[nm]] <- attr(x[[nm]], "description")
+    if (!is.null(attr(x[[nm]], "description", exact = TRUE))) {
+      ret[[nm]] <- attr(x[[nm]], "description", exact = TRUE)
     }
     
   }

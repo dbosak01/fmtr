@@ -135,15 +135,13 @@
 #' fapply(v5, lst)
 fapply <- function(x, format = NULL, width = NULL, justify = NULL) {
   
-
-  
   # Get attribute values if available
-  if (is.null(format) & is.null(attr(x, "format")) == FALSE) 
-    format <- attr(x, "format")
-  if (is.null(width) & is.null(attr(x, "width")) == FALSE)
-    width <- attr(x, "width")
-  if (is.null(justify) & is.null(attr(x, "justify")) == FALSE)
-    justify <- attr(x, "justify")
+  if (is.null(format) & is.null(attr(x, "format", exact = TRUE)) == FALSE) 
+    format <- attr(x, "format", exact = TRUE)
+  if (is.null(width) & is.null(attr(x, "width", exact = TRUE)) == FALSE)
+    width <- attr(x, "width", exact = TRUE)
+  if (is.null(justify) & is.null(attr(x, "justify", exact = TRUE)) == FALSE)
+    justify <- attr(x, "justify", exact = TRUE)
   
   # Parameter checks - Date values messing up this check
   # if (!is.vector(x) & !is.factor(x) & !is.list(x)) {

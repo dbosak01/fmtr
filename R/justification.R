@@ -62,8 +62,8 @@ justification <- function(x) {
   
   for (nm in names(x)) {
     
-    if (!is.null(attr(x[[nm]], "justify"))) {
-      ret[[nm]] <- attr(x[[nm]], "justify")
+    if (!is.null(attr(x[[nm]], "justify", exact = TRUE))) {
+      ret[[nm]] <- attr(x[[nm]], "justify", exact = TRUE)
     }
     
   }

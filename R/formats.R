@@ -75,8 +75,9 @@ formats <- function(x) {
   
   for (nm in names(x)) {
     
-    if (!is.null(attr(x[[nm]], "format"))) {
-      ret[[nm]] <- attr(x[[nm]], "format")
+    # Add fmtr format if it exists
+    if (!is.null(attr(x[[nm]], "format", exact = TRUE))) {
+      ret[[nm]] <- attr(x[[nm]], "format", exact = TRUE)
     }
     
   }

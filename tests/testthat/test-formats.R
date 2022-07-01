@@ -70,4 +70,31 @@ test_that("formats can be applied from format catalog to entire data frame", {
   expect_equal(dat2[1, "SEX"], "Female")
   
 })
+
+
+
+test_that("formats(), fapply and fdata can deal with format.sas attribute.", {
+  
+  df1 <- mtcars[1:10, c("mpg", "cyl") ]
+  
+  df1
+  
+  attr(df1$mpg, "format.sas") <- "something"
+  
+  # Assign formats
+  expect_equal(length(formats(df1)), 0)
+  
+  v2 <- fapply(df1$mpg)
+  
+  expect_equal(v2[1] == "something", FALSE)
+  
+  
+  df2 <- fdata(df1)
+  
+  expect_equal(df2$mpg[1] == "something", FALSE)
+
+  
+})
+
+
           

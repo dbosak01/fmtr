@@ -56,8 +56,8 @@ widths <- function(x) {
   
   for (nm in names(x)) {
     
-    if (!is.null(attr(x[[nm]], "width"))) {
-      ret[[nm]] <- attr(x[[nm]], "width")
+    if (!is.null(attr(x[[nm]], "width", exact = TRUE))) {
+      ret[[nm]] <- attr(x[[nm]], "width", exact = TRUE)
     }
     
   }

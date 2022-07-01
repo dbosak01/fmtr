@@ -54,8 +54,8 @@ labels.data.frame <- function(object, ...) {
   
   for (nm in names(object)) {
     
-    if (!is.null(attr(object[[nm]], "label"))) {
-      ret[[nm]] <- attr(object[[nm]], "label")
+    if (!is.null(attr(object[[nm]], "label", exact = TRUE))) {
+      ret[[nm]] <- attr(object[[nm]], "label", exact = TRUE)
     }
     
   }
