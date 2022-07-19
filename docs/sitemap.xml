@@ -58,6 +58,9 @@
     <loc>https://fmtr.r-sassy.org/reference/fapply.html</loc>
   </url>
   <url>
+    <loc>https://fmtr.r-sassy.org/reference/fapply2.html</loc>
+  </url>
+  <url>
     <loc>https://fmtr.r-sassy.org/reference/fattr-set.html</loc>
   </url>
   <url>
@@ -110,9 +113,6 @@
   </url>
   <url>
     <loc>https://fmtr.r-sassy.org/reference/justification.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/labels.data.frame.html</loc>
   </url>
   <url>
     <loc>https://fmtr.r-sassy.org/reference/labels.fmt.html</loc>

@@ -96,22 +96,22 @@ test_that("a format object can be applied to a vector.", {
   
 })
 
-test_that("labels() function works as expected", {
-  
-  
-  res <- c("Label A", "Label B", "Other")
-  
-  
-  fmt1 <- value(condition(x == "A", "Label A"),
-                condition(x == "B", "Label B"), 
-                condition(TRUE, "Other"))
-  
-  
-  lbls <- labels(fmt1)
-
-  expect_equal(lbls, res)
-  
-})
+# test_that("labels() function works as expected", {
+#   
+#   
+#   res <- c("Label A", "Label B", "Other")
+#   
+#   
+#   fmt1 <- value(condition(x == "A", "Label A"),
+#                 condition(x == "B", "Label B"), 
+#                 condition(TRUE, "Other"))
+#   
+#   
+#   lbls <- labels(fmt1)
+# 
+#   expect_equal(lbls, res)
+#   
+# })
 
 
 test_that("order parameter works as expected", {

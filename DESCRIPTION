@@ -15,7 +15,9 @@ License: CC0
 Encoding: UTF-8
 URL: https://fmtr.r-sassy.org
 BugReports: https://github.com/dbosak01/fmtr/issues
-Depends: R (>= 3.6.0)
+Depends: 
+    R (>= 3.6.0),
+    common
 Suggests: 
     testthat,
     knitr,

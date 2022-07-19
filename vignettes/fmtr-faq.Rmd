@@ -39,6 +39,7 @@ on the links below to navigate to the full question and answer content.
 * [Can I create a numeric user-defined format?](#numeric)
 * [Is there a way to set up a search path for a format catalog?](#path)
 * [Is there a way to read in a format catalog from SAS®?](#sas7bcat)
+* [What happened to the labels() function?](#labelsmoved)
 
 
 ## Content
@@ -323,6 +324,9 @@ labels(dat)
 # [1] "My Third Column"
 
 ```
+Note that starting in **fmtr** 1.5.8, the `labels()` function has 
+been moved to the **common** package.  To use the `labels()` function, 
+please reference that package.
 
 [top](#top)
 
@@ -759,3 +763,17 @@ be worked out.
 
 ******
 
+### What happened to the labels() function? {#labelsmoved}
+
+**Q:** I had been using the `labels()` function in a few programs,
+and now they are all broken.  It appears the `labels()` function is no longer
+part of the **fmtr** package.  What happened? 
+
+**A:** The `labels()` function has been moved to the **common** package.
+The reason it was moved is because this function is so generally useful, 
+that the **common** package was deemed a more appropriate home.  You can
+fix your code by simply adding a reference to the **common** package.
+
+[top](#top)
+
+******

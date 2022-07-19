@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convert a list to a format catalog — as.fcat.list • fmtr</title>
+<title>Apply formatting to two vectors and combine them into one vector. — fapply2 • fmtr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,9 +48,12 @@
   
   <script src="../extra.js"></script>
 
-<meta property="og:title" content="Convert a list to a format catalog — as.fcat.list" />
-<meta property="og:description" content="The as.fcat.list function converts a list of formats
-to a format catalog.  Items in the list must be named." />
+<meta property="og:title" content="Apply formatting to two vectors and combine them into one vector. — fapply2" />
+<meta property="og:description" content="The fapply2 function applies formatting to two different vectors, and 
+combines them into a single vector.  This function is useful in cases
+where your data is in two different variables, and you would like them
+displayed as a single column for reporting purposes. For example, if you
+wish to create one column to display mean and standard deviation." />
 <meta property="og:image" content="https://fmtr.r-sassy.org/logo.png" />
 
 
@@ -156,44 +159,108 @@ to a format catalog.  Items in the list must be named." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Convert a list to a format catalog</h1>
-    <small class="dont-index">Source: <a href='https://github.com/dbosak01/fmtr/blob/master/R/fcat.R'><code>R/fcat.R</code></a></small>
-    <div class="hidden name"><code>as.fcat.list.Rd</code></div>
+    <h1>Apply formatting to two vectors and combine them into one vector.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/dbosak01/fmtr/blob/master/R/fapply.R'><code>R/fapply.R</code></a></small>
+    <div class="hidden name"><code>fapply2.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The <code>as.fcat.list</code> function converts a list of formats
-to a format catalog.  Items in the list must be named.</p>
+    <p>The <code>fapply2</code> function applies formatting to two different vectors, and 
+combines them into a single vector.  This function is useful in cases
+where your data is in two different variables, and you would like them
+displayed as a single column for reporting purposes. For example, if you
+wish to create one column to display mean and standard deviation.</p>
     </div>
 
-    <pre class="usage"><span><span class='co'># S3 method for list</span></span>
-<span><span class='fu'><a href='as.fcat.html'>as.fcat</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></span></pre>
+    <pre class="usage"><span><span class='fu'>fapply2</span><span class='op'>(</span></span>
+<span>  <span class='va'>x1</span>,</span>
+<span>  <span class='va'>x2</span>,</span>
+<span>  format1 <span class='op'>=</span> <span class='cn'>NULL</span>,</span>
+<span>  format2 <span class='op'>=</span> <span class='cn'>NULL</span>,</span>
+<span>  sep <span class='op'>=</span> <span class='st'>""</span>,</span>
+<span>  width <span class='op'>=</span> <span class='cn'>NULL</span>,</span>
+<span>  justify <span class='op'>=</span> <span class='cn'>NULL</span></span>
+<span><span class='op'>)</span></span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>The list to convert.  List must contained named formats.</p></td>
+      <th>x1</th>
+      <td><p>A vector, factor, or list to apply the format1 to.</p></td>
+    </tr>
+    <tr>
+      <th>x2</th>
+      <td><p>A second vector, factor, or list to which format2 will be applied.</p></td>
+    </tr>
+    <tr>
+      <th>format1</th>
+      <td><p>A format to be applied to the first input.</p></td>
+    </tr>
+    <tr>
+      <th>format2</th>
+      <td><p>A format to be applied to the second input.</p></td>
+    </tr>
+    <tr>
+      <th>sep</th>
+      <td><p>A separator to use between the two formatted values.  Default
+is an empty string (""), meaning there is no separator.</p></td>
+    </tr>
+    <tr>
+      <th>width</th>
+      <td><p>The desired character width of the formatted vector.  Default
+value is NULL, meaning the vector will be variable width.</p></td>
+    </tr>
+    <tr>
+      <th>justify</th>
+      <td><p>Whether to justify the return vector.  Valid values are 
+'left', 'right', 'center', 'centre', or 'none'.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A format catalog based on the formats contained in the input list.</p>
+    <p>A vector of formatted values.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The <code>fapply2</code> function works nearly the same as <code><a href='fapply.html'>fapply</a></code>.
+The difference is it has parameters for two vectors and formats instead of one.  
+The output of the function
+is a single vector. The function essentially calls <code><a href='fapply.html'>fapply</a></code> 
+on each vector and pastes them together afterwards.</p>
+<p>There is an additional <code>sep</code> parameter so you can
+define a separator between the two formatted values. 
+The <code>width</code> and <code>justify</code> parameters
+will apply to the single vector result.  The function will also
+pick up format attributes on the supplied vectors.</p>
+<p>The <code>fapply2</code> function accepts any of the format types 
+that <code><a href='fapply.html'>fapply</a></code> accepts.
+See <code><a href='fapply.html'>fapply</a></code> for additional information on the types
+of formats that can be applied.</p>
+<p>Parameters may also be passed as attributes on the vector.  See 
+the <code><a href='fattr.html'>fattr</a></code> function for additional information on setting
+formatting attributes.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other fcat: 
-<code><a href='as.data.frame.fcat.html'>as.data.frame.fcat</a>()</code>,
-<code><a href='as.fcat.data.frame.html'>as.fcat.data.frame</a>()</code>,
-<code><a href='as.fcat.fmt_lst.html'>as.fcat.fmt_lst</a>()</code>,
-<code><a href='as.fcat.html'>as.fcat</a>()</code>,
-<code><a href='fcat.html'>fcat</a>()</code>,
-<code><a href='is.fcat.html'>is.fcat</a>()</code>,
-<code><a href='print.fcat.html'>print.fcat</a>()</code>,
-<code><a href='read.fcat.html'>read.fcat</a>()</code>,
-<code><a href='write.fcat.html'>write.fcat</a>()</code></p></div>
+    <div class='dont-index'><p><code><a href='fapply.html'>fapply</a></code> to format a single input,
+<code><a href='fcat.html'>fcat</a></code> to create a format catalog,
+<code><a href='value.html'>value</a></code> to define a format, 
+<code><a href='fattr.html'>fattr</a></code> to easily set the formatting attributes of a vector, 
+and <code><a href='flist.html'>flist</a></code> to define a formatting list.  Also see 
+<code><a href='fdata.html'>fdata</a></code> to apply formats to an entire data frame, and 
+<a href='FormattingStrings.html'>FormattingStrings</a> for how to define a formatting string.</p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span><span class='co'># Create sample data</span></span>
+<span><span class='va'>dt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2.1</span>, <span class='fl'>5</span>, <span class='fl'>6</span>, <span class='fl'>9</span>, <span class='fl'>2</span>, <span class='fl'>7</span>, <span class='fl'>3</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'># Calculate mean and standard deviation</span></span>
+<span><span class='va'>v1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>dt</span><span class='op'>)</span></span>
+<span><span class='va'>v2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/sd.html'>sd</a></span><span class='op'>(</span><span class='va'>dt</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='co'># Apply formats and combine</span></span>
+<span><span class='fu'>fapply2</span><span class='op'>(</span><span class='va'>v1</span>, <span class='va'>v2</span>, <span class='st'>"%.1f"</span>, <span class='st'>"(%.2f)"</span>, sep <span class='op'>=</span> <span class='st'>" "</span><span class='op'>)</span></span>
+<span><span class='co'># [1] "4.9 (2.66)"</span></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

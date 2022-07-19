@@ -57,6 +57,7 @@
 #' and \code{\link{flist}} to define a formatting list.  Also see 
 #' \code{\link{fdata}} to apply formats to an entire data frame, and 
 #' \link{FormattingStrings} for how to define a formatting string.
+#' @import common
 #' @export
 #' @examples 
 #' ## Example 1: Formatting string ##

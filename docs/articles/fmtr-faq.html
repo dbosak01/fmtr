@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.8</span>
       </span>
     </div>
 
@@ -156,6 +156,8 @@ format?</a></li>
 catalog?</a></li>
 <li><a href="#sas7bcat">Is there a way to read in a format catalog from
 SAS®?</a></li>
+<li><a href="#labelsmoved">What happened to the labels()
+function?</a></li>
 </ul>
 </div>
 <div id="content" class="section level2">
@@ -416,6 +418,10 @@ function. Like this:</p>
 <span><span class="co"># </span></span>
 <span><span class="co"># $col3</span></span>
 <span><span class="co"># [1] "My Third Column"</span></span></code></pre></div>
+<p>Note that starting in <strong>fmtr</strong> 1.5.8, the
+<code><a href="https://rdrr.io/r/base/labels.html">labels()</a></code> function has been moved to the
+<strong>common</strong> package. To use the <code><a href="https://rdrr.io/r/base/labels.html">labels()</a></code>
+function, please reference that package.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
@@ -814,6 +820,22 @@ way to read in a SAS® format catalog?</p>
 not feasible. SAS® provides a lot of functionality to their formats that
 cannot be reproduced in <strong>fmtr</strong>, even if the mechanics of
 reading the SAS® format catalog could be worked out.</p>
+<p><a href="#top">top</a></p>
+<hr>
+</div>
+<div id="labelsmoved" class="section level3">
+<h3 class="hasAnchor">
+<a href="#labelsmoved" class="anchor"></a>What happened to the labels() function?</h3>
+<p><strong>Q:</strong> I had been using the <code><a href="https://rdrr.io/r/base/labels.html">labels()</a></code>
+function in a few programs, and now they are all broken. It appears the
+<code><a href="https://rdrr.io/r/base/labels.html">labels()</a></code> function is no longer part of the
+<strong>fmtr</strong> package. What happened?</p>
+<p><strong>A:</strong> The <code><a href="https://rdrr.io/r/base/labels.html">labels()</a></code> function has been moved
+to the <strong>common</strong> package. The reason it was moved is
+because this function is so generally useful, that the
+<strong>common</strong> package was deemed a more appropriate home. You
+can fix your code by simply adding a reference to the
+<strong>common</strong> package.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>

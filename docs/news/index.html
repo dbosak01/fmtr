@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.8</span>
       </span>
     </div>
 
@@ -158,13 +158,30 @@
       <small>Source: <a href='https://github.com/dbosak01/fmtr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="fmtr-158" class="section level1">
+<h1 class="page-header" data-toc-text="1.5.8">
+<a href="#fmtr-158" class="anchor"></a>fmtr 1.5.8<small> Unreleased </small>
+</h1>
+<ul>
+<li>Fixed bug on <code><a href="../reference/fapply.html">fapply()</a></code> that was causing it to pick up
+and apply haven format attributes.</li>
+<li>Added <code><a href="../reference/fapply2.html">fapply2()</a></code> function to format and combine two
+variables.</li>
+<li>Added <code>na</code> and <code>zero</code> parameters to
+<code><a href="../reference/fmt_cnt_pct.html">fmt_cnt_pct()</a></code> to apply specified string in cases where the
+count is NA or zero.<br>
+</li>
+<li>Removed <code>labels.data.frame()</code> function from this package,
+as it has now been moved to the <strong>common</strong> package.</li>
+</ul>
+</div>
     <div id="fmtr-157" class="section level1">
 <h1 class="page-header" data-toc-text="1.5.7">
 <a href="#fmtr-157" class="anchor"></a>fmtr 1.5.7<small> 2022-06-25 </small>
 </h1>
 <ul>
-<li>Fixed fapply so that NA values in data are returned as NA instead of
-a string “NA”.</li>
+<li>Fixed <code><a href="../reference/fapply.html">fapply()</a></code> so that NA values in data are returned
+as NA instead of a string “NA”.</li>
 </ul>
 </div>
     <div id="fmtr-155" class="section level1">
@@ -232,7 +249,7 @@ assigning an NA. Now leaving the original value.</li>
 <a href="#fmtr-150" class="anchor"></a>fmtr 1.5.0<small> 2021-02-22 </small>
 </h1>
 <ul>
-<li>Added <code><a href="../reference/labels.data.frame.html">labels.data.frame()</a></code> function to assign label
+<li>Added <code>labels.data.frame()</code> function to assign label
 attributes of a data frame</li>
 <li>Small documentation fixes</li>
 </ul>
