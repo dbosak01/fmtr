@@ -2,7 +2,7 @@
 % Please edit documentation in R/fapply.R
 \name{fapply2}
 \alias{fapply2}
-\title{Apply formatting to two vectors and combine them into one vector.}
+\title{Apply formatting to two vectors}
 \usage{
 fapply2(
   x1,

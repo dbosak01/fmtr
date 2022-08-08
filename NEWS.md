@@ -1,13 +1,18 @@
 # fmtr 1.5.8
 
-* BREAKING CHANGE: Removed `labels.data.frame()` function from this package, 
-as it has now been moved to the **common** package.
+* BREAKING CHANGE: Removed the `labels.data.frame()` function 
+from this package, 
+as it has now been moved to the **common** package.  A dependency has been 
+added to **fmtr** so that the **common** package will be loaded automatically,
+and the `labels.data.frame()` function will be available automatically. 
+However, if you use fully qualified function calls in your programs, 
+such as `fmtr::labels()`, these calls will be broken, and will have to be 
+changed to `common::labels()`.
 * Fixed bug on `fapply()` that was causing it to pick up and apply
 haven format attributes. 
 * Added `fapply2()` function to format and combine two variables.
 * Added `na` and `zero` parameters to `fmt_cnt_pct()` to apply specified string 
 in cases where the count is NA or zero.  
-
 
 # fmtr 1.5.7
 

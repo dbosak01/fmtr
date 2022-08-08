@@ -17,6 +17,7 @@ reference:
   contents:
   - fdata
   - fapply
+  - fapply2
   - fattr
   - "fattr<-"
 - title: Format Catalog 

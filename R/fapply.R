@@ -245,7 +245,7 @@ fapply <- function(x, format = NULL, width = NULL, justify = NULL) {
 
 
 #' @title
-#' Apply formatting to two vectors and combine them into one vector.
+#' Apply formatting to two vectors
 #' @description 
 #' The \code{fapply2} function applies formatting to two different vectors, and 
 #' combines them into a single vector.  This function is useful in cases

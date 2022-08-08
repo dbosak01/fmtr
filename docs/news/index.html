@@ -163,9 +163,15 @@
 <a href="#fmtr-158" class="anchor"></a>fmtr 1.5.8<small> Unreleased </small>
 </h1>
 <ul>
-<li>BREAKING CHANGE: Removed <code>labels.data.frame()</code> function
-from this package, as it has now been moved to the
-<strong>common</strong> package.</li>
+<li>BREAKING CHANGE: Removed the <code>labels.data.frame()</code>
+function from this package, as it has now been moved to the
+<strong>common</strong> package. A dependency has been added to
+<strong>fmtr</strong> so that the <strong>common</strong> package will
+be loaded automatically, and the <code>labels.data.frame()</code>
+function will be available automatically. However, if you use fully
+qualified function calls in your programs, such as
+<code><a href="https://rdrr.io/r/base/labels.html">fmtr::labels()</a></code>, these calls will be broken, and will have
+to be changed to <code>common::labels()</code>.</li>
 <li>Fixed bug on <code><a href="../reference/fapply.html">fapply()</a></code> that was causing it to pick up
 and apply haven format attributes.</li>
 <li>Added <code><a href="../reference/fapply2.html">fapply2()</a></code> function to format and combine two
