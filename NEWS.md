@@ -1,3 +1,8 @@
+# fmtr 1.5.9
+
+* Changed default seperator on `fapply2()` to a blank space.  This seems
+like a more useful default.
+
 # fmtr 1.5.8
 
 * BREAKING CHANGE: Removed the `labels.data.frame()` function 

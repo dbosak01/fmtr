@@ -9,7 +9,7 @@ fapply2(
   x2,
   format1 = NULL,
   format2 = NULL,
-  sep = "",
+  sep = " ",
   width = NULL,
   justify = NULL
 )
@@ -24,7 +24,7 @@ fapply2(
 \item{format2}{A format to be applied to the second input.}
 
 \item{sep}{A separator to use between the two formatted values.  Default
-is an empty string (""), meaning there is no separator.}
+is a single blank space (" ").}
 
 \item{width}{The desired character width of the formatted vector.  Default
 value is NULL, meaning the vector will be variable width.}
@@ -73,7 +73,7 @@ v1 <- mean(dt)
 v2 <- sd(dt)
 
 # Apply formats and combine
-fapply2(v1, v2, "\%.1f", "(\%.2f)", sep = " ")
+fapply2(v1, v2, "\%.1f", "(\%.2f)")
 # [1] "4.9 (2.66)"
 }
 \seealso{

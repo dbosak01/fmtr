@@ -279,7 +279,7 @@ fapply <- function(x, format = NULL, width = NULL, justify = NULL) {
 #' @param format1 A format to be applied to the first input.
 #' @param format2 A format to be applied to the second input.
 #' @param sep A separator to use between the two formatted values.  Default
-#' is an empty string (""), meaning there is no separator.
+#' is a single blank space (" ").
 #' @param width The desired character width of the formatted vector.  Default
 #' value is NULL, meaning the vector will be variable width.
 #' @param justify Whether to justify the return vector.  Valid values are 
@@ -302,9 +302,9 @@ fapply <- function(x, format = NULL, width = NULL, justify = NULL) {
 #' v2 <- sd(dt)
 #' 
 #' # Apply formats and combine
-#' fapply2(v1, v2, "%.1f", "(%.2f)", sep = " ")
+#' fapply2(v1, v2, "%.1f", "(%.2f)")
 #' # [1] "4.9 (2.66)"
-fapply2 <- function(x1, x2, format1 = NULL, format2 = NULL, sep = "",
+fapply2 <- function(x1, x2, format1 = NULL, format2 = NULL, sep = " ",
                     width = NULL, justify = NULL) {
   
   
