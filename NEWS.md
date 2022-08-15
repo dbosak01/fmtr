@@ -4,6 +4,8 @@
 like a more useful default.
 * Allowed label on user-defined format to be a string format.  This means
 a string format can be executed conditionally.
+* Added "type" parameter to `fmt_quantile_range()` function so user can
+specify the type of quantile algorithm to use.
 
 # fmtr 1.5.8
 
