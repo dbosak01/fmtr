@@ -86,6 +86,10 @@ fmt_n <- function(x) {
 #' @param sep The character to use as a separator between the two quantiles.
 #' @param lower The lower quantile range.  Default is .25.
 #' @param upper The upper quantile range.  Default is .75.
+#' @param type An integer between 1 and 9 selecting one of the nine quantile
+#' algorithms.  The default is 7, which is the standard R default.
+#' If you are trying to match SAS results, use type 2.
+#' See the \code{\link{quantile}} function documentation for further details.
 #' @return The formatted quantile range.
 #' @family helpers 
 #' @import stats
@@ -100,10 +104,10 @@ fmt_n <- function(x) {
 #' # "4.3 - 7.8"
 #' @export
 fmt_quantile_range <- function(x, format = "%.1f", sep = "-", 
-                               lower = .25, upper = .75 ) {
+                               lower = .25, upper = .75, type = 7) {
   
-  q1 <- quantile(x, lower, na.rm = TRUE)
-  q3 <- quantile(x, upper, na.rm = TRUE)
+  q1 <- quantile(x, lower, na.rm = TRUE, type = type)
+  q3 <- quantile(x, upper, na.rm = TRUE, type = type)
   
   ret <- paste(sprintf(format, q1), sep, sprintf(format, q3))
   

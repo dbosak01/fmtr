@@ -164,7 +164,14 @@
     <p>A function to calculate and format a quantile range.</p>
     </div>
 
-    <pre class="usage"><span><span class='fu'>fmt_quantile_range</span><span class='op'>(</span><span class='va'>x</span>, format <span class='op'>=</span> <span class='st'>"%.1f"</span>, sep <span class='op'>=</span> <span class='st'>"-"</span>, lower <span class='op'>=</span> <span class='fl'>0.25</span>, upper <span class='op'>=</span> <span class='fl'>0.75</span><span class='op'>)</span></span></pre>
+    <pre class="usage"><span><span class='fu'>fmt_quantile_range</span><span class='op'>(</span></span>
+<span>  <span class='va'>x</span>,</span>
+<span>  format <span class='op'>=</span> <span class='st'>"%.1f"</span>,</span>
+<span>  sep <span class='op'>=</span> <span class='st'>"-"</span>,</span>
+<span>  lower <span class='op'>=</span> <span class='fl'>0.25</span>,</span>
+<span>  upper <span class='op'>=</span> <span class='fl'>0.75</span>,</span>
+<span>  type <span class='op'>=</span> <span class='fl'>7</span></span>
+<span><span class='op'>)</span></span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -190,6 +197,13 @@ defined as "%.1f", which displays the value with one decimal place.</p></td>
     <tr>
       <th>upper</th>
       <td><p>The upper quantile range.  Default is .75.</p></td>
+    </tr>
+    <tr>
+      <th>type</th>
+      <td><p>An integer between 1 and 9 selecting one of the nine quantile
+algorithms.  The default is 7, which is the standard R default.
+If you are trying to match SAS results, use type 2.
+See the <code><a href='https://rdrr.io/r/stats/quantile.html'>quantile</a></code> function documentation for further details.</p></td>
     </tr>
     </table>
 

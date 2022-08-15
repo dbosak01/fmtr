@@ -4,7 +4,14 @@
 \alias{fmt_quantile_range}
 \title{Formatted Quantile Range}
 \usage{
-fmt_quantile_range(x, format = "\%.1f", sep = "-", lower = 0.25, upper = 0.75)
+fmt_quantile_range(
+  x,
+  format = "\%.1f",
+  sep = "-",
+  lower = 0.25,
+  upper = 0.75,
+  type = 7
+)
 }
 \arguments{
 \item{x}{The input data vector or data frame column.}
@@ -18,6 +25,11 @@ defined as "\%.1f", which displays the value with one decimal place.}
 \item{lower}{The lower quantile range.  Default is .25.}
 
 \item{upper}{The upper quantile range.  Default is .75.}
+
+\item{type}{An integer between 1 and 9 selecting one of the nine quantile
+algorithms.  The default is 7, which is the standard R default.
+If you are trying to match SAS results, use type 2.
+See the \code{\link{quantile}} function documentation for further details.}
 }
 \value{
 The formatted quantile range.

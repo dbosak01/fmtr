@@ -344,3 +344,20 @@ test_that("fmt16: NA values in date format fall through unaltered.", {
 })
 
 
+
+test_that("fmt17: fapply works with user-defined format on factor.", {
+  
+  v1 <- factor(c("A", "B", "C", "A"))
+  
+  
+  fmt <- value(condition(x == "A", "Label A"),
+               condition(x == "B", "Label B"),
+               condition(TRUE, "Other"))
+  
+  fmtd <- fapply(v1, fmt)
+  
+  expect_equal(fmtd , c("Label A", "Label B", "Other", "Label A"))
+  
+  
+})
+

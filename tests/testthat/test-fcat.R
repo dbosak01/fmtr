@@ -1,7 +1,7 @@
 context("Format Catalog Tests")
 
 
-test_that("fcat() function works as expected", {
+test_that("fcat1: fcat() function works as expected", {
   
   
   c1 <- fcat(lblA = value(condition(x == "A", "Label A"),
@@ -19,7 +19,7 @@ test_that("fcat() function works as expected", {
   
 })
 
-test_that("as.data.frame.fcat() function works as expected", {
+test_that("fcat2: as.data.frame.fcat() function works as expected", {
   
   
   c1 <- fcat(lblA = value(condition(x == "A", "Label A", order = 2),
@@ -44,7 +44,7 @@ test_that("as.data.frame.fcat() function works as expected", {
   
 })
 
-test_that("as.fcat.data.frame() function works as expected", {
+test_that("fcat3: as.fcat.data.frame() function works as expected", {
   
   
   c1 <- fcat(lblA = value(condition(x == "A", "Label A", order = 2),
@@ -84,7 +84,7 @@ test_that("as.fcat.data.frame() function works as expected", {
 })
 
 
-test_that("write.fcat and read.fcat functions work as expected.", {
+test_that("fcat4: write.fcat and read.fcat functions work as expected.", {
   
   
   fp <- tempdir()
@@ -110,7 +110,7 @@ test_that("write.fcat and read.fcat functions work as expected.", {
   
 })
 
-test_that("is.fcat function work as expected.", {
+test_that("fcat5: is.fcat function work as expected.", {
   
   c1 <- fcat(num_fmt  = "%.1f",
              label_fmt = value(condition(x == "A", "Label A"),
@@ -123,7 +123,7 @@ test_that("is.fcat function work as expected.", {
   
 })
 
-test_that("fcat can be used for formatting vectors.", {
+test_that("fcat6: fcat can be used for formatting vectors.", {
   
   c1 <- fcat(num_fmt  = "%.1f",
              label_fmt = value(condition(x == "A", "Label A"),
@@ -141,7 +141,7 @@ test_that("fcat can be used for formatting vectors.", {
 })
 
 
-test_that("fcat printing works as expected.", {
+test_that("fcat7: fcat printing works as expected.", {
   
   c1 <- fcat(num_fmt  = "%.1f",
              label_fmt = value(condition(x == "A", "Label A"),
@@ -155,7 +155,7 @@ test_that("fcat printing works as expected.", {
 })
 
 
-test_that("fcat can be applied to a data frame with formats function.", {
+test_that("fcat8: fcat can be applied to a data frame with formats function.", {
   
   c1 <- fcat(AGE  = "%.1f",
              CATEGORY = value(condition(x == "A", "Label A"),
@@ -182,7 +182,7 @@ test_that("fcat can be applied to a data frame with formats function.", {
 
 
 
-test_that("print.fcat works as expected.", {
+test_that("fcat9: print.fcat works as expected.", {
   
   c1 <- fcat(AGE  = "%.1f",
              CATEGORY = value(condition(x == "A", "Label A"),
@@ -205,7 +205,7 @@ test_that("print.fcat works as expected.", {
 })
 
 
-test_that("as.fcat.fmt_lst works as expected.", {
+test_that("fcat10: as.fcat.fmt_lst works as expected.", {
   
   f1 <- flist(AGE  = "%.1f",
              CATEGORY = value(condition(x == "A", "Label A"),
@@ -221,7 +221,7 @@ test_that("as.fcat.fmt_lst works as expected.", {
 
 })
 
-test_that("as.fcat.list works as expected.", {
+test_that("fcat11: as.fcat.list works as expected.", {
   
   l1 <- list(AGE  = "%.1f",
               CATEGORY = value(condition(x == "A", "Label A"),
@@ -238,7 +238,7 @@ test_that("as.fcat.list works as expected.", {
 })
 
 
-test_that("as.fcat.tbl_df works as expected.", {
+test_that("fcat12: as.fcat.tbl_df works as expected.", {
   
   c1 <- fcat(AGE  = "%.1f",
              CATEGORY = value(condition(x == "A", "Label A"),
@@ -258,7 +258,7 @@ test_that("as.fcat.tbl_df works as expected.", {
   
 })
 
-test_that("row_limit parameter works as expected", {
+test_that("fcat13: row_limit parameter works as expected", {
   
   
   c1 <- fcat(lblA = value(condition(x == "A", "Label A", order = 2),
@@ -285,7 +285,7 @@ test_that("row_limit parameter works as expected", {
 })
 
 
-test_that("print.fcat function works as expected", {
+test_that("fcat14: print.fcat function works as expected", {
   
   
   c1 <- fcat(lblA = value(condition(x == "A", "Label A"),

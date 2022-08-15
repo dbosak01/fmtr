@@ -398,6 +398,8 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
         
         # Turn NA strings back into real NA
         ret <- replace(ret, nas, NA)
+    } else {
+      ret <- fmt
     }
   } else if ("function" %in% class(fmt)) {
     
