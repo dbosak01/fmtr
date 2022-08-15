@@ -11,23 +11,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 
-<meta name="date" content="2020-12-27" />
+<meta name="date" content="2022-08-14" />
 
 <title>Format Apply Function</title>
 
-<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
-// v0.0.1
-// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
-
-document.addEventListener('DOMContentLoaded', function() {
-  const codeList = document.getElementsByClassName("sourceCode");
-  for (var i = 0; i < codeList.length; i++) {
-    var linkList = codeList[i].getElementsByTagName('a');
-    for (var j = 0; j < linkList.length; j++) {
-      if (linkList[j].innerHTML === "") {
-        linkList[j].setAttribute('aria-hidden', 'true');
-      }
-    }
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
   }
 });
 </script>
@@ -42,21 +39,29 @@ document.addEventListener('DOMContentLoaded', function() {
     </style>
 
 
-<style type="text/css">code{white-space: pre;}</style>
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -76,7 +81,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -327,26 +332,31 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 <h1 class="title toc-ignore">Format Apply Function</h1>
-<h4 class="date">2020-12-27</h4>
+<h4 class="date">2022-08-14</h4>
 
 
 
 <div id="how-to-use-fapply" class="section level3">
 <h3>How to use fapply()</h3>
-<p>The <code>fapply()</code> function applies a format to a vector, factor, or list. This function may be used independently of the <code>fdata()</code> function. Here is an example:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>v1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;B&quot;</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a>v1</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;B&quot;</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a></span>
-<span id="cb1-6"><a href="#cb1-6"></a>fmt1 &lt;-<span class="st"> </span><span class="kw">value</span>(<span class="kw">condition</span>(x <span class="op">==</span><span class="st"> &quot;A&quot;</span>, <span class="st">&quot;Label A&quot;</span>),</span>
-<span id="cb1-7"><a href="#cb1-7"></a>              <span class="kw">condition</span>(x <span class="op">==</span><span class="st"> &quot;B&quot;</span>, <span class="st">&quot;Label B&quot;</span>),</span>
-<span id="cb1-8"><a href="#cb1-8"></a>              <span class="kw">condition</span>(<span class="ot">TRUE</span>, <span class="st">&quot;Other&quot;</span>))</span>
-<span id="cb1-9"><a href="#cb1-9"></a></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="kw">fapply</span>(v1, fmt1)</span>
-<span id="cb1-11"><a href="#cb1-11"></a></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="co"># &quot;Label A&quot; &quot;Label B&quot;   &quot;Other&quot; &quot;Label B&quot; </span></span></code></pre></div>
-<p>One advantage of using <code>fapply()</code> is that your original data is not altered. The formatted values are assigned to a new object. If your original data changes, the formatting function should be reapplied to maintain consistency with the original data.</p>
+<p>The <code>fapply()</code> function applies a format to a vector,
+factor, or list. This function may be used independently of the
+<code>fdata()</code> function. Here is an example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;B&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>v1</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;B&quot;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>fmt1 <span class="ot">&lt;-</span> <span class="fu">value</span>(<span class="fu">condition</span>(x <span class="sc">==</span> <span class="st">&quot;A&quot;</span>, <span class="st">&quot;Label A&quot;</span>),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>              <span class="fu">condition</span>(x <span class="sc">==</span> <span class="st">&quot;B&quot;</span>, <span class="st">&quot;Label B&quot;</span>),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>              <span class="fu">condition</span>(<span class="cn">TRUE</span>, <span class="st">&quot;Other&quot;</span>))</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">fapply</span>(v1, fmt1)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;Label A&quot; &quot;Label B&quot;   &quot;Other&quot; &quot;Label B&quot; </span></span></code></pre></div>
+<p>One advantage of using <code>fapply()</code> is that your original
+data is not altered. The formatted values are assigned to a new object.
+If your original data changes, the formatting function should be
+reapplied to maintain consistency with the original data.</p>
 </div>
 <div id="what-kind-of-formats-are-available" class="section level2">
 <h2>What kind of formats are available</h2>
@@ -358,110 +368,164 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <li>A vectorized function</li>
 <li>A formatting list</li>
 </ul>
-<p>You can use the type of formatting object that is most suitable to your data and situation. Each type of formatting object has it’s own strengths and weaknesses.</p>
+<p>You can use the type of formatting object that is most suitable to
+your data and situation. Each type of formatting object has it’s own
+strengths and weaknesses.</p>
 <div id="formatting-string" class="section level4">
 <h4>Formatting String</h4>
-<p>The formatting functions accept formatting strings such as those associated with the Base R <code>format()</code> and <code>sprintf()</code> functions. If the data type of the vector is a date or datetime, <code>fapply()</code> will use the format codes associated with the <code>format()</code> function. For other data types, <code>fapply()</code> will use the format codes associated with <code>sprintf</code>. Here is an example:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>v1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.367</span>, <span class="fl">8.356</span>, <span class="fl">4.583</span>, <span class="fl">2.873</span>)</span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">fapply</span>(v1, <span class="st">&quot;%.1f%%&quot;</span>)</span>
-<span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a>[<span class="dv">1</span>] <span class="st">&quot;1.4%&quot;</span> <span class="st">&quot;8.4%&quot;</span> <span class="st">&quot;4.6%&quot;</span> <span class="st">&quot;2.9%&quot;</span></span></code></pre></div>
+<p>The formatting functions accept formatting strings such as those
+associated with the Base R <code>format()</code> and
+<code>sprintf()</code> functions. If the data type of the vector is a
+date or datetime, <code>fapply()</code> will use the format codes
+associated with the <code>format()</code> function. For other data
+types, <code>fapply()</code> will use the format codes associated with
+<code>sprintf</code>. Here is an example:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.367</span>, <span class="fl">8.356</span>, <span class="fl">4.583</span>, <span class="fl">2.873</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fapply</span>(v1, <span class="st">&quot;%.1f%%&quot;</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">&quot;1.4%&quot;</span> <span class="st">&quot;8.4%&quot;</span> <span class="st">&quot;4.6%&quot;</span> <span class="st">&quot;2.9%&quot;</span></span></code></pre></div>
 </div>
 <div id="named-vectors" class="section level4">
 <h4>Named vectors</h4>
-<p>Data may be formatted using a named vector as a lookup. Simply ensure that the names on the formatting vector correspond to the values in the data vector.<br />
-The advantage of using a named vector for formatting is its simplicity. The disadvantage is that it only works with character values. Here is an example of formatting using a named vector:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>v1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;B&quot;</span>)</span>
-<span id="cb3-2"><a href="#cb3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3"></a>fmt1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dt">A =</span> <span class="st">&quot;Label A&quot;</span>, <span class="dt">B =</span> <span class="st">&quot;Label B&quot;</span>, <span class="dt">C=</span> <span class="st">&quot;Label C&quot;</span>)</span>
-<span id="cb3-4"><a href="#cb3-4"></a></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">fapply</span>(v1, fmt1)</span>
-<span id="cb3-6"><a href="#cb3-6"></a></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co"># &quot;Label A&quot; &quot;Label B&quot; &quot;Label C&quot; &quot;Label B&quot; </span></span></code></pre></div>
+<p>Data may be formatted using a named vector as a lookup. Simply ensure
+that the names on the formatting vector correspond to the values in the
+data vector.<br />
+The advantage of using a named vector for formatting is its simplicity.
+The disadvantage is that it only works with character values. Here is an
+example of formatting using a named vector:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;B&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>fmt1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">A =</span> <span class="st">&quot;Label A&quot;</span>, <span class="at">B =</span> <span class="st">&quot;Label B&quot;</span>, <span class="at">C=</span> <span class="st">&quot;Label C&quot;</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">fapply</span>(v1, fmt1)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;Label A&quot; &quot;Label B&quot; &quot;Label C&quot; &quot;Label B&quot; </span></span></code></pre></div>
 </div>
 <div id="user-defined-formats" class="section level4">
 <h4>User-defined formats</h4>
-<p>The <strong>fmtr</strong> package provides custom functions for creating user-defined formats, in a manner that is similar to a SAS® user-defined format. These functions are <code>value()</code> and <code>condition()</code>. The <code>value()</code> function accepts one or more conditions. The <code>condition()</code> function accepts an expression/label pair. A user-defined format has the advantage of a clear and flexible syntax. It is excellent for categorizing data. Here is an example of a user-defined format:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>v1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="ot">NA</span>, <span class="st">&quot;C&quot;</span>)</span>
-<span id="cb4-2"><a href="#cb4-2"></a></span>
-<span id="cb4-3"><a href="#cb4-3"></a>fmt2 &lt;-<span class="st"> </span><span class="kw">value</span>(<span class="kw">condition</span>(<span class="kw">is.na</span>(x), <span class="st">&quot;Missing&quot;</span>),</span>
-<span id="cb4-4"><a href="#cb4-4"></a>              <span class="kw">condition</span>(x <span class="op">==</span><span class="st"> &quot;A&quot;</span>, <span class="st">&quot;Label A&quot;</span>),</span>
-<span id="cb4-5"><a href="#cb4-5"></a>              <span class="kw">condition</span>(x <span class="op">==</span><span class="st"> &quot;B&quot;</span>, <span class="st">&quot;Label B&quot;</span>),</span>
-<span id="cb4-6"><a href="#cb4-6"></a>              <span class="kw">condition</span>(<span class="ot">TRUE</span>, <span class="st">&quot;Other&quot;</span>))</span>
-<span id="cb4-7"><a href="#cb4-7"></a>              </span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="kw">fapply</span>(v1, fmt2)</span>
-<span id="cb4-9"><a href="#cb4-9"></a></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="co"># &quot;Label A&quot; &quot;Label B&quot;   &quot;Missing&quot; &quot;Other&quot; </span></span></code></pre></div>
+<p>The <strong>fmtr</strong> package provides custom functions for
+creating user-defined formats, in a manner that is similar to a SAS®
+user-defined format. These functions are <code>value()</code> and
+<code>condition()</code>. The <code>value()</code> function accepts one
+or more conditions. The <code>condition()</code> function accepts an
+expression/label pair. A user-defined format has the advantage of a
+clear and flexible syntax. It is excellent for categorizing data. Here
+is an example of a user-defined format:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="cn">NA</span>, <span class="st">&quot;C&quot;</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>fmt2 <span class="ot">&lt;-</span> <span class="fu">value</span>(<span class="fu">condition</span>(<span class="fu">is.na</span>(x), <span class="st">&quot;Missing&quot;</span>),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>              <span class="fu">condition</span>(x <span class="sc">==</span> <span class="st">&quot;A&quot;</span>, <span class="st">&quot;Label A&quot;</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>              <span class="fu">condition</span>(x <span class="sc">==</span> <span class="st">&quot;B&quot;</span>, <span class="st">&quot;Label B&quot;</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>              <span class="fu">condition</span>(<span class="cn">TRUE</span>, <span class="st">&quot;Other&quot;</span>))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>              </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">fapply</span>(v1, fmt2)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;Label A&quot; &quot;Label B&quot;   &quot;Missing&quot; &quot;Other&quot; </span></span></code></pre></div>
+<p>The user-defined format may also be used to format values
+conditionally. Conditional formatting is accomplished by using a
+formatting string as the label. The following example formats a numeric
+value two decimal places, unless it exceeds a specified range.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>v2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">18.3987</span>, <span class="fl">15.45852</span>, <span class="fl">8.9835</span>, <span class="fl">11.246246</span>, <span class="fl">25.3858</span>, <span class="cn">NA</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>fmt3 <span class="ot">&lt;-</span> <span class="fu">value</span>(<span class="fu">condition</span>(<span class="fu">is.na</span>(x), <span class="st">&quot;Missing&quot;</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>              <span class="fu">condition</span>(x <span class="sc">&lt;</span> <span class="dv">10</span>, <span class="st">&quot;Low&quot;</span>),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>              <span class="fu">condition</span>(x <span class="sc">&gt;</span> <span class="dv">20</span>, <span class="st">&quot;High&quot;</span>),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>              <span class="fu">condition</span>(<span class="cn">TRUE</span>, <span class="st">&quot;%.2f&quot;</span>))</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>              </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">fapply</span>(v2, fmt3)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] &quot;18.40&quot;   &quot;15.46&quot;   &quot;Low&quot;     &quot;11.25&quot;   &quot;High&quot;    &quot;Missing&quot;</span></span></code></pre></div>
 </div>
 <div id="vectorized-functions" class="section level4">
 <h4>Vectorized functions</h4>
-<p>Vectorized functions provide the most powerful way of formatting data. Vectorized functions can be user-defined, or wrapping an available packaged function. The vectorized function has the advantage of being nearly limitless in the types of formatting you can perform. The drawback is that a vectorized function can be more complicated to write. Here is an example of formatting with a user-defined, vectorized function:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>v1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="ot">NA</span>, <span class="st">&quot;C&quot;</span>)</span>
-<span id="cb5-2"><a href="#cb5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3"></a>fmt2 &lt;-<span class="st"> </span><span class="kw">Vectorize</span>(<span class="cf">function</span>(x) {</span>
-<span id="cb5-4"><a href="#cb5-4"></a>    </span>
-<span id="cb5-5"><a href="#cb5-5"></a>    <span class="cf">if</span> (<span class="kw">is.na</span>(x)) </span>
-<span id="cb5-6"><a href="#cb5-6"></a>      ret &lt;-<span class="st"> &quot;Missing&quot;</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a>    <span class="cf">else</span> <span class="cf">if</span> (x <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>))</span>
-<span id="cb5-8"><a href="#cb5-8"></a>      ret &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;Label&quot;</span>, x)</span>
-<span id="cb5-9"><a href="#cb5-9"></a>    <span class="cf">else</span> </span>
-<span id="cb5-10"><a href="#cb5-10"></a>      ret &lt;-<span class="st"> &quot;Other&quot;</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a>    </span>
-<span id="cb5-12"><a href="#cb5-12"></a>    <span class="kw">return</span>(ret)</span>
-<span id="cb5-13"><a href="#cb5-13"></a>    </span>
-<span id="cb5-14"><a href="#cb5-14"></a>  })</span>
-<span id="cb5-15"><a href="#cb5-15"></a>  </span>
-<span id="cb5-16"><a href="#cb5-16"></a><span class="kw">fapply</span>(v1, fmt2)</span>
-<span id="cb5-17"><a href="#cb5-17"></a></span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="co"># &quot;Label A&quot; &quot;Label B&quot;   &quot;Missing&quot; &quot;Other&quot; </span></span></code></pre></div>
+<p>Vectorized functions provide the most powerful way of formatting
+data. Vectorized functions can be user-defined, or wrapping an available
+packaged function. The vectorized function has the advantage of being
+nearly limitless in the types of formatting you can perform. The
+drawback is that a vectorized function can be more complicated to write.
+Here is an example of formatting with a user-defined, vectorized
+function:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="cn">NA</span>, <span class="st">&quot;C&quot;</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>fmt2 <span class="ot">&lt;-</span> <span class="fu">Vectorize</span>(<span class="cf">function</span>(x) {</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">is.na</span>(x)) </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>      ret <span class="ot">&lt;-</span> <span class="st">&quot;Missing&quot;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="cf">if</span> (x <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>      ret <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;Label&quot;</span>, x)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>      ret <span class="ot">&lt;-</span> <span class="st">&quot;Other&quot;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(ret)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="fu">fapply</span>(v1, fmt2)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;Label A&quot; &quot;Label B&quot;   &quot;Missing&quot; &quot;Other&quot; </span></span></code></pre></div>
 </div>
 <div id="a-formatting-list" class="section level4">
 <h4>A formatting list</h4>
-<p>Sometimes data needs to be formatted differently for each row. This situation is difficult to deal with in any language.<br />
-But it can be made easy in R with the <strong>fmtr</strong> package and a formatting list.</p>
-<p>A formatting list is a list that contains one or more of the four types of formatting objects described above. It is defined with the <code>flist()</code> function. A formatting list can be applied in two different ways: in order, or with a lookup.</p>
-<p>By default, the list is applied in order. That means the first format in the list is applied to the first item in the vector, the second format in the list is applied to the second item in the vector, and so on. The list is recycled if the number of list items is shorter than the number of values in the vector.</p>
-<p>For the lookup method, the formatting object is specified by a lookup vector. The lookup vector should contain names associated with the elements in the formatting list. The lookup vector should also contain the same number of items as the data vector. For each item in the data vector, <strong>fmtr</strong> will look up the appropriate format from the formatting list, and apply that format to the corresponding data value.</p>
+<p>Sometimes data needs to be formatted differently for each row. This
+situation is difficult to deal with in any language.<br />
+But it can be made easy in R with the <strong>fmtr</strong> package and
+a formatting list.</p>
+<p>A formatting list is a list that contains one or more of the four
+types of formatting objects described above. It is defined with the
+<code>flist()</code> function. A formatting list can be applied in two
+different ways: in order, or with a lookup.</p>
+<p>By default, the list is applied in order. That means the first format
+in the list is applied to the first item in the vector, the second
+format in the list is applied to the second item in the vector, and so
+on. The list is recycled if the number of list items is shorter than the
+number of values in the vector.</p>
+<p>For the lookup method, the formatting object is specified by a lookup
+vector. The lookup vector should contain names associated with the
+elements in the formatting list. The lookup vector should also contain
+the same number of items as the data vector. For each item in the data
+vector, <strong>fmtr</strong> will look up the appropriate format from
+the formatting list, and apply that format to the corresponding data
+value.</p>
 <p>The following is an example of a lookup style formatting list:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Set up data</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>v1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;num&quot;</span>, <span class="st">&quot;char&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;char&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;num&quot;</span>)</span>
-<span id="cb6-3"><a href="#cb6-3"></a>v2 &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="fl">1.258</span>, <span class="st">&quot;H&quot;</span>, <span class="kw">as.Date</span>(<span class="st">&quot;2020-06-19&quot;</span>),</span>
-<span id="cb6-4"><a href="#cb6-4"></a>           <span class="st">&quot;L&quot;</span>, <span class="kw">as.Date</span>(<span class="st">&quot;2020-04-24&quot;</span>), <span class="fl">2.8865</span>)</span>
-<span id="cb6-5"><a href="#cb6-5"></a></span>
-<span id="cb6-6"><a href="#cb6-6"></a>df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">type =</span> v1, <span class="dt">values =</span> <span class="kw">I</span>(v2))</span>
-<span id="cb6-7"><a href="#cb6-7"></a>df</span>
-<span id="cb6-8"><a href="#cb6-8"></a></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#    type     values</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="co"># 1   num      1.258</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="co"># 2  char          H</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="co"># 3  date 2020-06-19</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="co"># 4  char          L</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="co"># 5  date 2020-04-24</span></span>
-<span id="cb6-15"><a href="#cb6-15"></a><span class="co"># 6   num     2.8865</span></span>
-<span id="cb6-16"><a href="#cb6-16"></a></span>
-<span id="cb6-17"><a href="#cb6-17"></a><span class="co"># Set up formatting list</span></span>
-<span id="cb6-18"><a href="#cb6-18"></a>lst &lt;-<span class="st"> </span><span class="kw">flist</span>(<span class="dt">type =</span> <span class="st">&quot;row&quot;</span>, <span class="dt">lookup =</span> v1,</span>
-<span id="cb6-19"><a href="#cb6-19"></a>             <span class="dt">num =</span> <span class="st">&quot;%.1f&quot;</span>,</span>
-<span id="cb6-20"><a href="#cb6-20"></a>             <span class="dt">char =</span> <span class="kw">value</span>(<span class="kw">condition</span>(x <span class="op">==</span><span class="st"> &quot;H&quot;</span>, <span class="st">&quot;High&quot;</span>),</span>
-<span id="cb6-21"><a href="#cb6-21"></a>                          <span class="kw">condition</span>(x <span class="op">==</span><span class="st"> &quot;L&quot;</span>, <span class="st">&quot;Low&quot;</span>),</span>
-<span id="cb6-22"><a href="#cb6-22"></a>                          <span class="kw">condition</span>(<span class="ot">TRUE</span>, <span class="st">&quot;NA&quot;</span>)),</span>
-<span id="cb6-23"><a href="#cb6-23"></a>             <span class="dt">date =</span> <span class="st">&quot;%y-%m&quot;</span>)</span>
-<span id="cb6-24"><a href="#cb6-24"></a></span>
-<span id="cb6-25"><a href="#cb6-25"></a><span class="co"># Assign formatting list to values column</span></span>
-<span id="cb6-26"><a href="#cb6-26"></a><span class="kw">attr</span>(df<span class="op">$</span>values, <span class="st">&quot;format&quot;</span>) &lt;-<span class="st"> </span>lst</span>
-<span id="cb6-27"><a href="#cb6-27"></a></span>
-<span id="cb6-28"><a href="#cb6-28"></a></span>
-<span id="cb6-29"><a href="#cb6-29"></a><span class="co"># Apply formatting</span></span>
-<span id="cb6-30"><a href="#cb6-30"></a><span class="kw">fdata</span>(df)</span>
-<span id="cb6-31"><a href="#cb6-31"></a></span>
-<span id="cb6-32"><a href="#cb6-32"></a><span class="co">#   type values</span></span>
-<span id="cb6-33"><a href="#cb6-33"></a><span class="co"># 1  num    1.3</span></span>
-<span id="cb6-34"><a href="#cb6-34"></a><span class="co"># 2 char   High</span></span>
-<span id="cb6-35"><a href="#cb6-35"></a><span class="co"># 3 date  20-06</span></span>
-<span id="cb6-36"><a href="#cb6-36"></a><span class="co"># 4 char    Low</span></span>
-<span id="cb6-37"><a href="#cb6-37"></a><span class="co"># 5 date  20-04</span></span>
-<span id="cb6-38"><a href="#cb6-38"></a><span class="co"># 6  num    2.9</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up data</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;num&quot;</span>, <span class="st">&quot;char&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;char&quot;</span>, <span class="st">&quot;date&quot;</span>, <span class="st">&quot;num&quot;</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>v2 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fl">1.258</span>, <span class="st">&quot;H&quot;</span>, <span class="fu">as.Date</span>(<span class="st">&quot;2020-06-19&quot;</span>),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;L&quot;</span>, <span class="fu">as.Date</span>(<span class="st">&quot;2020-04-24&quot;</span>), <span class="fl">2.8865</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">type =</span> v1, <span class="at">values =</span> <span class="fu">I</span>(v2))</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>df</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#    type     values</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 1   num      1.258</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 2  char          H</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 3  date 2020-06-19</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 4  char          L</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 5  date 2020-04-24</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 6   num     2.8865</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up formatting list</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>lst <span class="ot">&lt;-</span> <span class="fu">flist</span>(<span class="at">type =</span> <span class="st">&quot;row&quot;</span>, <span class="at">lookup =</span> v1,</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>             <span class="at">num =</span> <span class="st">&quot;%.1f&quot;</span>,</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>             <span class="at">char =</span> <span class="fu">value</span>(<span class="fu">condition</span>(x <span class="sc">==</span> <span class="st">&quot;H&quot;</span>, <span class="st">&quot;High&quot;</span>),</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">condition</span>(x <span class="sc">==</span> <span class="st">&quot;L&quot;</span>, <span class="st">&quot;Low&quot;</span>),</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">condition</span>(<span class="cn">TRUE</span>, <span class="st">&quot;NA&quot;</span>)),</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>             <span class="at">date =</span> <span class="st">&quot;%y-%m&quot;</span>)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign formatting list to values column</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(df<span class="sc">$</span>values, <span class="st">&quot;format&quot;</span>) <span class="ot">&lt;-</span> lst</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply formatting</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="fu">fdata</span>(df)</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="co">#   type values</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="co"># 1  num    1.3</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 char   High</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 date  20-06</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 char    Low</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 date  20-04</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="co"># 6  num    2.9</span></span></code></pre></div>
 <p>Next: <a href="fmtr-fcat.html">Format Catalogs</a></p>
 </div>
 </div>

@@ -2,7 +2,7 @@ context("fapply Tests")
 
 
 
-test_that("fapply() function works as expected with vectors.", {
+test_that("fapply1: fapply() function works as expected with vectors.", {
   
   
   
@@ -51,7 +51,7 @@ test_that("fapply() function works as expected with vectors.", {
   
 })
 
-test_that("fapply() function works as expected with vector input formats.", {
+test_that("fapply2: fapply() function works as expected with vector input formats.", {
   
   
   
@@ -66,7 +66,7 @@ test_that("fapply() function works as expected with vector input formats.", {
   
 })
 
-test_that("fapply() function works as expected with flist", {
+test_that("fapply3: fapply() function works as expected with flist", {
   
 
    ## Formatting List - Row Type ##
@@ -127,7 +127,7 @@ test_that("fapply() function works as expected with flist", {
 })
 
 
-test_that("fapply() with vector formats work as expected.", {
+test_that("fapply4: fapply() with vector formats work as expected.", {
   
   catc = c("A", "B", "C", "B")
   catn = c(1, 2, 3, 2) 
@@ -155,7 +155,7 @@ test_that("fapply() with vector formats work as expected.", {
   
 })
 
-test_that("fapply() returns a character vector instead of a factor", {
+test_that("fapply5: fapply() returns a character vector instead of a factor", {
   
   # Create vector
   a <- c(1.3243, 5.9783, 2.3848)
@@ -171,7 +171,7 @@ test_that("fapply() returns a character vector instead of a factor", {
   
 })
 
-test_that("fapply() parameter checks work as expected", {
+test_that("fapply6: fapply() parameter checks work as expected", {
   
   
   v <- c(1, 2, 3)
@@ -186,7 +186,7 @@ test_that("fapply() parameter checks work as expected", {
 })
 
 
-test_that("fapply2() works as expected.", {
+test_that("fapply7: fapply2() works as expected.", {
   
   # Create vector
   a <- c(1.3243, 5.9783, 2.3848)
@@ -218,4 +218,39 @@ test_that("fapply2() works as expected.", {
   
   
 })
+
+test_that("fapply8: fapply() works with numeric formats in label.", {
+ 
+  v1 <- c(1.3948234, 2.393745, 3.33775, .000001, NA)
+  
+  fmt <- value(condition(x < .0001, "<.0001"),
+               condition(TRUE, "%.4f"))
+  
+  res <- fapply(v1, fmt)
+  
+  res 
+  
+  expect_equal(res, c("1.3948", "2.3937", "3.3378", "<.0001", NA))
+  
+  
+  
+  
+})
+
+test_that("fapply9: fapply() works with date formats in label.", {
+  
+  v1 <- c(as.Date("2000-01-01"), as.Date("1999-01-01"), 
+          as.Date("2000-02-23"), NA)
+  
+  fmt <- value(condition(as.integer(format(x, "%Y")) < 2000, "Too old"),
+               condition(TRUE, "%B %m %Y"))
+  
+  res <- fapply(v1, fmt)
+  
+  res 
+  
+  expect_equal(res, c("January 01 2000", "Too old", "February 02 2000", NA))
+  
+})
+
 

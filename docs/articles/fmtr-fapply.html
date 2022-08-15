@@ -111,7 +111,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Format Apply Function</h1>
             
-            <h4 class="date">2022-08-07</h4>
+            <h4 class="date">2022-08-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/dbosak01/fmtr/blob/master/vignettes/fmtr-fapply.Rmd"><code>vignettes/fmtr-fapply.Rmd</code></a></small>
       <div class="hidden name"><code>fmtr-fapply.Rmd</code></div>
@@ -214,6 +214,21 @@ is an example of a user-defined format:</p>
 <span><span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="va">v1</span>, <span class="va">fmt2</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># "Label A" "Label B"   "Missing" "Other" </span></span></code></pre></div>
+<p>The user-defined format may also be used to format values
+conditionally. Conditional formatting is accomplished by using a
+formatting string as the label. The following example formats a numeric
+value two decimal places, unless it exceeds a specified range.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">18.3987</span>, <span class="fl">15.45852</span>, <span class="fl">8.9835</span>, <span class="fl">11.246246</span>, <span class="fl">25.3858</span>, <span class="cn">NA</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fmt3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/value.html">value</a></span><span class="op">(</span><span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="st">"Missing"</span><span class="op">)</span>,</span>
+<span>              <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">10</span>, <span class="st">"Low"</span><span class="op">)</span>,</span>
+<span>              <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">20</span>, <span class="st">"High"</span><span class="op">)</span>,</span>
+<span>              <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"%.2f"</span><span class="op">)</span><span class="op">)</span></span>
+<span>              </span>
+<span><span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="va">v2</span>, <span class="va">fmt3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># [1] "18.40"   "15.46"   "Low"     "11.25"   "High"    "Missing"</span></span></code></pre></div>
 </div>
 <div id="vectorized-functions" class="section level4">
 <h4 class="hasAnchor">
@@ -225,7 +240,7 @@ nearly limitless in the types of formatting you can perform. The
 drawback is that a vectorized function can be more complicated to write.
 Here is an example of formatting with a user-defined, vectorized
 function:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="cn">NA</span>, <span class="st">"C"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">fmt2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Vectorize.html">Vectorize</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
@@ -269,7 +284,7 @@ vector, <strong>fmtr</strong> will look up the appropriate format from
 the formatting list, and apply that format to the corresponding data
 value.</p>
 <p>The following is an example of a lookup style formatting list:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Set up data</span></span>
 <span><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"num"</span>, <span class="st">"char"</span>, <span class="st">"date"</span>, <span class="st">"char"</span>, <span class="st">"date"</span>, <span class="st">"num"</span><span class="op">)</span></span>
 <span><span class="va">v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1.258</span>, <span class="st">"H"</span>, <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2020-06-19"</span><span class="op">)</span>,</span>

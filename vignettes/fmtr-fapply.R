@@ -51,6 +51,18 @@ knitr::opts_chunk$set(
 #  
 
 ## ----eval=FALSE, echo=TRUE----------------------------------------------------
+#  v2 <- c(18.3987, 15.45852, 8.9835, 11.246246, 25.3858, NA)
+#  
+#  fmt3 <- value(condition(is.na(x), "Missing"),
+#                condition(x < 10, "Low"),
+#                condition(x > 20, "High"),
+#                condition(TRUE, "%.2f"))
+#  
+#  fapply(v2, fmt3)
+#  
+#  # [1] "18.40"   "15.46"   "Low"     "11.25"   "High"    "Missing"
+
+## ----eval=FALSE, echo=TRUE----------------------------------------------------
 #  v1 <- c("A", "B", NA, "C")
 #  
 #  fmt2 <- Vectorize(function(x) {

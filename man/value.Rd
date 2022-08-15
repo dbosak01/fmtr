@@ -34,6 +34,11 @@ the labels will be returned in the order specified.
 
 The format object may be applied to a vector using the \code{fapply}
 function.  See \code{\link{fapply}} for further details.
+
+Note that the label may also be a string format.  That means a 
+user-defined format can be used to apply string formats conditionally.
+This capability is useful when you want to conditionally format 
+data values.
 }
 \examples{
 ## Example 1: Character to Character Mapping ##
@@ -69,6 +74,17 @@ fmt3 <- value(condition(x < 5, "Low"),
               
 # Apply format to vector
 fapply(v2, fmt3)
+
+
+### Example 4: Conditional formatting
+v3 <- c(10.398873, 12.98762, 0.5654, 11.588372)
+
+fmt4 <- value(condition(x < 1, "< 1.0"),
+              condition(TRUE, "\%.2f"))
+              
+fapply(v3, fmt4)
+# [1] "10.40" "12.99" "< 1.0" "11.59"
+
 }
 \seealso{
 \code{\link{condition}} to define a condition,

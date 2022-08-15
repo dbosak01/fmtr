@@ -1,7 +1,7 @@
 context("Format Tests")
 
 
-test_that("value() function sets class and levels as expected", {
+test_that("fmt1: value() function sets class and levels as expected", {
   
   
   res <- c("Label A", "Label B", "Other")
@@ -16,7 +16,7 @@ test_that("value() function sets class and levels as expected", {
   
 })
 
-test_that("ordered conditions set levels as expected", {
+test_that("fmt2: ordered conditions set levels as expected", {
   
   
   res <- c("Label B", "Other", "Label A")
@@ -34,7 +34,7 @@ test_that("ordered conditions set levels as expected", {
 
 
 
-test_that("a format object can be applied to a vector.", {
+test_that("fmt3: a format object can be applied to a vector.", {
   
   
   res <- c("Label A", "Label B", "Other", "Label B")
@@ -91,8 +91,11 @@ test_that("a format object can be applied to a vector.", {
                 condition(x == "B", as.Date("2021-04-02")),
                 condition(TRUE, as.Date("2021-04-03")))
   
+  fmt6[[1]]$label
+  
   a6 <- fapply(v1, fmt6)
   expect_equal(a6,  c(18718, 18719, 18720, 18719))
+  #expect_equal(class(a6), "Date")
   
 })
 
@@ -114,7 +117,7 @@ test_that("a format object can be applied to a vector.", {
 # })
 
 
-test_that("order parameter works as expected", {
+test_that("fmt4: order parameter works as expected", {
   
   
   res <- c("Label B", "Label A","Other")
@@ -131,7 +134,7 @@ test_that("order parameter works as expected", {
   
 })
 
-test_that("invalid order parameter generates error.", {
+test_that("fmt5: invalid order parameter generates error.", {
   
   
   res <- c("Label B", "Label A","Other")
@@ -146,7 +149,7 @@ test_that("invalid order parameter generates error.", {
 })
 
 
-test_that("unassigned and NA values in value() function fall through unaltered.", {
+test_that("fmt6: unassigned and NA values in value() function fall through unaltered.", {
   
   v1 <- c("A", "B", "C", "B", NA, 1)
   res <- c("Label A", "Label B", "C", "Label B", NA, "1")
@@ -163,7 +166,7 @@ test_that("unassigned and NA values in value() function fall through unaltered."
   
 })
 
-test_that("as.data.frame.fmt function works as expected", {
+test_that("fmt7: as.data.frame.fmt function works as expected", {
   
   
   fmt1 <- value(condition(x == "A", "Label A", order = 2),
@@ -179,7 +182,7 @@ test_that("as.data.frame.fmt function works as expected", {
 })
 
 
-test_that("as.fmt.data.frame function works as expected", {
+test_that("fmt8: as.fmt.data.frame function works as expected", {
   
   o <- c(2, 1, NA)
   e <- c("x == \"A\"", "x == \"B\"", "TRUE")
@@ -203,7 +206,7 @@ test_that("as.fmt.data.frame function works as expected", {
   
 })
 
-test_that("as.fmt.data.frame function with NA order works as expected", {
+test_that("fmt9: as.fmt.data.frame function with NA order works as expected", {
   
   o <- c(NA, NA, NA)
   e <- c("x == \"A\"", "x == \"B\"", "TRUE")
@@ -227,7 +230,7 @@ test_that("as.fmt.data.frame function with NA order works as expected", {
   
 })
 
-test_that("print.fmt function works as expected", {
+test_that("fmt10: print.fmt function works as expected", {
   
   
   fmt1 <- value(condition(x == "A", "Label A", order = 2),
@@ -242,7 +245,7 @@ test_that("print.fmt function works as expected", {
 })
 
 
-test_that("as.fmt.data.frame function works as expected with caps.", {
+test_that("fmt11: as.fmt.data.frame function works as expected with caps.", {
   
   o <- c(2, 1, NA)
   e <- c("x == \"A\"", "x == \"B\"", "TRUE")
@@ -266,7 +269,7 @@ test_that("as.fmt.data.frame function works as expected with caps.", {
 })
 
 
-test_that("values function works with range.", {
+test_that("fmt12: values function works with range.", {
   
   
   res <- c("Label A", "Label B", "Other", "Label B")
@@ -283,7 +286,7 @@ test_that("values function works with range.", {
   
 })
 
-test_that("fmt parameter checks work as expected.", {
+test_that("fmt13: fmt parameter checks work as expected.", {
   
   expect_error(value())
   expect_error(as.data.frame.fmt("fork"))
@@ -293,7 +296,7 @@ test_that("fmt parameter checks work as expected.", {
   
 })
 
-test_that("as.fmt.data.frame function works as expected with numeric labels", {
+test_that("fmt14: as.fmt.data.frame function works as expected with numeric labels", {
   
   o <- c(2, 1, NA)
   e <- c("x == \"A\"", "x == \"B\"", "TRUE")
@@ -317,7 +320,7 @@ test_that("as.fmt.data.frame function works as expected with numeric labels", {
   
 })
 
-test_that("NA values in numeric format fall through unaltered.", {
+test_that("fmt15: NA values in numeric format fall through unaltered.", {
 
   v1 <- c(1.287, 2.3847, 3.2847, 4.847, NA, 1.387)
 
@@ -329,7 +332,7 @@ test_that("NA values in numeric format fall through unaltered.", {
 })
 
 
-test_that("NA values in date format fall through unaltered.", {
+test_that("fmt16: NA values in date format fall through unaltered.", {
 
   v1 <- c(Sys.Date(), Sys.Date() + 2, NA, Sys.Date() + 3)
 

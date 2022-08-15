@@ -19,7 +19,9 @@ a vectorized function.}
 \item{label}{A label to be assigned if the expression is TRUE.  The label 
 can any valid literal value.  Typically, the label will be a character 
 string.  However, the label parameter does not restrict the data type.
-Meaning, the label could also be a number, date, or other R object type.}
+Meaning, the label could also be a number, date, or other R object type.
+The label may also be a string format, which allows you to perform
+conditional formatting.}
 
 \item{order}{An optional integer order number. When used, this parameter 
 will effect the order of the labels returned from the 

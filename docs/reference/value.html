@@ -196,6 +196,10 @@ the labels will be returned in the order the conditions were passed to the
 the labels will be returned in the order specified.</p>
 <p>The format object may be applied to a vector using the <code>fapply</code>
 function.  See <code><a href='fapply.html'>fapply</a></code> for further details.</p>
+<p>Note that the label may also be a string format.  That means a 
+user-defined format can be used to apply string formats conditionally.
+This capability is useful when you want to conditionally format 
+data values.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='condition.html'>condition</a></code> to define a condition,
@@ -243,7 +247,18 @@ function.  See <code><a href='fapply.html'>fapply</a></code> for further details
 <span>              <span class='fu'><a href='condition.html'>condition</a></span><span class='op'>(</span><span class='cn'>TRUE</span>, <span class='st'>"Out of range"</span><span class='op'>)</span><span class='op'>)</span></span>
 <span>              </span>
 <span><span class='co'># Apply format to vector</span></span>
-<span><span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='va'>v2</span>, <span class='va'>fmt3</span><span class='op'>)</span></span></pre>
+<span><span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='va'>v2</span>, <span class='va'>fmt3</span><span class='op'>)</span></span>
+<span></span>
+<span></span>
+<span><span class='co'>### Example 4: Conditional formatting</span></span>
+<span><span class='va'>v3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>10.398873</span>, <span class='fl'>12.98762</span>, <span class='fl'>0.5654</span>, <span class='fl'>11.588372</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>fmt4</span> <span class='op'>&lt;-</span> <span class='fu'>value</span><span class='op'>(</span><span class='fu'><a href='condition.html'>condition</a></span><span class='op'>(</span><span class='va'>x</span> <span class='op'>&lt;</span> <span class='fl'>1</span>, <span class='st'>"&lt; 1.0"</span><span class='op'>)</span>,</span>
+<span>              <span class='fu'><a href='condition.html'>condition</a></span><span class='op'>(</span><span class='cn'>TRUE</span>, <span class='st'>"%.2f"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span>              </span>
+<span><span class='fu'><a href='fapply.html'>fapply</a></span><span class='op'>(</span><span class='va'>v3</span>, <span class='va'>fmt4</span><span class='op'>)</span></span>
+<span><span class='co'># [1] "10.40" "12.99" "&lt; 1.0" "11.59"</span></span>
+<span></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

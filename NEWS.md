@@ -1,7 +1,9 @@
 # fmtr 1.5.9
 
-* Changed default seperator on `fapply2()` to a blank space.  This seems
+* Changed default separator on `fapply2()` to a blank space.  This seems
 like a more useful default.
+* Allowed label on user-defined format to be a string format.  This means
+a string format can be executed conditionally.
 
 # fmtr 1.5.8
 
