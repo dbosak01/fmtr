@@ -50,6 +50,9 @@ fcat <- function(...) {
   # Create new structure of class "fcat"
   f <- structure(list(...), class = c("fcat", "list"))
   
+  
+  if (log_output())
+    log_logr(f)
 
   return(f)
   
@@ -362,6 +365,9 @@ write.fcat <- function(x, dir_path = getwd(), file_name = NULL) {
   
   saveRDS(x, pth)
   
+  
+  log_logr("Saved format catalog to '" %p% pth %p% "'")
+  
   return(pth)
 }
 
@@ -403,6 +409,10 @@ read.fcat <- function(file_path) {
   
   ret <-  readRDS(file_path)
   
+  log_logr("Read format catalog from '" %p% file_path %p% "'")
+  
+  if (log_output())
+    log_logr(ret)
   
   return(ret)
 }

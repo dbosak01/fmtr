@@ -22,7 +22,9 @@ Suggests:
     testthat,
     knitr,
     rmarkdown,
-    covr
+    covr,
+    logr,
+    utils
 Imports: 
     tibble,
     stats,

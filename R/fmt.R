@@ -95,6 +95,9 @@ value <- function(...) {
   
   # Assign labels to the levels attribute
   attr(x, "levels") <- labels(x)
+  
+  if (log_output())
+    log_logr(x)
 
   return(x)
 

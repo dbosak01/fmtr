@@ -40,7 +40,7 @@ columns descriptions, column widths, and column justification
 on an entire data frame.  The package
 also includes class testing functions like `is.format()` and `is.flist()`.
 
-NOTE: In version 1.5.8 of **fmtr** the `labels()` function was  
+NOTE: In version 1.5.8 of **fmtr** the `labels()` function was
 moved to the **common** package.  If you wish to use this function,
 please include the **common** package instead.
 
