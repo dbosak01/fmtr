@@ -1,6 +1,6 @@
 context("fapply Tests")
 
-
+options("logr.output" = FALSE)
 
 test_that("fapply1: fapply() function works as expected with vectors.", {
   
