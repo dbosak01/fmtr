@@ -6,7 +6,7 @@ test_that("utils1: log_output() function works as expected.", {
 
   res <- log_output()
   
-  expect_equal(res, FALSE)
+  expect_equal(res, TRUE)
   
   
   options("logr.output" = TRUE)
@@ -28,6 +28,6 @@ test_that("utils1: log_output() function works as expected.", {
   
   res <- log_output()
   
-  expect_equal(res, FALSE)
+  expect_equal(res, TRUE)
   
 })
