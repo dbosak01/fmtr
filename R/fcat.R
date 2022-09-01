@@ -51,8 +51,10 @@ fcat <- function(...) {
   f <- structure(list(...), class = c("fcat", "list"))
   
   
-  if (log_output())
+  if (log_output()) {
     log_logr(f)
+    print(f) 
+  }
 
   return(f)
   
@@ -411,9 +413,10 @@ read.fcat <- function(file_path) {
   
   log_logr("Read format catalog from '" %p% file_path %p% "'")
   
-  if (log_output())
+  if (log_output()) {
     log_logr(ret)
-  
+    print(ret)
+  }
   return(ret)
 }
 

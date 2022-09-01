@@ -1,5 +1,6 @@
 context("Format Catalog Tests")
 
+options("logr.output" = FALSE)
 
 test_that("fcat1: fcat() function works as expected", {
   
