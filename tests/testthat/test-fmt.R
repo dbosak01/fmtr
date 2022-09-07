@@ -361,3 +361,24 @@ test_that("fmt17: fapply works with user-defined format on factor.", {
   
 })
 
+# This goes to the console and can't be tested.
+test_that("fmt18: log parameter works as expected.", {
+  
+  
+  res <- c("Label A", "Label B", "Other", "Label B")
+  
+  v1 <- c("A", "B", "C", "B")
+  
+  fmt1 <- value(condition(x == "A", "Label A"),
+                condition(x == "B", "Label B"), 
+                condition(TRUE, "Other"))
+  
+  fmt1 <- value(condition(x == "A", "Label A"),
+                condition(x == "B", "Label B"), 
+                condition(TRUE, "Other"), log = FALSE)
+  
+  expect_equal(TRUE, TRUE)
+  
+  
+})
+

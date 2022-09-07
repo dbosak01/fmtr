@@ -4,11 +4,14 @@
 \alias{fcat}
 \title{Create a format catalog}
 \usage{
-fcat(...)
+fcat(..., log = TRUE)
 }
 \arguments{
 \item{...}{A set of formats. Pass the formats as a name/value pair.  Multiple
 name/value pairs are separated by a comma.}
+
+\item{log}{Whether to log the creation of the format catalog.  Default is
+TRUE. This parameter is used internally.}
 }
 \value{
 The format catalog object.

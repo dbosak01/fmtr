@@ -1,4 +1,4 @@
-context("widths() function Tests")
+context("utilities Tests")
 
 dev <- FALSE
 

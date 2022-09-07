@@ -34,6 +34,8 @@
 #' data values.
 #'
 #' @param ... One or more \code{\link{condition}} functions.
+#' @param log Whether to log the creation of the format.  Default is
+#' TRUE. This parameter is used internally.
 #' @return The new format object.
 #' @seealso \code{\link{condition}} to define a condition,
 #' \code{\link{levels}} or \code{\link{labels.fmt}} to access the labels, and 
@@ -85,7 +87,7 @@
 #' fapply(v3, fmt4)
 #' # [1] "10.40" "12.99" "< 1.0" "11.59"
 #' 
-value <- function(...) {
+value <- function(..., log = TRUE) {
   
   if (...length() == 0)
     stop("At least one condition is required.")
@@ -96,7 +98,7 @@ value <- function(...) {
   # Assign labels to the levels attribute
   attr(x, "levels") <- labels(x)
   
-  if (log_output()) {
+  if (log_output() & log) {
     log_logr(x)
     print(x) 
   }

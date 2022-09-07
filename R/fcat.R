@@ -27,6 +27,8 @@
 #' 
 #' @param ... A set of formats. Pass the formats as a name/value pair.  Multiple
 #' name/value pairs are separated by a comma.
+#' @param log Whether to log the creation of the format catalog.  Default is
+#' TRUE. This parameter is used internally.
 #' @return The format catalog object.
 #' @seealso \code{\link{formats}} function for assigning formats to a data 
 #' frame, and the \code{\link{fdata}} and \code{\link{fapply}} functions for
@@ -45,13 +47,13 @@
 #' fapply(c("A", "B", "C", "B"), c1$label_fmt)
 #' fapply(Sys.Date(), c1$date_fmt)
 #' @export
-fcat <- function(...) {
+fcat <- function(..., log = TRUE) {
   
   # Create new structure of class "fcat"
   f <- structure(list(...), class = c("fcat", "list"))
   
   
-  if (log_output()) {
+  if (log_output() & log) {
     log_logr(f)
     print(f) 
   }
@@ -532,3 +534,79 @@ is.fcat <- function(x) {
     
   return(ret)
 }
+
+# Import function ---------------------------------------------------------
+
+# Not quite ready to release this yet
+
+#' @title Import a format catalog from a data frame.
+#' @description This function helps to create a format catalog from 
+#' a data frame.  It has an advantage over \code{\link{as.fcat.data.frame}}
+#' in that it will map the columns and create the value expressions for you.
+#' @param data The input data frame.  
+#' @param name A quoted value that identifies the column to use for the 
+#' format name.  Default is "NAME".
+#' @param value The column to use for the expression value.  The function
+#' will create an expression of the form "x == " on the values in this column.
+#' Default is "CODE".
+#' @param label The column to use for the label values.  Default is "DECODE".
+#' @param type The type of formats to create.  Default is user-defined type "U".
+#' @param order The column to use for the format order.  The default is NULL,
+#' meaning the order will be determined by the order of the rows in the 
+#' incoming data.
+#' @return A formatting object, created using the information in the 
+#' input object.
+#' @family fcat
+#' @noRd
+import.fcat <- function(data, name = "NAME", value = "CODE", label = "DECODE", type = "U", order = NULL) {
+  
+  
+  dt <- data
+  
+  nms <- names(dt)
+  
+  if (!"data.frame" %in% class(data)) {
+    
+    stop("Input data must be of class 'data.frame'.") 
+  }
+  
+  if (!name %in% nms) {
+    
+    stop("Name parameter '" %p% name %p% "; does not exist on the input dataset.") 
+  }
+  
+  if (!value %in% nms) {
+    
+    stop("Value parameter '" %p% value %p% "; does not exist on the input dataset.") 
+  }
+  
+  if (!label %in% nms) {
+    
+    stop("Label parameter '" %p% label %p% "; does not exist on the input dataset.") 
+  }
+  
+  if (!is.null(order)) {
+    if (!order %in% nms) {
+      
+      stop("Order parameter '" %p% order %p% "; does not exist on the input dataset.") 
+    } 
+  }
+  
+  if (!type %in% c("U", "S", "F", "V")) {
+    
+    
+  }
+  
+  
+  df <- data.frame(Name = dt[[name]],
+                   Type = type,
+                   Expression =  paste0("x =='", dt[[value]], "'"),
+                   Label = dt[[label]],
+                   Order = NA)
+  
+  res <- as.fcat(df)
+  
+  return(res)
+  
+}
+

@@ -1,5 +1,30 @@
 context("Format Catalog Tests")
 
+
+cdlst <- read.table(header = TRUE, text ='
+CODELISTNAME	RANK	CODEDVALUE	TRANSLATED
+LBNRIND	1	H	High
+LBNRIND	2	L	Low
+LBNRIND	3	N	Normal
+LBTESTCD	1	ALB	Albumin
+LBTESTCD	2	ALP	"Alkaline Phosphatase"
+LBTESTCD	3	ALT	"Alanine Aminotransferase"
+LBTESTCD	4	AST	"Aspartate Aminotransferase"
+LBTESTCD	5	BILDIR	"Direct Bilirubin"
+LBTESTCD	6	BILI	Bilirubin
+LBTESTCD	7	GGT	"Gamma Glutamyl Transferase"
+LBTESTCD	8	HCT Hematocrit
+LBTESTCD	9	HGB Hemoglobin
+LBTESTCD	10	PROT	Protein
+LBTESTCD	11	GLUC	Glucose
+RACE	1	"BLACK OR AFRICAN AMERICAN" "Black or African American"
+RACE	2	ASIAN	Asian
+RACE	3	WHITE	White
+SEX	1	F	Female
+SEX	2	M	Male
+SEX	3	U	Unknown')
+
+
 options("logr.output" = FALSE)
 
 test_that("fcat1: fcat() function works as expected", {
@@ -307,4 +332,45 @@ test_that("fcat14: print.fcat function works as expected", {
   
 })
 
+# This is a test of printing to console.  No real test.
+test_that("fcat15: log parameter works as expected.", {
+  
+  # Prints to console
+  c1 <- fcat(lblA = c(A = 1, B = 2),
+             lblB = "%1.1f"
+  )
+  
+  # Does not print to console
+  c1 <- fcat(lblA = c(A = 1, B = 2),
+             lblB = "%1.1f", log = FALSE
+  )
+  
+  expect_equal(1, 1)
+  
+})
 
+
+test_that("fcat16: import.fcat works as expected.", {
+  
+  res <- import.fcat(cdlst, name = "CODELISTNAME", 
+                     value = "CODEDVALUE", 
+                     label = "TRANSLATED")
+  
+  res
+  
+  expect_equal(length(res), 4)
+  expect_equal(names(res), c("LBNRIND", "LBTESTCD", "RACE", "SEX"))
+
+
+  expect_equal(length(res$SEX), 3)
+  expect_equal(length(res$LBNRIND), 3)
+  expect_equal(length(res$LBTESTCD), 11)
+  expect_equal(length(res$RACE), 3)
+  
+  res$SEX
+  
+  res1 <- fapply(c("M", "F", "M"), res$SEX)
+  
+  expect_equal(res1[1], "Male")
+  
+})

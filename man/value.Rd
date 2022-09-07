@@ -4,10 +4,13 @@
 \alias{value}
 \title{Create a user-defined format}
 \usage{
-value(...)
+value(..., log = TRUE)
 }
 \arguments{
 \item{...}{One or more \code{\link{condition}} functions.}
+
+\item{log}{Whether to log the creation of the format.  Default is
+TRUE. This parameter is used internally.}
 }
 \value{
 The new format object.
