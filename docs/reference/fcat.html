@@ -84,7 +84,7 @@ fcat function defines the format catalog." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.9</span>
       </span>
     </div>
 
@@ -168,7 +168,7 @@ collection allows you to manage and store formats as a unit.  The
 <code>fcat</code> function defines the format catalog.</p>
     </div>
 
-    <pre class="usage"><span><span class='fu'>fcat</span><span class='op'>(</span><span class='va'>...</span><span class='op'>)</span></span></pre>
+    <pre class="usage"><span><span class='fu'>fcat</span><span class='op'>(</span><span class='va'>...</span>, log <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -177,6 +177,11 @@ collection allows you to manage and store formats as a unit.  The
       <th>...</th>
       <td><p>A set of formats. Pass the formats as a name/value pair.  Multiple
 name/value pairs are separated by a comma.</p></td>
+    </tr>
+    <tr>
+      <th>log</th>
+      <td><p>Whether to log the creation of the format catalog.  Default is
+TRUE. This parameter is used internally.</p></td>
     </tr>
     </table>
 

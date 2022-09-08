@@ -1,7 +1,7 @@
 Package: fmtr
 Type: Package
 Title: Easily Apply Formats to Data  
-Version: 1.5.8
+Version: 1.5.9
 Author: David Bosak
 Maintainer: David Bosak <dbosak01@gmail.com>
 Description: Contains a set of functions that can be used to apply
