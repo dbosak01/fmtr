@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,19 +40,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"></ul>
 <ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/fmtr.html">Get started</a>
 </li>
@@ -79,6 +75,9 @@
     <li>
       <a href="../articles/fmtr-example1.html">Complete Example</a>
     </li>
+    <li>
+      <a href="../articles/fmtr-faq.html">Frequently Asked Questions</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -91,7 +90,7 @@
   <a href="../news/index.html">Changelog</a>
 </li>
 <li>
-  <a href="https://github.com/dbosak01/fmtr/">
+  <a href="https://github.com/dbosak01/fmtr/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -106,28 +105,28 @@
 
       
 
-      </header><script src="fmtr-fapply_files/header-attrs-2.14/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Format Apply Function</h1>
             
-            <h4 class="date">2022-09-07</h4>
+            <h4 data-toc-skip class="date">2023-09-10</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/dbosak01/fmtr/blob/master/vignettes/fmtr-fapply.Rmd"><code>vignettes/fmtr-fapply.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/dbosak01/fmtr/blob/HEAD/vignettes/fmtr-fapply.Rmd" class="external-link"><code>vignettes/fmtr-fapply.Rmd</code></a></small>
       <div class="hidden name"><code>fmtr-fapply.Rmd</code></div>
 
     </div>
 
     
     
-<div id="how-to-use-fapply" class="section level3">
-<h3 class="hasAnchor">
-<a href="#how-to-use-fapply" class="anchor"></a>How to use fapply()</h3>
+<div class="section level3">
+<h3 id="how-to-use-fapply">How to use fapply()<a class="anchor" aria-label="anchor" href="#how-to-use-fapply"></a>
+</h3>
 <p>The <code><a href="../reference/fapply.html">fapply()</a></code> function applies a format to a vector,
 factor, or list. This function may be used independently of the
 <code><a href="../reference/fdata.html">fdata()</a></code> function. Here is an example:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"B"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"B"</span><span class="op">)</span></span>
 <span><span class="va">v1</span></span>
 <span></span>
 <span><span class="co"># [1] "A" "B" "C" "B"</span></span>
@@ -144,9 +143,9 @@ data is not altered. The formatted values are assigned to a new object.
 If your original data changes, the formatting function should be
 reapplied to maintain consistency with the original data.</p>
 </div>
-<div id="what-kind-of-formats-are-available" class="section level2">
-<h2 class="hasAnchor">
-<a href="#what-kind-of-formats-are-available" class="anchor"></a>What kind of formats are available</h2>
+<div class="section level2">
+<h2 id="what-kind-of-formats-are-available">What kind of formats are available<a class="anchor" aria-label="anchor" href="#what-kind-of-formats-are-available"></a>
+</h2>
 <p>Data can be formatted with several different types of objects:</p>
 <ul>
 <li>A formatting string</li>
@@ -158,25 +157,25 @@ reapplied to maintain consistency with the original data.</p>
 <p>You can use the type of formatting object that is most suitable to
 your data and situation. Each type of formatting object has it’s own
 strengths and weaknesses.</p>
-<div id="formatting-string" class="section level4">
-<h4 class="hasAnchor">
-<a href="#formatting-string" class="anchor"></a>Formatting String</h4>
+<div class="section level4">
+<h4 id="formatting-string">Formatting String<a class="anchor" aria-label="anchor" href="#formatting-string"></a>
+</h4>
 <p>The formatting functions accept formatting strings such as those
-associated with the Base R <code><a href="https://rdrr.io/r/base/format.html">format()</a></code> and
-<code><a href="https://rdrr.io/r/base/sprintf.html">sprintf()</a></code> functions. If the data type of the vector is a
+associated with the Base R <code><a href="https://rdrr.io/r/base/format.html" class="external-link">format()</a></code> and
+<code><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf()</a></code> functions. If the data type of the vector is a
 date or datetime, <code><a href="../reference/fapply.html">fapply()</a></code> will use the format codes
-associated with the <code><a href="https://rdrr.io/r/base/format.html">format()</a></code> function. For other data
+associated with the <code><a href="https://rdrr.io/r/base/format.html" class="external-link">format()</a></code> function. For other data
 types, <code><a href="../reference/fapply.html">fapply()</a></code> will use the format codes associated with
 <code>sprintf</code>. Here is an example:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.367</span>, <span class="fl">8.356</span>, <span class="fl">4.583</span>, <span class="fl">2.873</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fapply</span>(v1, <span class="st">"%.1f%%"</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"1.4%"</span> <span class="st">"8.4%"</span> <span class="st">"4.6%"</span> <span class="st">"2.9%"</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.367</span>, <span class="fl">8.356</span>, <span class="fl">4.583</span>, <span class="fl">2.873</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">fapply</span>(v1, <span class="st">"%.1f%%"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"1.4%"</span> <span class="st">"8.4%"</span> <span class="st">"4.6%"</span> <span class="st">"2.9%"</span></span></code></pre></div>
 </div>
-<div id="named-vectors" class="section level4">
-<h4 class="hasAnchor">
-<a href="#named-vectors" class="anchor"></a>Named vectors</h4>
+<div class="section level4">
+<h4 id="named-vectors">Named vectors<a class="anchor" aria-label="anchor" href="#named-vectors"></a>
+</h4>
 <p>Data may be formatted using a named vector as a lookup. Simply ensure
 that the names on the formatting vector correspond to the values in the
 data vector.<br>
@@ -184,17 +183,17 @@ The advantage of using a named vector for formatting is its simplicity.
 The disadvantage is that it only works with character values. Here is an
 example of formatting using a named vector:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"B"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"B"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">fmt1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>A <span class="op">=</span> <span class="st">"Label A"</span>, B <span class="op">=</span> <span class="st">"Label B"</span>, C<span class="op">=</span> <span class="st">"Label C"</span><span class="op">)</span></span>
+<span><span class="va">fmt1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>A <span class="op">=</span> <span class="st">"Label A"</span>, B <span class="op">=</span> <span class="st">"Label B"</span>, C<span class="op">=</span> <span class="st">"Label C"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="va">v1</span>, <span class="va">fmt1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># "Label A" "Label B" "Label C" "Label B" </span></span></code></pre></div>
 </div>
-<div id="user-defined-formats" class="section level4">
-<h4 class="hasAnchor">
-<a href="#user-defined-formats" class="anchor"></a>User-defined formats</h4>
+<div class="section level4">
+<h4 id="user-defined-formats">User-defined formats<a class="anchor" aria-label="anchor" href="#user-defined-formats"></a>
+</h4>
 <p>The <strong>fmtr</strong> package provides custom functions for
 creating user-defined formats, in a manner that is similar to a SAS®
 user-defined format. These functions are <code><a href="../reference/value.html">value()</a></code> and
@@ -204,9 +203,9 @@ expression/label pair. A user-defined format has the advantage of a
 clear and flexible syntax. It is excellent for categorizing data. Here
 is an example of a user-defined format:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="cn">NA</span>, <span class="st">"C"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="cn">NA</span>, <span class="st">"C"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">fmt2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/value.html">value</a></span><span class="op">(</span><span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="st">"Missing"</span><span class="op">)</span>,</span>
+<span><span class="va">fmt2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/value.html">value</a></span><span class="op">(</span><span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="st">"Missing"</span><span class="op">)</span>,</span>
 <span>              <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"A"</span>, <span class="st">"Label A"</span><span class="op">)</span>,</span>
 <span>              <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"B"</span>, <span class="st">"Label B"</span><span class="op">)</span>,</span>
 <span>              <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"Other"</span><span class="op">)</span><span class="op">)</span></span>
@@ -219,9 +218,9 @@ conditionally. Conditional formatting is accomplished by using a
 formatting string as the label. The following example formats a numeric
 value two decimal places, unless it exceeds a specified range.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">18.3987</span>, <span class="fl">15.45852</span>, <span class="fl">8.9835</span>, <span class="fl">11.246246</span>, <span class="fl">25.3858</span>, <span class="cn">NA</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">18.3987</span>, <span class="fl">15.45852</span>, <span class="fl">8.9835</span>, <span class="fl">11.246246</span>, <span class="fl">25.3858</span>, <span class="cn">NA</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">fmt3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/value.html">value</a></span><span class="op">(</span><span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="st">"Missing"</span><span class="op">)</span>,</span>
+<span><span class="va">fmt3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/value.html">value</a></span><span class="op">(</span><span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="st">"Missing"</span><span class="op">)</span>,</span>
 <span>              <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">10</span>, <span class="st">"Low"</span><span class="op">)</span>,</span>
 <span>              <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">20</span>, <span class="st">"High"</span><span class="op">)</span>,</span>
 <span>              <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"%.2f"</span><span class="op">)</span><span class="op">)</span></span>
@@ -230,9 +229,9 @@ value two decimal places, unless it exceeds a specified range.</p>
 <span></span>
 <span><span class="co"># [1] "18.40"   "15.46"   "Low"     "11.25"   "High"    "Missing"</span></span></code></pre></div>
 </div>
-<div id="vectorized-functions" class="section level4">
-<h4 class="hasAnchor">
-<a href="#vectorized-functions" class="anchor"></a>Vectorized functions</h4>
+<div class="section level4">
+<h4 id="vectorized-functions">Vectorized functions<a class="anchor" aria-label="anchor" href="#vectorized-functions"></a>
+</h4>
 <p>Vectorized functions provide the most powerful way of formatting
 data. Vectorized functions can be user-defined, or wrapping an available
 packaged function. The vectorized function has the advantage of being
@@ -241,18 +240,18 @@ drawback is that a vectorized function can be more complicated to write.
 Here is an example of formatting with a user-defined, vectorized
 function:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="cn">NA</span>, <span class="st">"C"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="cn">NA</span>, <span class="st">"C"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">fmt2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Vectorize.html">Vectorize</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="va">fmt2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Vectorize.html" class="external-link">Vectorize</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    </span>
-<span>    <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> </span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> </span>
 <span>      <span class="va">ret</span> <span class="op">&lt;-</span> <span class="st">"Missing"</span></span>
-<span>    <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span><span class="op">)</span></span>
-<span>      <span class="va">ret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Label"</span>, <span class="va">x</span><span class="op">)</span></span>
+<span>    <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span><span class="op">)</span></span>
+<span>      <span class="va">ret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Label"</span>, <span class="va">x</span><span class="op">)</span></span>
 <span>    <span class="kw">else</span> </span>
 <span>      <span class="va">ret</span> <span class="op">&lt;-</span> <span class="st">"Other"</span></span>
 <span>    </span>
-<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">ret</span><span class="op">)</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">ret</span><span class="op">)</span></span>
 <span>    </span>
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span>  </span>
@@ -260,9 +259,9 @@ function:</p>
 <span></span>
 <span><span class="co"># "Label A" "Label B"   "Missing" "Other" </span></span></code></pre></div>
 </div>
-<div id="a-formatting-list" class="section level4">
-<h4 class="hasAnchor">
-<a href="#a-formatting-list" class="anchor"></a>A formatting list</h4>
+<div class="section level4">
+<h4 id="a-formatting-list">A formatting list<a class="anchor" aria-label="anchor" href="#a-formatting-list"></a>
+</h4>
 <p>Sometimes data needs to be formatted differently for each row. This
 situation is difficult to deal with in any language.<br>
 But it can be made easy in R with the <strong>fmtr</strong> package and
@@ -286,11 +285,11 @@ value.</p>
 <p>The following is an example of a lookup style formatting list:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Set up data</span></span>
-<span><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"num"</span>, <span class="st">"char"</span>, <span class="st">"date"</span>, <span class="st">"char"</span>, <span class="st">"date"</span>, <span class="st">"num"</span><span class="op">)</span></span>
-<span><span class="va">v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1.258</span>, <span class="st">"H"</span>, <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2020-06-19"</span><span class="op">)</span>,</span>
-<span>           <span class="st">"L"</span>, <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2020-04-24"</span><span class="op">)</span>, <span class="fl">2.8865</span><span class="op">)</span></span>
+<span><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"num"</span>, <span class="st">"char"</span>, <span class="st">"date"</span>, <span class="st">"char"</span>, <span class="st">"date"</span>, <span class="st">"num"</span><span class="op">)</span></span>
+<span><span class="va">v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1.258</span>, <span class="st">"H"</span>, <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2020-06-19"</span><span class="op">)</span>,</span>
+<span>           <span class="st">"L"</span>, <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2020-04-24"</span><span class="op">)</span>, <span class="fl">2.8865</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>type <span class="op">=</span> <span class="va">v1</span>, values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">v2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>type <span class="op">=</span> <span class="va">v1</span>, values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I</a></span><span class="op">(</span><span class="va">v2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">df</span></span>
 <span></span>
 <span><span class="co">#    type     values</span></span>
@@ -310,7 +309,7 @@ value.</p>
 <span>             date <span class="op">=</span> <span class="st">"%y-%m"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Assign formatting list to values column</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">values</span>, <span class="st">"format"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">lst</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">values</span>, <span class="st">"format"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">lst</span></span>
 <span></span>
 <span></span>
 <span><span class="co"># Apply formatting</span></span>
@@ -339,11 +338,13 @@ value.</p>
 
 
       <footer><div class="copyright">
-  <p>Developed by David Bosak.</p>
+  <p></p>
+<p>Developed by David Bosak.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -351,6 +352,8 @@ value.</p>
 
   
 
+
+  
 
   </body>
 </html>

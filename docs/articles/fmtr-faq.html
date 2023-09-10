@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,19 +40,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"></ul>
 <ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/fmtr.html">Get started</a>
 </li>
@@ -79,6 +75,9 @@
     <li>
       <a href="../articles/fmtr-example1.html">Complete Example</a>
     </li>
+    <li>
+      <a href="../articles/fmtr-faq.html">Frequently Asked Questions</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -91,7 +90,7 @@
   <a href="../news/index.html">Changelog</a>
 </li>
 <li>
-  <a href="https://github.com/dbosak01/fmtr/">
+  <a href="https://github.com/dbosak01/fmtr/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -106,13 +105,13 @@
 
       
 
-      </header><script src="fmtr-faq_files/header-attrs-2.14/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Frequently Asked Questions</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/dbosak01/fmtr/blob/master/vignettes/fmtr-faq.Rmd"><code>vignettes/fmtr-faq.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/dbosak01/fmtr/blob/HEAD/vignettes/fmtr-faq.Rmd" class="external-link"><code>vignettes/fmtr-faq.Rmd</code></a></small>
       <div class="hidden name"><code>fmtr-faq.Rmd</code></div>
 
     </div>
@@ -122,9 +121,9 @@
 <p>Below are some frequently asked questions about the
 <strong>fmtr</strong> package. Click on the links below to navigate to
 the full question and answer content.</p>
-<div id="top" class="section level2">
-<h2 class="hasAnchor">
-<a href="#top" class="anchor"></a>Index</h2>
+<div class="section level2">
+<h2 id="top">Index<a class="anchor" aria-label="anchor" href="#top"></a>
+</h2>
 <ul>
 <li><a href="#fdata">How do I format a data frame?</a></li>
 <li><a href="#fapply">How can I add a new, formatted column to my
@@ -160,12 +159,12 @@ SAS®?</a></li>
 function?</a></li>
 </ul>
 </div>
-<div id="content" class="section level2">
-<h2 class="hasAnchor">
-<a href="#content" class="anchor"></a>Content</h2>
-<div id="fdata" class="section level3">
-<h3 class="hasAnchor">
-<a href="#fdata" class="anchor"></a>How do I format a data frame?</h3>
+<div class="section level2">
+<h2 id="content">Content<a class="anchor" aria-label="anchor" href="#content"></a>
+</h2>
+<div class="section level3">
+<h3 id="fdata">How do I format a data frame?<a class="anchor" aria-label="anchor" href="#fdata"></a>
+</h3>
 <p><strong>Q:</strong> I have a data frame with different types of
 variables: numbers, dates, character values. How can I format them
 without messing up the original data?</p>
@@ -175,12 +174,12 @@ apply the formats using the <code><a href="../reference/fdata.html">fdata()</a><
 result to a new data frame. Here is a simple example:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create sample data</span></span>
-<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>SUBJ <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
-<span>                  BDATE <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1945-10-17"</span><span class="op">)</span>, </span>
-<span>                            <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1967-09-04"</span><span class="op">)</span>,</span>
-<span>                            <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1998-04-28"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                  SEX <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"M"</span>, <span class="st">"F"</span>, <span class="st">"M"</span><span class="op">)</span>,</span>
-<span>                  WEIGHT <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">77.1107</span>, <span class="fl">64.2848</span>, <span class="fl">85.9842</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>SUBJ <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>                  BDATE <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"1945-10-17"</span><span class="op">)</span>, </span>
+<span>                            <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"1967-09-04"</span><span class="op">)</span>,</span>
+<span>                            <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"1998-04-28"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                  SEX <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"M"</span>, <span class="st">"F"</span>, <span class="st">"M"</span><span class="op">)</span>,</span>
+<span>                  WEIGHT <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">77.1107</span>, <span class="fl">64.2848</span>, <span class="fl">85.9842</span><span class="op">)</span><span class="op">)</span></span>
 <span>                  </span>
 <span><span class="co"># View data                  </span></span>
 <span><span class="va">dat</span></span>
@@ -190,8 +189,8 @@ result to a new data frame. Here is a simple example:</p>
 <span><span class="co"># 3    3 1998-04-28   M 85.9842</span></span>
 <span></span>
 <span><span class="co"># Assign formats</span></span>
-<span><span class="fu"><a href="../reference/formats.html">formats</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>BDATE <span class="op">=</span> <span class="st">"%Y/%m/%d"</span>,</span>
-<span>                     SEX <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"M"</span> <span class="op">=</span> <span class="st">"Male"</span>, <span class="st">"F"</span> <span class="op">=</span> <span class="st">"Female"</span><span class="op">)</span>,</span>
+<span><span class="fu"><a href="../reference/formats.html">formats</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>BDATE <span class="op">=</span> <span class="st">"%Y/%m/%d"</span>,</span>
+<span>                     SEX <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"M"</span> <span class="op">=</span> <span class="st">"Male"</span>, <span class="st">"F"</span> <span class="op">=</span> <span class="st">"Female"</span><span class="op">)</span>,</span>
 <span>                     WEIGHT <span class="op">=</span> <span class="st">"%1.1f kg"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Apply formats to new data frame</span></span>
@@ -206,9 +205,9 @@ result to a new data frame. Here is a simple example:</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="fapply" class="section level3">
-<h3 class="hasAnchor">
-<a href="#fapply" class="anchor"></a>How can I add a new, formatted column to my dataframe?</h3>
+<div class="section level3">
+<h3 id="fapply">How can I add a new, formatted column to my dataframe?<a class="anchor" aria-label="anchor" href="#fapply"></a>
+</h3>
 <p><strong>Q:</strong> I want to add a new column to my data frame using
 a format. This column will be a categorization of an existing continuous
 column. I want to add it directly to my existing data frame, not create
@@ -219,8 +218,8 @@ a new one. How can I do that?</p>
 <span>             <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">5</span>, <span class="st">"B"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Then we’ll create some sample data:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>ID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
-<span>                  NUM <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">7</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>ID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>                  NUM <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">7</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Then you can apply the format to your data frame using either Base R
 or <strong>tidyverse</strong>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -235,8 +234,8 @@ or <strong>tidyverse</strong>.</p>
 <span><span class="co"># 3  3   7   B</span></span>
 <span></span>
 <span><span class="co"># tidyverse method</span></span>
-<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>       <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>CAT <span class="op">=</span> <span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="va">NUM</span>, <span class="va">fmt</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>       <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>CAT <span class="op">=</span> <span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="va">NUM</span>, <span class="va">fmt</span><span class="op">)</span><span class="op">)</span></span>
 <span>       </span>
 <span><span class="va">dat</span></span>
 <span><span class="co">#   ID NUM CAT</span></span>
@@ -246,9 +245,9 @@ or <strong>tidyverse</strong>.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="lookup" class="section level3">
-<h3 class="hasAnchor">
-<a href="#lookup" class="anchor"></a>How do I use a format as a lookup?</h3>
+<div class="section level3">
+<h3 id="lookup">How do I use a format as a lookup?<a class="anchor" aria-label="anchor" href="#lookup"></a>
+</h3>
 <p><strong>Q:</strong> I have a decode lookup I want to use on a
 variable in my dataframe. How can I do this with the
 <strong>fmtr</strong> package?</p>
@@ -258,11 +257,11 @@ vector from the decode. The other is to create a user-defined
 format.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create sample data frame</span></span>
-<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>ID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>,</span>
-<span>                  CODE <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"B"</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>ID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>,</span>
+<span>                  CODE <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"C"</span>, <span class="st">"B"</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create decode vector</span></span>
-<span><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>A <span class="op">=</span> <span class="st">"Value A"</span>, B <span class="op">=</span> <span class="st">"Value B"</span>, C <span class="op">=</span> <span class="st">"Value C"</span><span class="op">)</span></span>
+<span><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>A <span class="op">=</span> <span class="st">"Value A"</span>, B <span class="op">=</span> <span class="st">"Value B"</span>, C <span class="op">=</span> <span class="st">"Value C"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create user-defined format</span></span>
 <span><span class="va">fmt1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/value.html">value</a></span><span class="op">(</span><span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"A"</span>, <span class="st">"Value A"</span><span class="op">)</span>,</span>
@@ -291,21 +290,21 @@ for a vectorized function example.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="documentation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#documentation" class="anchor"></a>Where is the documentation for the formatting codes?</h3>
+<div class="section level3">
+<h3 id="documentation">Where is the documentation for the formatting codes?<a class="anchor" aria-label="anchor" href="#documentation"></a>
+</h3>
 <p><strong>Q:</strong> I’m trying to create some formats for dates and
 numbers, but am not sure what codes are available. Where is the
 documentation for the possible codes?</p>
 <p><strong>A:</strong> Some commonly used codes are documented as part
 of the <strong>fmtr</strong> documentation <a href="https://fmtr.r-sassy.org/reference/FormattingStrings.html">here</a>.
-Additional documentation on the possible codes for dates is <a href="https://rdrr.io/r/base/strptime.html">here</a>, and for numbers <a href="https://rdrr.io/r/base/sprintf.html">here</a>.</p>
+Additional documentation on the possible codes for dates is <a href="https://rdrr.io/r/base/strptime.html" class="external-link">here</a>, and for numbers <a href="https://rdrr.io/r/base/sprintf.html" class="external-link">here</a>.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="formats" class="section level3">
-<h3 class="hasAnchor">
-<a href="#formats" class="anchor"></a>How do I assign formats from metadata to my data frame?</h3>
+<div class="section level3">
+<h3 id="formats">How do I assign formats from metadata to my data frame?<a class="anchor" aria-label="anchor" href="#formats"></a>
+</h3>
 <p><strong>Q:</strong> I have metadata for my datasets that includes the
 desired format for each variable. How can I apply these formats to my
 data?</p>
@@ -315,8 +314,8 @@ are at least two columns in the metadata: the variable name and the
 format.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Sample metadata</span></span>
-<span><span class="va">mdat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>var <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"col1"</span>, <span class="st">"col2"</span>, <span class="st">"col3"</span><span class="op">)</span>,</span>
-<span>                   fmt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"%1.1f"</span>, <span class="st">"%m-%d-%Y"</span>, <span class="st">"%1.2f%%"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">mdat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>var <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"col1"</span>, <span class="st">"col2"</span>, <span class="st">"col3"</span><span class="op">)</span>,</span>
+<span>                   fmt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"%1.1f"</span>, <span class="st">"%m-%d-%Y"</span>, <span class="st">"%1.2f%%"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># View metadata</span></span>
 <span><span class="va">mdat</span></span>
@@ -327,11 +326,11 @@ format.</p>
 <p>Then imagine another data frame that needs formatting:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Sample data</span></span>
-<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>col1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.235</span>, <span class="fl">3.3947</span>, <span class="fl">7.2842</span><span class="op">)</span>,</span>
-<span>                  col2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2021-11-01"</span><span class="op">)</span>,</span>
-<span>                           <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2021-11-02"</span><span class="op">)</span>,</span>
-<span>                           <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2021-11-03"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                  col3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">23.325</span>, <span class="fl">87.2746</span>, <span class="fl">64.2184</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>col1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.235</span>, <span class="fl">3.3947</span>, <span class="fl">7.2842</span><span class="op">)</span>,</span>
+<span>                  col2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2021-11-01"</span><span class="op">)</span>,</span>
+<span>                           <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2021-11-02"</span><span class="op">)</span>,</span>
+<span>                           <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2021-11-03"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                  col3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">23.325</span>, <span class="fl">87.2746</span>, <span class="fl">64.2184</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># View sample data</span></span>
 <span><span class="va">dat</span></span>
@@ -342,8 +341,8 @@ format.</p>
 <p>Now we can put the format metadata into a list:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create list out of metadata vectors</span></span>
-<span><span class="va">lst</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="va">mdat</span><span class="op">$</span><span class="va">fmt</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">lst</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">mdat</span><span class="op">$</span><span class="va">var</span></span>
+<span><span class="va">lst</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="va">mdat</span><span class="op">$</span><span class="va">fmt</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">lst</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">mdat</span><span class="op">$</span><span class="va">var</span></span>
 <span></span>
 <span><span class="co"># View List</span></span>
 <span><span class="va">lst</span></span>
@@ -378,9 +377,9 @@ attributes using the <code><a href="../reference/formats.html">formats()</a></co
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="labels" class="section level3">
-<h3 class="hasAnchor">
-<a href="#labels" class="anchor"></a>How do I assign labels from metadata to my data frame?</h3>
+<div class="section level3">
+<h3 id="labels">How do I assign labels from metadata to my data frame?<a class="anchor" aria-label="anchor" href="#labels"></a>
+</h3>
 <p><strong>Q:</strong> I have metadata for my datasets that includes the
 desired label for each variable. How can I apply these labels to my
 data?</p>
@@ -390,26 +389,26 @@ metadata will be nearly identical to the process for formats. You will
 create a named list of labels from the metadata, then assign it to the
 dataframe, and apply it with <code><a href="../reference/fdata.html">fdata()</a></code>. The difference is
 that in the case of labels, you will assign them with the
-<code><a href="https://rdrr.io/r/base/labels.html">labels()</a></code> function instead of the <code><a href="../reference/formats.html">formats()</a></code>
+<code><a href="https://rdrr.io/r/base/labels.html" class="external-link">labels()</a></code> function instead of the <code><a href="../reference/formats.html">formats()</a></code>
 function. Like this:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create sample list of labels</span></span>
-<span><span class="va">lst</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>col1 <span class="op">=</span> <span class="st">"My First Column"</span>,</span>
+<span><span class="va">lst</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>col1 <span class="op">=</span> <span class="st">"My First Column"</span>,</span>
 <span>            col2 <span class="op">=</span> <span class="st">"My Second Column"</span>, </span>
 <span>            col3 <span class="op">=</span> <span class="st">"My Third Column"</span><span class="op">)</span></span>
 <span>            </span>
 <span><span class="co"># Create sample data frame</span></span>
-<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>col1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.235</span>, <span class="fl">3.3947</span>, <span class="fl">7.2842</span><span class="op">)</span>,</span>
-<span>                  col2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2021-11-01"</span><span class="op">)</span>,</span>
-<span>                           <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2021-11-02"</span><span class="op">)</span>,</span>
-<span>                           <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2021-11-03"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                  col3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">23.325</span>, <span class="fl">87.2746</span>, <span class="fl">64.2184</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>col1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.235</span>, <span class="fl">3.3947</span>, <span class="fl">7.2842</span><span class="op">)</span>,</span>
+<span>                  col2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2021-11-01"</span><span class="op">)</span>,</span>
+<span>                           <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2021-11-02"</span><span class="op">)</span>,</span>
+<span>                           <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2021-11-03"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                  col3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">23.325</span>, <span class="fl">87.2746</span>, <span class="fl">64.2184</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Assign labels to data frame</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/labels.html">labels</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">lst</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/labels.html" class="external-link">labels</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">lst</span></span>
 <span></span>
 <span><span class="co"># View label attributes</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/labels.html">labels</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/labels.html" class="external-link">labels</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
 <span><span class="co"># $col1</span></span>
 <span><span class="co"># [1] "My First Column"</span></span>
 <span><span class="co"># </span></span>
@@ -419,15 +418,15 @@ function. Like this:</p>
 <span><span class="co"># $col3</span></span>
 <span><span class="co"># [1] "My Third Column"</span></span></code></pre></div>
 <p>Note that starting in <strong>fmtr</strong> 1.5.8, the
-<code><a href="https://rdrr.io/r/base/labels.html">labels()</a></code> function has been moved to the
-<strong>common</strong> package. To use the <code><a href="https://rdrr.io/r/base/labels.html">labels()</a></code>
+<code><a href="https://rdrr.io/r/base/labels.html" class="external-link">labels()</a></code> function has been moved to the
+<strong>common</strong> package. To use the <code><a href="https://rdrr.io/r/base/labels.html" class="external-link">labels()</a></code>
 function, please reference that package.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="descriptions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#descriptions" class="anchor"></a>How do I assign descriptions from metadata to my data frame?</h3>
+<div class="section level3">
+<h3 id="descriptions">How do I assign descriptions from metadata to my data frame?<a class="anchor" aria-label="anchor" href="#descriptions"></a>
+</h3>
 <p><strong>Q:</strong> I have metadata for my datasets that includes the
 desired descriptions for each variable. How can I apply these
 descriptions to my data?</p>
@@ -437,7 +436,7 @@ only difference is that you will use the <code><a href="../reference/description
 function.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Assign descriptions</span></span>
-<span><span class="fu"><a href="../reference/descriptions.html">descriptions</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>col1 <span class="op">=</span> <span class="st">"Here is my description for col1."</span>,</span>
+<span><span class="fu"><a href="../reference/descriptions.html">descriptions</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>col1 <span class="op">=</span> <span class="st">"Here is my description for col1."</span>,</span>
 <span>                          col2 <span class="op">=</span> <span class="st">"Here is my description for col2."</span>,</span>
 <span>                          col3 <span class="op">=</span> <span class="st">"Here is my description for col3."</span><span class="op">)</span></span>
 <span></span>
@@ -454,15 +453,15 @@ function.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="fcat" class="section level3">
-<h3 class="hasAnchor">
-<a href="#fcat" class="anchor"></a>How do I create a format catalog?</h3>
+<div class="section level3">
+<h3 id="fcat">How do I create a format catalog?<a class="anchor" aria-label="anchor" href="#fcat"></a>
+</h3>
 <p><strong>Q:</strong> I want to create a format catalog, save that
 catalog, and reuse it later. How can I do that?</p>
 <p><strong>A:</strong> The <strong>fmtr</strong> package provides all
 the functions necessary to do what you want. Here is an example:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fmtr.r-sassy.org">fmtr</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://fmtr.r-sassy.org">fmtr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create format catalog</span></span>
 <span><span class="va">fmts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fcat.html">fcat</a></span><span class="op">(</span>AGECAT <span class="op">=</span> <span class="fu"><a href="../reference/value.html">value</a></span><span class="op">(</span><span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">18</span> <span class="op">&amp;</span> <span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">24</span>, <span class="st">"18 to 24"</span><span class="op">)</span>,</span>
@@ -470,11 +469,11 @@ the functions necessary to do what you want. Here is an example:</p>
 <span>                            <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">45</span> <span class="op">&amp;</span> <span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">64</span>, <span class="st">"45 to 64"</span><span class="op">)</span>,</span>
 <span>                            <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">65</span>, <span class="st">"&gt;= 65"</span><span class="op">)</span>,</span>
 <span>                            <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"Other"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>             SEX <span class="op">=</span> <span class="fu"><a href="../reference/value.html">value</a></span><span class="op">(</span><span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="st">"Missing"</span><span class="op">)</span>,</span>
+<span>             SEX <span class="op">=</span> <span class="fu"><a href="../reference/value.html">value</a></span><span class="op">(</span><span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="st">"Missing"</span><span class="op">)</span>,</span>
 <span>                         <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"M"</span>, <span class="st">"Male"</span><span class="op">)</span>,</span>
 <span>                         <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"F"</span>, <span class="st">"Female"</span><span class="op">)</span>,</span>
 <span>                         <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"Other"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>             VAR <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AGE"</span> <span class="op">=</span> <span class="st">"Age"</span>, </span>
+<span>             VAR <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AGE"</span> <span class="op">=</span> <span class="st">"Age"</span>, </span>
 <span>                     <span class="st">"AGECAT"</span> <span class="op">=</span> <span class="st">"Age Group"</span>, </span>
 <span>                     <span class="st">"SEX"</span> <span class="op">=</span> <span class="st">"Sex"</span><span class="op">)</span><span class="op">)</span> </span>
 <span></span>
@@ -492,14 +491,14 @@ the functions necessary to do what you want. Here is an example:</p>
 <span><span class="co"># - $VAR: type V, 3 elements</span></span>
 <span></span>
 <span><span class="co"># Use restored formats</span></span>
-<span><span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">55</span>, <span class="fl">27</span>, <span class="fl">19</span><span class="op">)</span>, <span class="va">fmts</span><span class="op">$</span><span class="va">AGECAT</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">55</span>, <span class="fl">27</span>, <span class="fl">19</span><span class="op">)</span>, <span class="va">fmts</span><span class="op">$</span><span class="va">AGECAT</span><span class="op">)</span></span>
 <span><span class="co"># [1] "45 to 64" "25 to 44" "18 to 24"</span></span></code></pre></div>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="usefmt" class="section level3">
-<h3 class="hasAnchor">
-<a href="#usefmt" class="anchor"></a>How do I use formats from a format catalog?</h3>
+<div class="section level3">
+<h3 id="usefmt">How do I use formats from a format catalog?<a class="anchor" aria-label="anchor" href="#usefmt"></a>
+</h3>
 <p><strong>Q:</strong> My colleague gave me a format catalog. How can I
 use it?</p>
 <p><strong>A:</strong> First read the format catalog into R using
@@ -517,14 +516,14 @@ catalog using dollar sign ($) notation. Here is an example:</p>
 <span><span class="co"># - $VAR: type V, 3 elements</span></span>
 <span></span>
 <span><span class="co"># Use restored formats</span></span>
-<span><span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">55</span>, <span class="fl">27</span>, <span class="fl">19</span><span class="op">)</span>, <span class="va">fmts</span><span class="op">$</span><span class="va">AGECAT</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">55</span>, <span class="fl">27</span>, <span class="fl">19</span><span class="op">)</span>, <span class="va">fmts</span><span class="op">$</span><span class="va">AGECAT</span><span class="op">)</span></span>
 <span><span class="co"># [1] "45 to 64" "25 to 44" "18 to 24"</span></span></code></pre></div>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="assign" class="section level3">
-<h3 class="hasAnchor">
-<a href="#assign" class="anchor"></a>How do I assign formats from a catalog to a data frame?</h3>
+<div class="section level3">
+<h3 id="assign">How do I assign formats from a catalog to a data frame?<a class="anchor" aria-label="anchor" href="#assign"></a>
+</h3>
 <p><strong>Q:</strong> I have a format catalog that I use to store
 formats. The formats are shared between several datasets. How can I
 assign formats from the catalog to one of my datasets?</p>
@@ -543,7 +542,7 @@ assign formats from the catalog to one of my datasets?</p>
 <span><span class="co"># - $VAR: type V, 3 elements</span></span>
 <span></span>
 <span><span class="co"># Create sample data frame</span></span>
-<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span>header <span class="op">=</span> <span class="cn">TRUE</span>, text <span class="op">=</span> <span class="st">'</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span>header <span class="op">=</span> <span class="cn">TRUE</span>, text <span class="op">=</span> <span class="st">'</span></span>
 <span><span class="st">SUBJECT  AGECAT SEX</span></span>
 <span><span class="st">101       35      F</span></span>
 <span><span class="st">102       19      F</span></span>
@@ -562,7 +561,7 @@ assign formats from the catalog to one of my datasets?</p>
 <p>Note that this only works when the format names in the catalog
 correspond to the column names in the dataframe. If the names in the
 catalog do not correspond to the column names, it is best to manipulate
-the names of the format catalog using the <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> function
+the names of the format catalog using the <code><a href="https://rdrr.io/r/base/names.html" class="external-link">names()</a></code> function
 so that they match the column names in the dataframe. Then proceed as
 above. Like this:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
@@ -577,7 +576,7 @@ above. Like this:</p>
 <span><span class="co"># - $VAR: type V, 3 elements</span></span>
 <span></span>
 <span><span class="co"># Create sample data frame</span></span>
-<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span>header <span class="op">=</span> <span class="cn">TRUE</span>, text <span class="op">=</span> <span class="st">'</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span>header <span class="op">=</span> <span class="cn">TRUE</span>, text <span class="op">=</span> <span class="st">'</span></span>
 <span><span class="st">SUBJ     AGE GENDER</span></span>
 <span><span class="st">101       35      F</span></span>
 <span><span class="st">102       19      F</span></span>
@@ -585,7 +584,7 @@ above. Like this:</p>
 <span><span class="st">'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Reassign format names in catalog</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">fmts</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AGE"</span>, <span class="st">"GENDER"</span>, <span class="st">"VAR"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">fmts</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AGE"</span>, <span class="st">"GENDER"</span>, <span class="st">"VAR"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Assign formats from catalog to data frame</span></span>
 <span><span class="fu"><a href="../reference/formats.html">formats</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">fmts</span></span>
@@ -599,9 +598,9 @@ above. Like this:</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="excel" class="section level3">
-<h3 class="hasAnchor">
-<a href="#excel" class="anchor"></a>How do I create a format catalog from an Excel spreadsheet?</h3>
+<div class="section level3">
+<h3 id="excel">How do I create a format catalog from an Excel spreadsheet?<a class="anchor" aria-label="anchor" href="#excel"></a>
+</h3>
 <p><strong>Q:</strong> I have format information stored in an Excel
 spreadsheet. Can I use that to create a format catalog and format my
 data?</p>
@@ -614,11 +613,11 @@ column values.</p>
 <p>Here is an example showing Excel data that is already in the correct
 structure:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fmtr.r-sassy.org">fmtr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org">readxl</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://fmtr.r-sassy.org">fmtr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org" class="external-link">readxl</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Read data from Excel</span></span>
-<span><span class="va">xldat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span><span class="st">"c:\\packages\\myxlfile.xlsx"</span><span class="op">)</span></span>
+<span><span class="va">xldat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">read_excel</a></span><span class="op">(</span><span class="st">"c:\\packages\\myxlfile.xlsx"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># View data frame</span></span>
 <span><span class="va">xldat</span></span>
@@ -648,7 +647,7 @@ structure:</p>
 <span></span>
 <span></span>
 <span><span class="co"># Create sample data frame</span></span>
-<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span>header <span class="op">=</span> <span class="cn">TRUE</span>, text <span class="op">=</span> <span class="st">'</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span>header <span class="op">=</span> <span class="cn">TRUE</span>, text <span class="op">=</span> <span class="st">'</span></span>
 <span><span class="st">SUBJECT AGECAT  SEX</span></span>
 <span><span class="st">101       35      F</span></span>
 <span><span class="st">102       19      F</span></span>
@@ -667,20 +666,20 @@ structure:</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="export" class="section level3">
-<h3 class="hasAnchor">
-<a href="#export" class="anchor"></a>How do I export my format catalog to a spreadsheet?</h3>
+<div class="section level3">
+<h3 id="export">How do I export my format catalog to a spreadsheet?<a class="anchor" aria-label="anchor" href="#export"></a>
+</h3>
 <p><strong>Q:</strong> I have a format catalog I created in R with the
 <strong>fmtr</strong> package. I want to store that catalog in a
 spreadsheet for documentation purposes. How can I do that?</p>
 <p><strong>A:</strong> There is a Base R function
-<code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> that can be used to convert a
+<code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> that can be used to convert a
 <strong>fmtr</strong> user-defined format or a format catalog to a data
 frame. From there, it is easy to export to Excel or any other file
 format you like. Here is an example:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fmtr.r-sassy.org">fmtr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html">openxlsx</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://fmtr.r-sassy.org">fmtr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ycphs.github.io/openxlsx/index.html" class="external-link">openxlsx</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create sample format catlog</span></span>
 <span><span class="va">fmts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fcat.html">fcat</a></span><span class="op">(</span>AGECAT <span class="op">=</span> <span class="fu"><a href="../reference/value.html">value</a></span><span class="op">(</span><span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">18</span> <span class="op">&amp;</span> <span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">24</span>, <span class="st">"18 to 24"</span><span class="op">)</span>,</span>
@@ -688,11 +687,11 @@ format you like. Here is an example:</p>
 <span>                            <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">45</span> <span class="op">&amp;</span> <span class="va">x</span> <span class="op">&lt;=</span> <span class="fl">64</span>, <span class="st">"45 to 64"</span><span class="op">)</span>,</span>
 <span>                            <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">65</span>, <span class="st">"&gt;= 65"</span><span class="op">)</span>,</span>
 <span>                            <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"Other"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>             SEX <span class="op">=</span> <span class="fu"><a href="../reference/value.html">value</a></span><span class="op">(</span><span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="st">"Missing"</span><span class="op">)</span>,</span>
+<span>             SEX <span class="op">=</span> <span class="fu"><a href="../reference/value.html">value</a></span><span class="op">(</span><span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="st">"Missing"</span><span class="op">)</span>,</span>
 <span>                         <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"M"</span>, <span class="st">"Male"</span><span class="op">)</span>,</span>
 <span>                         <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"F"</span>, <span class="st">"Female"</span><span class="op">)</span>,</span>
 <span>                         <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"Other"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>             VAR <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AGE"</span> <span class="op">=</span> <span class="st">"Age"</span>, </span>
+<span>             VAR <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AGE"</span> <span class="op">=</span> <span class="st">"Age"</span>, </span>
 <span>                     <span class="st">"AGECAT"</span> <span class="op">=</span> <span class="st">"Age Group"</span>, </span>
 <span>                     <span class="st">"SEX"</span> <span class="op">=</span> <span class="st">"Sex"</span><span class="op">)</span><span class="op">)</span> </span>
 <span>                     </span>
@@ -704,47 +703,47 @@ format you like. Here is an example:</p>
 <span><span class="co"># - $VAR: type V, 3 element</span></span>
 <span></span>
 <span><span class="co"># Convert format catalog to data frame</span></span>
-<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">fmts</span><span class="op">)</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">fmts</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Write data frame to Excel using openxlsx</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/write.xlsx.html">write.xlsx</a></span><span class="op">(</span><span class="va">dat</span>, <span class="st">"c:\\mypath\\myxlfile.xlsx"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/openxlsx/man/write.xlsx.html" class="external-link">write.xlsx</a></span><span class="op">(</span><span class="va">dat</span>, <span class="st">"c:\\mypath\\myxlfile.xlsx"</span><span class="op">)</span></span></code></pre></div>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="asfmt" class="section level3">
-<h3 class="hasAnchor">
-<a href="#asfmt" class="anchor"></a>Can I create a user-defined format from data?</h3>
+<div class="section level3">
+<h3 id="asfmt">Can I create a user-defined format from data?<a class="anchor" aria-label="anchor" href="#asfmt"></a>
+</h3>
 <p><strong>Q:</strong> I have a dataset with a code list that I want to
 create a user-defined format from. Is there a way to do that?</p>
 <p><strong>A:</strong> Yes. There is a function <code><a href="../reference/as.fmt.html">as.fmt()</a></code>
 that allows you to convert a data frame into a user-defined format. But
 the input dataframe needs a specific structure. Here is an example:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fmtr.r-sassy.org">fmtr</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://fmtr.r-sassy.org">fmtr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create sample input data </span></span>
-<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span>header <span class="op">=</span> <span class="cn">TRUE</span>, text <span class="op">=</span><span class="st">'</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span>header <span class="op">=</span> <span class="cn">TRUE</span>, text <span class="op">=</span><span class="st">'</span></span>
 <span><span class="st">        Col1  Col2 </span></span>
 <span><span class="st">        A    "Label A"</span></span>
 <span><span class="st">        B    "Label B"</span></span>
 <span><span class="st">        C    "Label C"'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create main conditions</span></span>
-<span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Name <span class="op">=</span> <span class="st">"myfmt"</span>, </span>
+<span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>Name <span class="op">=</span> <span class="st">"myfmt"</span>, </span>
 <span>                  Type <span class="op">=</span> <span class="st">"U"</span>, </span>
-<span>                  Expression <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"x == '"</span>, <span class="va">dat</span><span class="op">$</span><span class="va">Col1</span>, <span class="st">"'"</span><span class="op">)</span>,</span>
+<span>                  Expression <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x == '"</span>, <span class="va">dat</span><span class="op">$</span><span class="va">Col1</span>, <span class="st">"'"</span><span class="op">)</span>,</span>
 <span>                  Label <span class="op">=</span> <span class="va">dat</span><span class="op">$</span><span class="va">Col2</span>,</span>
 <span>                  Order <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create default condition</span></span>
-<span><span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Name <span class="op">=</span> <span class="st">"myfmt"</span>, </span>
+<span><span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>Name <span class="op">=</span> <span class="st">"myfmt"</span>, </span>
 <span>                  Type <span class="op">=</span> <span class="st">"U"</span>, </span>
 <span>                  Expression <span class="op">=</span> <span class="st">"TRUE"</span>,</span>
 <span>                  Label <span class="op">=</span> <span class="st">"Other"</span>,</span>
 <span>                  Order <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Append default condition</span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">df1</span>, <span class="va">df2</span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">df1</span>, <span class="va">df2</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># View input data</span></span>
 <span><span class="va">df</span></span>
@@ -758,14 +757,14 @@ the input dataframe needs a specific structure. Here is an example:</p>
 <span><span class="va">fmt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as.fmt.html">as.fmt</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Apply the format</span></span>
-<span><span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="cn">NA</span><span class="op">)</span>, <span class="va">fmt</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="cn">NA</span><span class="op">)</span>, <span class="va">fmt</span><span class="op">)</span></span>
 <span><span class="co"># [1] "Label A" "Label B" "Label C" "Other" </span></span></code></pre></div>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="input" class="section level3">
-<h3 class="hasAnchor">
-<a href="#input" class="anchor"></a>Can I create an input format?</h3>
+<div class="section level3">
+<h3 id="input">Can I create an input format?<a class="anchor" aria-label="anchor" href="#input"></a>
+</h3>
 <p><strong>Q:</strong> SAS® distinguishes between an input format and an
 output format. Is there a similar distinction in the
 <strong>fmtr</strong> package?</p>
@@ -774,9 +773,9 @@ formats.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="numeric" class="section level3">
-<h3 class="hasAnchor">
-<a href="#numeric" class="anchor"></a>Can I create a numeric user-defined format?</h3>
+<div class="section level3">
+<h3 id="numeric">Can I create a numeric user-defined format?<a class="anchor" aria-label="anchor" href="#numeric"></a>
+</h3>
 <p><strong>Q:</strong> I have a column of data with some character
 values that I want to convert to a number. I’d like to create a format
 to do that. Can I create a user-defined format that returns a number
@@ -787,20 +786,20 @@ logical value. That means a <strong>fmtr</strong> user-defined format
 can be used to translate incoming values, whether character or numeric,
 to a number. Here is an example:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fmtr.r-sassy.org">fmtr</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://fmtr.r-sassy.org">fmtr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">nfmt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/value.html">value</a></span><span class="op">(</span><span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"A"</span>, <span class="fl">1</span><span class="op">)</span>,</span>
 <span>              <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"B"</span>, <span class="fl">2</span><span class="op">)</span>,</span>
 <span>              <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>, <span class="va">nfmt</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>, <span class="va">nfmt</span><span class="op">)</span></span>
 <span><span class="co"># [1] 1 2 3</span></span></code></pre></div>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="path" class="section level3">
-<h3 class="hasAnchor">
-<a href="#path" class="anchor"></a>Is there a way to set up a search path for a format catalog?</h3>
+<div class="section level3">
+<h3 id="path">Is there a way to set up a search path for a format catalog?<a class="anchor" aria-label="anchor" href="#path"></a>
+</h3>
 <p><strong>Q:</strong> In SAS® you can set up a search path for a format
 catalog, so you don’t need to read it. You can just reference the format
 names and it will work. Is there a similar functionality in the
@@ -810,9 +809,9 @@ consideration as a future enhancement.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="sas7bcat" class="section level3">
-<h3 class="hasAnchor">
-<a href="#sas7bcat" class="anchor"></a>Is there a way to read in a format catalog from SAS®?</h3>
+<div class="section level3">
+<h3 id="sas7bcat">Is there a way to read in a format catalog from SAS®?<a class="anchor" aria-label="anchor" href="#sas7bcat"></a>
+</h3>
 <p><strong>Q:</strong> I have an existing format catalog from SAS® that
 I want to convert to R. Does the <strong>fmtr</strong> package provide a
 way to read in a SAS® format catalog?</p>
@@ -823,14 +822,14 @@ reading the SAS® format catalog could be worked out.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
-<div id="labelsmoved" class="section level3">
-<h3 class="hasAnchor">
-<a href="#labelsmoved" class="anchor"></a>What happened to the labels() function?</h3>
-<p><strong>Q:</strong> I had been using the <code><a href="https://rdrr.io/r/base/labels.html">labels()</a></code>
+<div class="section level3">
+<h3 id="labelsmoved">What happened to the labels() function?<a class="anchor" aria-label="anchor" href="#labelsmoved"></a>
+</h3>
+<p><strong>Q:</strong> I had been using the <code><a href="https://rdrr.io/r/base/labels.html" class="external-link">labels()</a></code>
 function in a few programs, and now they are all broken. It appears the
-<code><a href="https://rdrr.io/r/base/labels.html">labels()</a></code> function is no longer part of the
+<code><a href="https://rdrr.io/r/base/labels.html" class="external-link">labels()</a></code> function is no longer part of the
 <strong>fmtr</strong> package. What happened?</p>
-<p><strong>A:</strong> The <code><a href="https://rdrr.io/r/base/labels.html">labels()</a></code> function has been moved
+<p><strong>A:</strong> The <code><a href="https://rdrr.io/r/base/labels.html" class="external-link">labels()</a></code> function has been moved
 to the <strong>common</strong> package. The reason it was moved is
 because this function is so generally useful, that the
 <strong>common</strong> package was deemed a more appropriate home. You
@@ -853,11 +852,13 @@ can fix your code by simply adding a reference to the
 
 
       <footer><div class="copyright">
-  <p>Developed by David Bosak.</p>
+  <p></p>
+<p>Developed by David Bosak.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -865,6 +866,8 @@ can fix your code by simply adding a reference to the
 
   
 
+
+  
 
   </body>
 </html>

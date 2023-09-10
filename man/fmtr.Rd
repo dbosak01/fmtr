@@ -3,6 +3,7 @@
 \docType{package}
 \name{fmtr}
 \alias{fmtr}
+\alias{fmtr-package}
 \title{A package for formatting data}
 \description{
 The \strong{fmtr} package contains functions to 
@@ -82,3 +83,4 @@ See the \code{\link{fcat}} function for
 additional information.
 }
 
+\keyword{internal}

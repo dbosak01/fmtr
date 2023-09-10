@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,19 +40,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"></ul>
 <ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/fmtr.html">Get started</a>
 </li>
@@ -79,6 +75,9 @@
     <li>
       <a href="../articles/fmtr-example1.html">Complete Example</a>
     </li>
+    <li>
+      <a href="../articles/fmtr-faq.html">Frequently Asked Questions</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -91,7 +90,7 @@
   <a href="../news/index.html">Changelog</a>
 </li>
 <li>
-  <a href="https://github.com/dbosak01/fmtr/">
+  <a href="https://github.com/dbosak01/fmtr/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -106,28 +105,28 @@
 
       
 
-      </header><script src="fmtr-fcat_files/header-attrs-2.14/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Format Catalogs</h1>
             
-            <h4 class="date">2022-09-07</h4>
+            <h4 data-toc-skip class="date">2023-09-10</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/dbosak01/fmtr/blob/master/vignettes/fmtr-fcat.Rmd"><code>vignettes/fmtr-fcat.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/dbosak01/fmtr/blob/HEAD/vignettes/fmtr-fcat.Rmd" class="external-link"><code>vignettes/fmtr-fcat.Rmd</code></a></small>
       <div class="hidden name"><code>fmtr-fcat.Rmd</code></div>
 
     </div>
 
     
     
-<div id="the-fcat-function" class="section level3">
-<h3 class="hasAnchor">
-<a href="#the-fcat-function" class="anchor"></a>The <code>fcat()</code> function</h3>
+<div class="section level3">
+<h3 id="the-fcat-function">The <code>fcat()</code> function<a class="anchor" aria-label="anchor" href="#the-fcat-function"></a>
+</h3>
 <p>As of <strong>fmtr</strong> version 1.2, you can now create a format
 catalog. A format catalog is a collection of formats that can be saved,
 shared, and reused. The format catalog is created with the
 <code><a href="../reference/fcat.html">fcat()</a></code> function. A format catalog can also be converted to
-and from a data frame using the <code><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame()</a></code> and
+and from a data frame using the <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> and
 <code><a href="../reference/as.fcat.html">as.fcat()</a></code> functions. These functions make it easy to store
 formatting information as tabular metadata, such as in database tables
 or Excel spreadsheets. Here is an example:</p>
@@ -143,14 +142,14 @@ or Excel spreadsheets. Here is an example:</p>
 <span><span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="fl">2</span>, <span class="va">c1</span><span class="op">$</span><span class="va">num_fmt</span><span class="op">)</span></span>
 <span><span class="co"># [1] "2.0"</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"B"</span><span class="op">)</span>, <span class="va">c1</span><span class="op">$</span><span class="va">label_fmt</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"B"</span><span class="op">)</span>, <span class="va">c1</span><span class="op">$</span><span class="va">label_fmt</span><span class="op">)</span></span>
 <span><span class="co"># [1] "Label A" "Label B" "Other"   "Label B"</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">c1</span><span class="op">$</span><span class="va">date_fmt</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">c1</span><span class="op">$</span><span class="va">date_fmt</span><span class="op">)</span></span>
 <span><span class="co"># [1] "22Jul2021"</span></span>
 <span></span>
 <span><span class="co"># Convert to a data frame</span></span>
-<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">c1</span><span class="op">)</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">c1</span><span class="op">)</span></span>
 <span><span class="va">dat</span></span>
 <span><span class="co">#        Name Type Expression   Label Order</span></span>
 <span><span class="co"># 1   num_fmt    S       %.1f            NA</span></span>
@@ -160,7 +159,7 @@ or Excel spreadsheets. Here is an example:</p>
 <span><span class="co"># 5  date_fmt    S     %d%b%Y            NA</span></span>
 <span></span>
 <span><span class="co"># Save format catalog for later use</span></span>
-<span><span class="fu"><a href="../reference/write.fcat.html">write.fcat</a></span><span class="op">(</span><span class="va">c1</span>, <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/write.fcat.html">write.fcat</a></span><span class="op">(</span><span class="va">c1</span>, <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Next: <a href="fmtr-convenience.html">Convenience Functions</a></p>
 </div>
   </div>
@@ -174,11 +173,13 @@ or Excel spreadsheets. Here is an example:</p>
 
 
       <footer><div class="copyright">
-  <p>Developed by David Bosak.</p>
+  <p></p>
+<p>Developed by David Bosak.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -186,6 +187,8 @@ or Excel spreadsheets. Here is an example:</p>
 
   
 
+
+  
 
   </body>
 </html>

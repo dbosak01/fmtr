@@ -1,7 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://fmtr.r-sassy.org/404.html</loc>
+  </url>
+  <url>
+    <loc>https://fmtr.r-sassy.org/articles/fmtr-convenience.html</loc>
+  </url>
+  <url>
+    <loc>https://fmtr.r-sassy.org/articles/fmtr-example1.html</loc>
+  </url>
+  <url>
+    <loc>https://fmtr.r-sassy.org/articles/fmtr-fapply.html</loc>
+  </url>
+  <url>
+    <loc>https://fmtr.r-sassy.org/articles/fmtr-faq.html</loc>
+  </url>
+  <url>
+    <loc>https://fmtr.r-sassy.org/articles/fmtr-fcat.html</loc>
+  </url>
+  <url>
+    <loc>https://fmtr.r-sassy.org/articles/fmtr-fdata.html</loc>
+  </url>
+  <url>
+    <loc>https://fmtr.r-sassy.org/articles/fmtr-helpers.html</loc>
+  </url>
+  <url>
+    <loc>https://fmtr.r-sassy.org/articles/fmtr.html</loc>
+  </url>
+  <url>
+    <loc>https://fmtr.r-sassy.org/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://fmtr.r-sassy.org/authors.html</loc>
+  </url>
+  <url>
     <loc>https://fmtr.r-sassy.org/index.html</loc>
+  </url>
+  <url>
+    <loc>https://fmtr.r-sassy.org/news/index.html</loc>
   </url>
   <url>
     <loc>https://fmtr.r-sassy.org/reference/as.data.frame.fcat.html</loc>
@@ -19,10 +55,10 @@
     <loc>https://fmtr.r-sassy.org/reference/as.fcat.fmt_lst.html</loc>
   </url>
   <url>
-    <loc>https://fmtr.r-sassy.org/reference/as.fcat.list.html</loc>
+    <loc>https://fmtr.r-sassy.org/reference/as.fcat.html</loc>
   </url>
   <url>
-    <loc>https://fmtr.r-sassy.org/reference/as.fcat.html</loc>
+    <loc>https://fmtr.r-sassy.org/reference/as.fcat.list.html</loc>
   </url>
   <url>
     <loc>https://fmtr.r-sassy.org/reference/as.fcat.tbl_df.html</loc>
@@ -34,10 +70,10 @@
     <loc>https://fmtr.r-sassy.org/reference/as.flist.fcat.html</loc>
   </url>
   <url>
-    <loc>https://fmtr.r-sassy.org/reference/as.flist.list.html</loc>
+    <loc>https://fmtr.r-sassy.org/reference/as.flist.html</loc>
   </url>
   <url>
-    <loc>https://fmtr.r-sassy.org/reference/as.flist.html</loc>
+    <loc>https://fmtr.r-sassy.org/reference/as.flist.list.html</loc>
   </url>
   <url>
     <loc>https://fmtr.r-sassy.org/reference/as.flist.tbl_df.html</loc>
@@ -47,6 +83,9 @@
   </url>
   <url>
     <loc>https://fmtr.r-sassy.org/reference/as.fmt.html</loc>
+  </url>
+  <url>
+    <loc>https://fmtr.r-sassy.org/reference/as.fmt.tbl_df.html</loc>
   </url>
   <url>
     <loc>https://fmtr.r-sassy.org/reference/condition.html</loc>
@@ -103,6 +142,9 @@
     <loc>https://fmtr.r-sassy.org/reference/FormattingStrings.html</loc>
   </url>
   <url>
+    <loc>https://fmtr.r-sassy.org/reference/index.html</loc>
+  </url>
+  <url>
     <loc>https://fmtr.r-sassy.org/reference/is.fcat.html</loc>
   </url>
   <url>
@@ -115,7 +157,13 @@
     <loc>https://fmtr.r-sassy.org/reference/justification.html</loc>
   </url>
   <url>
+    <loc>https://fmtr.r-sassy.org/reference/labels.data.frame.html</loc>
+  </url>
+  <url>
     <loc>https://fmtr.r-sassy.org/reference/labels.fmt.html</loc>
+  </url>
+  <url>
+    <loc>https://fmtr.r-sassy.org/reference/labels.tbl_df.html</loc>
   </url>
   <url>
     <loc>https://fmtr.r-sassy.org/reference/print.fcat.html</loc>
@@ -137,29 +185,5 @@
   </url>
   <url>
     <loc>https://fmtr.r-sassy.org/reference/write.fcat.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/articles/fmtr-convenience.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/articles/fmtr-example1.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/articles/fmtr-fapply.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/articles/fmtr-faq.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/articles/fmtr-fcat.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/articles/fmtr-fdata.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/articles/fmtr-helpers.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/articles/fmtr.html</loc>
   </url>
 </urlset>

@@ -73,6 +73,8 @@
 #' See the \code{\link{fcat}} function for 
 #' additional information.
 #' @docType package
+#' @keywords internal
+#' @aliases fmtr-package
 #' @name fmtr
 NULL
 

@@ -10,6 +10,7 @@ articles:
   - fmtr-convenience
   - fmtr-helpers
   - fmtr-example1
+  - fmtr-faq
 
 reference:
 - title: Applying Formats
@@ -82,6 +83,7 @@ navbar:
   type: inverse
   structure:
     right: [home, intro, articles, reference, faq, news, github]
+    left: []
   components:
     faq:
       text: FAQ

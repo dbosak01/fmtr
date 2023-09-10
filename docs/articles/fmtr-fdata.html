@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,19 +40,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"></ul>
 <ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/fmtr.html">Get started</a>
 </li>
@@ -79,6 +75,9 @@
     <li>
       <a href="../articles/fmtr-example1.html">Complete Example</a>
     </li>
+    <li>
+      <a href="../articles/fmtr-faq.html">Frequently Asked Questions</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -91,7 +90,7 @@
   <a href="../news/index.html">Changelog</a>
 </li>
 <li>
-  <a href="https://github.com/dbosak01/fmtr/">
+  <a href="https://github.com/dbosak01/fmtr/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -106,65 +105,64 @@
 
       
 
-      </header><script src="fmtr-fdata_files/header-attrs-2.14/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Format Data Function</h1>
             
-            <h4 class="date">2022-09-07</h4>
+            <h4 data-toc-skip class="date">2023-09-10</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/dbosak01/fmtr/blob/master/vignettes/fmtr-fdata.Rmd"><code>vignettes/fmtr-fdata.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/dbosak01/fmtr/blob/HEAD/vignettes/fmtr-fdata.Rmd" class="external-link"><code>vignettes/fmtr-fdata.Rmd</code></a></small>
       <div class="hidden name"><code>fmtr-fdata.Rmd</code></div>
 
     </div>
 
     
     
-<div id="how-to-use-fdata" class="section level3">
-<h3 class="hasAnchor">
-<a href="#how-to-use-fdata" class="anchor"></a>How to use fdata()</h3>
+<div class="section level3">
+<h3 id="how-to-use-fdata">How to use fdata()<a class="anchor" aria-label="anchor" href="#how-to-use-fdata"></a>
+</h3>
 <p>Data can be formatted by assigning formats to the
 <strong>format</strong> attribute of the columns in your dataframe or
 tibble, and then by calling the <code><a href="../reference/fdata.html">fdata()</a></code> function on that
 data. A sample program is as follows:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Set up data frame</span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"cyl"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"cyl"</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="va">df</span></span>
 <span></span>
 <span><span class="co"># Define and assign formats</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">mpg</span>, <span class="st">"format"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/value.html">value</a></span><span class="op">(</span><span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">20</span>, <span class="st">"High"</span><span class="op">)</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">mpg</span>, <span class="st">"format"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/value.html">value</a></span><span class="op">(</span><span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">20</span>, <span class="st">"High"</span><span class="op">)</span>,</span>
 <span>                                <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">20</span>, <span class="st">"Low"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">cyl</span>, <span class="st">"format"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">x</span>, nsmall <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">cyl</span>, <span class="st">"format"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">x</span>, nsmall <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Apply formatting</span></span>
 <span><span class="fu"><a href="../reference/fdata.html">fdata</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <p>Here is the mtcars subset before formatting:</p>
-<pre><code>#                    mpg cyl
-# Mazda RX4         21.0   6
-# Mazda RX4 Wag     21.0   6
-# Datsun 710        22.8   4
-# Hornet 4 Drive    21.4   6
-# Hornet Sportabout 18.7   8
-# Valiant           18.1   6
-# Duster 360        14.3   8
-# Merc 240D         24.4   4
-# Merc 230          22.8   4
-# Merc 280          19.2   6</code></pre>
+<pre><code><span><span class="co">#                    mpg cyl</span></span>
+<span><span class="co"># Mazda RX4         21.0   6</span></span>
+<span><span class="co"># Mazda RX4 Wag     21.0   6</span></span>
+<span><span class="co"># Datsun 710        22.8   4</span></span>
+<span><span class="co"># Hornet 4 Drive    21.4   6</span></span>
+<span><span class="co"># Hornet Sportabout 18.7   8</span></span>
+<span><span class="co"># Valiant           18.1   6</span></span>
+<span><span class="co"># Duster 360        14.3   8</span></span>
+<span><span class="co"># Merc 240D         24.4   4</span></span>
+<span><span class="co"># Merc 230          22.8   4</span></span>
+<span><span class="co"># Merc 280          19.2   6</span></span></code></pre>
 <p>And here is the mtcars subset after formatting:</p>
-<pre><code>#                    mpg cyl
-# Mazda RX4         High 6.0
-# Mazda RX4 Wag     High 6.0
-# Datsun 710        High 4.0
-# Hornet 4 Drive    High 6.0
-# Hornet Sportabout Low  8.0
-# Valiant           Low  6.0
-# Duster 360        Low  8.0
-# Merc 240D         High 4.0
-# Merc 230          High 4.0
-# Merc 280          Low  6.0
-</code></pre>
+<pre><code><span><span class="co">#                    mpg cyl</span></span>
+<span><span class="co"># Mazda RX4         High 6.0</span></span>
+<span><span class="co"># Mazda RX4 Wag     High 6.0</span></span>
+<span><span class="co"># Datsun 710        High 4.0</span></span>
+<span><span class="co"># Hornet 4 Drive    High 6.0</span></span>
+<span><span class="co"># Hornet Sportabout Low  8.0</span></span>
+<span><span class="co"># Valiant           Low  6.0</span></span>
+<span><span class="co"># Duster 360        Low  8.0</span></span>
+<span><span class="co"># Merc 240D         High 4.0</span></span>
+<span><span class="co"># Merc 230          High 4.0</span></span>
+<span><span class="co"># Merc 280          Low  6.0</span></span></code></pre>
 <p>You may apply formatting to variables of any data type: character,
 numeric, date, etc. Internally, the <code><a href="../reference/fdata.html">fdata()</a></code> function is
 using the <code><a href="../reference/fapply.html">fapply()</a></code> function on each column in the data
@@ -183,11 +181,13 @@ returned unaltered.</p>
 
 
       <footer><div class="copyright">
-  <p>Developed by David Bosak.</p>
+  <p></p>
+<p>Developed by David Bosak.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -195,6 +195,8 @@ returned unaltered.</p>
 
   
 
+
+  
 
   </body>
 </html>

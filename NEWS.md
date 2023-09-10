@@ -1,3 +1,8 @@
+# fmtr 1.6.0
+
+* Increment version.
+* CRAN fix.
+
 # fmtr 1.5.9
 
 * Changed default separator on `fapply2()` to a blank space.  This seems
