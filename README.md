@@ -6,7 +6,6 @@
 [![fmtr total downloads](https://cranlogs.r-pkg.org/badges/grand-total/fmtr)](https://cran.r-project.org/package=fmtr)
 [![R-CMD-check](https://github.com/dbosak01/fmtr/workflows/R-CMD-check/badge.svg)](https://github.com/dbosak01/fmtr/actions)
 [![Codecov test coverage](https://codecov.io/gh/dbosak01/fmtr/branch/master/graph/badge.svg)](https://app.codecov.io/gh/dbosak01/fmtr?branch=master)
-
 <!-- badges: end -->
 
 # Introduction to **fmtr**
