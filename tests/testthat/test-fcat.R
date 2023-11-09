@@ -374,3 +374,28 @@ test_that("fcat16: import.fcat works as expected.", {
   expect_equal(res1[1], "Male")
   
 })
+
+
+test_that("fcat4: write.fcat and read.fcat functions retain as.factor parameter.", {
+  
+  
+  fp <- tempdir()
+  
+  c1 <- fcat(lblA = value(condition(x == "A", "Label A"),
+                          condition(x == "B", "Label B"),
+                          condition(TRUE, "Other")),
+             lblB = value(condition(x == "C", "Label C"),
+                          condition(x == "D", "Label D"),
+                          condition(TRUE, "Other"), as.factor = TRUE)
+  )
+  
+  pth <- write.fcat(c1, fp)
+  
+  c2 <- read.fcat(pth)
+
+  expect_equal(attr(c2$lblA, "as.factor"), FALSE)
+  expect_equal(attr(c2$lblB, "as.factor"), TRUE)
+  
+})
+
+

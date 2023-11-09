@@ -217,6 +217,13 @@ fapply <- function(x, format = NULL, width = NULL, justify = NULL) {
     ret <- mapply(eval_conditions, x, MoreArgs = list(conds = format))
     names(ret) <- NULL  # Names not needed and mess up stuff
     
+    if (!is.null(attr(format, "as.factor"))) {
+      if (attr(format, "as.factor") == TRUE) {
+         ret <- factor(ret, levels = labels(format), ordered = TRUE)
+         
+      }
+    }
+    
   } else if (is.flist(format)) {
     
     # For flist class, call row or column functions as appropriate

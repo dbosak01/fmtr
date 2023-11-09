@@ -382,3 +382,43 @@ test_that("fmt18: log parameter works as expected.", {
   
 })
 
+
+test_that("fmt19: as.factor parameter works as expected.", {
+  
+  v1 <- c("A", "B", "C", "A")
+  
+  
+  fmt1 <- value(condition(x == "A", "Label A"),
+               condition(x == "B", "Label B"),
+               condition(TRUE, "Other"), as.factor = TRUE)
+  
+  # levels(fmt1)
+  
+  
+  fmtd1 <- fapply(v1, fmt1)
+  
+  expect_equal(is.factor(fmtd1), TRUE)
+  expect_equal(levels(fmtd1), c("Label A", "Label B", "Other"))
+  
+  
+  fmt2 <- value(condition(x == "A", "Label A"),
+               condition(x == "B", "Label B"),
+               condition(TRUE, "Other"), as.factor = FALSE)
+  
+  fmtd2 <- fapply(v1, fmt2)
+  
+  expect_equal(is.factor(fmtd2) , FALSE)
+  
+  
+  fmt3 <- value(condition(x == "A", "Label A", 2),
+                condition(x == "B", "Label B", 3),
+                condition(TRUE, "Other", 1), as.factor = TRUE)
+  
+  fmtd3 <- fapply(v1, fmt3)
+  
+  expect_equal(is.factor(fmtd3) , TRUE)
+  expect_equal(levels(fmtd3), c("Other", "Label A", "Label B"))
+  
+  
+})
+

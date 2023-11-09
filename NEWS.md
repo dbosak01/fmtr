@@ -1,3 +1,7 @@
+# fmtr 1.6.1
+
+* Added "as.factor" parameter to `value()` function to convert results to a factor.
+
 # fmtr 1.6.0
 
 * Increment version.

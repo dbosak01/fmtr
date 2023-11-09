@@ -36,6 +36,9 @@
 #' @param ... One or more \code{\link{condition}} functions.
 #' @param log Whether to log the creation of the format.  Default is
 #' TRUE. This parameter is used internally.
+#' @param as.factor If TRUE, the \code{\link{fapply}} function will return
+#' the result as an ordered factor.  Otherwise, the result will be returned
+#' as a vector.  Default is FALSE.
 #' @return The new format object.
 #' @seealso \code{\link{condition}} to define a condition,
 #' \code{\link{levels}} or \code{\link{labels.fmt}} to access the labels, and 
@@ -87,7 +90,7 @@
 #' fapply(v3, fmt4)
 #' # [1] "10.40" "12.99" "< 1.0" "11.59"
 #' 
-value <- function(..., log = TRUE) {
+value <- function(..., log = TRUE, as.factor = FALSE) {
   
   if (...length() == 0)
     stop("At least one condition is required.")
@@ -97,6 +100,7 @@ value <- function(..., log = TRUE) {
   
   # Assign labels to the levels attribute
   attr(x, "levels") <- labels(x)
+  attr(x, "as.factor") <- as.factor
   
   if (log_output() & log) {
     log_logr(x)
@@ -486,6 +490,11 @@ print.fmt <- function(x, ..., name = deparse(substitute(x, env = environment()))
     grey60 <- make_style(grey60 = "#999999")
     cat(grey60("# A user-defined format: " %+% 
                  as.character(length(x)) %+% " conditions\n")) 
+    if (!is.null(attr(x, "as.factor"))) {
+      if (attr(x, "as.factor") == TRUE) { 
+        cat(grey60("- as.factor: TRUE\n"))
+      }
+    }
     
     dat <- as.data.frame(x, name = name, stringsAsFactors = FALSE)
     

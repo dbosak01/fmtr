@@ -4,13 +4,17 @@
 \alias{value}
 \title{Create a user-defined format}
 \usage{
-value(..., log = TRUE)
+value(..., log = TRUE, as.factor = FALSE)
 }
 \arguments{
 \item{...}{One or more \code{\link{condition}} functions.}
 
 \item{log}{Whether to log the creation of the format.  Default is
 TRUE. This parameter is used internally.}
+
+\item{as.factor}{If TRUE, the \code{\link{fapply}} function will return
+the result as an ordered factor.  Otherwise, the result will be returned
+as a vector.  Default is FALSE.}
 }
 \value{
 The new format object.
