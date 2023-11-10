@@ -42,17 +42,17 @@ formatting attributes.
 The \code{fapply} function will process any of the following types of
 formats:
 \itemize{
-  \item{\strong{Formatting string:}}{ A single string will be interpreted as 
+  \item{\strong{Formatting string:} A single string will be interpreted as 
 a formatting string.  See the \link{FormattingStrings} documentation for 
 further details.}
-  \item{\strong{Named vector:}}{ A named vector can serve as a lookup list or 
+  \item{\strong{Named vector:} A named vector can serve as a lookup list or 
   decode 
 for a vector.  You can use a named vector to perform simple 
 lookups on character vectors.}
-  \item{\strong{Format object:}}{ A format object may be created using the 
+  \item{\strong{Format object:} A format object may be created using the 
 \code{\link{value}} function.  The format object is included in the 
 \strong{fmtr} package, and is specially designed for data categorization.}  
-  \item{\strong{Vectorized formatting function:}}{ A vectorized function 
+  \item{\strong{Vectorized formatting function:} A vectorized function 
   provides
 the most flexibility and power over your formatting.  You can use 
 an existing formatting function from any package, or create 

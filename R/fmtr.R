@@ -22,16 +22,16 @@
 #' The main functions included in the \strong{fmtr} package are 
 #' as follows:
 #' \itemize{
-#'   \item {\code{\link{fdata}}:}{ Applies formatting 
+#'   \item {\code{\link{fdata}}: Applies formatting 
 #' to a dataframe.}
-#'   \item {\code{\link{fapply}}:}{ Applies formatting 
+#'   \item {\code{\link{fapply}}: Applies formatting 
 #' to a vector.}
-#'   \item {\code{\link{fcat}}:}{ Creates a format catalog.}
-#'   \item {\code{\link{value}}:}{ Creates a new
+#'   \item {\code{\link{fcat}}: Creates a format catalog.}
+#'   \item {\code{\link{value}}: Creates a new
 #' user-defined format.}
-#'   \item {\code{\link{formats}}:}{ Helps assign format attributes
+#'   \item {\code{\link{formats}}: Helps assign format attributes
 #'   to a data frame.}
-#'   \item {\code{\link{fattr}}:}{ Helps assign formatting attributes
+#'   \item {\code{\link{fattr}}: Helps assign formatting attributes
 #'   to a vector.}
 #' }
 #' 
