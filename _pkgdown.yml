@@ -7,9 +7,11 @@ articles:
   - fmtr-fdata
   - fmtr-fapply
   - fmtr-fcat
+  - fmtr-fapply2
   - fmtr-convenience
   - fmtr-helpers
   - fmtr-example1
+  - fmtr-example2
   - fmtr-faq
 
 reference:

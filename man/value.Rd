@@ -59,7 +59,7 @@ fmt1 <- value(condition(x == "A", "Label A"),
               
 # Apply format to vector
 fapply(v1, fmt1)
-
+# [1] "Label A" "Label B" "Other"   "Label B"
 
 ## Example 2: Character to Integer Mapping ##
 fmt2 <- value(condition(x == "A", 1),
@@ -68,7 +68,7 @@ fmt2 <- value(condition(x == "A", 1),
 
 # Apply format to vector
 fapply(v1, fmt2)
-
+# [1] 1 2 3 2
 
 ## Example 3: Categorization of Continuous Variable ##
 # Set up vector
@@ -81,7 +81,7 @@ fmt3 <- value(condition(x < 5, "Low"),
               
 # Apply format to vector
 fapply(v2, fmt3)
-
+# [1] "Low"          "High"         "Out of range" "High" 
 
 ### Example 4: Conditional formatting
 v3 <- c(10.398873, 12.98762, 0.5654, 11.588372)

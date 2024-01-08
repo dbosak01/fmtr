@@ -55,8 +55,6 @@ v1 <- c(4.3, 3.7, 8.7, 6.1, 9.2, 5.6, NA, 0.7, 7.8, 4.9)
 
 # Format Quantiles
 fmt_quantile_range(v1)
-
-# Output
 # "4.3 - 7.8"
 }
 \seealso{

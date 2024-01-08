@@ -25,8 +25,6 @@
 #' 
 #' # Format range
 #' fmt_range(v1)
-#' 
-#' # Output
 #' # "0.7 - 9.2"
 #' @export
 fmt_range <- function(x, format = "%s", sep = "-") {
@@ -53,8 +51,6 @@ fmt_range <- function(x, format = "%s", sep = "-") {
 #' 
 #' # Format n
 #' fmt_n(v1)
-#' 
-#' # Output
 #' # "9"
 #' @export
 fmt_n <- function(x) {
@@ -99,8 +95,6 @@ fmt_n <- function(x) {
 #' 
 #' # Format Quantiles
 #' fmt_quantile_range(v1)
-#' 
-#' # Output
 #' # "4.3 - 7.8"
 #' @export
 fmt_quantile_range <- function(x, format = "%.1f", sep = "-", 
@@ -135,8 +129,6 @@ fmt_quantile_range <- function(x, format = "%.1f", sep = "-",
 #' 
 #' # Format median
 #' fmt_median(v1)
-#' 
-#' # Output
 #' # "5.6"
 #' @export
 fmt_median <- function(x, format = "%.1f") {
@@ -260,8 +252,6 @@ fmt_cnt_pct <- function(x, denom = NULL, format = "%5.1f",
 #' 
 #' # Format mean and standard deviation
 #' fmt_mean_sd(v1)
-#' 
-#' # Output
 #' # "5.7 (2.7)"
 #' @export
 fmt_mean_sd <- function(x, format = "%.1f", sd_format = NULL) {

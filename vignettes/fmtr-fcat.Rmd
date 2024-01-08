@@ -56,4 +56,4 @@ write.fcat(c1, tempdir())
 
 ```
 
-Next: [Convenience Functions](fmtr-convenience.html)
+Next: [Format and Combine](fmtr-fapply2.html)

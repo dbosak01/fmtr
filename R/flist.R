@@ -51,7 +51,6 @@
 #' 
 #' # Apply formatting list to vector
 #' fapply(v1, fl1)
-#' 
 #' # [1] "The month is: October"  "The month is: November" "The month is: December"
 #' 
 #' ## Example 2: Formatting List - Row Type ordered ##
@@ -67,7 +66,6 @@
 #'              "%d%b%Y")
 #' 
 #' fapply(l1, fl2)
-#' 
 #' # [1] "Label A"   "1.3"       "21Jul2020" "Label B"   "5.9"       "17Oct2020"
 #' 
 #' 
@@ -89,7 +87,6 @@
 #' 
 #' # Apply formatting list to vector, using lookup
 #' fapply(l2, fl3)
-#' 
 #' # [1] "2,841.3"   "High"      "19Jun2020" "Low"       "24Apr2020" "1,382.9"
 flist <- function(..., type = "column", lookup = NULL, simplify = TRUE) {
   
@@ -295,7 +292,6 @@ as.flist.fcat <- function(x, type = "column", lookup = NULL, simplify = TRUE) {
 #' # Convert catalog to data frame to view the structure
 #' df <- as.data.frame(c1)
 #' print(df)
-#' 
 #' #       Name Type Expression   Label Order
 #' # 1   num_fmt    S       %.1f            NA
 #' # 2 label_fmt    U   x == "A" Label A    NA
@@ -305,6 +301,16 @@ as.flist.fcat <- function(x, type = "column", lookup = NULL, simplify = TRUE) {
 #' 
 #' # Convert data frame back to a formatting list
 #' c2 <- as.flist(df)
+#' c2
+#' # # A formatting list: 3 formats
+#' # - type: column
+#' # - simplify: TRUE
+#' #        Name Type Expression   Label Order
+#' # 1  date_fmt    S     %d%b%Y          <NA>
+#' # 2 label_fmt    U   x == "A" Label A  <NA>
+#' # 3 label_fmt    U   x == "B" Label B  <NA>
+#' # 4 label_fmt    U       TRUE   Other  <NA>
+#' # 5   num_fmt    S       %.1f          <NA>
 #' @export
 as.data.frame.fmt_lst <- function(x, row.names = NULL, optional = FALSE, ...) {
   

@@ -18,7 +18,7 @@ a user-defined format."><meta property="og:image" content="https://fmtr.r-sassy.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.3</span>
       </span>
     </div>
 
@@ -42,13 +42,19 @@ a user-defined format."><meta property="og:image" content="https://fmtr.r-sassy.
       <a href="../articles/fmtr-fcat.html">Format Catalogs</a>
     </li>
     <li>
+      <a href="../articles/fmtr-fapply2.html">Format and Combine</a>
+    </li>
+    <li>
       <a href="../articles/fmtr-convenience.html">Convenience Functions</a>
     </li>
     <li>
       <a href="../articles/fmtr-helpers.html">Helper Functions</a>
     </li>
     <li>
-      <a href="../articles/fmtr-example1.html">Complete Example</a>
+      <a href="../articles/fmtr-example1.html">Complete Example 1</a>
+    </li>
+    <li>
+      <a href="../articles/fmtr-example2.html">Complete Example 2</a>
     </li>
     <li>
       <a href="../articles/fmtr-faq.html">Frequently Asked Questions</a>
@@ -115,7 +121,7 @@ a user-defined format.</p>
 definition.  Each condition has a label as part of its definition.
 The <code>labels</code> function extracts the labels from the conditions and
 returns them as a vector.  While the labels will typically be of type
-character, they can be of any data type. See the <code>link{condition}</code>
+character, they can be of any data type. See the <code><a href="condition.html">condition</a></code>
 function help for further details.</p>
     </div>
     <div id="see-also">
@@ -135,14 +141,14 @@ function help for further details.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span></span>
-<span><span class="co"># Define format</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># Define format</span></span>
 <span><span class="va">fmt1</span> <span class="op">&lt;-</span> <span class="fu"><a href="value.html">value</a></span><span class="op">(</span><span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"A"</span>, <span class="st">"Label A"</span><span class="op">)</span>,</span>
 <span>              <span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"B"</span>, <span class="st">"Label B"</span><span class="op">)</span>, </span>
 <span>              <span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"Other"</span><span class="op">)</span><span class="op">)</span></span>
 <span>              </span>
 <span><span class="co"># Extract labels</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/labels.html" class="external-link">labels</a></span><span class="op">(</span><span class="va">fmt1</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/labels.html" class="external-link">labels</a></span><span class="op">(</span><span class="va">fmt1</span><span class="op">)</span></span>
+<span><span class="co"># [1] "Label A" "Label B" "Other" </span></span></code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

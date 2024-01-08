@@ -36,8 +36,6 @@ v1 <- c(4.3, 3.7, 8.7, 6.1, 9.2, 5.6, NA, 0.7, 7.8, 4.9)
 
 # Format mean and standard deviation
 fmt_mean_sd(v1)
-
-# Output
 # "5.7 (2.7)"
 }
 \seealso{

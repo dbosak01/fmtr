@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.3</span>
       </span>
     </div>
 
@@ -67,13 +67,19 @@
       <a href="../articles/fmtr-fcat.html">Format Catalogs</a>
     </li>
     <li>
+      <a href="../articles/fmtr-fapply2.html">Format and Combine</a>
+    </li>
+    <li>
       <a href="../articles/fmtr-convenience.html">Convenience Functions</a>
     </li>
     <li>
       <a href="../articles/fmtr-helpers.html">Helper Functions</a>
     </li>
     <li>
-      <a href="../articles/fmtr-example1.html">Complete Example</a>
+      <a href="../articles/fmtr-example1.html">Complete Example 1</a>
+    </li>
+    <li>
+      <a href="../articles/fmtr-example2.html">Complete Example 2</a>
     </li>
     <li>
       <a href="../articles/fmtr-faq.html">Frequently Asked Questions</a>
@@ -804,8 +810,11 @@ to a number. Here is an example:</p>
 catalog, so you don’t need to read it. You can just reference the format
 names and it will work. Is there a similar functionality in the
 <strong>fmtr</strong> package?</p>
-<p><strong>A:</strong> No. This issue has been raised, and is under
-consideration as a future enhancement.</p>
+<p><strong>A:</strong> Not exactly. What you can do is use the
+<code><a href="https://common.r-sassy.org/reference/file.find.html" class="external-link">file.find()</a></code> function from the <em>common</em> package to
+search for the format catalog file, and then read the catalog into your
+program using <code><a href="../reference/read.fcat.html">read.fcat()</a></code>. From there you just use the
+format catalog as normal.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>
@@ -815,10 +824,15 @@ consideration as a future enhancement.</p>
 <p><strong>Q:</strong> I have an existing format catalog from SAS® that
 I want to convert to R. Does the <strong>fmtr</strong> package provide a
 way to read in a SAS® format catalog?</p>
-<p><strong>A:</strong> No. This issue has been raised, but is probably
-not feasible. SAS® provides a lot of functionality to their formats that
-cannot be reproduced in <strong>fmtr</strong>, even if the mechanics of
-reading the SAS® format catalog could be worked out.</p>
+<p><strong>A:</strong> Not directly. What you can do is export the SAS
+format catalog to a dataset, read the dataset into R, and rearrange the
+data to correspond to the requirements of
+<code><a href="../reference/as.fcat.data.frame.html">as.fcat.data.frame()</a></code>. Then use
+<code><a href="../reference/as.fcat.data.frame.html">as.fcat.data.frame()</a></code> to convert the data frame to a
+<em>fmtr</em> format catalog. Note that SAS® provides a lot of
+functionality in their formats that cannot be reproduced in
+<strong>fmtr</strong>. So there is no guarantee that all your SAS
+formats will convert as desired.</p>
 <p><a href="#top">top</a></p>
 <hr>
 </div>

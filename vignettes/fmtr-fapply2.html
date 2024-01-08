@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+<meta name="date" content="2024-01-07" />
+
+<title>Format and Combine</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Format and Combine</h1>
+<h4 class="date">2024-01-07</h4>
+
+
+
+<div id="how-to-use-fapply2" class="section level3">
+<h3>How to use fapply2()</h3>
+<p>The <code>fapply2()</code> function applies two formats to two
+different vectors, and combines them when complete. This function can be
+used to collapse two columns into one. The <code>fapply2()</code>
+function is convenient to use when preparing your data for reporting.
+Here is an example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Create sample vectors</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">27</span>, <span class="dv">43</span>, <span class="dv">22</span>, <span class="dv">56</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>v2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">18.24324</span>, <span class="fl">29.05405</span>, <span class="fl">14.86486</span>, <span class="fl">37.83784</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co"># Create data frame</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;Counts&quot;</span> <span class="ot">=</span> v1, <span class="st">&quot;Percents&quot;</span> <span class="ot">=</span> v2)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co"># Format and Combine</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>dat<span class="sc">$</span>CntPct <span class="ot">&lt;-</span> <span class="fu">fapply2</span>(dat<span class="sc">$</span>Counts, dat<span class="sc">$</span>Percents, <span class="st">&quot;%d&quot;</span>, <span class="st">&quot;(%.1f%%)&quot;</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="co"># View results</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>dat</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="co">#   Counts Percents     CntPct</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="co"># 1     27 18.24324 27 (18.2%)</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="co"># 2     43 29.05405 43 (29.1%)</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="co"># 3     22 14.86486 22 (14.9%)</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="co"># 4     56 37.83784 56 (37.8%)</span></span></code></pre></div>
+</div>
+<div id="use-with-dplyr" class="section level3">
+<h3>Use with <em>dplyr</em></h3>
+<p>The <code>fapply2()</code> function is suitable for use with the
+<em>dplyr</em> package. Here is the same example as above, but using
+<em>dplyr</em> <code>mutate()</code> instead of Base R:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co"># Create sample vectors</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">27</span>, <span class="dv">43</span>, <span class="dv">22</span>, <span class="dv">56</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>v2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">18.24324</span>, <span class="fl">29.05405</span>, <span class="fl">14.86486</span>, <span class="fl">37.83784</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co"># Create data frame</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;Counts&quot;</span> <span class="ot">=</span> v1, <span class="st">&quot;Percents&quot;</span> <span class="ot">=</span> v2)</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co"># Format and Combine</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat <span class="sc">|&gt;</span> </span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">CntPct =</span> <span class="fu">fapply2</span>(dat<span class="sc">$</span>Counts, dat<span class="sc">$</span>Percents, <span class="st">&quot;%d&quot;</span>, <span class="st">&quot;(%.1f%%)&quot;</span>))</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="co"># View results</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>dat</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="co">#   Counts Percents     CntPct</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="co"># 1     27 18.24324 27 (18.2%)</span></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="co"># 2     43 29.05405 43 (29.1%)</span></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="co"># 3     22 14.86486 22 (14.9%)</span></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="co"># 4     56 37.83784 56 (37.8%)</span></span></code></pre></div>
+</div>
+<div id="use-with-datastep" class="section level3">
+<h3>Use with <em>datastep</em></h3>
+<p>The <code>fapply2()</code> function is also compatible with the
+<code>datastep()</code> function from the <em>libr</em> package. Here is
+the example again with the <code>datastep()</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">library</span>(libr)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co"># Create sample vectors</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">27</span>, <span class="dv">43</span>, <span class="dv">22</span>, <span class="dv">56</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>v2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">18.24324</span>, <span class="fl">29.05405</span>, <span class="fl">14.86486</span>, <span class="fl">37.83784</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co"># Create data frame</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;Counts&quot;</span> <span class="ot">=</span> v1, <span class="st">&quot;Percents&quot;</span> <span class="ot">=</span> v2)</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co"># Format and Combine</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">datastep</span>(dat,</span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>         {</span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>           CntPct <span class="ot">&lt;-</span> <span class="fu">fapply2</span>(Counts, Percents, <span class="st">&quot;%d&quot;</span>, <span class="st">&quot;(%.1f%%)&quot;</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>         })</span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>  </span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="co"># View results</span></span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>dat</span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="co">#   Counts Percents     CntPct</span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a><span class="co"># 1     27 18.24324 27 (18.2%)</span></span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a><span class="co"># 2     43 29.05405 43 (29.1%)</span></span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a><span class="co"># 3     22 14.86486 22 (14.9%)</span></span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a><span class="co"># 4     56 37.83784 56 (37.8%)</span></span></code></pre></div>
+</div>
+<div id="using-assigned-formats" class="section level2">
+<h2>Using Assigned Formats</h2>
+<p>Note that <code>fapply2()</code> will use formats assigned to the
+data frame columns if they are available. Assigning the formats to the
+columns first can simplify use of the function and promote format reuse.
+To assign the formats to the columns, use the <code>formats()</code>
+function, like so:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Create sample vectors</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">27</span>, <span class="dv">43</span>, <span class="dv">22</span>, <span class="dv">56</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>v2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">18.24324</span>, <span class="fl">29.05405</span>, <span class="fl">14.86486</span>, <span class="fl">37.83784</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co"># Create data frame</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;Counts&quot;</span> <span class="ot">=</span> v1, <span class="st">&quot;Percents&quot;</span> <span class="ot">=</span> v2)</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="fu">formats</span>(dat) <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Counts =</span> <span class="st">&quot;%d&quot;</span>, <span class="at">Percents =</span> <span class="st">&quot;(%.1f%%)&quot;</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co"># Format and Combine - Formats already assigned</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>dat<span class="sc">$</span>CntPct <span class="ot">&lt;-</span> <span class="fu">fapply2</span>(dat<span class="sc">$</span>Counts, dat<span class="sc">$</span>Percents)</span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co"># View results</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>dat</span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#   Counts Percents     CntPct</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co"># 1     27 18.24324 27 (18.2%)</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co"># 2     43 29.05405 43 (29.1%)</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co"># 3     22 14.86486 22 (14.9%)</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co"># 4     56 37.83784 56 (37.8%)</span></span></code></pre></div>
+</div>
+<div id="format-catalog-with-datastep" class="section level2">
+<h2>Format Catalog with <code>datastep()</code></h2>
+<p>The ability to use any formats assigned to the columns makes the
+<code>fapply()</code> function very useful when combined with format
+catalogs and the <code>datastep()</code> function. When the format
+catalog is assigned to the <code>datastep()</code>, it will
+automatically assign the formats in the catalog to any corresponding
+columns on the input data frame. This feature allows you to quickly
+assign saved formats to a new dataset, and use those formats to combine
+columns in the desired way. Observe:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">library</span>(libr)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co"># Create sample vectors</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>grp <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Group1&quot;</span>, <span class="st">&quot;Group2&quot;</span>, <span class="st">&quot;Group3&quot;</span>, <span class="st">&quot;Group4&quot;</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">27</span>, <span class="dv">43</span>, <span class="dv">22</span>, <span class="dv">56</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>v2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">18.24324</span>, <span class="fl">29.05405</span>, <span class="fl">14.86486</span>, <span class="fl">37.83784</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>v3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">5.24883</span>, <span class="fl">8.83724</span>, <span class="fl">2.39483</span>, <span class="fl">9.12542</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>v4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2.97632</span>, <span class="fl">3.32845</span>, <span class="fl">0.29784</span>, <span class="fl">4.22156</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co"># Create data frame</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;Group&quot;</span> <span class="ot">=</span> grp, <span class="st">&quot;Counts&quot;</span> <span class="ot">=</span> v1, <span class="st">&quot;Percents&quot;</span> <span class="ot">=</span> v2, </span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>                  <span class="st">&quot;Mean&quot;</span> <span class="ot">=</span> v3, <span class="st">&quot;SD&quot;</span> <span class="ot">=</span> v4)</span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="co"># View original data</span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>dat</span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="co">#    Group Counts Percents    Mean      SD</span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co"># 1 Group1     27 18.24324 5.24883 2.97632</span></span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a><span class="co"># 2 Group2     43 29.05405 8.83724 3.32845</span></span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a><span class="co"># 3 Group3     22 14.86486 2.39483 0.29784</span></span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a><span class="co"># 4 Group4     56 37.83784 9.12542 4.22156</span></span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a><span class="co"># Create format catalog</span></span>
+<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a>fc <span class="ot">&lt;-</span> <span class="fu">fcat</span>(<span class="at">Counts =</span> <span class="st">&quot;%d&quot;</span>, <span class="at">Percents =</span> <span class="st">&quot;(%03.1f%%)&quot;</span>,</span>
+<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a>           <span class="at">Mean =</span> <span class="st">&quot;%.1f&quot;</span>, <span class="at">SD =</span> <span class="st">&quot;(%04.2f)&quot;</span>)</span>
+<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a><span class="co"># Format and Combine columns using Format catalog</span></span>
+<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">datastep</span>(dat, <span class="at">format =</span> fc,</span>
+<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a>                 <span class="at">keep =</span> <span class="fu">v</span>(Group, CntPct, MeanSD),</span>
+<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a>                 {</span>
+<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a>                   </span>
+<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a>                   CntPct <span class="ot">&lt;-</span> <span class="fu">fapply2</span>(Counts, Percents)</span>
+<span id="cb5-32"><a href="#cb5-32" tabindex="-1"></a>                   MeanSD <span class="ot">&lt;-</span> <span class="fu">fapply2</span>(Mean, SD)</span>
+<span id="cb5-33"><a href="#cb5-33" tabindex="-1"></a>                   </span>
+<span id="cb5-34"><a href="#cb5-34" tabindex="-1"></a>                 })</span>
+<span id="cb5-35"><a href="#cb5-35" tabindex="-1"></a><span class="co"># View results</span></span>
+<span id="cb5-36"><a href="#cb5-36" tabindex="-1"></a>dat2</span>
+<span id="cb5-37"><a href="#cb5-37" tabindex="-1"></a><span class="co">#    Group     CntPct     MeanSD</span></span>
+<span id="cb5-38"><a href="#cb5-38" tabindex="-1"></a><span class="co"># 1 Group1 27 (18.2%) 5.2 (2.98)</span></span>
+<span id="cb5-39"><a href="#cb5-39" tabindex="-1"></a><span class="co"># 2 Group2 43 (29.1%) 8.8 (3.33)</span></span>
+<span id="cb5-40"><a href="#cb5-40" tabindex="-1"></a><span class="co"># 3 Group3 22 (14.9%) 2.4 (0.30)</span></span>
+<span id="cb5-41"><a href="#cb5-41" tabindex="-1"></a><span class="co"># 4 Group4 56 (37.8%) 9.1 (4.22)</span></span></code></pre></div>
+<p>The above technique points to a method for sharing formats between
+programs and ensuring that statistical results are formatted
+consistently across programs.</p>
+</div>
+<div id="use-of-other-format-types" class="section level2">
+<h2>Use of Other Format Types</h2>
+<p>Note that the <code>fapply2()</code> function will accept any type of
+format supported by the <em>fmtr</em> package. That means you can use
+numeric formats, date formats, vector lookups, user-defined formats, and
+vectorized functions. The combination of these format types allows you
+to format and combine data in a powerful way that will enhance the
+impact of your analysis.</p>
+<p>Next: <a href="fmtr-convenience.html">Convenience Functions</a></p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

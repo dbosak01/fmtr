@@ -19,7 +19,7 @@ functions. See below for further details."><meta property="og:image" content="ht
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.3</span>
       </span>
     </div>
 
@@ -43,13 +43,19 @@ functions. See below for further details."><meta property="og:image" content="ht
       <a href="../articles/fmtr-fcat.html">Format Catalogs</a>
     </li>
     <li>
+      <a href="../articles/fmtr-fapply2.html">Format and Combine</a>
+    </li>
+    <li>
       <a href="../articles/fmtr-convenience.html">Convenience Functions</a>
     </li>
     <li>
       <a href="../articles/fmtr-helpers.html">Helper Functions</a>
     </li>
     <li>
-      <a href="../articles/fmtr-example1.html">Complete Example</a>
+      <a href="../articles/fmtr-example1.html">Complete Example 1</a>
+    </li>
+    <li>
+      <a href="../articles/fmtr-example2.html">Complete Example 2</a>
     </li>
     <li>
       <a href="../articles/fmtr-faq.html">Frequently Asked Questions</a>
@@ -112,7 +118,8 @@ the output <code>"January 01, 1970"</code>.  The code
 <li><p>%B = unabbreviated month</p></li>
 <li><p>%y = 2-digit year</p></li>
 <li><p>%Y = 4-digit year</p></li>
-<li><p>%H = hour</p></li>
+<li><p>%H = hour (24 hour clock)</p></li>
+<li><p>%I = hour (12 hour clock)</p></li>
 <li><p>%M = minute</p></li>
 <li><p>%S = second</p></li>
 <li><p>%p = AM/PM indicator</p></li>
@@ -121,7 +128,7 @@ examples of formatting dates and times.</p>
 <p>Below are some commonly used formatting codes for other data types:</p>
 <ul><li><p>%s = string</p></li>
 <li><p>%d = integer</p></li>
-<li><p>%f = decimal number</p></li>
+<li><p>%f = floating point number</p></li>
 </ul><p>See the <code><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></code> function for additional codes and 
 examples of formatting other data types.</p>
     </div>

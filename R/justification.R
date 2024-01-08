@@ -36,26 +36,51 @@
 #' @aliases justification<-
 #' @examples 
 #' # Take subset of data
-#' df1 <- mtcars[1:10, c("mpg", "cyl") ]
+#' df1 <- mtcars[1:5, c("mpg", "cyl") ]
 #' 
 #' # Print current state
 #' print(df1)
+#' #                    mpg cyl
+#' # Mazda RX4         21.0   6
+#' # Mazda RX4 Wag     21.0   6
+#' # Datsun 710        22.8   4
+#' # Hornet 4 Drive    21.4   6
+#' # Hornet Sportabout 18.7   8
 #' 
 #' # Assign justification
 #' justification(df1) <- list(mpg = "left", cyl = "right")
 #' widths(df1) <- list(mpg = 12, cyl = 10)
 #' 
 #' fdata(df1)
+#' #                            mpg        cyl
+#' # Mazda RX4         21                    6
+#' # Mazda RX4 Wag     21                    6
+#' # Datsun 710        22.8                  4
+#' # Hornet 4 Drive    21.4                  6
+#' # Hornet Sportabout 18.7                  8
 #' 
 #' # Display justification
 #' justification(df1)
+#' # $mpg
+#' # [1] "left"
+#' # 
+#' # $cyl
+#' # [1] "right"
+#'
+#' # Display widths
 #' widths(df1)
+#' # $mpg
+#' # [1] 12
+#' # 
+#' # $cyl
+#' # [1] 10
 #' 
 #' # Clear justification
 #' justification(df1) <- NULL
 #' 
 #' # Confirm justifications are cleared
 #' justification(df1)
+#' # list()
 justification <- function(x) {
   
   ret <- list()

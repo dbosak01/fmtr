@@ -23,11 +23,10 @@ The \code{condition} function creates a condition as part of a format
 definition.  Each condition has a label as part of its definition.
 The \code{labels} function extracts the labels from the conditions and
 returns them as a vector.  While the labels will typically be of type
-character, they can be of any data type. See the \code{link{condition}}
+character, they can be of any data type. See the \code{\link{condition}}
 function help for further details.
 }
 \examples{
-
 # Define format
 fmt1 <- value(condition(x == "A", "Label A"),
               condition(x == "B", "Label B"), 
@@ -35,6 +34,7 @@ fmt1 <- value(condition(x == "A", "Label A"),
               
 # Extract labels
 labels(fmt1)
+# [1] "Label A" "Label B" "Other" 
 }
 \seealso{
 \code{\link{value}} to define a format,

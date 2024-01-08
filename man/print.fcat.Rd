@@ -32,6 +32,10 @@ c1 <- fcat(num_fmt  = "\%.1f",
            
 # Print the catalog
 print(c1)
+# # A format catalog: 3 formats
+# - $num_fmt: type S, "\%.1f"
+# - $label_fmt: type U, 3 conditions
+# - $date_fmt: type S, "\%d\%b\%Y"
 }
 \seealso{
 Other fcat: 

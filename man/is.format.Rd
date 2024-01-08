@@ -23,7 +23,6 @@ function. See the \code{\link{value}}
 function help for further details.
 }
 \examples{
-
 # Define format
 fmt1 <- value(condition(x == "A", "Label A"),
               condition(x == "B", "Label B"), 
@@ -31,7 +30,10 @@ fmt1 <- value(condition(x == "A", "Label A"),
               
 # Check for format
 is.format(fmt1)
+# [1] TRUE
+
 is.format("A")
+# [1] FALSE
 }
 \seealso{
 \code{\link{value}} to define a format,

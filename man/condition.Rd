@@ -66,6 +66,7 @@ fmt1 <- value(condition(x == "A", "Label A"),
 # Apply format to vector
 v2 <- fapply(v1, fmt1)
 v2
+# [1] "Label A" "Label B" "Other"   "Label B"
 }
 \seealso{
 \code{\link{fdata}} to apply formatting to a data frame,

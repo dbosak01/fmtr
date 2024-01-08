@@ -27,7 +27,10 @@ c1 <- fcat(num_fmt  = "\%.1f",
            
 # Test for "fcat" class
 is.fcat(c1)  
-is.fcat(Sys.Date())          
+# [1] TRUE
+
+is.fcat(Sys.Date())   
+# [1] FALSE       
 }
 \seealso{
 Other fcat: 

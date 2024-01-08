@@ -1,5 +1,5 @@
 ---
-title: "Complete Example"
+title: "Complete Example 1"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{example1}
@@ -56,11 +56,8 @@ pkg <- system.file("extdata", package = "fmtr")
 # Define data library
 libname(sdtm, pkg, "csv") 
 
-# Loads data into workspace
-lib_load(sdtm)
-
 # Prepare data
-dm_mod <- sdtm.DM %>% 
+dm_mod <- sdtm$DM %>% 
   select(USUBJID, SEX, AGE, ARM) %>% 
   filter(ARM != "SCREEN FAILURE") %>% 
   put()
@@ -199,21 +196,24 @@ res <- write_report(rpt)
 # Clean Up ----------------------------------------------------------------
 sep("Clean Up")
 
-# Unload library from workspace
-lib_unload(sdtm)
-
 # Close log
 log_close()
-
-# View log
-writeLines(readLines(lf, encoding = "UTF-8"))
 
 # View report
 # file.show(res$modified_path)
 
+# View Log
+# file.show(lf)
+
 
 
 ```
+
+## Output
+
+Here is the report produced by the above sample program:
+
+<img src="../man/images/example1.png"/>
 
 ## Log
 
@@ -438,8 +438,5 @@ Log Elapsed Time: 0 00:00:00
 =========================================================================
 ```
 
-## Output
 
-Here is the report produced by the above sample program:
-
-<img src="../man/images/example1.png"/>
+* [Complete Example 2](fmtr-example2.html)

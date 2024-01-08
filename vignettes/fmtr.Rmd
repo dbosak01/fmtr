@@ -325,6 +325,9 @@ following articles:
 * [Format Data Function](fmtr-fdata.html)
 * [Format Apply Function](fmtr-fapply.html)
 * [Format Catalogs](fmtr-fcat.html)
+* [Format and Combine](fmtr-fapply2.html)
 * [Convenience Functions](fmtr-convenience.html)
 * [Helper Functions](fmtr-helpers.html)
+* [Complete Example 1](fmtr-example1.html)
+* [Complete Example 2](fmtr-example2.html)
 

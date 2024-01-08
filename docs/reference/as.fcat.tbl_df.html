@@ -20,7 +20,7 @@ in the data frame. The data frame should have 5 columns: "Name", "Type",
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.3</span>
       </span>
     </div>
 
@@ -44,13 +44,19 @@ in the data frame. The data frame should have 5 columns: "Name", "Type",
       <a href="../articles/fmtr-fcat.html">Format Catalogs</a>
     </li>
     <li>
+      <a href="../articles/fmtr-fapply2.html">Format and Combine</a>
+    </li>
+    <li>
       <a href="../articles/fmtr-convenience.html">Convenience Functions</a>
     </li>
     <li>
       <a href="../articles/fmtr-helpers.html">Helper Functions</a>
     </li>
     <li>
-      <a href="../articles/fmtr-example1.html">Complete Example</a>
+      <a href="../articles/fmtr-example1.html">Complete Example 1</a>
+    </li>
+    <li>
+      <a href="../articles/fmtr-example2.html">Complete Example 2</a>
     </li>
     <li>
       <a href="../articles/fmtr-faq.html">Frequently Asked Questions</a>
@@ -164,7 +170,6 @@ format created with the <code><a href="value.html">value</a></code> function.</p
 <span><span class="co"># Convert catalog to data frame to view the structure</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">c1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span></span>
 <span><span class="co">#       Name Type Expression   Label Order</span></span>
 <span><span class="co"># 1   num_fmt    S       %.1f            NA</span></span>
 <span><span class="co"># 2 label_fmt    U   x == "A" Label A    NA</span></span>
@@ -174,11 +179,21 @@ format created with the <code><a href="value.html">value</a></code> function.</p
 <span></span>
 <span><span class="co"># Convert data frame back to a format catalog</span></span>
 <span><span class="va">c2</span> <span class="op">&lt;-</span> <span class="fu"><a href="as.fcat.html">as.fcat</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span><span class="va">c2</span></span>
+<span><span class="co"># # A format catalog: 3 formats</span></span>
+<span><span class="co"># - $date_fmt: type S, "%d-%b-%Y"</span></span>
+<span><span class="co"># - $label_fmt: type U, 3 conditions</span></span>
+<span><span class="co"># - $num_fmt: type S, "%.1f"</span></span>
 <span></span>
 <span><span class="co"># Use re-converted catalog</span></span>
 <span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="fl">123.456</span>, <span class="va">c2</span><span class="op">$</span><span class="va">num_fmt</span><span class="op">)</span></span>
+<span><span class="co"># [1] "123.5"</span></span>
+<span></span>
 <span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"B"</span><span class="op">)</span>, <span class="va">c2</span><span class="op">$</span><span class="va">label_fmt</span><span class="op">)</span></span>
-<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">c2</span><span class="op">$</span><span class="va">date_fmt</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># [1] "Label A" "Label B" "Other"   "Label B"</span></span>
+<span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">c2</span><span class="op">$</span><span class="va">date_fmt</span><span class="op">)</span></span>
+<span><span class="co"># [1] "07-Jan-2024"</span></span></code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

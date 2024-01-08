@@ -18,7 +18,7 @@ to the entire data frame."><meta property="og:image" content="https://fmtr.r-sas
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.3</span>
       </span>
     </div>
 
@@ -42,13 +42,19 @@ to the entire data frame."><meta property="og:image" content="https://fmtr.r-sas
       <a href="../articles/fmtr-fcat.html">Format Catalogs</a>
     </li>
     <li>
+      <a href="../articles/fmtr-fapply2.html">Format and Combine</a>
+    </li>
+    <li>
       <a href="../articles/fmtr-convenience.html">Convenience Functions</a>
     </li>
     <li>
       <a href="../articles/fmtr-helpers.html">Helper Functions</a>
     </li>
     <li>
-      <a href="../articles/fmtr-example1.html">Complete Example</a>
+      <a href="../articles/fmtr-example1.html">Complete Example 1</a>
+    </li>
+    <li>
+      <a href="../articles/fmtr-example2.html">Complete Example 2</a>
     </li>
     <li>
       <a href="../articles/fmtr-faq.html">Frequently Asked Questions</a>
@@ -153,7 +159,6 @@ functions to get or set formatting for an entire data frame.  Also see
 <span></span>
 <span><span class="co"># Before formatting </span></span>
 <span><span class="va">df</span></span>
-<span></span>
 <span><span class="co">#    state   area         pct</span></span>
 <span><span class="co"># 1     AL  51609  1.42629378</span></span>
 <span><span class="co"># 2     AK 589757 16.29883824</span></span>
@@ -177,7 +182,6 @@ functions to get or set formatting for an entire data frame.  Also see
 <span></span>
 <span><span class="co"># Apply formats</span></span>
 <span><span class="fu">fdata</span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span></span>
 <span><span class="co">#          state    area   pct</span></span>
 <span><span class="co"># 1      Alabama  51,609  1.4%</span></span>
 <span><span class="co"># 2       Alaska 589,757 16.3%</span></span>

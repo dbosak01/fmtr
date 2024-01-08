@@ -55,7 +55,6 @@ fl1 <- flist("\%B", "The month is: \%s")
 
 # Apply formatting list to vector
 fapply(v1, fl1)
-
 # [1] "The month is: October"  "The month is: November" "The month is: December"
 
 ## Example 2: Formatting List - Row Type ordered ##
@@ -71,7 +70,6 @@ fl2 <- flist(type = "row",
              "\%d\%b\%Y")
 
 fapply(l1, fl2)
-
 # [1] "Label A"   "1.3"       "21Jul2020" "Label B"   "5.9"       "17Oct2020"
 
 
@@ -93,7 +91,6 @@ fl3 <- flist(type = "row", lookup = v3,
 
 # Apply formatting list to vector, using lookup
 fapply(l2, fl3)
-
 # [1] "2,841.3"   "High"      "19Jun2020" "Low"       "24Apr2020" "1,382.9"
 }
 \seealso{

@@ -740,8 +740,10 @@ fapply(c("A", "B", "C"), nfmt)
 you don't need to read it.  You can just reference the format names
 and it will work.  Is there a similar functionality in the **fmtr** package?
 
-**A:** No.  This issue has been raised, and is under consideration as 
-a future enhancement. 
+**A:** Not exactly. What you can do is use the `file.find()` function
+from the *common* package to search for the format catalog file, and
+then read the catalog into your program using `read.fcat()`. From there you
+just use the format catalog as normal.
 
 [top](#top) 
 
@@ -754,10 +756,13 @@ a future enhancement.
 to R.  Does the **fmtr** package provide a way to read in a SAS® format
 catalog? 
 
-**A:** No.  This issue has been raised, but is probably not feasible. 
-SAS® provides a lot of functionality to their formats that cannot be reproduced
-in **fmtr**, even if the mechanics of reading the SAS® format catalog could
-be worked out.
+**A:** Not directly. What you can do is export the SAS format catalog to 
+a dataset, read the dataset into R, and rearrange the data to correspond to the
+requirements of `as.fcat.data.frame()`. Then use `as.fcat.data.frame()` 
+to convert the data frame to a *fmtr* format catalog.  Note that
+SAS® provides a lot of functionality in their formats that cannot be reproduced
+in **fmtr**.  So there is no guarantee that all your SAS formats will convert
+as desired.
 
 [top](#top)
 

@@ -19,7 +19,7 @@ assigns formats from a named list."><meta property="og:image" content="https://f
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.3</span>
       </span>
     </div>
 
@@ -43,13 +43,19 @@ assigns formats from a named list."><meta property="og:image" content="https://f
       <a href="../articles/fmtr-fcat.html">Format Catalogs</a>
     </li>
     <li>
+      <a href="../articles/fmtr-fapply2.html">Format and Combine</a>
+    </li>
+    <li>
       <a href="../articles/fmtr-convenience.html">Convenience Functions</a>
     </li>
     <li>
       <a href="../articles/fmtr-helpers.html">Helper Functions</a>
     </li>
     <li>
-      <a href="../articles/fmtr-example1.html">Complete Example</a>
+      <a href="../articles/fmtr-example1.html">Complete Example 1</a>
+    </li>
+    <li>
+      <a href="../articles/fmtr-example2.html">Complete Example 2</a>
     </li>
     <li>
       <a href="../articles/fmtr-faq.html">Frequently Asked Questions</a>
@@ -142,10 +148,16 @@ value to the <code>formats</code> function.</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># Take subset of data</span></span>
-<span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"cyl"</span><span class="op">)</span> <span class="op">]</span></span>
+<span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"cyl"</span><span class="op">)</span> <span class="op">]</span></span>
 <span></span>
 <span><span class="co"># Print current state</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span>
+<span><span class="co">#                    mpg cyl</span></span>
+<span><span class="co"># Mazda RX4         21.0   6</span></span>
+<span><span class="co"># Mazda RX4 Wag     21.0   6</span></span>
+<span><span class="co"># Datsun 710        22.8   4</span></span>
+<span><span class="co"># Hornet 4 Drive    21.4   6</span></span>
+<span><span class="co"># Hornet Sportabout 18.7   8</span></span>
 <span></span>
 <span><span class="co"># Assign formats</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">df1</span><span class="op">$</span><span class="va">mpg</span>, <span class="st">"format"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="value.html">value</a></span><span class="op">(</span><span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">20</span>, <span class="st">"High"</span><span class="op">)</span>,</span>
@@ -154,6 +166,12 @@ value to the <code>formats</code> function.</p>
 <span></span>
 <span><span class="co"># Display formatted data</span></span>
 <span><span class="fu"><a href="fdata.html">fdata</a></span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span>
+<span><span class="co">#                    mpg cyl</span></span>
+<span><span class="co"># Mazda RX4         High 6.0</span></span>
+<span><span class="co"># Mazda RX4 Wag     High 6.0</span></span>
+<span><span class="co"># Datsun 710        High 4.0</span></span>
+<span><span class="co"># Hornet 4 Drive    High 6.0</span></span>
+<span><span class="co"># Hornet Sportabout  Low 8.0</span></span>
 <span></span>
 <span><span class="co"># Extract format list</span></span>
 <span><span class="va">lst</span> <span class="op">&lt;-</span> <span class="fu">formats</span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span>
@@ -166,12 +184,19 @@ value to the <code>formats</code> function.</p>
 <span></span>
 <span><span class="co"># Display formatted data</span></span>
 <span><span class="fu"><a href="fdata.html">fdata</a></span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span>
+<span><span class="co">#                    mpg  cyl</span></span>
+<span><span class="co"># Mazda RX4          Low 6.00</span></span>
+<span><span class="co"># Mazda RX4 Wag      Low 6.00</span></span>
+<span><span class="co"># Datsun 710        High 4.00</span></span>
+<span><span class="co"># Hornet 4 Drive     Low 6.00</span></span>
+<span><span class="co"># Hornet Sportabout  Low 8.00</span></span>
 <span></span>
 <span><span class="co"># Clear formats</span></span>
 <span><span class="fu">formats</span><span class="op">(</span><span class="va">df1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
 <span></span>
 <span><span class="co"># Confirm formats are cleared </span></span>
-<span><span class="fu">formats</span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">formats</span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span>
+<span><span class="co"># list()</span></span></code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

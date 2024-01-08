@@ -39,7 +39,6 @@
 #' 
 #' # Apply format attributes
 #' fapply(a)
-#' 
 #' # [1] "   1.3    " "   6.0    " "   2.4    "
 fattr <- function(x, format = NULL, width = NULL, justify = NULL, 
                   label = NULL, description = NULL, keep = TRUE) {
@@ -103,6 +102,7 @@ fattr <- function(x, format = NULL, width = NULL, justify = NULL,
 #' 
 #' # Apply format attributes
 #' fapply(a)
+#' # [1] "1.3" "6.0" "2.4"
 "fattr<-" <- function(x, value) {
   
   if (!is.null(value[["format"]])) {

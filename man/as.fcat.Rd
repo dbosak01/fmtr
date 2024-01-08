@@ -10,7 +10,7 @@ as.fcat(x)
 \item{x}{The object to cast.}
 }
 \value{
-A formatting object, created using the information in the 
+A format catalog, created using the information in the 
 input object.
 }
 \description{

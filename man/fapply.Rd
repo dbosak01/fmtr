@@ -70,44 +70,44 @@ v1 <- c(1.235, 8.363, 5.954, 2.465)
 
 # Apply string format.
 fapply(v1, "\%.1f")
-
+# [1] "1.2" "8.4" "6.0" "2.5"
 
 ## Example 2: Named vector ##
 # Set up vector
 v2 <- c("A", "B", "C", "B")
 
 # Set up named vector for formatting
-fmt2 <- c(A = "Vector Label A", B = "Vector Label B", C = "Vector Label C")
+fmt2 <- c(A = "Label A", B = "Label B", C = "Label C")
 
 # Apply format to vector
 fapply(v2, fmt2)
-
+# [1] "Label A" "Label B" "Label C" "Label B"
 
 ## Example 3: User-defined format ##
 # Define format
-fmt3 <- value(condition(x == "A", "Format Label A"),
-              condition(x == "B", "Format Label B"), 
-              condition(TRUE, "Format Other"))
+fmt3 <- value(condition(x == "A", "Label A"),
+              condition(x == "B", "Label B"), 
+              condition(TRUE, "Other"))
               
 # Apply format to vector
 fapply(v2, fmt3)
-
+# [1] "Label A" "Label B" "Other"   "Label B"
 
 ## Example 4: Formatting function ##
 # Set up vectorized function
 fmt4 <- Vectorize(function(x) {
 
   if (x \%in\% c("A", "B"))
-    ret <- paste("Function Label", x)
+    ret <- paste("Label", x)
   else
-    ret <- "Function Other" 
+    ret <- "Other" 
     
   return(ret)
 })
 
 # Apply format to vector
 fapply(v2, fmt4)
-
+# [1] "Label A" "Label B" "Other"   "Label B"
 
 ## Example 5: Formatting List - Row Type ##
 # Set up data
@@ -127,18 +127,34 @@ lst <- flist(type = "row", lookup = v4,
 
 # Apply formatting list to vector
 fapply(v3, lst)
-
+# [1] "2,841.3"   "High"      "06Jan2024" "Low"       "06Mar2024" "1,382.9"  
 
 ## Example 6: Formatting List - Column Type ##
 # Set up data
 v5 <- c(Sys.Date(), Sys.Date() + 30, Sys.Date() + 60)
 v5
+# [1] "2024-01-06" "2024-02-05" "2024-03-06"
 
 # Create formatting list
 lst <- flist("\%B", "This month is: \%s", type = "column")
 
 # Apply formatting list to vector
 fapply(v5, lst)
+# [1] "This month is: January"  "This month is: February" "This month is: March" 
+
+# Example 7: Conditional Formatting
+# Data vector
+v6 <- c(8.38371, 1.46938, 3.28783, NA, 0.98632)
+
+# User-defined format
+fmt5 <- value(condition(is.na(x), "Missing"),
+              condition(x < 1, "Low"), 
+              condition(x > 5, "High"),
+              condition(TRUE, "\%.2f"))
+
+# Apply format to data vector
+fapply(v6, fmt5)
+# [1] "High"    "1.47"    "3.29"    "Missing" "Low" 
 }
 \seealso{
 \code{\link{fcat}} to create a format catalog,

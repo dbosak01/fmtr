@@ -39,10 +39,16 @@
 #' @aliases formats<-
 #' @examples 
 #' # Take subset of data
-#' df1 <- mtcars[1:10, c("mpg", "cyl") ]
+#' df1 <- mtcars[1:5, c("mpg", "cyl") ]
 #' 
 #' # Print current state
 #' print(df1)
+#' #                    mpg cyl
+#' # Mazda RX4         21.0   6
+#' # Mazda RX4 Wag     21.0   6
+#' # Datsun 710        22.8   4
+#' # Hornet 4 Drive    21.4   6
+#' # Hornet Sportabout 18.7   8
 #' 
 #' # Assign formats
 #' attr(df1$mpg, "format") <- value(condition(x >= 20, "High"),
@@ -51,6 +57,12 @@
 #' 
 #' # Display formatted data
 #' fdata(df1)
+#' #                    mpg cyl
+#' # Mazda RX4         High 6.0
+#' # Mazda RX4 Wag     High 6.0
+#' # Datsun 710        High 4.0
+#' # Hornet 4 Drive    High 6.0
+#' # Hornet Sportabout  Low 8.0
 #' 
 #' # Extract format list
 #' lst <- formats(df1)
@@ -63,12 +75,19 @@
 #' 
 #' # Display formatted data
 #' fdata(df1)
+#' #                    mpg  cyl
+#' # Mazda RX4          Low 6.00
+#' # Mazda RX4 Wag      Low 6.00
+#' # Datsun 710        High 4.00
+#' # Hornet 4 Drive     Low 6.00
+#' # Hornet Sportabout  Low 8.00
 #' 
 #' # Clear formats
 #' formats(df1) <- NULL
 #' 
 #' # Confirm formats are cleared 
 #' formats(df1)
+#' # list()
 formats <- function(x) {
   
   ret <- list()

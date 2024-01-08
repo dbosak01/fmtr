@@ -1,0 +1,201 @@
+---
+title: "Format and Combine"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Format and Combine}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+### How to use fapply2()
+
+The `fapply2()` function applies two formats to two different vectors, and combines
+them when complete.  This function can be used to collapse two columns into one.
+The `fapply2()` function is convenient to use when preparing your data for 
+reporting.  Here is an example:
+```{r eval=FALSE, echo=TRUE} 
+# Create sample vectors
+v1 <- c(27, 43, 22, 56)
+v2 <- c(18.24324, 29.05405, 14.86486, 37.83784)
+
+# Create data frame
+dat <- data.frame("Counts" = v1, "Percents" = v2)
+
+# Format and Combine
+dat$CntPct <- fapply2(dat$Counts, dat$Percents, "%d", "(%.1f%%)")
+
+# View results
+dat
+#   Counts Percents     CntPct
+# 1     27 18.24324 27 (18.2%)
+# 2     43 29.05405 43 (29.1%)
+# 3     22 14.86486 22 (14.9%)
+# 4     56 37.83784 56 (37.8%)
+
+```
+
+### Use with *dplyr*
+
+The `fapply2()` function is suitable for use with the *dplyr* package.
+Here is the same example as above, but using *dplyr* `mutate()` instead of Base R:
+```{r eval=FALSE, echo=TRUE} 
+library(dplyr)
+
+# Create sample vectors
+v1 <- c(27, 43, 22, 56)
+v2 <- c(18.24324, 29.05405, 14.86486, 37.83784)
+
+# Create data frame
+dat <- data.frame("Counts" = v1, "Percents" = v2)
+
+# Format and Combine
+dat <- dat |> 
+  mutate(CntPct = fapply2(dat$Counts, dat$Percents, "%d", "(%.1f%%)"))
+
+# View results
+dat
+#   Counts Percents     CntPct
+# 1     27 18.24324 27 (18.2%)
+# 2     43 29.05405 43 (29.1%)
+# 3     22 14.86486 22 (14.9%)
+# 4     56 37.83784 56 (37.8%)
+
+```
+
+### Use with *datastep*
+
+The `fapply2()` function is also compatible with the `datastep()` function
+from the *libr* package.
+Here is the example again with the `datastep()`: 
+```{r eval=FALSE, echo=TRUE} 
+library(libr)
+
+# Create sample vectors
+v1 <- c(27, 43, 22, 56)
+v2 <- c(18.24324, 29.05405, 14.86486, 37.83784)
+
+# Create data frame
+dat <- data.frame("Counts" = v1, "Percents" = v2)
+
+# Format and Combine
+dat <- datastep(dat,
+         {
+           CntPct <- fapply2(Counts, Percents, "%d", "(%.1f%%)")
+         })
+  
+# View results
+dat
+#   Counts Percents     CntPct
+# 1     27 18.24324 27 (18.2%)
+# 2     43 29.05405 43 (29.1%)
+# 3     22 14.86486 22 (14.9%)
+# 4     56 37.83784 56 (37.8%)
+
+```
+
+
+## Using Assigned Formats
+
+Note that `fapply2()` will use formats assigned to the data frame columns
+if they are available.  Assigning the formats to the columns first can 
+simplify use of the function and promote format reuse.
+To assign the formats to the columns, use the 
+`formats()` function, like so:
+```{r eval=FALSE, echo=TRUE} 
+# Create sample vectors
+v1 <- c(27, 43, 22, 56)
+v2 <- c(18.24324, 29.05405, 14.86486, 37.83784)
+
+# Create data frame
+dat <- data.frame("Counts" = v1, "Percents" = v2)
+
+formats(dat) <- list(Counts = "%d", Percents = "(%.1f%%)")
+
+# Format and Combine - Formats already assigned
+dat$CntPct <- fapply2(dat$Counts, dat$Percents)
+
+# View results
+dat
+#   Counts Percents     CntPct
+# 1     27 18.24324 27 (18.2%)
+# 2     43 29.05405 43 (29.1%)
+# 3     22 14.86486 22 (14.9%)
+# 4     56 37.83784 56 (37.8%)
+
+```
+
+## Format Catalog with `datastep()`
+
+The ability to use any formats assigned to the columns makes the `fapply()` 
+function very useful when combined with format catalogs and the `datastep()`
+function.  When the format catalog is assigned to the `datastep()`, it will
+automatically assign the formats in the catalog to any corresponding columns
+on the input data frame.  This feature allows you to quickly assign saved formats
+to a new dataset, and use those formats to combine columns in the desired way.
+Observe:
+```{r eval=FALSE, echo=TRUE} 
+library(libr)
+
+# Create sample vectors
+grp <- c("Group1", "Group2", "Group3", "Group4")
+v1 <- c(27, 43, 22, 56)
+v2 <- c(18.24324, 29.05405, 14.86486, 37.83784)
+v3 <- c(5.24883, 8.83724, 2.39483, 9.12542)
+v4 <- c(2.97632, 3.32845, 0.29784, 4.22156)
+
+# Create data frame
+dat <- data.frame("Group" = grp, "Counts" = v1, "Percents" = v2, 
+                  "Mean" = v3, "SD" = v4)
+
+# View original data
+dat
+#    Group Counts Percents    Mean      SD
+# 1 Group1     27 18.24324 5.24883 2.97632
+# 2 Group2     43 29.05405 8.83724 3.32845
+# 3 Group3     22 14.86486 2.39483 0.29784
+# 4 Group4     56 37.83784 9.12542 4.22156
+
+# Create format catalog
+fc <- fcat(Counts = "%d", Percents = "(%03.1f%%)",
+           Mean = "%.1f", SD = "(%04.2f)")
+
+# Format and Combine columns using Format catalog
+dat2 <- datastep(dat, format = fc,
+                 keep = v(Group, CntPct, MeanSD),
+                 {
+                   
+                   CntPct <- fapply2(Counts, Percents)
+                   MeanSD <- fapply2(Mean, SD)
+                   
+                 })
+# View results
+dat2
+#    Group     CntPct     MeanSD
+# 1 Group1 27 (18.2%) 5.2 (2.98)
+# 2 Group2 43 (29.1%) 8.8 (3.33)
+# 3 Group3 22 (14.9%) 2.4 (0.30)
+# 4 Group4 56 (37.8%) 9.1 (4.22)
+
+```
+
+The above technique points to a method for sharing formats between programs
+and ensuring that statistical results are formatted consistently across programs. 
+
+## Use of Other Format Types
+
+Note that the `fapply2()` function will
+accept any type of format supported by the *fmtr* package. That means you can use
+numeric formats, date formats, vector lookups, user-defined formats, 
+and vectorized functions.  The combination of these format types allows you
+to format and combine data in a powerful way that will enhance the impact 
+of your analysis.
+
+
+Next: [Convenience Functions](fmtr-convenience.html)

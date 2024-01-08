@@ -57,7 +57,7 @@
 #'               
 #' # Apply format to vector
 #' fapply(v1, fmt1)
-#' 
+#' # [1] "Label A" "Label B" "Other"   "Label B"
 #' 
 #' ## Example 2: Character to Integer Mapping ##
 #' fmt2 <- value(condition(x == "A", 1),
@@ -66,7 +66,7 @@
 #' 
 #' # Apply format to vector
 #' fapply(v1, fmt2)
-#' 
+#' # [1] 1 2 3 2
 #' 
 #' ## Example 3: Categorization of Continuous Variable ##
 #' # Set up vector
@@ -79,7 +79,7 @@
 #'               
 #' # Apply format to vector
 #' fapply(v2, fmt3)
-#' 
+#' # [1] "Low"          "High"         "Out of range" "High" 
 #' 
 #' ### Example 4: Conditional formatting
 #' v3 <- c(10.398873, 12.98762, 0.5654, 11.588372)
@@ -174,6 +174,7 @@ value <- function(..., log = TRUE, as.factor = FALSE) {
 #' # Apply format to vector
 #' v2 <- fapply(v1, fmt1)
 #' v2
+#' # [1] "Label A" "Label B" "Other"   "Label B"
 condition <- function(expr, label, order = NULL) {
   
   y <- structure(list(), class = c("fmt_cnd"))    
@@ -373,7 +374,7 @@ as.fmt.data.frame <- function(x) {
 #' definition.  Each condition has a label as part of its definition.
 #' The \code{labels} function extracts the labels from the conditions and
 #' returns them as a vector.  While the labels will typically be of type
-#' character, they can be of any data type. See the \code{link{condition}}
+#' character, they can be of any data type. See the \code{\link{condition}}
 #' function help for further details.  
 #'
 #' @param object A user-defined format of class "fmt".
@@ -385,7 +386,6 @@ as.fmt.data.frame <- function(x) {
 #' @family fmt
 #' @export
 #' @examples 
-#' 
 #' # Define format
 #' fmt1 <- value(condition(x == "A", "Label A"),
 #'               condition(x == "B", "Label B"), 
@@ -393,6 +393,7 @@ as.fmt.data.frame <- function(x) {
 #'               
 #' # Extract labels
 #' labels(fmt1)
+#' # [1] "Label A" "Label B" "Other" 
 labels.fmt <- function(object, ...) {
   
   ret <- NULL
@@ -445,7 +446,6 @@ labels.fmt <- function(object, ...) {
 #' @family fmt
 #' @export
 #' @examples 
-#' 
 #' # Define format
 #' fmt1 <- value(condition(x == "A", "Label A"),
 #'               condition(x == "B", "Label B"), 
@@ -453,7 +453,10 @@ labels.fmt <- function(object, ...) {
 #'               
 #' # Check for format
 #' is.format(fmt1)
+#' # [1] TRUE
+#' 
 #' is.format("A")
+#' # [1] FALSE
 is.format <- function(x) {
  
   ret <- FALSE

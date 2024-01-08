@@ -41,7 +41,6 @@ c1 <- flist(num_fmt  = "\%.1f",
 # Convert catalog to data frame to view the structure
 df <- as.data.frame(c1)
 print(df)
-
 #       Name Type Expression   Label Order
 # 1   num_fmt    S       \%.1f            NA
 # 2 label_fmt    U   x == "A" Label A    NA
@@ -51,6 +50,16 @@ print(df)
 
 # Convert data frame back to a formatting list
 c2 <- as.flist(df)
+c2
+# # A formatting list: 3 formats
+# - type: column
+# - simplify: TRUE
+#        Name Type Expression   Label Order
+# 1  date_fmt    S     \%d\%b\%Y          <NA>
+# 2 label_fmt    U   x == "A" Label A  <NA>
+# 3 label_fmt    U   x == "B" Label B  <NA>
+# 4 label_fmt    U       TRUE   Other  <NA>
+# 5   num_fmt    S       \%.1f          <NA>
 }
 \seealso{
 Other flist: 

@@ -44,8 +44,14 @@
 #' 
 #' # Use formats in the catalog
 #' fapply(2, c1$num_fmt)
+#' # [1] "2.0"
+#' 
 #' fapply(c("A", "B", "C", "B"), c1$label_fmt)
+#' # [1] "Label A" "Label B" "Other"   "Label B"
+#' 
 #' fapply(Sys.Date(), c1$date_fmt)
+#' # [1] "06Jan2024"
+#' 
 #' @export
 fcat <- function(..., log = TRUE) {
   
@@ -70,7 +76,7 @@ fcat <- function(..., log = TRUE) {
 #' @description A generic method for casting objects to
 #' a format catalog.  Individual objects will inherit from this function.
 #' @param x The object to cast.
-#' @return A formatting object, created using the information in the 
+#' @return A format catalog, created using the information in the 
 #' input object.
 #' @seealso For class-specific methods, see \code{\link{as.fcat.data.frame}},
 #' \code{\link{as.fcat.list}}, and \code{\link{as.fcat.fmt_lst}}.
@@ -130,7 +136,6 @@ as.fcat <- function (x) {
 #' # Convert catalog to data frame to view the structure
 #' df <- as.data.frame(c1)
 #' print(df)
-#' 
 #' #       Name Type Expression   Label Order
 #' # 1   num_fmt    S       %.1f            NA
 #' # 2 label_fmt    U   x == "A" Label A    NA
@@ -140,11 +145,21 @@ as.fcat <- function (x) {
 #' 
 #' # Convert data frame back to a format catalog
 #' c2 <- as.fcat(df)
+#' c2
+#' # # A format catalog: 3 formats
+#' # - $date_fmt: type S, "%d-%b-%Y"
+#' # - $label_fmt: type U, 3 conditions
+#' # - $num_fmt: type S, "%.1f"
 #' 
 #' # Use re-converted catalog
 #' fapply(123.456, c2$num_fmt)
+#' # [1] "123.5"
+#' 
 #' fapply(c("A", "B", "C", "B"), c2$label_fmt)
+#' # [1] "Label A" "Label B" "Other"   "Label B"
+#' 
 #' fapply(Sys.Date(), c2$date_fmt)
+#' # [1] "07-Jan-2024"
 #' @export
 as.fcat.data.frame <- function(x) {
   
@@ -250,7 +265,6 @@ as.fcat.fmt_lst <- function(x) {
 #' # Convert catalog to data frame to view the structure
 #' df <- as.data.frame(c1)
 #' print(df)
-#' 
 #' #       Name Type Expression   Label Order
 #' # 1   num_fmt    S       %.1f            NA
 #' # 2 label_fmt    U   x == "A" Label A    NA
@@ -260,6 +274,11 @@ as.fcat.fmt_lst <- function(x) {
 #' 
 #' # Convert data frame back to a format catalog
 #' c2 <- as.fcat(df)
+#' c2
+#' # # A format catalog: 3 formats
+#' # - $date_fmt: type S, "%d%b%Y"
+#' # - $label_fmt: type U, 3 conditions
+#' # - $num_fmt: type S, "%.1f"
 #' @export
 as.data.frame.fcat <- function(x, row.names = NULL, optional = FALSE, ...) {
   
@@ -353,8 +372,13 @@ as.data.frame.fcat <- function(x, row.names = NULL, optional = FALSE, ...) {
 #' 
 #' # Use formats in the catalog
 #' fapply(2, c1$num_fmt)
+#' # [1] "2.0"
+#' 
 #' fapply(c("A", "B", "C", "B"), c1$label_fmt)
+#' # [1] "Label A" "Label B" "Other"   "Label B"
+#' 
 #' fapply(Sys.Date(), c1$date_fmt)
+#' # [1] "07Jan2024"
 #' @export
 write.fcat <- function(x, dir_path = getwd(), file_name = NULL) {
   
@@ -406,8 +430,13 @@ write.fcat <- function(x, dir_path = getwd(), file_name = NULL) {
 #' 
 #' # Use formats in the catalog
 #' fapply(2, c1$num_fmt)
+#' # [1] "2.0"
+#' 
 #' fapply(c("A", "B", "C", "B"), c1$label_fmt)
+#' # [1] "Label A" "Label B" "Other"   "Label B"
+#' 
 #' fapply(Sys.Date(), c1$date_fmt)
+#' # [1] "07Jan2024"
 #' @export
 read.fcat <- function(file_path) {
   
@@ -442,6 +471,10 @@ read.fcat <- function(file_path) {
 #'            
 #' # Print the catalog
 #' print(c1)
+#' # # A format catalog: 3 formats
+#' # - $num_fmt: type S, "%.1f"
+#' # - $label_fmt: type U, 3 conditions
+#' # - $date_fmt: type S, "%d%b%Y"
 #' @import crayon
 #' @export
 print.fcat <- function(x, ..., verbose = FALSE) {
@@ -524,7 +557,10 @@ print.fcat <- function(x, ..., verbose = FALSE) {
 #'            
 #' # Test for "fcat" class
 #' is.fcat(c1)  
-#' is.fcat(Sys.Date())          
+#' # [1] TRUE
+#' 
+#' is.fcat(Sys.Date())   
+#' # [1] FALSE       
 #' @export
 is.fcat <- function(x) {
   

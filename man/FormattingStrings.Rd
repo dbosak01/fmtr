@@ -32,7 +32,8 @@ Below are some commonly used formatting codes for dates:
 \item \%B = unabbreviated month
 \item \%y = 2-digit year
 \item \%Y = 4-digit year	
-\item \%H = hour
+\item \%H = hour (24 hour clock)
+\item \%I = hour (12 hour clock)
 \item \%M = minute
 \item \%S = second
 \item \%p = AM/PM indicator
@@ -46,7 +47,7 @@ Below are some commonly used formatting codes for other data types:
 \itemize{
 \item \%s = string
 \item \%d = integer
-\item \%f = decimal number
+\item \%f = floating point number
 }
 See the \code{\link[base]{sprintf}} function for additional codes and 
 examples of formatting other data types.

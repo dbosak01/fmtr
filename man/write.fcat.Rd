@@ -49,8 +49,13 @@ c2 <- read.fcat(pth)
 
 # Use formats in the catalog
 fapply(2, c1$num_fmt)
+# [1] "2.0"
+
 fapply(c("A", "B", "C", "B"), c1$label_fmt)
+# [1] "Label A" "Label B" "Other"   "Label B"
+
 fapply(Sys.Date(), c1$date_fmt)
+# [1] "07Jan2024"
 }
 \seealso{
 Other fcat: 

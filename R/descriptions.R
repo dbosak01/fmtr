@@ -35,22 +35,34 @@
 #' @aliases descriptions<-
 #' @examples 
 #' # Take subset of data
-#' df1 <- mtcars[1:10, c("mpg", "cyl") ]
+#' df1 <- mtcars[1:5, c("mpg", "cyl") ]
 #' 
 #' # Print current state
 #' print(df1)
+#' #                    mpg cyl
+#' # Mazda RX4         21.0   6
+#' # Mazda RX4 Wag     21.0   6
+#' # Datsun 710        22.8   4
+#' # Hornet 4 Drive    21.4   6
+#' # Hornet Sportabout 18.7   8
 #' 
 #' # Assign descriptions
 #' descriptions(df1) <- list(mpg = "Miles per Gallon", cyl = "Cylinders")
 #' 
 #' # Display descriptions
 #' descriptions(df1)
+#' # $mpg
+#' # [1] "Miles per Gallon"
+#' # 
+#' # $cyl
+#' # [1] "Cylinders"
 #' 
 #' # Clear descriptions
 #' descriptions(df1) <- NULL
 #' 
 #' # Confirm descriptions are cleared
 #' descriptions(df1)
+#' # list()
 descriptions <- function(x) {
   
   ret <- list()

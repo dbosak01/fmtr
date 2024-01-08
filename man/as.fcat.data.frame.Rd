@@ -64,7 +64,6 @@ c1 <- fcat(num_fmt  = "\%.1f",
 # Convert catalog to data frame to view the structure
 df <- as.data.frame(c1)
 print(df)
-
 #       Name Type Expression   Label Order
 # 1   num_fmt    S       \%.1f            NA
 # 2 label_fmt    U   x == "A" Label A    NA
@@ -74,11 +73,21 @@ print(df)
 
 # Convert data frame back to a format catalog
 c2 <- as.fcat(df)
+c2
+# # A format catalog: 3 formats
+# - $date_fmt: type S, "\%d-\%b-\%Y"
+# - $label_fmt: type U, 3 conditions
+# - $num_fmt: type S, "\%.1f"
 
 # Use re-converted catalog
 fapply(123.456, c2$num_fmt)
+# [1] "123.5"
+
 fapply(c("A", "B", "C", "B"), c2$label_fmt)
+# [1] "Label A" "Label B" "Other"   "Label B"
+
 fapply(Sys.Date(), c2$date_fmt)
+# [1] "07-Jan-2024"
 }
 \seealso{
 Other fcat: 

@@ -51,8 +51,14 @@ c1 <- fcat(num_fmt  = "\%.1f",
 
 # Use formats in the catalog
 fapply(2, c1$num_fmt)
+# [1] "2.0"
+
 fapply(c("A", "B", "C", "B"), c1$label_fmt)
+# [1] "Label A" "Label B" "Other"   "Label B"
+
 fapply(Sys.Date(), c1$date_fmt)
+# [1] "06Jan2024"
+
 }
 \seealso{
 \code{\link{formats}} function for assigning formats to a data 
