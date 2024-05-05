@@ -1,7 +1,7 @@
 Package: fmtr
 Type: Package
 Title: Easily Apply Formats to Data  
-Version: 1.6.3
+Version: 1.6.4
 Author: David Bosak
 Maintainer: David Bosak <dbosak01@gmail.com>
 Description: Contains a set of functions that can be used to apply
@@ -13,7 +13,7 @@ Description: Contains a set of functions that can be used to apply
   to create a user-defined format, similar to a SAS® user-defined format.
 License: CC0
 Encoding: UTF-8
-URL: https://fmtr.r-sassy.org
+URL: https://fmtr.r-sassy.org, https://github.com/dbosak01/fmtr
 BugReports: https://github.com/dbosak01/fmtr/issues
 Depends: 
     R (>= 3.6.0),

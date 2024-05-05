@@ -200,7 +200,7 @@ fapply <- function(x, format = NULL, width = NULL, justify = NULL) {
   if (is.vector(format) & is.list(format) == FALSE) {
    
     # If format is a single string, call format_vector to deal with it
-    if (length(format) == 1)
+    if (length(format) == 1 & length(names(format)) == 0)
       ret <- format_vector(x, format)
     else {
       
@@ -513,7 +513,7 @@ flist_row_apply <- function(lst, vect) {
     
   } else {
     
-    if (length(vect) %% length(lst) != 0 )
+    if (length(vect) %% length(lst$formats) != 0 )
       message("NOTE: format list is not a multiple of input vector")
 
     fmts <- rep(lst$formats, length.out = length(vect))

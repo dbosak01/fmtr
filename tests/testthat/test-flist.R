@@ -1,7 +1,7 @@
 context("flist Tests")
 
 
-test_that("flist() function works as expected.", {
+test_that("flist01: flist() function works as expected.", {
  
   fl <- flist(f1 = "%.1f",
               f2 = "%d%b%Y",
@@ -19,7 +19,7 @@ test_that("flist() function works as expected.", {
   
 })
 
-test_that("flist works as expected for row type with lookup.", {
+test_that("flist02: flist works as expected for row type with lookup.", {
   
   # flist lookup
   a <- list("A", 1.263, "B", as.Date("2020-07-21"), 
@@ -46,7 +46,7 @@ test_that("flist works as expected for row type with lookup.", {
 
 
 
-test_that("flist works as expected for row type ordered,", {
+test_that("flist03: flist works as expected for row type ordered,", {
   
   # flist type row
   a <- list("A", 1.263, as.Date("2020-07-21"), 
@@ -72,7 +72,7 @@ test_that("flist works as expected for row type ordered,", {
   
 })
 
-test_that("flist parameter checks work as expected.", {
+test_that("flist04: flist parameter checks work as expected.", {
   
   expect_error(flist(type = "fork"))
   expect_error(flist(simplify = "fork"))
@@ -81,7 +81,7 @@ test_that("flist parameter checks work as expected.", {
 })
 
 
-test_that("flist works as expected for column type.", {
+test_that("flist05: flist works as expected for column type.", {
   
   
   # flist type col
@@ -97,7 +97,7 @@ test_that("flist works as expected for column type.", {
 })
 
 
-test_that("flist works as expected for column type and simplify false.", {
+test_that("flist06: flist works as expected for column type and simplify false.", {
   
   
   # flist type col
@@ -114,7 +114,7 @@ test_that("flist works as expected for column type and simplify false.", {
 })
 
 
-test_that("as.flist and is.flist work as expected.", {
+test_that("flist07: as.flist and is.flist work as expected.", {
   
   lst <- list("%d%b%Y", "%.1f")
   flst <- as.flist(lst)
@@ -123,7 +123,7 @@ test_that("as.flist and is.flist work as expected.", {
   
 })
 
-test_that("as.flist parameter checks work as expected.", {
+test_that("flist08: as.flist parameter checks work as expected.", {
   
   a <- list(A = "%.1f", B = "%B%m%Y")
   
@@ -134,7 +134,7 @@ test_that("as.flist parameter checks work as expected.", {
 })
 
 
-test_that("as.data.frame.flist works as expected.", {
+test_that("flist09: as.data.frame.flist works as expected.", {
   
   
   fl2 <- flist(fmt1 = function(x) round(x, 2), 
@@ -150,7 +150,7 @@ test_that("as.data.frame.flist works as expected.", {
   
 })
 
-test_that("as.flist.data.frame parameter checks work as expected.", {
+test_that("flist10: as.flist.data.frame parameter checks work as expected.", {
   
   
   fl2 <- flist(fmt1 = function(x) round(x, 2), 
@@ -175,7 +175,7 @@ test_that("as.flist.data.frame parameter checks work as expected.", {
 })
 
 
-test_that("another test for as.data.frame.flist works as expected.", {
+test_that("flist11: another test for as.data.frame.flist works as expected.", {
   
   df <- read.table(header = TRUE, text = '
        Name Type Expression Label Order
@@ -195,7 +195,7 @@ test_that("another test for as.data.frame.flist works as expected.", {
   
 })
 
-test_that("as.data.frame.flist works as expected with no names.", {
+test_that("flist12: as.data.frame.flist works as expected with no names.", {
   
   
   # flist type col
@@ -219,7 +219,7 @@ test_that("as.data.frame.flist works as expected with no names.", {
 
 
 
-test_that("as.fcat.fmt_lst() works as expected.", {
+test_that("flist13: as.fcat.fmt_lst() works as expected.", {
   
   # flist lookup
   a <- list("A", 1.263, "B", as.Date("2020-07-21"), 
@@ -255,4 +255,35 @@ test_that("as.fcat.fmt_lst() works as expected.", {
   expect_equal(r[[4]], "21Jul2020")
   
 })
+
+test_that("flist14: write.fcat and read.fcat functions work as expected.", {
+  
+  
+  fp <- tempdir()
+  
+  fl <- flist(f1 = "%.1f",
+              f2 = "%d%b%Y",
+              type = "row",
+              lookup = c(1, 2),
+              simplify = FALSE)
+  
+  fl
+  
+
+  
+  pth <- write.flist(fl, fp)
+  
+  fr <- read.flist(pth)
+  
+  
+  
+  expect_equal(fr$formats$f1, "%.1f")
+  expect_equal(fr$formats$f2, "%d%b%Y")
+  expect_equal(fr$type, "row")
+  expect_equal(fr$simplify, FALSE)
+  expect_equal("fmt_lst" %in% class(fr), TRUE)
+  
+  
+})
+
 

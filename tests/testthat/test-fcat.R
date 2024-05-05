@@ -376,7 +376,7 @@ test_that("fcat16: import.fcat works as expected.", {
 })
 
 
-test_that("fcat4: write.fcat and read.fcat functions retain as.factor parameter.", {
+test_that("fcat17: write.fcat and read.fcat functions retain as.factor parameter.", {
   
   
   fp <- tempdir()

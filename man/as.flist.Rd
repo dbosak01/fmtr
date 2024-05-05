@@ -101,6 +101,8 @@ Other flist:
 \code{\link{as.flist.tbl_df}()},
 \code{\link{flist}()},
 \code{\link{is.flist}()},
-\code{\link{print.fmt_lst}()}
+\code{\link{print.fmt_lst}()},
+\code{\link{read.flist}()},
+\code{\link{write.flist}()}
 }
 \concept{flist}

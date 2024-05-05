@@ -253,5 +253,21 @@ test_that("fapply9: fapply() works with date formats in label.", {
   
 })
 
+test_that("fapply10: fapply() works as expected with single item vector lookup.", {
+  
+  
+  
+  t <- c("A", "B", "B", NA, "A")
+
+  fmt <- c("A" = "Group A")
+  
+  re <- c("Group A","B",
+          "B", NA,"Group A")
+  
+  res <- fapply(t, fmt)
+  
+  expect_equal(res, re)
+})
+
 
 

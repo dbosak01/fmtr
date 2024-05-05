@@ -25,6 +25,8 @@ Other flist:
 \code{\link{as.flist.tbl_df}()},
 \code{\link{as.flist}()},
 \code{\link{flist}()},
-\code{\link{is.flist}()}
+\code{\link{is.flist}()},
+\code{\link{read.flist}()},
+\code{\link{write.flist}()}
 }
 \concept{flist}

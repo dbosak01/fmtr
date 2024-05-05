@@ -1,3 +1,8 @@
+# fmtr 1.6.4
+
+* Allow single item vector lookup. 
+* Added `read.flist()` and `write.flist()` functions.
+
 # fmtr 1.6.3
 
 * Improved documentation and examples.
