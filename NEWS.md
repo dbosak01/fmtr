@@ -2,6 +2,9 @@
 
 * Allow single item vector lookup. 
 * Added `read.flist()` and `write.flist()` functions.
+* Fixed note on `fapply()` of flist object.
+* Fixed minor issues with `as.fcat()`.
+
 
 # fmtr 1.6.3
 

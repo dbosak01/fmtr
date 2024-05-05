@@ -166,7 +166,7 @@ as.fcat.data.frame <- function(x) {
   names(x) <- titleCase(names(x))
   
   s <- split(x, x$Name)
-  ret <- fcat()
+  ret <- fcat(log = FALSE)
   for (df in s) {
     
     nm <- as.character(df[1, "Name"])

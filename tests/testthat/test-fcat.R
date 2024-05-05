@@ -398,4 +398,21 @@ test_that("fcat17: write.fcat and read.fcat functions retain as.factor parameter
   
 })
 
+test_that("fcat18: as.fcat.data.frame() order works as expected", {
+  
+  
+  c1 <- fcat(lblA = value(condition(x == "A", "Label A", order = "2"),
+                          condition(x == "B", "Label B", order = "1"),
+                          condition(TRUE, "Other", order = "3"))
+  )
+  
+
+  # Possible error
+  res <- fapply(c("A", "B", "C"), c1$lblA)
+  
+  
+  expect_equal(length(res), 3)
+
+  
+})
 
