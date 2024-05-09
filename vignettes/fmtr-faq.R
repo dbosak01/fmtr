@@ -453,3 +453,26 @@ options(rmarkdown.html_vignette.check_title = FALSE)
 #  # [1] 1 2 3
 #  
 
+## ----eval=FALSE, echo=TRUE----------------------------------------------------
+#  library(fmtr)
+#  
+#  # Create format
+#  fmt <- value(condition(x == "A", "Group A"),
+#               condition(x == "B", "Group B"))
+#  
+#  # Create sample data
+#  dat <- c("A", "B", "C")
+#  
+#  # Apply format
+#  fapply(dat, fmt)
+#  # [1] "Group A" "Group B" "C"
+#  
+#  # Add "C" condition to format
+#  fmt[[length(fmt) + 1]] <- condition(x == "C", "Group C")
+#  
+#  # Apply revised format
+#  fapply(dat, fmt)
+#  # [1] "Group A" "Group B" "Group C"
+#  
+#  
+

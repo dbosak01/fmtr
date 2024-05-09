@@ -76,8 +76,8 @@ v2
 
 Other fmt: 
 \code{\link{as.data.frame.fmt}()},
-\code{\link{as.fmt.data.frame}()},
 \code{\link{as.fmt}()},
+\code{\link{as.fmt.data.frame}()},
 \code{\link{is.format}()},
 \code{\link{labels.fmt}()},
 \code{\link{print.fmt}()},

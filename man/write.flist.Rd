@@ -24,11 +24,7 @@ The \code{write.flist} function writes a formatting list
 to the file system.  By default, the formatting list will be written to the 
 current working directory, using the variable name as the file name.  These
 defaults can be overridden using the appropriate parameters.  The catalog
-will be saved with a file extension of ".flist". 
-
-Note that the formatting list is saved as an RDS file.  The ".flist" file 
-extension only serves to distinguish the format catalog from other RDS
-files.
+will be saved with a file extension of ".flist".
 }
 \examples{
 # Create formatting list
@@ -56,11 +52,11 @@ fapply(dat, fr)
 \seealso{
 Other flist: 
 \code{\link{as.data.frame.fmt_lst}()},
+\code{\link{as.flist}()},
 \code{\link{as.flist.data.frame}()},
 \code{\link{as.flist.fcat}()},
 \code{\link{as.flist.list}()},
 \code{\link{as.flist.tbl_df}()},
-\code{\link{as.flist}()},
 \code{\link{flist}()},
 \code{\link{is.flist}()},
 \code{\link{print.fmt_lst}()},

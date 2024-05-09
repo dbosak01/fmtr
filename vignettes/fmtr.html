@@ -49,7 +49,7 @@ overflow: visible;
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -380,7 +380,7 @@ examine the use of the <code>fapply()</code> function.</p>
 <span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.483</span>, <span class="fl">5.29837</span>, <span class="fl">7.9472</span>, <span class="fl">8.684021</span>)</span>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co"># Apply format</span></span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="fu">fapply</span>(v1, <span class="st">&quot;%1.1f&quot;</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="fu">fapply</span>(v1, <span class="st">&quot;%.1f&quot;</span>)</span>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co"># [1] &quot;1.5&quot; &quot;5.3&quot; &quot;7.9&quot; &quot;8.7&quot;</span></span></code></pre></div>
 <p>As you can see from the above example, the <code>fapply()</code>
 function typically takes two parameters: a vector and a format. In this
@@ -396,7 +396,7 @@ same:</p>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.483</span>, <span class="fl">5.29837</span>, <span class="fl">7.9472</span>, <span class="fl">8.684021</span>)</span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a></span>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co"># Assign format attribute</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="fu">attr</span>(v1, <span class="st">&quot;format&quot;</span>) <span class="ot">&lt;-</span> <span class="st">&quot;%1.1f&quot;</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="fu">attr</span>(v1, <span class="st">&quot;format&quot;</span>) <span class="ot">&lt;-</span> <span class="st">&quot;%.1f&quot;</span></span>
 <span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a></span>
 <span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co"># Apply format</span></span>
 <span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="fu">fapply</span>(v1)</span>
@@ -413,7 +413,7 @@ Here is an example:</p>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.483</span>, <span class="fl">5.29837</span>, <span class="fl">7.9472</span>, <span class="fl">8.684021</span>)</span>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a></span>
 <span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co"># Assign formatting attributes</span></span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="fu">attr</span>(v1, <span class="st">&quot;format&quot;</span>) <span class="ot">&lt;-</span> <span class="st">&quot;%1.1f&quot;</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="fu">attr</span>(v1, <span class="st">&quot;format&quot;</span>) <span class="ot">&lt;-</span> <span class="st">&quot;%.1f&quot;</span></span>
 <span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="fu">attr</span>(v1, <span class="st">&quot;width&quot;</span>) <span class="ot">&lt;-</span> <span class="dv">5</span></span>
 <span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="fu">attr</span>(v1, <span class="st">&quot;justify&quot;</span>) <span class="ot">&lt;-</span> <span class="st">&quot;right&quot;</span></span>
 <span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a></span>
@@ -431,7 +431,7 @@ function, that ends with the same result as the example above.</p>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.483</span>, <span class="fl">5.29837</span>, <span class="fl">7.9472</span>, <span class="fl">8.684021</span>)</span>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
 <span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co"># Assign formatting attributes</span></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">fattr</span>(v1, <span class="at">format =</span> <span class="st">&quot;%1.1f&quot;</span>, <span class="at">width =</span> <span class="dv">5</span>, <span class="at">justify =</span> <span class="st">&quot;right&quot;</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>v1 <span class="ot">&lt;-</span> <span class="fu">fattr</span>(v1, <span class="at">format =</span> <span class="st">&quot;%.1f&quot;</span>, <span class="at">width =</span> <span class="dv">5</span>, <span class="at">justify =</span> <span class="st">&quot;right&quot;</span>)</span>
 <span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a></span>
 <span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co"># Apply formatting attributes</span></span>
 <span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="fu">fapply</span>(v1)</span>

@@ -39,6 +39,8 @@ hold different types of values depending on the format type.  Within the
 data frame, this expression is stored as a character string.
 \item \strong{Label}: The label for user-defined, "U" type formats.
 \item \strong{Order}: The order for user-defined, "U" type formats. 
+\item \strong{Factor}: An optional column for "U" type formats that sets
+the "as.factor" parameter. Valid values are TRUE, FALSE, or NA. 
 }
 Any additional columns will be ignored.  Column names are case-insensitive.
 
@@ -51,7 +53,7 @@ See \link{FormattingStrings}.
 \item \strong{F}: A vectorized function.
 \item \strong{V}: A named vector lookup.}
 
-The "Label" and "Order" columns are used only for a type "U", user-defined
+The "Label", "Order", and "Factor" columns are used only for a type "U", user-defined
 format created with the \code{\link{value}} function.
 }
 
@@ -65,10 +67,10 @@ f1 <- value(condition(x == "A", "Label A"),
 df <- as.data.frame(f1)
 print(df)
 
-# Name Type Expression   Label Order
-# 1 f1    U   x == "A" Label A    NA
-# 2 f1    U   x == "B" Label B    NA
-# 3 f1    U       TRUE   Other    NA
+# Name Type Expression   Label Order Factor
+# 1 f1    U   x == "A" Label A    NA  FALSE
+# 2 f1    U   x == "B" Label B    NA  FALSE
+# 3 f1    U       TRUE   Other    NA  FALSE
 
 # Convert data frame back to a user-defined format 
 f2 <- as.fmt(df)

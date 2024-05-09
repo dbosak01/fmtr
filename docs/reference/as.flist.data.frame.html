@@ -148,10 +148,10 @@ correspond to names on the formatting list.</p>
     <h2>See also</h2>
     <div class="dont-index"><p>Other flist: 
 <code><a href="as.data.frame.fmt_lst.html">as.data.frame.fmt_lst</a>()</code>,
+<code><a href="as.flist.html">as.flist</a>()</code>,
 <code><a href="as.flist.fcat.html">as.flist.fcat</a>()</code>,
 <code><a href="as.flist.list.html">as.flist.list</a>()</code>,
 <code><a href="as.flist.tbl_df.html">as.flist.tbl_df</a>()</code>,
-<code><a href="as.flist.html">as.flist</a>()</code>,
 <code><a href="flist.html">flist</a>()</code>,
 <code><a href="is.flist.html">is.flist</a>()</code>,
 <code><a href="print.fmt_lst.html">print.fmt_lst</a>()</code>,
@@ -189,24 +189,50 @@ correspond to names on the formatting list.</p>
 <span></span>
 <span></span>
 <span><span class="co">## Example 3: Formatting List - Row Type with lookup ##</span></span>
+<span></span>
+<span><span class="co">#' # Create formatting list</span></span>
+<span><span class="va">fl3</span> <span class="op">&lt;-</span> <span class="fu"><a href="flist.html">flist</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"row"</span>, </span>
+<span>             DEC1 <span class="op">=</span> <span class="st">"%.1f"</span>,</span>
+<span>             DEC2 <span class="op">=</span> <span class="st">"%.2f"</span>, </span>
+<span>             PCT1 <span class="op">=</span> <span class="st">"%.1f%%"</span><span class="op">)</span></span>
+<span>             </span>
 <span><span class="co"># Set up data</span></span>
-<span><span class="co"># Notice each row has a different data type</span></span>
-<span><span class="va">l2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">2841.258</span>, <span class="st">"H"</span>, <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2020-06-19"</span><span class="op">)</span>,</span>
-<span>           <span class="st">"L"</span>, <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2020-04-24"</span><span class="op">)</span>, <span class="fl">1382.8865</span><span class="op">)</span></span>
-<span><span class="va">v3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"num"</span>, <span class="st">"char"</span>, <span class="st">"date"</span>, <span class="st">"char"</span>, <span class="st">"date"</span>, <span class="st">"num"</span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>CODE <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"DEC1"</span>, <span class="st">"DEC2"</span>, <span class="st">"PCT1"</span>, <span class="st">"DEC2"</span>, <span class="st">"PCT1"</span><span class="op">)</span>,</span>
+<span>                 VAL <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">41.258</span>, <span class="fl">62.948</span>, <span class="fl">12.125</span>, <span class="fl">65.294</span>, <span class="fl">15.825</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Create formatting list</span></span>
-<span><span class="va">fl3</span> <span class="op">&lt;-</span> <span class="fu"><a href="flist.html">flist</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"row"</span>, lookup <span class="op">=</span> <span class="va">v3</span>,</span>
-<span>             num <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fl">2</span>, nsmall <span class="op">=</span> <span class="fl">1</span>, </span>
-<span>                                  big.mark<span class="op">=</span><span class="st">","</span><span class="op">)</span>,</span>
-<span>             char <span class="op">=</span> <span class="fu"><a href="value.html">value</a></span><span class="op">(</span><span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"H"</span>, <span class="st">"High"</span><span class="op">)</span>,</span>
-<span>                     <span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"L"</span>, <span class="st">"Low"</span><span class="op">)</span>,</span>
-<span>                     <span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"NA"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>             date <span class="op">=</span> <span class="st">"%d%b%Y"</span><span class="op">)</span></span>
+<span><span class="co"># Assign lookup</span></span>
+<span><span class="va">fl3</span><span class="op">$</span><span class="va">lookup</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">CODE</span></span>
 <span></span>
-<span><span class="co"># Apply formatting list to vector, using lookup</span></span>
-<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">l2</span>, <span class="va">fl3</span><span class="op">)</span></span>
-<span><span class="co"># [1] "2,841.3"   "High"      "19Jun2020" "Low"       "24Apr2020" "1,382.9"</span></span></code></pre></div>
+<span><span class="co"># Apply Formatting List</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">VAL</span>, <span class="va">fl3</span><span class="op">)</span></span>
+<span><span class="co"># [1] "41.3"  "62.95" "12.1%" "65.29" "15.8%"</span></span>
+<span></span>
+<span><span class="co">## Example 4: Formatting List - Values with Units ##</span></span>
+<span></span>
+<span><span class="co">#' # Create formatting list</span></span>
+<span><span class="va">fl4</span> <span class="op">&lt;-</span> <span class="fu"><a href="flist.html">flist</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"row"</span>, </span>
+<span>             BASO <span class="op">=</span> <span class="st">"%.2f x10(9)/L"</span>,</span>
+<span>             EOS  <span class="op">=</span> <span class="st">"%.2f x10(9)/L"</span>,</span>
+<span>             HCT <span class="op">=</span> <span class="st">"%.1f%%"</span>, </span>
+<span>             HGB <span class="op">=</span> <span class="st">"%.1f g/dL"</span><span class="op">)</span></span>
+<span>             </span>
+<span><span class="co"># Set up data</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>CODE <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BASO"</span>, <span class="st">"EOS"</span>, <span class="st">"HCT"</span>, <span class="st">"HGB"</span><span class="op">)</span>,</span>
+<span>                 VAL <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.02384</span>, <span class="fl">0.14683</span>, <span class="fl">40.68374</span>, <span class="fl">15.6345</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Assign lookup</span></span>
+<span><span class="va">fl4</span><span class="op">$</span><span class="va">lookup</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">CODE</span></span>
+<span></span>
+<span><span class="co"># Apply Formatting List</span></span>
+<span><span class="va">df</span><span class="op">$</span><span class="va">VALC</span> <span class="op">&lt;-</span> <span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">VAL</span>, <span class="va">fl4</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># View results</span></span>
+<span><span class="va">df</span></span>
+<span><span class="co">#   CODE      VAL          VALC</span></span>
+<span><span class="co"># 1 BASO  0.02384 0.02 x10(9)/L</span></span>
+<span><span class="co"># 2  EOS  0.14683 0.15 x10(9)/L</span></span>
+<span><span class="co"># 3  HCT 40.68374         40.7%</span></span>
+<span><span class="co"># 4  HGB 15.63450     15.6 g/dL</span></span></code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

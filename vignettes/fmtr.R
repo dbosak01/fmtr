@@ -1,4 +1,4 @@
-## ---- include = FALSE---------------------------------------------------------
+## ----include = FALSE----------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -11,7 +11,7 @@ knitr::opts_chunk$set(
 #  v1 <- c(1.483, 5.29837, 7.9472, 8.684021)
 #  
 #  # Apply format
-#  fapply(v1, "%1.1f")
+#  fapply(v1, "%.1f")
 #  # [1] "1.5" "5.3" "7.9" "8.7"
 
 ## ----eval=FALSE, echo=TRUE----------------------------------------------------
@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 #  v1 <- c(1.483, 5.29837, 7.9472, 8.684021)
 #  
 #  # Assign format attribute
-#  attr(v1, "format") <- "%1.1f"
+#  attr(v1, "format") <- "%.1f"
 #  
 #  # Apply format
 #  fapply(v1)
@@ -34,7 +34,7 @@ knitr::opts_chunk$set(
 #  v1 <- c(1.483, 5.29837, 7.9472, 8.684021)
 #  
 #  # Assign formatting attributes
-#  attr(v1, "format") <- "%1.1f"
+#  attr(v1, "format") <- "%.1f"
 #  attr(v1, "width") <- 5
 #  attr(v1, "justify") <- "right"
 #  
@@ -49,7 +49,7 @@ knitr::opts_chunk$set(
 #  v1 <- c(1.483, 5.29837, 7.9472, 8.684021)
 #  
 #  # Assign formatting attributes
-#  v1 <- fattr(v1, format = "%1.1f", width = 5, justify = "right")
+#  v1 <- fattr(v1, format = "%.1f", width = 5, justify = "right")
 #  
 #  # Apply formatting attributes
 #  fapply(v1)

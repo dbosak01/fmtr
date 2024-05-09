@@ -83,4 +83,13 @@ See the \code{\link{fcat}} function for
 additional information.
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://fmtr.r-sassy.org}
+  \item \url{https://github.com/dbosak01/fmtr}
+  \item Report bugs at \url{https://github.com/dbosak01/fmtr/issues}
+}
+
+}
 \keyword{internal}

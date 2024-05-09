@@ -63,11 +63,11 @@ c2
 }
 \seealso{
 Other flist: 
+\code{\link{as.flist}()},
 \code{\link{as.flist.data.frame}()},
 \code{\link{as.flist.fcat}()},
 \code{\link{as.flist.list}()},
 \code{\link{as.flist.tbl_df}()},
-\code{\link{as.flist}()},
 \code{\link{flist}()},
 \code{\link{is.flist}()},
 \code{\link{print.fmt_lst}()},

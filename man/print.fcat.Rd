@@ -40,10 +40,10 @@ print(c1)
 \seealso{
 Other fcat: 
 \code{\link{as.data.frame.fcat}()},
+\code{\link{as.fcat}()},
 \code{\link{as.fcat.data.frame}()},
 \code{\link{as.fcat.fmt_lst}()},
 \code{\link{as.fcat.list}()},
-\code{\link{as.fcat}()},
 \code{\link{fcat}()},
 \code{\link{is.fcat}()},
 \code{\link{read.fcat}()},

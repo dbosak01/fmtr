@@ -49,7 +49,7 @@ overflow: visible;
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -378,6 +378,8 @@ catalog?</a></li>
 SAS®?</a></li>
 <li><a href="#labelsmoved">What happened to the labels()
 function?</a></li>
+<li><a href="#udfedit">Can I change a User-Defined Format after it has
+been created?</a></li>
 </ul>
 </div>
 <div id="content" class="section level2">
@@ -1025,6 +1027,35 @@ because this function is so generally useful, that the
 <strong>common</strong> package was deemed a more appropriate home. You
 can fix your code by simply adding a reference to the
 <strong>common</strong> package.</p>
+<p><a href="#top">top</a></p>
+<hr />
+</div>
+<div id="udfedit" class="section level3">
+<h3>Can I change a User-Defined Format after it has been created?</h3>
+<p><strong>Q:</strong> I created a User_Define Format, and now I want to
+add a new item to it. Is there a way to do that?</p>
+<p><strong>A:</strong> Yes. Reminder that, in the end, a User-Defined
+Format is a list, and can be manipulated as such. You can change a
+User-Defined Format the same way you change a list. For example:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="fu">library</span>(fmtr)</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a><span class="co"># Create format</span></span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>fmt <span class="ot">&lt;-</span> <span class="fu">value</span>(<span class="fu">condition</span>(x <span class="sc">==</span> <span class="st">&quot;A&quot;</span>, <span class="st">&quot;Group A&quot;</span>),</span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>             <span class="fu">condition</span>(x <span class="sc">==</span> <span class="st">&quot;B&quot;</span>, <span class="st">&quot;Group B&quot;</span>))</span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a><span class="co"># Create sample data</span></span>
+<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a><span class="co"># Apply format</span></span>
+<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a><span class="fu">fapply</span>(dat, fmt)</span>
+<span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a><span class="co"># [1] &quot;Group A&quot; &quot;Group B&quot; &quot;C&quot;</span></span>
+<span id="cb21-13"><a href="#cb21-13" tabindex="-1"></a></span>
+<span id="cb21-14"><a href="#cb21-14" tabindex="-1"></a><span class="co"># Add &quot;C&quot; condition to format</span></span>
+<span id="cb21-15"><a href="#cb21-15" tabindex="-1"></a>fmt[[<span class="fu">length</span>(fmt) <span class="sc">+</span> <span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="fu">condition</span>(x <span class="sc">==</span> <span class="st">&quot;C&quot;</span>, <span class="st">&quot;Group C&quot;</span>)</span>
+<span id="cb21-16"><a href="#cb21-16" tabindex="-1"></a></span>
+<span id="cb21-17"><a href="#cb21-17" tabindex="-1"></a><span class="co"># Apply revised format</span></span>
+<span id="cb21-18"><a href="#cb21-18" tabindex="-1"></a><span class="fu">fapply</span>(dat, fmt)</span>
+<span id="cb21-19"><a href="#cb21-19" tabindex="-1"></a><span class="co"># [1] &quot;Group A&quot; &quot;Group B&quot; &quot;Group C&quot;</span></span></code></pre></div>
 <p><a href="#top">top</a></p>
 <hr />
 </div>

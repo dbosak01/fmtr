@@ -34,8 +34,8 @@ method.
 }
 \seealso{
 Other fmt: 
-\code{\link{as.fmt.data.frame}()},
 \code{\link{as.fmt}()},
+\code{\link{as.fmt.data.frame}()},
 \code{\link{condition}()},
 \code{\link{is.format}()},
 \code{\link{labels.fmt}()},

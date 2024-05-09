@@ -72,11 +72,10 @@
 #' programs, with new data, or to share them with colleagues.  
 #' See the \code{\link{fcat}} function for 
 #' additional information.
-#' @docType package
 #' @keywords internal
 #' @aliases fmtr-package
 #' @name fmtr
-NULL
+"_PACKAGE"
 
 
 

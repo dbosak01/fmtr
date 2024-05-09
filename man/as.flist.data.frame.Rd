@@ -73,32 +73,58 @@ fapply(l1, fl2)
 
 
 ## Example 3: Formatting List - Row Type with lookup ##
+
+#' # Create formatting list
+fl3 <- flist(type = "row", 
+             DEC1 = "\%.1f",
+             DEC2 = "\%.2f", 
+             PCT1 = "\%.1f\%\%")
+             
 # Set up data
-# Notice each row has a different data type
-l2 <- list(2841.258, "H", as.Date("2020-06-19"),
-           "L", as.Date("2020-04-24"), 1382.8865)
-v3 <- c("num", "char", "date", "char", "date", "num")
+df <- data.frame(CODE = c("DEC1", "DEC2", "PCT1", "DEC2", "PCT1"),
+                 VAL = c(41.258, 62.948, 12.125, 65.294, 15.825))
 
-# Create formatting list
-fl3 <- flist(type = "row", lookup = v3,
-             num = function(x) format(x, digits = 2, nsmall = 1, 
-                                  big.mark=","),
-             char = value(condition(x == "H", "High"),
-                     condition(x == "L", "Low"),
-                     condition(TRUE, "NA")),
-             date = "\%d\%b\%Y")
+# Assign lookup
+fl3$lookup <- df$CODE
 
-# Apply formatting list to vector, using lookup
-fapply(l2, fl3)
-# [1] "2,841.3"   "High"      "19Jun2020" "Low"       "24Apr2020" "1,382.9"
+# Apply Formatting List
+fapply(df$VAL, fl3)
+# [1] "41.3"  "62.95" "12.1\%" "65.29" "15.8\%"
+
+## Example 4: Formatting List - Values with Units ##
+
+#' # Create formatting list
+fl4 <- flist(type = "row", 
+             BASO = "\%.2f x10(9)/L",
+             EOS  = "\%.2f x10(9)/L",
+             HCT = "\%.1f\%\%", 
+             HGB = "\%.1f g/dL")
+             
+# Set up data
+df <- data.frame(CODE = c("BASO", "EOS", "HCT", "HGB"),
+                 VAL = c(0.02384, 0.14683, 40.68374, 15.6345))
+
+# Assign lookup
+fl4$lookup <- df$CODE
+
+# Apply Formatting List
+df$VALC <- fapply(df$VAL, fl4)
+
+# View results
+df
+#   CODE      VAL          VALC
+# 1 BASO  0.02384 0.02 x10(9)/L
+# 2  EOS  0.14683 0.15 x10(9)/L
+# 3  HCT 40.68374         40.7\%
+# 4  HGB 15.63450     15.6 g/dL
 }
 \seealso{
 Other flist: 
 \code{\link{as.data.frame.fmt_lst}()},
+\code{\link{as.flist}()},
 \code{\link{as.flist.fcat}()},
 \code{\link{as.flist.list}()},
 \code{\link{as.flist.tbl_df}()},
-\code{\link{as.flist}()},
 \code{\link{flist}()},
 \code{\link{is.flist}()},
 \code{\link{print.fmt_lst}()},

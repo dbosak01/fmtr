@@ -16,10 +16,6 @@ The format catalog as an R object.
 The \code{read.fcat} function reads a format catalog
 from the file system.  The function accepts a path to the format catalog,
 reads the catalog, and returns it.
-
-Note that the format catalog is saved as an RDS file.  The ".fcat" file 
-extension only serves to distinguish the format catalog from other RDS
-files.
 }
 \examples{
 # Create format catalog
@@ -51,10 +47,10 @@ fapply(Sys.Date(), c1$date_fmt)
 \seealso{
 Other fcat: 
 \code{\link{as.data.frame.fcat}()},
+\code{\link{as.fcat}()},
 \code{\link{as.fcat.data.frame}()},
 \code{\link{as.fcat.fmt_lst}()},
 \code{\link{as.fcat.list}()},
-\code{\link{as.fcat}()},
 \code{\link{fcat}()},
 \code{\link{is.fcat}()},
 \code{\link{print.fcat}()},
