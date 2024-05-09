@@ -70,24 +70,50 @@
 #' 
 #' 
 #' ## Example 3: Formatting List - Row Type with lookup ##
+#' 
+#' #' # Create formatting list
+#' fl3 <- flist(type = "row", 
+#'              DEC1 = "%.1f",
+#'              DEC2 = "%.2f", 
+#'              PCT1 = "%.1f%%")
+#'              
 #' # Set up data
-#' # Notice each row has a different data type
-#' l2 <- list(2841.258, "H", as.Date("2020-06-19"),
-#'            "L", as.Date("2020-04-24"), 1382.8865)
-#' v3 <- c("num", "char", "date", "char", "date", "num")
+#' df <- data.frame(CODE = c("DEC1", "DEC2", "PCT1", "DEC2", "PCT1"),
+#'                  VAL = c(41.258, 62.948, 12.125, 65.294, 15.825))
 #' 
-#' # Create formatting list
-#' fl3 <- flist(type = "row", lookup = v3,
-#'              num = function(x) format(x, digits = 2, nsmall = 1, 
-#'                                   big.mark=","),
-#'              char = value(condition(x == "H", "High"),
-#'                      condition(x == "L", "Low"),
-#'                      condition(TRUE, "NA")),
-#'              date = "%d%b%Y")
+#' # Assign lookup
+#' fl3$lookup <- df$CODE
 #' 
-#' # Apply formatting list to vector, using lookup
-#' fapply(l2, fl3)
-#' # [1] "2,841.3"   "High"      "19Jun2020" "Low"       "24Apr2020" "1,382.9"
+#' # Apply Formatting List
+#' fapply(df$VAL, fl3)
+#' # [1] "41.3"  "62.95" "12.1%" "65.29" "15.8%"
+#' 
+#' ## Example 4: Formatting List - Values with Units ##
+#' 
+#' #' # Create formatting list
+#' fl4 <- flist(type = "row", 
+#'              BASO = "%.2f x10(9)/L",
+#'              EOS  = "%.2f x10(9)/L",
+#'              HCT = "%.1f%%", 
+#'              HGB = "%.1f g/dL")
+#'              
+#' # Set up data
+#' df <- data.frame(CODE = c("BASO", "EOS", "HCT", "HGB"),
+#'                  VAL = c(0.02384, 0.14683, 40.68374, 15.6345))
+#' 
+#' # Assign lookup
+#' fl4$lookup <- df$CODE
+#' 
+#' # Apply Formatting List
+#' df$VALC <- fapply(df$VAL, fl4)
+#'
+#' # View results
+#' df
+#' #   CODE      VAL          VALC
+#' # 1 BASO  0.02384 0.02 x10(9)/L
+#' # 2  EOS  0.14683 0.15 x10(9)/L
+#' # 3  HCT 40.68374         40.7%
+#' # 4  HGB 15.63450     15.6 g/dL
 flist <- function(..., type = "column", lookup = NULL, simplify = TRUE) {
   
   if (!type %in% c("column", "row"))
@@ -338,14 +364,18 @@ as.data.frame.fmt_lst <- function(x, row.names = NULL, optional = FALSE, ...) {
                                 Type = "S",
                                 Expression = fmts[[i]],
                                 Label = "", 
-                                Order = NA, stringsAsFactors = FALSE)
+                                Order = NA, 
+                                Factor = NA, 
+                                stringsAsFactors = FALSE)
       } else {
         tmp[[nm]] <- data.frame(Name = nm, 
                                 Type = "V",
                                 Expression = paste(deparse(fmts[[i]]), 
                                                    collapse = " "),
                                 Label = "", 
-                                Order = NA, stringsAsFactors = FALSE)
+                                Order = NA, 
+                                Factor = NA, 
+                                stringsAsFactors = FALSE)
       }
       
     } else if (any(class(fmts[[i]]) == "function")) {
@@ -355,7 +385,9 @@ as.data.frame.fmt_lst <- function(x, row.names = NULL, optional = FALSE, ...) {
                                Expression = paste(deparse(fmts[[i]]), 
                                                   collapse = " "),
                                Label = "", 
-                               Order = NA, stringsAsFactors = FALSE)
+                               Order = NA, 
+                               Factor = NA, 
+                               stringsAsFactors = FALSE)
       
       
     }
@@ -386,10 +418,6 @@ as.data.frame.fmt_lst <- function(x, row.names = NULL, optional = FALSE, ...) {
 #' current working directory, using the variable name as the file name.  These
 #' defaults can be overridden using the appropriate parameters.  The catalog
 #' will be saved with a file extension of ".flist". 
-#' 
-#' Note that the formatting list is saved as an RDS file.  The ".flist" file 
-#' extension only serves to distinguish the format catalog from other RDS
-#' files.
 #' @param x The formatting list to write.
 #' @param dir_path The directory path to write the catalog to. Default is the 
 #' current working directory.
@@ -445,10 +473,6 @@ write.flist <- function(x, dir_path = getwd(), file_name = NULL) {
 #' @description The \code{read.flist} function reads a formatting list
 #' from the file system.  The function accepts a path to the formatting list,
 #' reads the list, and returns it.
-#' 
-#' Note that the formatting list is saved as an RDS file.  The ".flist" file 
-#' extension only serves to distinguish the formatting list from other RDS
-#' files.
 #' @param file_path The path to the formatting list.
 #' @return The formatting list as an R object.
 #' @family flist

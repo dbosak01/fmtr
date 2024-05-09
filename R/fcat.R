@@ -297,13 +297,17 @@ as.data.frame.fcat <- function(x, row.names = NULL, optional = FALSE, ...) {
                                 Type = "S",
                                 Expression = x[[nm]],
                                 Label = "", 
-                                Order = NA, stringsAsFactors = FALSE)
+                                Order = NA, 
+                                Factor = NA,
+                                stringsAsFactors = FALSE)
       } else {
         tmp[[nm]] <- data.frame(Name = nm, 
                                 Type = "V",
                                 Expression = paste(deparse(x[[nm]]), collapse = " "),
                                 Label = "", 
-                                Order = NA, stringsAsFactors = FALSE)
+                                Order = NA, 
+                                Factor = NA,
+                                stringsAsFactors = FALSE)
       }
                               
     } else if (any(class(x[[nm]]) == "function")) {
@@ -312,7 +316,9 @@ as.data.frame.fcat <- function(x, row.names = NULL, optional = FALSE, ...) {
                                Type = "F",
                                Expression = paste(deparse(x[[nm]]), collapse = " "),
                                Label = "", 
-                               Order = NA, stringsAsFactors = FALSE)
+                               Order = NA, 
+                               Factor = NA,
+                               stringsAsFactors = FALSE)
         
         
     }
@@ -341,10 +347,6 @@ as.data.frame.fcat <- function(x, row.names = NULL, optional = FALSE, ...) {
 #' current working directory, using the variable name as the file name.  These
 #' defaults can be overridden using the appropriate parameters.  The catalog
 #' will be saved with a file extension of ".fcat". 
-#' 
-#' Note that the format catalog is saved as an RDS file.  The ".fcat" file 
-#' extension only serves to distinguish the format catalog from other RDS
-#' files.
 #' @param x The format catalog to write.
 #' @param dir_path The directory path to write the catalog to. Default is the 
 #' current working directory.
@@ -404,10 +406,6 @@ write.fcat <- function(x, dir_path = getwd(), file_name = NULL) {
 #' @description The \code{read.fcat} function reads a format catalog
 #' from the file system.  The function accepts a path to the format catalog,
 #' reads the catalog, and returns it.
-#' 
-#' Note that the format catalog is saved as an RDS file.  The ".fcat" file 
-#' extension only serves to distinguish the format catalog from other RDS
-#' files.
 #' @param file_path The path to the format catalog.
 #' @return The format catalog as an R object.
 #' @family fcat

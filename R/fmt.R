@@ -230,6 +230,12 @@ as.data.frame.fmt <- function(x, row.names = NULL, optional = FALSE, ...,
   l <- c()
   o <- c()
   
+  f <- FALSE
+  isFactor <- attr(x, "as.factor")
+  if (!is.null(isFactor)) {
+    f <- isFactor
+  }
+  
   for (cond in x) {
     e[[length(e) + 1]] <- paste(deparse(cond$expression), collapse = " ")
     l[[length(l) + 1]] <- cond$label
@@ -242,6 +248,7 @@ as.data.frame.fmt <- function(x, row.names = NULL, optional = FALSE, ...,
   
   dat <- data.frame(Name = name, Type = "U", 
                     Expression = e, Label = l, Order = o, 
+                    Factor = f,
                     stringsAsFactors = FALSE)
   
   if (!is.null(row.names))
@@ -274,6 +281,8 @@ as.data.frame.fmt <- function(x, row.names = NULL, optional = FALSE, ...,
 #' data frame, this expression is stored as a character string.
 #' \item \strong{Label}: The label for user-defined, "U" type formats.
 #' \item \strong{Order}: The order for user-defined, "U" type formats. 
+#' \item \strong{Factor}: An optional column for "U" type formats that sets
+#' the "as.factor" parameter. Valid values are TRUE, FALSE, or NA. 
 #' }
 #' Any additional columns will be ignored.  Column names are case-insensitive.
 #' 
@@ -286,7 +295,7 @@ as.data.frame.fmt <- function(x, row.names = NULL, optional = FALSE, ...,
 #' \item \strong{F}: A vectorized function.
 #' \item \strong{V}: A named vector lookup.}
 #' 
-#' The "Label" and "Order" columns are used only for a type "U", user-defined
+#' The "Label", "Order", and "Factor" columns are used only for a type "U", user-defined
 #' format created with the \code{\link{value}} function.
 #' @param x The data frame to convert.
 #' @return A format catalog based on the information contained in the 
@@ -301,10 +310,10 @@ as.data.frame.fmt <- function(x, row.names = NULL, optional = FALSE, ...,
 #' df <- as.data.frame(f1)
 #' print(df)
 #' 
-#' # Name Type Expression   Label Order
-#' # 1 f1    U   x == "A" Label A    NA
-#' # 2 f1    U   x == "B" Label B    NA
-#' # 3 f1    U       TRUE   Other    NA
+#' # Name Type Expression   Label Order Factor
+#' # 1 f1    U   x == "A" Label A    NA  FALSE
+#' # 2 f1    U   x == "B" Label B    NA  FALSE
+#' # 3 f1    U       TRUE   Other    NA  FALSE
 #' 
 #' # Convert data frame back to a user-defined format 
 #' f2 <- as.fmt(df)
@@ -324,10 +333,22 @@ as.fmt.data.frame <- function(x) {
   
   names(x) <- titleCase(names(x))
   
+  hasFactor <- ifelse("Factor" %in% names(x), TRUE, FALSE) 
+  
+  isFactor <- FALSE
+  if (hasFactor) {
+    if ("logical" %in% class(x[["Factor"]])) {
+      isFactor <- all(x[["Factor"]] == TRUE)
+    }
+  }
+  
+  if (is.na(isFactor)) {
+    isFactor <- FALSE 
+  }
+  
   ret <- list()
   
   for (i in seq_len(nrow(x))) {
-    
     
     y <- structure(list(), class = c("fmt_cnd"))    
     
@@ -345,14 +366,12 @@ as.fmt.data.frame <- function(x) {
       y$order <- as.character(x[i, "Order"]) 
     }
     
-    
     ret[[length(ret) + 1]] <- y
-    
-    
   }
   
   class(ret) <- "fmt"
   attr(ret, "levels") <- labels(ret)
+  attr(ret, "as.factor") <- isFactor
   
   return(ret)
   
@@ -500,6 +519,8 @@ print.fmt <- function(x, ..., name = deparse(substitute(x, env = environment()))
     }
     
     dat <- as.data.frame(x, name = name, stringsAsFactors = FALSE)
+    
+    dat$Factor <- NULL
     
     print(dat)
   }

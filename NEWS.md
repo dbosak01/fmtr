@@ -4,6 +4,8 @@
 * Added `read.flist()` and `write.flist()` functions.
 * Fixed note on `fapply()` of flist object.
 * Fixed minor issues with `as.fcat()`.
+* Added "Factor" column to UDF data frame conversion. Will allow user to set
+"as.factor" property from a data frame.
 
 
 # fmtr 1.6.3

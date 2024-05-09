@@ -41,6 +41,8 @@ reference:
   desc: Functions to create a manage a formatting list.
   contents:
   - flist
+  - read.flist
+  - write.flist
   - as.flist
   - as.flist.data.frame
   - as.flist.tbl_df

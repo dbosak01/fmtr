@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.4</span>
       </span>
     </div>
 
@@ -163,6 +163,8 @@ catalog?</a></li>
 SAS®?</a></li>
 <li><a href="#labelsmoved">What happened to the labels()
 function?</a></li>
+<li><a href="#udfedit">Can I change a User-Defined Format after it has
+been created?</a></li>
 </ul>
 </div>
 <div class="section level2">
@@ -849,6 +851,37 @@ because this function is so generally useful, that the
 <strong>common</strong> package was deemed a more appropriate home. You
 can fix your code by simply adding a reference to the
 <strong>common</strong> package.</p>
+<p><a href="#top">top</a></p>
+<hr>
+</div>
+<div class="section level3">
+<h3 id="udfedit">Can I change a User-Defined Format after it has been created?<a class="anchor" aria-label="anchor" href="#udfedit"></a>
+</h3>
+<p><strong>Q:</strong> I created a User_Define Format, and now I want to
+add a new item to it. Is there a way to do that?</p>
+<p><strong>A:</strong> Yes. Reminder that, in the end, a User-Defined
+Format is a list, and can be manipulated as such. You can change a
+User-Defined Format the same way you change a list. For example:</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://fmtr.r-sassy.org">fmtr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create format</span></span>
+<span><span class="va">fmt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/value.html">value</a></span><span class="op">(</span><span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"A"</span>, <span class="st">"Group A"</span><span class="op">)</span>,</span>
+<span>             <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"B"</span>, <span class="st">"Group B"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create sample data</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Apply format</span></span>
+<span><span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">fmt</span><span class="op">)</span></span>
+<span><span class="co"># [1] "Group A" "Group B" "C"</span></span>
+<span></span>
+<span><span class="co"># Add "C" condition to format</span></span>
+<span><span class="va">fmt</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">fmt</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"C"</span>, <span class="st">"Group C"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Apply revised format</span></span>
+<span><span class="fu"><a href="../reference/fapply.html">fapply</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">fmt</span><span class="op">)</span></span>
+<span><span class="co"># [1] "Group A" "Group B" "Group C"</span></span></code></pre></div>
 <p><a href="#top">top</a></p>
 <hr>
 </div>

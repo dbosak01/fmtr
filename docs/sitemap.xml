@@ -184,6 +184,9 @@
     <loc>https://fmtr.r-sassy.org/reference/read.fcat.html</loc>
   </url>
   <url>
+    <loc>https://fmtr.r-sassy.org/reference/read.flist.html</loc>
+  </url>
+  <url>
     <loc>https://fmtr.r-sassy.org/reference/value.html</loc>
   </url>
   <url>
@@ -191,5 +194,8 @@
   </url>
   <url>
     <loc>https://fmtr.r-sassy.org/reference/write.fcat.html</loc>
+  </url>
+  <url>
+    <loc>https://fmtr.r-sassy.org/reference/write.flist.html</loc>
   </url>
 </urlset>

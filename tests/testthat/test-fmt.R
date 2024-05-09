@@ -389,8 +389,8 @@ test_that("fmt19: as.factor parameter works as expected.", {
   
   
   fmt1 <- value(condition(x == "A", "Label A"),
-               condition(x == "B", "Label B"),
-               condition(TRUE, "Other"), as.factor = TRUE)
+                condition(x == "B", "Label B"),
+                condition(TRUE, "Other"), as.factor = TRUE)
   
   # levels(fmt1)
   
@@ -422,3 +422,91 @@ test_that("fmt19: as.factor parameter works as expected.", {
   
 })
 
+test_that("fmt20: as.factor conversions works as expected.", {
+  
+
+  v1 <- c("A", "B", "C", "A")
+  
+  # Factor TRUE
+  
+  fmt1 <- value(condition(x == "A", "Label A"),
+                condition(x == "B", "Label B"),
+                condition(TRUE, "Other"), as.factor = TRUE)
+  
+  ds1 <- as.data.frame(fmt1)
+  
+  expect_equal("Factor" %in% names(ds1), TRUE)
+  
+  
+  fmt2 <- as.fmt(ds1)
+  
+  expect_equal(attr(fmt2, "as.factor"), TRUE)
+  
+  expect_equal(is.factor(fapply(v1, fmt1)), TRUE)
+  
+  # Factor FALSE
+  
+  fmt1 <- value(condition(x == "A", "Label A"),
+                condition(x == "B", "Label B"),
+                condition(TRUE, "Other"))
+  
+  ds1 <- as.data.frame(fmt1)
+  
+  expect_equal("Factor" %in% names(ds1), TRUE)
+  
+  
+  fmt2 <- as.fmt(ds1)
+  
+  expect_equal(attr(fmt2, "as.factor"), FALSE)
+  
+  expect_equal(is.factor(fapply(v1, fmt1)), FALSE)
+  
+  
+  
+})
+
+
+test_that("fmt21: as.fmt.data.frame function with no Format column works as expected", {
+  
+  o <- c(NA, NA, NA)
+  e <- c("x == \"A\"", "x == \"B\"", "TRUE")
+  l <- c("Label A", "Label B", "Other")
+  
+  dat <- data.frame(Name = "Fork", Type = "U", 
+                    Expression = e, Label = l, Order = o)
+  
+  
+  fmt <- as.fmt(dat)
+  
+  
+  v1 <- c("A", "B", "C", "B")
+  
+  res <- fapply(v1, fmt)
+  
+  expect_equal(length(res), 4)
+  expect_equal(is.factor(res), FALSE)
+  
+  
+  fmt <- as.fmt(dat)
+  
+  dat$Factor<- TRUE
+  
+  fmt <- as.fmt(dat)
+  
+  res <- fapply(v1, fmt)
+  
+  expect_equal(length(res), 4)
+  expect_equal(is.factor(res), TRUE)
+  
+  
+  dat$Factor<- NA
+  
+  fmt <- as.fmt(dat)
+  
+  res <- fapply(v1, fmt)
+  
+  expect_equal(length(res), 4)
+  expect_equal(is.factor(res), FALSE)
+  
+
+})

@@ -147,6 +147,20 @@ test_that("flist09: as.data.frame.flist works as expected.", {
   dat
   
   expect_equal(nrow(dat), 5)
+  expect_equal(dat[4, "Factor"], FALSE)
+  
+  fl2 <- flist(fmt1 = function(x) round(x, 2), 
+               fmt2 = "$%f", 
+               fmt3 = function(x) substr(x, 1, 5),
+               fmt4 = value(condition(x == 1, "Label 1"),
+                            condition(TRUE, "Label 2"), 
+                            as.factor = TRUE))
+  fl2
+  dat <- as.data.frame(fl2)
+  dat
+  
+  expect_equal(nrow(dat), 5)
+  expect_equal(dat[4, "Factor"], TRUE)
   
 })
 

@@ -1,4 +1,4 @@
-pandoc: 3.1.1
+pandoc: 3.1.11
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
@@ -12,7 +12,7 @@ articles:
   fmtr-fdata: fmtr-fdata.html
   fmtr-helpers: fmtr-helpers.html
   fmtr: fmtr.html
-last_built: 2024-01-07T23:42Z
+last_built: 2024-05-09T17:22Z
 urls:
   reference: https://fmtr.r-sassy.org/reference
   article: https://fmtr.r-sassy.org/articles

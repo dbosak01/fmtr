@@ -40,6 +40,7 @@ on the links below to navigate to the full question and answer content.
 * [Is there a way to set up a search path for a format catalog?](#path)
 * [Is there a way to read in a format catalog from SAS®?](#sas7bcat)
 * [What happened to the labels() function?](#labelsmoved)
+* [Can I change a User-Defined Format after it has been created?](#udfedit)
 
 
 ## Content
@@ -778,6 +779,44 @@ part of the **fmtr** package.  What happened?
 The reason it was moved is because this function is so generally useful, 
 that the **common** package was deemed a more appropriate home.  You can
 fix your code by simply adding a reference to the **common** package.
+
+[top](#top)
+
+******
+
+### Can I change a User-Defined Format after it has been created? {#udfedit}
+
+**Q:** I created a User_Define Format, and now I want to add a new item to it.
+Is there a way to do that? 
+
+**A:** Yes.  Reminder that, in the end, a User-Defined Format is a list, and can
+be manipulated as such.  You can change a User-Defined Format the same way
+you change a list.  For example:
+
+```{r eval=FALSE, echo=TRUE}
+library(fmtr)
+
+# Create format
+fmt <- value(condition(x == "A", "Group A"),
+             condition(x == "B", "Group B"))
+
+# Create sample data
+dat <- c("A", "B", "C")
+
+# Apply format
+fapply(dat, fmt)
+# [1] "Group A" "Group B" "C"
+
+# Add "C" condition to format
+fmt[[length(fmt) + 1]] <- condition(x == "C", "Group C")
+
+# Apply revised format
+fapply(dat, fmt)
+# [1] "Group A" "Group B" "Group C"
+
+
+```
+
 
 [top](#top)
 
