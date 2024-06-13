@@ -16,7 +16,7 @@ Encoding: UTF-8
 URL: https://fmtr.r-sassy.org, https://github.com/dbosak01/fmtr
 BugReports: https://github.com/dbosak01/fmtr/issues
 Depends: 
-    R (>= 3.6.0),
+    R (>= 4.0.0),
     common
 Suggests: 
     testthat,
