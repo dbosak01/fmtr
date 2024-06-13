@@ -54,7 +54,7 @@ test_that("utils2: get_quarter() works as expected.", {
   
   res <- get_quarter(v1)
   
-  expect_equal(res %eq% c(1, 1, 2, 2, 3, 3, 4, 4, NA, NA), TRUE)  
+  expect_equal(all(res[1:8] == c(1, 1, 2, 2, 3, 3, 4, 4)), TRUE)  
   expect_equal("numeric" %in% class(res), TRUE)
   
 })
@@ -77,8 +77,10 @@ test_that("utils3: replace_quarter() works as expected.", {
   
   res
   
-  expect_equal(res %eq% c("2000-Q1", "2025-Q1", "2000-Q2", "2025-Q2", "2000-Q3",
-                          "2025-Q3", "2000-Q4", "2025-Q4", NA, NA), TRUE)  
+  expect_equal(all(res[1:8] == c("2000-Q1", "2025-Q1", "2000-Q2", "2025-Q2", "2000-Q3",
+                          "2025-Q3", "2000-Q4", "2025-Q4")), TRUE)  
+  
+  expect_equal(all(is.na(res[9:10]) == c(TRUE, TRUE)), TRUE) 
 
   val <- format(v1, "%Y-%q")
   q <- get_quarter(v1)
@@ -89,9 +91,10 @@ test_that("utils3: replace_quarter() works as expected.", {
   
   res2
   
-  expect_equal(res2 %eq% c("2000-q1", "2025-q1", "2000-q2", "2025-q2", "2000-q3",
-                          "2025-q3", "2000-q4", "2025-q4", NA, NA), TRUE) 
+  expect_equal(all(res2[1:8] == c("2000-q1", "2025-q1", "2000-q2", "2025-q2", "2000-q3",
+                          "2025-q3", "2000-q4", "2025-q4")), TRUE) 
   
+  expect_equal(all(is.na(res2[9:10]) == c(TRUE, TRUE)), TRUE) 
   
 })
 

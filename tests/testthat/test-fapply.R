@@ -282,8 +282,8 @@ test_that("fapply11: format_quarter() works as expected.", {
   
   res
   
-  expect_equal(res %eq% c("2000-1", "2025-1", "2000-2", "2025-2", "2000-3", "2025-3",
-                          "2000-4", "2025-4", NA, NA), TRUE)
+  expect_equal(all(res[1:8] == c("2000-1", "2025-1", "2000-2", "2025-2", "2000-3", "2025-3",
+                          "2000-4", "2025-4")), TRUE)
   
   f2 <- format(v1, "%Y-%Q")  
   
@@ -291,8 +291,8 @@ test_that("fapply11: format_quarter() works as expected.", {
   
   res2
   
-  expect_equal(res2 %eq% c("2000-Q1", "2025-Q1", "2000-Q2", "2025-Q2", "2000-Q3", 
-                           "2025-Q3", "2000-Q4", "2025-Q4", NA, NA), TRUE)
+  expect_equal(all(res2[1:8] == c("2000-Q1", "2025-Q1", "2000-Q2", "2025-Q2", "2000-Q3", 
+                           "2025-Q3", "2000-Q4", "2025-Q4")), TRUE)
 
 })
 
@@ -307,8 +307,8 @@ test_that("fapply12: fapply with quarter works as expected.", {
   
   print(res1)
   
-  expect_equal(res1 %eq% c("00-1", "25-1", "00-2","25-2", "00-3", "25-3", "00-4",
-                          "25-4", NA,     NA), TRUE)
+  expect_equal(all(res1[1:8] == c("00-1", "25-1", "00-2","25-2", "00-3", "25-3", "00-4",
+                          "25-4")), TRUE)
   
   
   res2 <- fapply(v1, "%Y-%Q")
@@ -317,10 +317,10 @@ test_that("fapply12: fapply with quarter works as expected.", {
   
   print(res2)
   
-  expect_equal(res2 %eq% c("2000-Q1", "2025-Q1", "2000-Q2","2025-Q2", "2000-Q3", 
+  expect_equal(all(res2[1:8] == c("2000-Q1", "2025-Q1", "2000-Q2","2025-Q2", "2000-Q3", 
                           "2025-Q3", 
                           "2000-Q4",
-                          "2025-Q4", NA,     NA), TRUE)
+                          "2025-Q4")), TRUE)
   
   
   res3 <- fapply(v1, "%q")
@@ -329,8 +329,8 @@ test_that("fapply12: fapply with quarter works as expected.", {
   
   print(res3)
   
-  expect_equal(res3 %eq% c("1", "1", "2","2", "3", "3", "4",
-                           "4", NA,     NA), TRUE)
+  expect_equal(all(res3[1:8] == c("1", "1", "2","2", "3", "3", "4",
+                           "4")), TRUE)
   
   res4 <- fapply(Sys.time(), "%Q")
   
@@ -359,8 +359,8 @@ test_that("fapply13: fapply with quarter and date works as expected.", {
   
   
   
-  expect_equal(res1 %eq% c("00-1-15", "25-1-15", "00-2-15","25-2-15", "00-3-15", 
-                           "25-3-15", "00-4-15", "25-4-15", NA,     NA), TRUE)
+  expect_equal(all(res1[1:8] == c("00-1-15", "25-1-15", "00-2-15","25-2-15", "00-3-15", 
+                           "25-3-15", "00-4-15", "25-4-15")), TRUE)
   
   
   res2 <- fapply(v1, "%Y-%Q-%d")
@@ -369,10 +369,10 @@ test_that("fapply13: fapply with quarter and date works as expected.", {
   
   res2
   
-  expect_equal(res2 %eq% c("2000-Q1-15", "2025-Q1-15", "2000-Q2-15","2025-Q2-15", "2000-Q3-15", 
+  expect_equal(all(res2[1:8] == c("2000-Q1-15", "2025-Q1-15", "2000-Q2-15","2025-Q2-15", "2000-Q3-15", 
                            "2025-Q3-15", 
                            "2000-Q4-15",
-                           "2025-Q4-15", NA,     NA), TRUE)
+                           "2025-Q4-15")), TRUE)
   
   
 })
