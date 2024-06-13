@@ -71,7 +71,7 @@ get_quarter <- Vectorize(function(x) {
 replace_quarter <- Vectorize(function(val, ptn, repl) {
   
 
-  ret <- gsub(ptn, val, repl, fixed = TRUE, 
+  ret <- gsub(ptn, repl, val,  fixed = TRUE, 
           ignore.case = FALSE)
   
   return(ret)

@@ -561,10 +561,13 @@ format_quarter <- function(x, val, fmt) {
     if (q2) {
       
       ptn <- "q"
+      
+      # Can't replace with just a number.  Quirk of gsub.
       repl <- paste0("q", q) 
 
       ret <- replace_quarter(ret, ptn, repl)
       
+      # Now remove "q" after the fact.
       ret <- gsub("q", "", ret, fixed = TRUE, ignore.case = FALSE)
       
     }
