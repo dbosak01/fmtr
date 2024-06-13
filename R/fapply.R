@@ -556,6 +556,9 @@ format_quarter <- function(x, val, fmt) {
       
       ret <- replace_quarter(ret, ptn, repl)
       
+      # On some versions of R, the % is left over.  Remove it if exists.
+      ret <- gsub("%", "", ret, fixed = TRUE, ignore.case = FALSE)
+      
     } 
     
     if (q2) {
@@ -569,6 +572,9 @@ format_quarter <- function(x, val, fmt) {
       
       # Now remove "q" after the fact.
       ret <- gsub("q", "", ret, fixed = TRUE, ignore.case = FALSE)
+      
+      # On some versions of R, the % is left over.  Remove it if exists.
+      ret <- gsub("%", "", ret, fixed = TRUE, ignore.case = FALSE)
       
     }
     
