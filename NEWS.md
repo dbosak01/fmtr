@@ -1,3 +1,7 @@
+# fmtr 1.6.5
+
+* Add %q and %Q format codes for quarters. Do not exist in Base R. 
+
 # fmtr 1.6.4
 
 * Allow single item vector lookup. 

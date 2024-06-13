@@ -19,7 +19,7 @@ functions. See below for further details."><meta property="og:image" content="ht
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.5</span>
       </span>
     </div>
 
@@ -123,6 +123,8 @@ the output <code>"January 01, 1970"</code>.  The code
 <li><p>%M = minute</p></li>
 <li><p>%S = second</p></li>
 <li><p>%p = AM/PM indicator</p></li>
+<li><p>%q = Quarter as integer</p></li>
+<li><p>%Q = Quarter as "Q?"</p></li>
 </ul><p>See the <code><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strptime</a></code> function for additional codes and 
 examples of formatting dates and times.</p>
 <p>Below are some commonly used formatting codes for other data types:</p>
@@ -146,6 +148,7 @@ examples of formatting other data types.</p>
 <span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"%d%b%Y"</span><span class="op">)</span>                <span class="co"># Day abbreviated month year</span></span>
 <span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"%y-%m"</span><span class="op">)</span>                 <span class="co"># Two digit year - month</span></span>
 <span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"%A, %B %d"</span><span class="op">)</span>             <span class="co"># Weekday, unabbreviated month and date</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"%Y-%Q"</span><span class="op">)</span>                 <span class="co"># Year and Quarter</span></span>
 <span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"%Y-%m%-%d %H:%M:%S %p"</span><span class="op">)</span> <span class="co"># Common timestamp format</span></span>
 <span></span>
 <span><span class="co"># Examples for formatting numbers</span></span>

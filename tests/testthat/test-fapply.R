@@ -269,5 +269,71 @@ test_that("fapply10: fapply() works as expected with single item vector lookup."
   expect_equal(res, re)
 })
 
+test_that("fapply11: format_quarter() works as expected.", {
+  
+  
+  v1 <- as.Date(c("2000-01-15", "2025-03-15", "2000-04-15", "2025-06-15", 
+                  "2000-07-15", "2025-09-15", "2000-10-15", "2025-12-15", 
+                  "2025-12-32", "2000-20-59"))
 
+  f1 <- format(v1, "%Y-%q")  
+  
+  res <- format_quarter(v1, f1, "%Y-%q")
+  
+  res
+  
+  expect_equal(res %eq% c("2000-1", "2025-1", "2000-2", "2025-2", "2000-3", "2025-3",
+                          "2000-4", "2025-4", NA, NA), TRUE)
+  
+  f2 <- format(v1, "%Y-%Q")  
+  
+  res2 <- format_quarter(v1, f2, "%Y-%Q")
+  
+  res2
+  
+  expect_equal(res2 %eq% c("2000-Q1", "2025-Q1", "2000-Q2", "2025-Q2", "2000-Q3", 
+                           "2025-Q3", "2000-Q4", "2025-Q4", NA, NA), TRUE)
+
+})
+
+test_that("fapply12: fapply with quarter works as expected.", {
+  
+  
+  v1 <- as.Date(c("2000-01-15", "2025-03-15", "2000-04-15", "2025-06-15", 
+                  "2000-07-15", "2025-09-15", "2000-10-15", "2025-12-15", 
+                  "2025-12-32", "2000-20-59"))
+  
+  res1 <- fapply(v1, "%y-%q")
+  
+  
+  
+  expect_equal(res1 %eq% c("00-1", "25-1", "00-2","25-2", "00-3", "25-3", "00-4",
+                          "25-4", NA,     NA), TRUE)
+  
+  
+  res2 <- fapply(v1, "%Y-%Q")
+  
+  res2
+  
+  expect_equal(res2 %eq% c("2000-Q1", "2025-Q1", "2000-Q2","2025-Q2", "2000-Q3", 
+                          "2025-Q3", 
+                          "2000-Q4",
+                          "2025-Q4", NA,     NA), TRUE)
+  
+  
+  res3 <- fapply(v1, "%q")
+  
+  res3
+  
+  expect_equal(res3 %eq% c("1", "1", "2","2", "3", "3", "4",
+                           "4", NA,     NA), TRUE)
+  
+  res4 <- fapply(Sys.time(), "%Q")
+  
+  res4
+  
+  # No error
+  expect_equal(TRUE, TRUE)
+  
+})
 

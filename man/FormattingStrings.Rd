@@ -37,6 +37,8 @@ Below are some commonly used formatting codes for dates:
 \item \%M = minute
 \item \%S = second
 \item \%p = AM/PM indicator
+\item \%q = Quarter as integer
+\item \%Q = Quarter as "Q?"
 }
 
 See the \code{\link[base]{strptime}} function for additional codes and 
@@ -59,6 +61,7 @@ fapply(t, "\%d/\%m/\%Y")              # Day/Month/Year
 fapply(t, "\%d\%b\%Y")                # Day abbreviated month year
 fapply(t, "\%y-\%m")                 # Two digit year - month
 fapply(t, "\%A, \%B \%d")             # Weekday, unabbreviated month and date
+fapply(t, "\%Y-\%Q")                 # Year and Quarter
 fapply(t, "\%Y-\%m\%-\%d \%H:\%M:\%S \%p") # Common timestamp format
 
 # Examples for formatting numbers

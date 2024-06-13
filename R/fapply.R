@@ -403,6 +403,12 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
       } else {
         ret <- format(x, format = fmt)
       }
+      
+      xin <- x
+      if (!"Date" %in% class(x))
+        xin <- as.Date(x)
+      
+      ret <- format_quarter(xin, ret, fmt)
     
     } else if (any(class(x) %in% c("numeric", "character", "integer"))) {
       
@@ -440,32 +446,6 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
   
 }
 
-
-#' @noRd
-format_vector_back <- function(x, fmt) {
-  
-  
-  if (any(class(x) %in% c("Date", "POSIXt"))) {
-    
-    # For dates, call format
-    ret <- format(x, format = fmt)
-    
-  } else if (any(class(x) %in% c("numeric", "character", "integer"))) {
-    
-    # For numerics, call sprintf
-    ret <- sprintf(fmt, x)
-    
-    # Find NA strings
-    nas <- ret == "NA"
-    
-    # Turn NA strings back into real NA
-    ret <- replace(ret, nas, NA)
-    
-  }
-  
-  return(ret)
-  
-}
 
 #' @noRd
 justify_vector <- function(x, width = NULL, justify = NULL) {
@@ -554,6 +534,51 @@ flist_column_apply <- function(lst, vect) {
   return(ret)
   
 }
+
+
+format_quarter <- function(x, val, fmt) {
+  
+  q1 <- grepl("%Q", fmt, ignore.case = FALSE, fixed = TRUE)
+  q2 <- grepl("%q", fmt, ignore.case = FALSE, fixed = TRUE)
+
+
+  
+  if (q1 | q2) {
+    
+    ret <- val
+    q <- get_quarter(x)
+
+    
+    if (q1) {
+      
+      ptn <- "Q"
+      repl <- paste0("Q", q) 
+      
+      ret <- replace_quarter(ret, ptn, repl)
+      
+    } 
+    
+    if (q2) {
+      
+      ptn <- "q"
+      repl <- paste0("q", q) 
+
+      ret <- replace_quarter(ret, ptn, repl)
+      
+      ret <- gsub("q", "", ret, fixed = TRUE, ignore.case = FALSE)
+      
+    }
+    
+  } else {
+    
+    ret <- val
+  }
+  
+  return(ret)
+}
+
+
+
 
 
 
