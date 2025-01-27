@@ -1,3 +1,7 @@
+# fmtr 1.6.6
+
+* Added "verbose" option to `descriptions()` function.
+
 # fmtr 1.6.5
 
 * Add %q and %Q format codes for quarters. Do not exist in Base R. 

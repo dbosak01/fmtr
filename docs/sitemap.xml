@@ -1,201 +1,69 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://fmtr.r-sassy.org/404.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/articles/fmtr-convenience.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/articles/fmtr-example1.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/articles/fmtr-example2.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/articles/fmtr-fapply.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/articles/fmtr-fapply2.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/articles/fmtr-faq.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/articles/fmtr-fcat.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/articles/fmtr-fdata.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/articles/fmtr-helpers.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/articles/fmtr.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/index.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/as.data.frame.fcat.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/as.data.frame.fmt.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/as.data.frame.fmt_lst.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/as.fcat.data.frame.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/as.fcat.fmt_lst.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/as.fcat.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/as.fcat.list.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/as.fcat.tbl_df.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/as.flist.data.frame.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/as.flist.fcat.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/as.flist.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/as.flist.list.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/as.flist.tbl_df.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/as.fmt.data.frame.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/as.fmt.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/as.fmt.tbl_df.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/condition.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/descriptions.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/fapply.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/fapply2.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/fattr-set.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/fattr.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/fcat.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/fdata.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/flist.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/fmtr.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/fmt_cnt_pct.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/fmt_mean_sd.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/fmt_median.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/fmt_n.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/fmt_quantile_range.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/fmt_range.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/formats.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/FormattingStrings.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/is.fcat.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/is.flist.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/is.format.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/justification.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/labels.data.frame.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/labels.fmt.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/labels.tbl_df.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/print.fcat.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/print.fmt.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/print.fmt_lst.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/read.fcat.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/read.flist.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/value.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/widths.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/write.fcat.html</loc>
-  </url>
-  <url>
-    <loc>https://fmtr.r-sassy.org/reference/write.flist.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://fmtr.r-sassy.org/404.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/articles/fmtr-convenience.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/articles/fmtr-example1.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/articles/fmtr-example2.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/articles/fmtr-fapply.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/articles/fmtr-fapply2.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/articles/fmtr-faq.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/articles/fmtr-fcat.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/articles/fmtr-fdata.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/articles/fmtr-helpers.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/articles/fmtr.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/articles/index.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/authors.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/index.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/news/index.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/as.data.frame.fcat.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/as.data.frame.fmt.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/as.data.frame.fmt_lst.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/as.fcat.data.frame.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/as.fcat.fmt_lst.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/as.fcat.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/as.fcat.list.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/as.fcat.tbl_df.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/as.flist.data.frame.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/as.flist.fcat.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/as.flist.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/as.flist.list.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/as.flist.tbl_df.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/as.fmt.data.frame.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/as.fmt.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/as.fmt.tbl_df.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/condition.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/descriptions.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/fapply.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/fapply2.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/fattr-set.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/fattr.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/fcat.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/fdata.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/flist.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/fmtr.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/fmt_cnt_pct.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/fmt_mean_sd.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/fmt_median.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/fmt_n.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/fmt_quantile_range.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/fmt_range.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/formats.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/FormattingStrings.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/index.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/is.fcat.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/is.flist.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/is.format.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/justification.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/labels.data.frame.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/labels.fmt.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/labels.tbl_df.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/print.fcat.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/print.fmt.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/print.fmt_lst.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/read.fcat.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/read.flist.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/value.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/widths.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/write.fcat.html</loc></url>
+<url><loc>https://fmtr.r-sassy.org/reference/write.flist.html</loc></url>
 </urlset>
+

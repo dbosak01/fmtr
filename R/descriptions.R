@@ -82,10 +82,32 @@ descriptions <- function(x) {
 #' @aliases descriptions
 #' @rdname  descriptions
 #' @param x A data frame or tibble
+#' @param verbose If TRUE, the function will emit messages regarding
 #' @param value A named list of description values. 
+#' misspelled column names, missing columns, etc.  This option is helpful
+#' if you are setting a lot of descriptions on your data, and need
+#' more feedback.
 #' @export 
-`descriptions<-` <- function(x, value) {
+`descriptions<-` <- function(x, verbose = FALSE, value) {
   
+  
+  if (verbose) {
+    x <- descriptions_verbose(x, value)
+    
+  } else {
+    
+    x <- assign_descriptions(x, value) 
+  
+  }
+  
+
+  
+  return(x)
+  
+}
+
+assign_descriptions <- function(x, value) {
+ 
   if (all(is.null(value))) {
     
     for (nm in names(x)) {
@@ -102,10 +124,95 @@ descriptions <- function(x) {
         attr(x[[nm]], "description") <- value[[nm]]
       
     }
-  }
+  } 
   
   return(x)
   
 }
 
+#' @noRd
+descriptions_verbose <- function(x, value){
+  
+  if(any(duplicated(names(value)))){
+    stop("List `value` names must be unique.")
+  }
+  vars.overdescribed <- setdiff(names(value), names(x))
+  
+  if(length(vars.overdescribed) > 0){
+    message("The following variables are defined in descriptions list and not in dataframe: ")
+    cat("  ", paste0(vars.overdescribed, collapse = ", "), "\n")
+  }
+  
+  
+  cur.descriptions = descriptions(x)
+  description.collisions = intersect(names(cur.descriptions), names(value))
+  if(length(description.collisions) > 0){
+    description.overwrites = data.frame(variable = description.collisions,
+                                        original = do.call(c, cur.descriptions[description.collisions]),
+                                        new = do.call(c, value[description.collisions]))
+    description.overwrites = description.overwrites[description.overwrites$original != description.overwrites$new,]
+    #print(description.overwrites)
+    if(nrow(description.overwrites) > 0){
+      #browser()
+      updates.formatted = paste0("- ", description.overwrites$variable, ":  ",
+                                 description.overwrites$original, " -> ", 
+                                 description.overwrites$new, "\n")
 
+      message("The following descriptions are being updated:")
+      
+      for (uf in updates.formatted) {
+        cat(paste0(uf))
+      }
+    }
+  }
+  x <- assign_descriptions(x, value)
+  
+  vars.undefined = setdiff(names(x), names(descriptions(x)))
+  if(length(vars.undefined)>0){
+    message("The following variables are still undescribed:")
+    cat("  ", paste0(vars.undefined, collapse = ", "), "\n")
+    
+  } else {
+    message("All variables described")
+  }
+  return(x)
+}
+
+## alternative version of `descriptions<-` that provides feedback on variables that are left undescribed,
+## descriptions that are being overwritten.
+# descriptions_verbose2 <- function(x, value){
+#   if(any(duplicated(names(value)))){
+#     cli::cli_abort("`value` names must be unique!")
+#   }
+#   vars.overdescribed <- setdiff(names(value), names(x))
+#   
+#   if(length(vars.overdescribed) > 0){
+#     cli::cli_alert("The following variables are defined in descriptions list and not in dataframe: {vars.overdescribed}")
+#   }
+#   
+#   
+#   cur.descriptions = fmtr::descriptions(x)
+#   description.collisions = intersect(names(cur.descriptions), names(value))
+#   if(length(description.collisions) > 0){
+#     description.overwrites = data.frame(variable = description.collisions,
+#                                         original = do.call(c, cur.descriptions[description.collisions]),
+#                                         new = do.call(c, value[description.collisions]))
+#     description.overwrites = description.overwrites[description.overwrites$original != description.overwrites$new,]
+#     if(nrow(description.overwrites) > 0){
+#       updates.formatted = paste0("{.strong ", description.overwrites$variable, "}:  ",
+#                                  description.overwrites$original, " {.emph ->} ", description.overwrites$new)
+#       names(updates.formatted) = rep("*", length(updates.formatted))
+#       cli::cli_alert("The following descriptions are being updated")
+#       cli::cli_div(theme = list(span.emph = list(color = "cornflowerblue")))
+#       cli::cli_bullets(updates.formatted)
+#     }
+#   }
+#   x <- assign_descriptions(x, value)
+#   vars.undefined = setdiff(names(x), names(fmtr::descriptions(x)))
+#   if(length(vars.undefined)>0){
+#     cli::cli_alert_warning("The following variables are still undescribed: {vars.undefined}")
+#   } else {
+#     cli::cli_alert_success("All variables described")
+#   }
+#   return(x)
+# }

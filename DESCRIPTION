@@ -1,7 +1,7 @@
 Package: fmtr
 Type: Package
 Title: Easily Apply Formats to Data  
-Version: 1.6.5
+Version: 1.6.6
 Author: David Bosak
 Maintainer: David Bosak <dbosak01@gmail.com>
 Description: Contains a set of functions that can be used to apply
@@ -32,7 +32,7 @@ Imports:
     stats,
     crayon,
     Rcpp
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 VignetteBuilder: knitr
 LinkingTo: 
     Rcpp

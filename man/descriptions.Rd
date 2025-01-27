@@ -7,12 +7,17 @@
 \usage{
 descriptions(x)
 
-descriptions(x) <- value
+descriptions(x, verbose = FALSE) <- value
 }
 \arguments{
 \item{x}{A data frame or tibble}
 
-\item{value}{A named list of description values.}
+\item{verbose}{If TRUE, the function will emit messages regarding}
+
+\item{value}{A named list of description values. 
+misspelled column names, missing columns, etc.  This option is helpful
+if you are setting a lot of descriptions on your data, and need
+more feedback.}
 }
 \value{
 A named list of description values.
