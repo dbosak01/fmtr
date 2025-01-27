@@ -83,10 +83,10 @@ descriptions <- function(x) {
 #' @rdname  descriptions
 #' @param x A data frame or tibble
 #' @param verbose If TRUE, the function will emit messages regarding
+#' which descriptions have been added or revised, and which are still missing. 
+#' This option can help you if you are filling out a lot of descriptions on
+#' a large dataset.
 #' @param value A named list of description values. 
-#' misspelled column names, missing columns, etc.  This option is helpful
-#' if you are setting a lot of descriptions on your data, and need
-#' more feedback.
 #' @export 
 `descriptions<-` <- function(x, verbose = FALSE, value) {
   
