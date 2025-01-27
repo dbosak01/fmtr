@@ -267,5 +267,3 @@ fmt_mean_sd <- function(x, format = "%.1f", sd_format = NULL) {
   return(ret)
 }
 
-
-
