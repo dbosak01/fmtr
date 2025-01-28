@@ -1,4 +1,4 @@
-# fmtr 1.6.7
+# fmtr 1.6.8
 
 * Added "verbose" option to `descriptions()` function.
 
