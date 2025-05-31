@@ -72,6 +72,14 @@ v1 <- c(1.235, 8.363, 5.954, 2.465)
 fapply(v1, "\%.1f")
 # [1] "1.2" "8.4" "6.0" "2.5"
 
+# Apply width and two decimals
+fapply(v1, "\%5.2f")
+# [1] " 1.24" " 8.36" " 5.95" " 2.46"
+
+# Apply "best" format
+fapply(v1, "best5")
+# [1] "1.235" "8.363" "5.954" "2.465"
+
 ## Example 2: Named vector ##
 # Set up vector
 v2 <- c("A", "B", "C", "B")

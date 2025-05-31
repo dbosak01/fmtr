@@ -1,7 +1,7 @@
 Package: fmtr
 Type: Package
 Title: Easily Apply Formats to Data  
-Version: 1.6.8
+Version: 1.6.9
 Maintainer: David Bosak <dbosak01@gmail.com>
 Authors@R: person(given = "David",
                   family = "Bosak",

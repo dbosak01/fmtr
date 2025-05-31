@@ -1,3 +1,8 @@
+# fmtr 1.6.9
+
+* Added "best" format to `fapply()` function.  This format recreates the "best."
+format in SAS.
+
 # fmtr 1.6.8
 
 * Added "verbose" option to `descriptions()` function.

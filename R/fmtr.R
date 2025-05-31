@@ -99,6 +99,7 @@
 #' the output \code{"January 01, 1970"}.  The code 
 #' \code{fapply(1.2345, "\%.1f")} will produce the output \code{"1.2"}.
 #' 
+#' @section Date Formatting:  
 #' Below are some commonly used formatting codes for dates:
 #' \itemize{
 #' \item \%d = day as a number 
@@ -121,6 +122,8 @@
 #' See the \code{\link[base]{strptime}} function for additional codes and 
 #' examples of formatting dates and times.
 #' 
+#' @section Numeric Formatting:
+#' 
 #' Below are some commonly used formatting codes for other data types:
 #' 
 #' \itemize{
@@ -131,6 +134,21 @@
 
 #' See the \code{\link[base]{sprintf}} function for additional codes and 
 #' examples of formatting other data types.
+#' 
+#' @section "best" Numeric Format:
+#' The "best" format is a special numeric format that replicates the "best"
+#' style of formatting from SAS.  The "best" format automatically determines
+#' the best way to format a number within a specified with.  
+#' 
+#' For example, if you have a number
+#' like 123.45678, and format it with "best6", the result will be "123.46".
+#' Note that the decimal point counts as one of the digits. Also note that 
+#' the rightmost digit will be rounded according to SAS rounding rules.
+#' 
+#' The same number above formatted with "best8" will be "123.4567".  The default
+#' width is 12. That means, if you simply send the format "best" with no width, 
+#' it will be interpreted as "best12".
+#' 
 #' @seealso \code{\link{fapply}} for formatting vectors, and 
 #' \code{\link{fdata}} for formatting data frames.
 #' @examples 
@@ -155,6 +173,11 @@
 #' fapply(a, "%.1f%%")                # Percentage
 #' fapply(a, "$%.2f")                 # Currency
 #' fapply(a, "The number is %f.")     # Interpolation
+#' 
+#' # "best" formatting
+#' fapply(a, "best6")                 # Total width of 6
+#' fapply(a, "best8")                 # Total width of 8
+#' 
 #' @name FormattingStrings
 NULL
 

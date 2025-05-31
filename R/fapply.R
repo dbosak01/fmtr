@@ -67,6 +67,14 @@
 #' fapply(v1, "%.1f")
 #' # [1] "1.2" "8.4" "6.0" "2.5"
 #' 
+#' # Apply width and two decimals
+#' fapply(v1, "%5.2f")
+#' # [1] " 1.24" " 8.36" " 5.95" " 2.46"
+#' 
+#' # Apply "best" format
+#' fapply(v1, "best5")
+#' # [1] "1.235" "8.363" "5.954" "2.465"
+#' 
 #' ## Example 2: Named vector ##
 #' # Set up vector
 #' v2 <- c("A", "B", "C", "B")
@@ -412,14 +420,38 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
     
     } else if (any(class(x) %in% c("numeric", "character", "integer"))) {
       
-  
-        # For numerics, call sprintf
-        if (udfmt == TRUE) {
-          ret <- tryCatch({suppressWarnings(sprintf(fmt, x))},
-                        error = function(cond) {fmt})
-        } else {
+        bst <- grepl("best", fmt, fixed = TRUE)
+      
+        if (bst) { 
           
-          ret <- sprintf(fmt, x)
+          wdth <- sub("best", "", fmt, fixed = TRUE)
+          
+          if (wdth == "") {
+            wdth <- 12
+          } else {
+            
+            wdth <- suppressWarnings(as.integer(wdth))
+            
+            if (is.na(wdth)) {
+              warning(paste0("Invalid format specification: ", fmt, "\n",
+                             "Reverting to 'best12'."))
+              wdth <- 12 
+            }
+          }
+          
+          ret <- format_best(x, wdth)
+          
+        } else {
+        
+          # For numerics, call sprintf
+          if (udfmt == TRUE) {
+            ret <- tryCatch({suppressWarnings(sprintf(fmt, x))},
+                          error = function(cond) {fmt})
+          } else {
+            
+            ret <- sprintf(fmt, x)
+          }
+          
         }
         
         # Find NA strings
@@ -586,10 +618,102 @@ format_quarter <- function(x, val, fmt) {
   return(ret)
 }
 
+#' @import common
+format_best <- function(x, width = 12) {
+  
+  chr <- as.character(x)
+
+  dpos <- regexpr(".", chr, fixed = TRUE)
+  
+  dgts <- width - dpos 
+
+  oopt <- getOption("scipen")
+  options("scipen" = 999)
+  ret <- best_roundup(x, dgts)
+  options("scipen" = oopt)
+  
+  # Substring values coming out too long
+  ret <- ifelse(nchar(ret) > width, 
+                as.character(as.numeric(substr(ret, 1, width))), ret)
+  
+  return(ret)
+  
+}
+
+best_roundup <- Vectorize(function(x, dgts) {
+  
+  # browser() 
+
+  if (is.na(x)) {
+    
+    mtst <- NA
+  } else if (x == 0) {
+    
+    mtst <- 1
+  } else if (x > 0 & x < 1) {
+  
+    mtst <- as.integer(x * (10 ^ 5))
+  } else if (x < 0 & x > -1) {
+    
+    mtst <- as.integer(x * (10 ^ 5))
+    
+  } else {
+    
+     mtst <- x 
+  }
+  print(mtst)
+  if (is.na(mtst)) {
+    
+    ret <- NA
+  } else {
+  
+    if (abs(mtst) > 0) {
+    
+  
+      
+      ret <- as.character(roundup(x, dgts))
+      
+    } else {
+      # browser()
+      ret <- sas_sci(x, dgts)
+      
+    }
+  }
+  
+  return(ret)
+  
+}, SIMPLIFY = TRUE)
 
 
-
-
+sas_sci <- function(x, dgts) {
+  
+  d2 <- 1
+  for (idx in seq(1, 22)) {
+    mtst <- as.integer(x * (10 ^ idx))
+    if (is.na(mtst)) {
+      d2 <- 1
+      break
+    } else {
+      if (mtst > 0) {
+        d2 <- idx
+        break
+      }
+    }
+  }
+  
+  if (is.na(x)) {
+    ret <- NA
+    
+  } else {
+    ln <- nchar(as.character(d2)) + 2 # +2 is "E-"
+    
+    vl <- roundup(x * (10 ^ d2), dgts - ln)
+    
+    ret <- paste0(vl, "E-", d2)
+  }
+  
+  return(ret)
+}
 
 # Testing -----------------------------------------------------------------
 
