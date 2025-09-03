@@ -377,87 +377,7 @@ test_that("fapply13: fapply with quarter and date works as expected.", {
   
 })
 
-# 
-# test_that("fapply14: format_best works as expected.", {
-#   
-#   v1 <- c(123.456778910248, 12.384883832456, 1456.2468483838833, 
-#           1.4, NA, 0.000003984900897739283873, 
-#           0.00003984900897739283873, 0, 
-#           849.0000000000001
-#   )
-#   
-#   res <- format_best(v1, 6)
-# 
-#   res  
-#   
-#   expect_equal(res[1], "123.46")
-#   expect_equal(res[2], "12.385")
-#   expect_equal(res[3], "1456.2")
-#   expect_equal(res[4], "1.4")
-#   expect_equal(is.na(res[5]), TRUE)
-#   
-#   
-#   res <- format_best(v1, 12)
-#   
-#   res  
-#   
-#   expect_equal(res[1], "123.46")
-#   expect_equal(res[2], "12.385")
-#   expect_equal(res[3], "1456.2")
-#   expect_equal(res[4], "1.4")
-#   expect_equal(is.na(res[5]), TRUE)
-#   expect_equal(res[6], "3.9849009E-6")
-#   expect_equal(res[7], "0.000039849")
-#   
-# })
-# 
-# 
-# test_that("fapply15: fapply with best format works as expected.", {
-#   v1 <- c(
-#     123.456778910248,
-#     12.384883832456,
-#     1456.2468483838833,
-#     1.4,
-#     NA,
-#     0.0000003984900897739283873,
-#     0.00003984900897739283873
-#   )
-#   
-#   res <- fapply(v1, "best6")
-#   
-#   res
-#   
-#   expect_equal(res[1], "123.46")
-#   expect_equal(res[2], "12.385")
-#   expect_equal(res[3], "1456.2")
-#   expect_equal(res[4], "1.4")
-#   expect_equal(is.na(res[5]), TRUE)
-#   
-#   res <- fapply(v1, "best8")
-#   
-#   res
-#   
-#   expect_equal(res[1], "123.4568")
-#   expect_equal(res[2], "12.38488")
-#   expect_equal(res[3], "1456.247")
-#   expect_equal(res[4], "1.4")
-#   expect_equal(is.na(res[5]), TRUE)
-#   
-#   
-#   res <- fapply(v1, "best")
-#   
-#   res
-#   
-#   expect_equal(res[1], "123.45677891")
-#   expect_equal(res[2], "12.384883832")
-#   expect_equal(res[3], "1456.2468484")
-#   expect_equal(res[4], "1.4")
-#   expect_equal(is.na(res[5]), TRUE)
-#   
-#   
-# })
-
-test_that("fapply16: standard numeric formats work with fapply.", {
+test_that("fapply14: standard numeric formats work with fapply.", {
   
   v1 <- c(123.456778910248, 12.384883832456, 1456.2468483838833, 1.4, NA)
   
@@ -481,11 +401,5 @@ test_that("fapply16: standard numeric formats work with fapply.", {
   expect_equal(res[4], " 1.400")
   expect_equal(res[5], "    NA")
   
-
+  
 })
-
-
-# Best plus other stuff
-# Best word vs best format  "I like sponges best".
-
-

@@ -39,11 +39,45 @@
 #' the most flexibility and power over your formatting.  You can use 
 #' an existing formatting function from any package, or create 
 #' your own vectorized formatting function using \code{\link[base]{Vectorize}}.}
+#' \item{\strong{"best" format name:} A "best" format name of the form 
+#' "bestW", where "W" is the desired width.  The "best" format replicates the 
+#' SAS format of the same name.  See section below for further information.}
 #' }
 #' 
 #' \code{fapply} will also accept a formatting list, which can contain any 
 #' number of formats from the above list.  To create a formatting list, 
 #' see the \code{\link{flist}} function.
+#' 
+#' @section "best" Format:
+#' The SAS "best" format is used to fit numeric values within a certain width.
+#' The word "best" is followed by the desired width, i.e. "best6" or "best12".
+#' The format will then use the most optimal display for the available 
+#' width. 
+#' 
+#' The format will use the entire value if the number of digits fits in the
+#' desired width.  If not, the format may round the value.  The format may
+#' also use scientific notation if the value is very large or very small.  If
+#' the format cannot fit the value in the desired width at all, it will
+#' emit stars ("*") in the desired width.
+#' 
+#' For input values that are less than the desired width, the result will be 
+#' left-padded with spaces.  The output value will then always contain the exact
+#' number of characters requested.
+#' 
+#' Such a format has no direct equivalent in R, and is indeed difficult to
+#' replicate.  For this reason, the \strong{fmtr} package added this format
+#' option for those situations when you want to replicate SAS "best" formatting
+#' as closely as possible.
+#' 
+#' The "best" format accepts widths between 1 and 32. The default width is 12.
+#' The R "best" format syntax does not accept a number of decimals, as in 
+#' "bestW.d".
+#' 
+#' Note that "best" widths between 8 and 16 will match SAS most reliably.
+#' Small widths have many special cases, and the logic is difficult to replicate.
+#' For large values, there are some differences between SAS and R in how they
+#' represent these numbers, and sometimes they will not match.
+#' 
 #' @param x A vector, factor, or list to apply the format to.
 #' @param format A format to be applied.
 #' @param width The desired character width of the formatted vector.  Default
@@ -72,8 +106,8 @@
 #' # [1] " 1.24" " 8.36" " 5.95" " 2.46"
 #' 
 #' # Apply "best" format
-#' fapply(v1, "best5")
-#' # [1] "1.235" "8.363" "5.954" "2.465"
+#' fapply(v1, "best3")
+#' # [1] "1.2" "8.4" "  6" "2.5"
 #' 
 #' ## Example 2: Named vector ##
 #' # Set up vector
@@ -158,6 +192,14 @@
 #' # Apply format to data vector
 #' fapply(v6, fmt5)
 #' # [1] "High"    "1.47"    "3.29"    "Missing" "Low" 
+#' 
+#' # Example 8: "best" Format
+#' #' # Data vector
+#' v7 <- c(12.3456, 1234567.89, NA, 0.123456, 0.000012345)
+#' 
+#' fapply(v7, "best6")
+#' # [1] "12.346" "1.23E6" NA       "0.1235" "123E-7"
+#' 
 fapply <- function(x, format = NULL, width = NULL, justify = NULL) {
   
   # Get attribute values if available
@@ -420,7 +462,7 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
     
     } else if (any(class(x) %in% c("numeric", "character", "integer"))) {
       
-        bst <- grepl("best", fmt, fixed = TRUE)
+        bst <- grepl("^best.*", fmt)
       
         if (bst) { 
           
@@ -568,6 +610,10 @@ flist_column_apply <- function(lst, vect) {
 }
 
 
+# Quarter Formatting ------------------------------------------------------
+
+
+
 format_quarter <- function(x, val, fmt) {
   
   q1 <- grepl("%Q", fmt, ignore.case = FALSE, fixed = TRUE)
@@ -613,103 +659,6 @@ format_quarter <- function(x, val, fmt) {
   } else {
     
     ret <- val
-  }
-  
-  return(ret)
-}
-
-#' @import common
-format_best <- function(x, width = 12) {
-  
-  chr <- as.character(x)
-
-  dpos <- regexpr(".", chr, fixed = TRUE)
-  
-  dgts <- width - dpos 
-
-  oopt <- getOption("scipen")
-  options("scipen" = 999)
-  ret <- best_roundup(x, dgts)
-  options("scipen" = oopt)
-  
-  # Substring values coming out too long
-  ret <- ifelse(nchar(ret) > width, 
-                as.character(as.numeric(substr(ret, 1, width))), ret)
-  
-  return(ret)
-  
-}
-
-best_roundup <- Vectorize(function(x, dgts) {
-  
-  # browser() 
-
-  if (is.na(x)) {
-    
-    mtst <- NA
-  } else if (x == 0) {
-    
-    mtst <- 1
-  } else if (x > 0 & x < 1) {
-  
-    mtst <- as.integer(x * (10 ^ 5))
-  } else if (x < 0 & x > -1) {
-    
-    mtst <- as.integer(x * (10 ^ 5))
-    
-  } else {
-    
-     mtst <- x 
-  }
-  print(mtst)
-  if (is.na(mtst)) {
-    
-    ret <- NA
-  } else {
-  
-    if (abs(mtst) > 0) {
-    
-  
-      
-      ret <- as.character(roundup(x, dgts))
-      
-    } else {
-      # browser()
-      ret <- sas_sci(x, dgts)
-      
-    }
-  }
-  
-  return(ret)
-  
-}, SIMPLIFY = TRUE)
-
-
-sas_sci <- function(x, dgts) {
-  
-  d2 <- 1
-  for (idx in seq(1, 22)) {
-    mtst <- as.integer(x * (10 ^ idx))
-    if (is.na(mtst)) {
-      d2 <- 1
-      break
-    } else {
-      if (mtst > 0) {
-        d2 <- idx
-        break
-      }
-    }
-  }
-  
-  if (is.na(x)) {
-    ret <- NA
-    
-  } else {
-    ln <- nchar(as.character(d2)) + 2 # +2 is "E-"
-    
-    vl <- roundup(x * (10 ^ d2), dgts - ln)
-    
-    ret <- paste0(vl, "E-", d2)
   }
   
   return(ret)

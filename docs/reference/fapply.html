@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.9</span>
       </span>
     </div>
 
@@ -155,9 +155,40 @@ lookups on character vectors.</p></li>
 the most flexibility and power over your formatting.  You can use
 an existing formatting function from any package, or create
 your own vectorized formatting function using <code><a href="https://rdrr.io/r/base/Vectorize.html" class="external-link">Vectorize</a></code>.</p></li>
+<li><p><strong>"best" format name:</strong> A "best" format name of the form
+"bestW", where "W" is the desired width.  The "best" format replicates the
+SAS format of the same name.  See section below for further information.</p></li>
 </ul><p><code>fapply</code> will also accept a formatting list, which can contain any
 number of formats from the above list.  To create a formatting list,
 see the <code><a href="flist.html">flist</a></code> function.</p>
+    </div>
+    <div id="-best-format">
+    <h2>"best" Format</h2>
+
+
+<p>The SAS "best" format is used to fit numeric values within a certain width.
+The word "best" is followed by the desired width, i.e. "best6" or "best12".
+The format will then use the most optimal display for the available
+width.</p>
+<p>The format will use the entire value if the number of digits fits in the
+desired width.  If not, the format may round the value.  The format may
+also use scientific notation if the value is very large or very small.  If
+the format cannot fit the value in the desired width at all, it will
+emit stars ("*") in the desired width.</p>
+<p>For input values that are less than the desired width, the result will be
+left-padded with spaces.  The output value will then always contain the exact
+number of characters requested.</p>
+<p>Such a format has no direct equivalent in R, and is indeed difficult to
+replicate.  For this reason, the <strong>fmtr</strong> package added this format
+option for those situations when you want to replicate SAS "best" formatting
+as closely as possible.</p>
+<p>The "best" format accepts widths between 1 and 32. The default width is 12.
+The R "best" format syntax does not accept a number of decimals, as in
+"bestW.d".</p>
+<p>Note that "best" widths between 8 and 16 will match SAS most reliably.
+Small widths have many special cases, and the logic is difficult to replicate.
+For large values, there are some differences between SAS and R in how they
+represent these numbers, and sometimes they will not match.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -177,6 +208,14 @@ and <code><a href="flist.html">flist</a></code> to define a formatting list.  Al
 <span><span class="co"># Apply string format.</span></span>
 <span><span class="fu">fapply</span><span class="op">(</span><span class="va">v1</span>, <span class="st">"%.1f"</span><span class="op">)</span></span>
 <span><span class="co"># [1] "1.2" "8.4" "6.0" "2.5"</span></span>
+<span></span>
+<span><span class="co"># Apply width and two decimals</span></span>
+<span><span class="fu">fapply</span><span class="op">(</span><span class="va">v1</span>, <span class="st">"%5.2f"</span><span class="op">)</span></span>
+<span><span class="co"># [1] " 1.24" " 8.36" " 5.95" " 2.46"</span></span>
+<span></span>
+<span><span class="co"># Apply "best" format</span></span>
+<span><span class="fu">fapply</span><span class="op">(</span><span class="va">v1</span>, <span class="st">"best3"</span><span class="op">)</span></span>
+<span><span class="co"># [1] "1.2" "8.4" "  6" "2.5"</span></span>
 <span></span>
 <span><span class="co">## Example 2: Named vector ##</span></span>
 <span><span class="co"># Set up vector</span></span>
@@ -260,7 +299,15 @@ and <code><a href="flist.html">flist</a></code> to define a formatting list.  Al
 <span></span>
 <span><span class="co"># Apply format to data vector</span></span>
 <span><span class="fu">fapply</span><span class="op">(</span><span class="va">v6</span>, <span class="va">fmt5</span><span class="op">)</span></span>
-<span><span class="co"># [1] "High"    "1.47"    "3.29"    "Missing" "Low" </span></span></code></pre></div>
+<span><span class="co"># [1] "High"    "1.47"    "3.29"    "Missing" "Low" </span></span>
+<span></span>
+<span><span class="co"># Example 8: "best" Format</span></span>
+<span><span class="co">#' # Data vector</span></span>
+<span><span class="va">v7</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12.3456</span>, <span class="fl">1234567.89</span>, <span class="cn">NA</span>, <span class="fl">0.123456</span>, <span class="fl">0.000012345</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">fapply</span><span class="op">(</span><span class="va">v7</span>, <span class="st">"best6"</span><span class="op">)</span></span>
+<span><span class="co"># [1] "12.346" "1.23E6" NA       "0.1235" "123E-7"</span></span>
+<span></span></code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

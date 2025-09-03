@@ -19,7 +19,7 @@ functions. See below for further details."><meta property="og:image" content="ht
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.9</span>
       </span>
     </div>
 
@@ -110,6 +110,11 @@ function.</p>
 the code <code>fapply(as.Date("1970-01-01"), "%B %d, %Y")</code> will produce
 the output <code>"January 01, 1970"</code>.  The code
 <code>fapply(1.2345, "%.1f")</code> will produce the output <code>"1.2"</code>.</p>
+    </div>
+    <div id="date-formatting">
+    <h2>Date Formatting</h2>
+
+
 <p>Below are some commonly used formatting codes for dates:</p><ul><li><p>%d = day as a number</p></li>
 <li><p>%a = abbreviated weekday</p></li>
 <li><p>%A = unabbreviated weekday</p></li>
@@ -127,12 +132,33 @@ the output <code>"January 01, 1970"</code>.  The code
 <li><p>%Q = Quarter as "Q?"</p></li>
 </ul><p>See the <code><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strptime</a></code> function for additional codes and
 examples of formatting dates and times.</p>
+    </div>
+    <div id="numeric-formatting">
+    <h2>Numeric Formatting</h2>
+
+
+
 <p>Below are some commonly used formatting codes for other data types:</p>
 <ul><li><p>%s = string</p></li>
 <li><p>%d = integer</p></li>
 <li><p>%f = floating point number</p></li>
 </ul><p>See the <code><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></code> function for additional codes and
 examples of formatting other data types.</p>
+    </div>
+    <div id="-best-numeric-format">
+    <h2>"best" Numeric Format</h2>
+
+
+<p>The "best" format is a special numeric format that replicates the "best"
+style of formatting from SAS.  The "best" format automatically determines
+the best way to format a number within a specified with.</p>
+<p>For example, if you have a number
+like 123.45678, and format it with "best6", the result will be "123.46".
+Note that the decimal point counts as one of the digits. Also note that
+the rightmost digit will be rounded according to SAS rounding rules.</p>
+<p>The same number above formatted with "best8" will be "123.4567".  The default
+width is 12. That means, if you simply send the format "best" with no width,
+it will be interpreted as "best12".</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -162,7 +188,12 @@ examples of formatting other data types.</p>
 <span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="op">-</span><span class="va">a</span>, <span class="st">"%+.1f"</span><span class="op">)</span>                <span class="co"># Negative </span></span>
 <span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"%.1f%%"</span><span class="op">)</span>                <span class="co"># Percentage</span></span>
 <span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"$%.2f"</span><span class="op">)</span>                 <span class="co"># Currency</span></span>
-<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"The number is %f."</span><span class="op">)</span>     <span class="co"># Interpolation</span></span></code></pre></div>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"The number is %f."</span><span class="op">)</span>     <span class="co"># Interpolation</span></span>
+<span></span>
+<span><span class="co"># "best" formatting</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"best6"</span><span class="op">)</span>                 <span class="co"># Total width of 6</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"best8"</span><span class="op">)</span>                 <span class="co"># Total width of 8</span></span>
+<span></span></code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
