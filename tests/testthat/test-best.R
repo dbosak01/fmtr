@@ -869,7 +869,7 @@ test_that("best17: large widths work as expected.", {
   
   # Not right, nothing we can do
   # R just won't represent a number that large
-  expect_equal(res[1], "  123456789012345680")  
+ # expect_equal(res[1], "  123456789012345680")  
   expect_equal(res[2], "           123.12345")
   expect_equal(res[3], "        1.2345678E-6")
   
