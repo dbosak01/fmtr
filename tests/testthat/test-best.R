@@ -861,6 +861,30 @@ test_that("best16: full range of best works as expected.", {
 
 
 
+test_that("best17: large widths work as expected.", {
+
+  dat <- c(123456789012345678.12345, 123.12345, 0.0000012345678)
+  
+  res <- fapply(dat, "best20")
+  
+  # Not right, nothing we can do
+  # R just won't represent a number that large
+  expect_equal(res[1], "  123456789012345680")  
+  expect_equal(res[2], "           123.12345")
+  expect_equal(res[3], "        1.2345678E-6")
+  
+})
+
+
+test_that("best18: fapply2 with best works as expected.", {
+  
+
+  res <- fapply2(123.12345, 123456789.12345, "best6", "best6")
+  
+  expect_equal(res[1], "123.12 1.23E8")  
+  
+})
+
 
 # 
 # test_that("best13: paper examples.", {
