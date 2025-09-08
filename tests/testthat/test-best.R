@@ -2,6 +2,9 @@ context("best Tests")
 
 options("logr.output" = FALSE)
 
+base_path <- "c:/packages/fmtr/tests/testthat/"
+
+base_path <- "./"
 
 
 test_that("best1: best_obj works as expected.", {
@@ -598,7 +601,7 @@ test_that("best13: fapply with best(6) format works as expected.", {
 test_that("best14: remove_trailing_zeros() works as expected.", {
   
   # Positive change
-  ob1 <- list(value = 2023.12, exponent = 2, pn = TRUE)
+  ob1 <- list(value = 2023.12, exponent = 2, pn = TRUE, wdth = 6)
   
   res1 <- remove_trailing_zeros(ob1)
   
@@ -606,14 +609,14 @@ test_that("best14: remove_trailing_zeros() works as expected.", {
   
   
   # Negative change
-  ob2 <- list(value = 0.0202312, exponent = -3, pn = FALSE)
+  ob2 <- list(value = 0.0202312, exponent = -3, pn = FALSE, wdth = 6)
   
   res2 <- remove_trailing_zeros(ob2)
   
   expect_equal(res2, -2)
   
   # Positive no change
-  ob3 <- list(value = 2023.12, exponent = 3, pn = TRUE)
+  ob3 <- list(value = 2023.12, exponent = 3, pn = TRUE, wdth = 6)
   
   res3 <- remove_trailing_zeros(ob3)
   
@@ -621,7 +624,7 @@ test_that("best14: remove_trailing_zeros() works as expected.", {
   
   
   # Negative no change
-  ob4 <- list(value = 0.0202312, exponent = -4, pn = FALSE)
+  ob4 <- list(value = 0.0202312, exponent = -4, pn = FALSE, wdth = 6)
   
   res4 <- remove_trailing_zeros(ob4)
   
@@ -884,6 +887,141 @@ test_that("best18: fapply2 with best works as expected.", {
   expect_equal(res[1], "123.12 1.23E8")  
   
 })
+
+
+
+test_that("best19: SAS comparison works as expected.", {
+  
+  # library(libr)
+  # 
+  # pth1 <- file.path(base_path, "data")
+  # 
+  # libname(l1, pth1, "dbf")
+  # 
+  # 
+  # lib_export(l1, l2, pth1, "Rdata")  
+  
+  
+  
+  pth1 <- file.path(base_path, "data/TEST.RData")
+  
+  nm <- load(pth1)
+  
+  dat <- get(nm)
+  
+  # Check best4
+  
+  b4 <- fapply(dat$Value, "best4")
+  
+  c4 <- trimws(dat$FmtBest4) == trimws(b4)
+  
+  expect_equal(all(c4 == TRUE), TRUE)
+  
+  # d4 <- data.frame(Value = dat$Value, FmtSAS = dat$FmtBest4,
+  #                  FmtR = b4, EQ = c4)
+  # 
+  # d4[d4$EQ == FALSE, ]
+  
+  # Check best5
+  
+  b5 <- fapply(dat$Value, "best5")
+  
+  c5 <- trimws(dat$FmtBest5) == trimws(b5)
+  
+  expect_equal(all(c5 == TRUE), TRUE)
+  
+  # d5 <- data.frame(Value = dat$Value, FmtSAS = dat$FmtBest5,
+  #                  FmtR = b5, EQ = c5)
+  # 
+  # d5[d5$EQ == FALSE, ]
+  
+  
+  # Check best6
+  
+  b6 <- fapply(dat$Value, "best6")
+  
+  c6 <- trimws(dat$FmtBest6) == trimws(b6)
+  
+  expect_equal(all(c6 == TRUE), TRUE)
+  
+  # d6 <- data.frame(Value = dat$Value, FmtSAS = dat$FmtBest6,
+  #                  FmtR = b6, EQ = c6)
+  # 
+  # d6[d6$EQ == FALSE, ]
+  
+  # Check best7
+  
+  b7 <- fapply(dat$Value, "best7")
+  
+  c7 <- trimws(dat$FmtBest7) == trimws(b7)
+  
+  expect_equal(all(c7 == TRUE), TRUE)
+  
+  # d7 <- data.frame(Value = dat$Value, FmtSAS = dat$FmtBest7,
+  #                  FmtR = b7, EQ = c7)
+  # 
+  # d7[d7$EQ == FALSE, ]
+  
+  # Check best8
+  
+  b8 <- fapply(dat$Value, "best8")
+  
+  c8 <- trimws(dat$FmtBest8) == trimws(b8)
+  
+  expect_equal(all(c8 == TRUE), TRUE)
+  
+  # d8 <- data.frame(Value = dat$Value, FmtSAS = dat$FmtBest8,
+  #                  FmtR = b8, EQ = c8)
+  # 
+  # d8[d8$EQ == FALSE, ]
+  
+  # Check best9
+  
+  b9 <- fapply(dat$Value, "best9")
+  
+  c9 <- trimws(dat$FmtBest9) == trimws(b9)
+  
+  expect_equal(all(c9 == TRUE), TRUE)
+  
+  # d9 <- data.frame(Value = dat$Value, FmtSAS = dat$FmtBest9,
+  #                  FmtR = b9, EQ = c9)
+  # 
+  # d9[d9$EQ == FALSE, ]
+  
+  # Check best10
+  
+  b10 <- fapply(dat$Value, "best10")
+  
+  c10 <- trimws(dat$FmtBest10) == trimws(b10)
+  
+  expect_equal(all(c10 == TRUE), TRUE)
+  
+  # Check best11
+  
+  b11 <- fapply(dat$Value, "best11")
+  
+  c11 <- trimws(dat$FmtBest11) == trimws(b11)
+  
+  expect_equal(all(c11 == TRUE), TRUE)
+  
+  # Check best12  - Not working.  Can't figure out what SAS is doing
+  
+  # b12 <- fapply(dat$Value, "best12")
+  # 
+  # c12 <- trimws(dat$FmtBest12) == trimws(b12)
+  # 
+  # expect_equal(all(c12 == TRUE), TRUE)      
+  # 
+  # d12 <- data.frame(Value = dat$Value, FmtSAS = dat$FmtBest12,
+  #                  FmtR = b12, EQ = c12)
+  # 
+  # d12[d12$EQ == FALSE, ]
+
+  
+})
+
+
+
 
 
 # 

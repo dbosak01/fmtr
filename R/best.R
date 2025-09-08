@@ -139,7 +139,7 @@ best_obj <- function(x, wdth) {
   # Remove leading zero flag
   b$rmlz <- get_rmlz(b)
   
-  #browser()
+  # browser()
   
   # No digits left for coefficient
   if (b$cwdth <= 0) {
@@ -464,14 +464,15 @@ get_rmlz <- function(obj) {
 # Remove trailing zeros by adjusting exponent
 remove_trailing_zeros <- function(obj) {
   
-  
   # browser()
   
   x <- obj$value
   offst <- obj$exponent
+  tdgts <- c
   
   # Test base value
   vl <- roundup(x / (10 ^ offst), 0)
+  # vl <- as.integer(x / (10 ^ offst), 0)
 
   # if (vl > 0) {  ?
     toffst <- offst
@@ -484,11 +485,22 @@ remove_trailing_zeros <- function(obj) {
         toffst <- toffst + 1  # - 1 Need to make it smaller?
       }
       vl <- roundup(x / (10 ^ toffst), 0)
+      # vl <- as.integer(x / (10 ^ toffst), 0)
 
       if (abs(offst) > 22) {
         toffst <- offst
         break
 
+      }
+      
+      if (obj$wdth > 5) {
+        vl2 <- as.integer(x / (10 ^ toffst), 0)
+        
+        if (vl2 == 0 & toffst > offst) {
+          
+          toffst <- toffst - 1 
+          break
+        }
       }
     }
 
