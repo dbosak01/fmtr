@@ -903,7 +903,7 @@ test_that("best19: SAS comparison works as expected.", {
   
   
   
-  pth1 <- file.path(base_path, "data/TEST.RData")
+  pth1 <- file.path(base_path, "data/TEST.Rdata")
   
   nm <- load(pth1)
   
