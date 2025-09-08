@@ -4,7 +4,7 @@ options("logr.output" = FALSE)
 
 base_path <- "c:/packages/fmtr/tests/testthat/"
 
-base_path <- "./"
+base_path <- "."
 
 
 test_that("best1: best_obj works as expected.", {
