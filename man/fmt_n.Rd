@@ -32,6 +32,7 @@ fmt_n(v1)
 Other helpers: 
 \code{\link{fmt_cnt_pct}()},
 \code{\link{fmt_mean_sd}()},
+\code{\link{fmt_mean_stderr}()},
 \code{\link{fmt_median}()},
 \code{\link{fmt_quantile_range}()},
 \code{\link{fmt_range}()}

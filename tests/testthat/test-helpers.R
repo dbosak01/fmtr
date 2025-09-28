@@ -103,3 +103,18 @@ test_that("fmt_mean_sd() function works as expected.", {
   
 })
   
+
+test_that("fmt_mean_stderr() function works as expected.", {
+  
+  v <- c(1, 5, 10, 13, 6, 3, NA)
+  
+  res1 <- fmt_mean_stderr(v)
+  res2 <- fmt_mean_stderr(v, format = "%.2f")
+  res3 <- fmt_mean_stderr(v, format = "%.2f", stderr_format = "%.5f")
+  
+  expect_equal(res1, "6.3 (1.8)")
+  expect_equal(res2, "6.33 (1.82)")
+  expect_equal(res3, "6.33 (1.81965)")
+  
+})
+

@@ -292,7 +292,7 @@ fmt_mean_sd <- function(x, format = "%.1f", sd_format = NULL) {
 #' 
 #' # Format mean and standard error
 #' fmt_mean_stderr(v1)
-#' # "5.7 (2.7)"
+#' # "5.7 (0.9)"
 #' @export
 
 fmt_mean_stderr <- function(x, format = "%.1f", stderr_format = NULL) {

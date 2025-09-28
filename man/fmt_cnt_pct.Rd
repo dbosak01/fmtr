@@ -71,6 +71,7 @@ fmt_cnt_pct(v1, na = "N/A", zero = "0 (-)")
 \seealso{
 Other helpers: 
 \code{\link{fmt_mean_sd}()},
+\code{\link{fmt_mean_stderr}()},
 \code{\link{fmt_median}()},
 \code{\link{fmt_n}()},
 \code{\link{fmt_quantile_range}()},

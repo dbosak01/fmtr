@@ -1,3 +1,7 @@
+# fmtr 1.7.0
+
+* Added `fmt_mean_stderr()` helper function.
+
 # fmtr 1.6.9
 
 * Added "best" format to `fapply()` function.  This format recreates the "best."

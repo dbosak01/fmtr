@@ -75,6 +75,7 @@ reference:
   - fmt_n
   - fmt_cnt_pct
   - fmt_mean_sd
+  - fmt_mean_stderr
   - fmt_median
   - fmt_quantile_range
   - fmt_range
