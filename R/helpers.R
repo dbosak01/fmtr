@@ -268,4 +268,45 @@ fmt_mean_sd <- function(x, format = "%.1f", sd_format = NULL) {
 }
 
 
-# stderr <- function(x) sd(x) / sqrt(length(x))
+
+#' @title Formatted mean and standard error
+#' @description A function to calculate and format a mean and standard error.
+#' @details
+#' This function calculates a mean and standard error, and formats using
+#' \code{\link[base]{sprintf}}. 
+#' You may control the format using the \strong{format} parameter.  
+#' Function will ignore NA values in the input data. Results are 
+#' returned as a character vector. 
+#' @param x The input data vector or data frame column.
+#' @param format A formatting string suitable for input into the 
+#' \code{\link[base]{sprintf}} function.  By default, this format is
+#' defined as "\%.1f", which displays the mean and standard error with 
+#' one decimal place.
+#' @param stderr_format An optional format for the standard error.  If this 
+#' parameter is not supplied, the standard error will be formatted
+#' the same as the mean, according to the `format` parameter.
+#' @return The formatted mean and standard error.
+#' @family helpers 
+#' @examples 
+#' v1 <- c(4.3, 3.7, 8.7, 6.1, 9.2, 5.6, NA, 0.7, 7.8, 4.9)
+#' 
+#' # Format mean and standard error
+#' fmt_mean_stderr(v1)
+#' # "5.7 (2.7)"
+#' @export
+
+fmt_mean_stderr <- function(x, format = "%.1f", stderr_format = NULL) {
+  num<-x[!is.na(x)]
+  m <- mean(num)
+  
+  stderr <- function(x) sd(x) / sqrt(length(x))
+  
+  stderr_format <- ifelse(is.null(stderr_format), format, stderr_format)
+  
+  # Format result
+  ret <- sprintf(paste0(format, " (", stderr_format, ")"), m, stderr(num))
+  
+  return(ret)
+}
+
+
