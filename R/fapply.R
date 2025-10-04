@@ -462,26 +462,19 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
     
     } else if (any(class(x) %in% c("numeric", "character", "integer"))) {
       
-        bst <- grepl("^best.*", fmt)
+        bst <- grepl("^best[0-9]*\\.?$", fmt, ignore.case = TRUE)
       
         if (bst) { 
           
-          wdth <- sub("best", "", fmt, fixed = TRUE)
+          wdth<- sub("best", "", tolower(fmt), fixed = TRUE)
+          wdth<-suppressWarnings(as.integer(wdth))
           
-          if (wdth == "") {
-            wdth <- 12
-          } else {
-            
-            wdth <- suppressWarnings(as.integer(wdth))
-            
-            if (is.na(wdth)) {
-              warning(paste0("Invalid format specification: ", fmt, "\n",
-                             "Reverting to 'best12'."))
-              wdth <- 12 
-            }
+          if (is.na(wdth)){
+            wdth=12
           }
           
-          ret <- format_best(x, wdth)
+          ret<-format_best(x,wdth)
+          
           
         } else {
         
