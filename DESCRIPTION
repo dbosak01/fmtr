@@ -10,7 +10,7 @@ Authors@R: c(person(given = "David",
              person(given = "Chen",
                   family = "Ling",
                   role = c("ctb"),
-                  email = "chen.ling@abbvie.com")
+                  email = "chen.lingcpu@gmail.com")
                   )
 Description: Contains a set of functions that can be used to apply
   formats to data frames or vectors.  The package aims to provide 

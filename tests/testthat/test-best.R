@@ -1021,7 +1021,29 @@ test_that("best19: SAS comparison works as expected.", {
 })
 
 
-
+test_that("best20: fapply with best format variations.", {
+  
+  
+  v1 <- c(t1 = 123.456778910248,
+          t2 = 12.384883832456,
+          t3 = 1456.2468483838833)
+  
+  res1 <- fapply(v1, "BEST6")
+  
+  expect_equal(res1[1], "123.46")
+  expect_equal(res1[2], "12.385")
+  expect_equal(res1[3], "1456.2")
+        
+  
+  
+  res2 <- fapply(v1, "BEST6.")
+  
+  expect_equal(res1[1], "123.46")
+  expect_equal(res1[2], "12.385")
+  expect_equal(res1[3], "1456.2")
+  
+          
+})
 
 
 # 

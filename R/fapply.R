@@ -466,14 +466,14 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
       
         if (bst) { 
           
-          wdth<- sub("best", "", tolower(fmt), fixed = TRUE)
-          wdth<-suppressWarnings(as.integer(wdth))
+          wdth <- sub("best", "", tolower(fmt), fixed = TRUE)
+          wdth <-suppressWarnings(as.integer(wdth))
           
-          if (is.na(wdth)){
+          if (is.na(wdth)) {
             wdth=12
           }
           
-          ret<-format_best(x,wdth)
+          ret <- format_best(x, wdth)
           
           
         } else {
