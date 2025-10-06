@@ -147,56 +147,84 @@ value to the <code>formats</code> function.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># Take subset of data</span></span>
-<span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"cyl"</span><span class="op">)</span> <span class="op">]</span></span>
-<span></span>
-<span><span class="co"># Print current state</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span>
-<span><span class="co">#                    mpg cyl</span></span>
-<span><span class="co"># Mazda RX4         21.0   6</span></span>
-<span><span class="co"># Mazda RX4 Wag     21.0   6</span></span>
-<span><span class="co"># Datsun 710        22.8   4</span></span>
-<span><span class="co"># Hornet 4 Drive    21.4   6</span></span>
-<span><span class="co"># Hornet Sportabout 18.7   8</span></span>
-<span></span>
-<span><span class="co"># Assign formats</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">df1</span><span class="op">$</span><span class="va">mpg</span>, <span class="st">"format"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="value.html">value</a></span><span class="op">(</span><span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">20</span>, <span class="st">"High"</span><span class="op">)</span>,</span>
-<span>                                 <span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">20</span>, <span class="st">"Low"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">df1</span><span class="op">$</span><span class="va">cyl</span>, <span class="st">"format"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">x</span>, nsmall <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Display formatted data</span></span>
-<span><span class="fu"><a href="fdata.html">fdata</a></span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span>
-<span><span class="co">#                    mpg cyl</span></span>
-<span><span class="co"># Mazda RX4         High 6.0</span></span>
-<span><span class="co"># Mazda RX4 Wag     High 6.0</span></span>
-<span><span class="co"># Datsun 710        High 4.0</span></span>
-<span><span class="co"># Hornet 4 Drive    High 6.0</span></span>
-<span><span class="co"># Hornet Sportabout  Low 8.0</span></span>
-<span></span>
-<span><span class="co"># Extract format list</span></span>
-<span><span class="va">lst</span> <span class="op">&lt;-</span> <span class="fu">formats</span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Alter format list and reassign</span></span>
-<span><span class="va">lst</span><span class="op">$</span><span class="va">mpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="value.html">value</a></span><span class="op">(</span><span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">22</span>, <span class="st">"High"</span><span class="op">)</span>,</span>
-<span>                 <span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">22</span>, <span class="st">"Low"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">lst</span><span class="op">$</span><span class="va">cyl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">x</span>, nsmall <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="fu">formats</span><span class="op">(</span><span class="va">df1</span><span class="op">)</span> <span class="op">&lt;-</span>  <span class="va">lst</span></span>
-<span></span>
-<span><span class="co"># Display formatted data</span></span>
-<span><span class="fu"><a href="fdata.html">fdata</a></span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span>
-<span><span class="co">#                    mpg  cyl</span></span>
-<span><span class="co"># Mazda RX4          Low 6.00</span></span>
-<span><span class="co"># Mazda RX4 Wag      Low 6.00</span></span>
-<span><span class="co"># Datsun 710        High 4.00</span></span>
-<span><span class="co"># Hornet 4 Drive     Low 6.00</span></span>
-<span><span class="co"># Hornet Sportabout  Low 8.00</span></span>
-<span></span>
-<span><span class="co"># Clear formats</span></span>
-<span><span class="fu">formats</span><span class="op">(</span><span class="va">df1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
-<span></span>
-<span><span class="co"># Confirm formats are cleared </span></span>
-<span><span class="fu">formats</span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span>
-<span><span class="co"># list()</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Take subset of data</span></span></span>
+<span class="r-in"><span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"cyl"</span><span class="op">)</span> <span class="op">]</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Print current state</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    mpg cyl</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4         21.0   6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag     21.0   6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710        22.8   4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet 4 Drive    21.4   6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout 18.7   8</span>
+<span class="r-in"><span><span class="co">#                    mpg cyl</span></span></span>
+<span class="r-in"><span><span class="co"># Mazda RX4         21.0   6</span></span></span>
+<span class="r-in"><span><span class="co"># Mazda RX4 Wag     21.0   6</span></span></span>
+<span class="r-in"><span><span class="co"># Datsun 710        22.8   4</span></span></span>
+<span class="r-in"><span><span class="co"># Hornet 4 Drive    21.4   6</span></span></span>
+<span class="r-in"><span><span class="co"># Hornet Sportabout 18.7   8</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Assign formats</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">df1</span><span class="op">$</span><span class="va">mpg</span>, <span class="st">"format"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="value.html">value</a></span><span class="op">(</span><span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">20</span>, <span class="st">"High"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                                 <span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">20</span>, <span class="st">"Low"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A user-defined format: 2 conditions</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Name Type Expression Label Order</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    x    U    x &gt;= 20  High    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    x    U     x &lt; 20   Low    NA</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">df1</span><span class="op">$</span><span class="va">cyl</span>, <span class="st">"format"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">x</span>, nsmall <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Display formatted data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="fdata.html">fdata</a></span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    mpg cyl</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4         High 6.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag     High 6.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710        High 4.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet 4 Drive    High 6.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout  Low 8.0</span>
+<span class="r-in"><span><span class="co">#                    mpg cyl</span></span></span>
+<span class="r-in"><span><span class="co"># Mazda RX4         High 6.0</span></span></span>
+<span class="r-in"><span><span class="co"># Mazda RX4 Wag     High 6.0</span></span></span>
+<span class="r-in"><span><span class="co"># Datsun 710        High 4.0</span></span></span>
+<span class="r-in"><span><span class="co"># Hornet 4 Drive    High 6.0</span></span></span>
+<span class="r-in"><span><span class="co"># Hornet Sportabout  Low 8.0</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Extract format list</span></span></span>
+<span class="r-in"><span><span class="va">lst</span> <span class="op">&lt;-</span> <span class="fu">formats</span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Alter format list and reassign</span></span></span>
+<span class="r-in"><span><span class="va">lst</span><span class="op">$</span><span class="va">mpg</span> <span class="op">&lt;-</span> <span class="fu"><a href="value.html">value</a></span><span class="op">(</span><span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;=</span> <span class="fl">22</span>, <span class="st">"High"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                 <span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">22</span>, <span class="st">"Low"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A user-defined format: 2 conditions</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Name Type Expression Label Order</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    x    U    x &gt;= 22  High    NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    x    U     x &lt; 22   Low    NA</span>
+<span class="r-in"><span><span class="va">lst</span><span class="op">$</span><span class="va">cyl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">x</span>, nsmall <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">formats</span><span class="op">(</span><span class="va">df1</span><span class="op">)</span> <span class="op">&lt;-</span>  <span class="va">lst</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Display formatted data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="fdata.html">fdata</a></span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    mpg  cyl</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4          Low 6.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag      Low 6.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710        High 4.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet 4 Drive     Low 6.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout  Low 8.00</span>
+<span class="r-in"><span><span class="co">#                    mpg  cyl</span></span></span>
+<span class="r-in"><span><span class="co"># Mazda RX4          Low 6.00</span></span></span>
+<span class="r-in"><span><span class="co"># Mazda RX4 Wag      Low 6.00</span></span></span>
+<span class="r-in"><span><span class="co"># Datsun 710        High 4.00</span></span></span>
+<span class="r-in"><span><span class="co"># Hornet 4 Drive     Low 6.00</span></span></span>
+<span class="r-in"><span><span class="co"># Hornet Sportabout  Low 8.00</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Clear formats</span></span></span>
+<span class="r-in"><span><span class="fu">formats</span><span class="op">(</span><span class="va">df1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Confirm formats are cleared </span></span></span>
+<span class="r-in"><span><span class="fu">formats</span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> list()</span>
+<span class="r-in"><span><span class="co"># list()</span></span></span>
+</code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

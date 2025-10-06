@@ -143,44 +143,64 @@ a NULL value to the <code>widths</code> function.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># Take subset of data</span></span>
-<span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"cyl"</span><span class="op">)</span> <span class="op">]</span></span>
-<span></span>
-<span><span class="co"># Print current state</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span>
-<span><span class="co">#                    mpg cyl</span></span>
-<span><span class="co"># Mazda RX4         21.0   6</span></span>
-<span><span class="co"># Mazda RX4 Wag     21.0   6</span></span>
-<span><span class="co"># Datsun 710        22.8   4</span></span>
-<span><span class="co"># Hornet 4 Drive    21.4   6</span></span>
-<span><span class="co"># Hornet Sportabout 18.7   8</span></span>
-<span></span>
-<span><span class="co"># Assign widths</span></span>
-<span><span class="fu">widths</span><span class="op">(</span><span class="va">df1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mpg <span class="op">=</span> <span class="fl">12</span>, cyl <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> </span>
-<span></span>
-<span><span class="co"># Display formatted data</span></span>
-<span><span class="fu"><a href="fdata.html">fdata</a></span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span>
-<span><span class="co">#                            mpg        cyl</span></span>
-<span><span class="co"># Mazda RX4                 21.0          6</span></span>
-<span><span class="co"># Mazda RX4 Wag             21.0          6</span></span>
-<span><span class="co"># Datsun 710                22.8          4</span></span>
-<span><span class="co"># Hornet 4 Drive            21.4          6</span></span>
-<span><span class="co"># Hornet Sportabout         18.7          8</span></span>
-<span></span>
-<span><span class="co"># View assigned widths</span></span>
-<span><span class="fu">widths</span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span>
-<span><span class="co"># $mpg</span></span>
-<span><span class="co"># [1] 12</span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># $cyl</span></span>
-<span><span class="co"># [1] 10</span></span>
-<span></span>
-<span><span class="co"># Clear widths</span></span>
-<span><span class="fu">widths</span><span class="op">(</span><span class="va">df1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
-<span></span>
-<span><span class="co"># Confirm widths are cleared</span></span>
-<span><span class="fu">widths</span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span>
-<span><span class="co"># list()</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Take subset of data</span></span></span>
+<span class="r-in"><span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="va">mtcars</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"cyl"</span><span class="op">)</span> <span class="op">]</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Print current state</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    mpg cyl</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4         21.0   6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag     21.0   6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710        22.8   4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet 4 Drive    21.4   6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout 18.7   8</span>
+<span class="r-in"><span><span class="co">#                    mpg cyl</span></span></span>
+<span class="r-in"><span><span class="co"># Mazda RX4         21.0   6</span></span></span>
+<span class="r-in"><span><span class="co"># Mazda RX4 Wag     21.0   6</span></span></span>
+<span class="r-in"><span><span class="co"># Datsun 710        22.8   4</span></span></span>
+<span class="r-in"><span><span class="co"># Hornet 4 Drive    21.4   6</span></span></span>
+<span class="r-in"><span><span class="co"># Hornet Sportabout 18.7   8</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Assign widths</span></span></span>
+<span class="r-in"><span><span class="fu">widths</span><span class="op">(</span><span class="va">df1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>mpg <span class="op">=</span> <span class="fl">12</span>, cyl <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> </span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Display formatted data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="fdata.html">fdata</a></span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            mpg        cyl</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4                 21.0          6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Mazda RX4 Wag             21.0          6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Datsun 710                22.8          4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet 4 Drive            21.4          6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Hornet Sportabout         18.7          8</span>
+<span class="r-in"><span><span class="co">#                            mpg        cyl</span></span></span>
+<span class="r-in"><span><span class="co"># Mazda RX4                 21.0          6</span></span></span>
+<span class="r-in"><span><span class="co"># Mazda RX4 Wag             21.0          6</span></span></span>
+<span class="r-in"><span><span class="co"># Datsun 710                22.8          4</span></span></span>
+<span class="r-in"><span><span class="co"># Hornet 4 Drive            21.4          6</span></span></span>
+<span class="r-in"><span><span class="co"># Hornet Sportabout         18.7          8</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># View assigned widths</span></span></span>
+<span class="r-in"><span><span class="fu">widths</span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $mpg</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $cyl</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span><span class="co"># $mpg</span></span></span>
+<span class="r-in"><span><span class="co"># [1] 12</span></span></span>
+<span class="r-in"><span><span class="co"># </span></span></span>
+<span class="r-in"><span><span class="co"># $cyl</span></span></span>
+<span class="r-in"><span><span class="co"># [1] 10</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Clear widths</span></span></span>
+<span class="r-in"><span><span class="fu">widths</span><span class="op">(</span><span class="va">df1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Confirm widths are cleared</span></span></span>
+<span class="r-in"><span><span class="fu">widths</span><span class="op">(</span><span class="va">df1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> list()</span>
+<span class="r-in"><span><span class="co"># list()</span></span></span>
+</code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

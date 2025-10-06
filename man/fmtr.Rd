@@ -97,7 +97,7 @@ Useful links:
 
 Other contributors:
 \itemize{
-  \item Chen Ling \email{chen.ling@abbvie.com} [contributor]
+  \item Chen Ling \email{chen.lingcpu@gmail.com} [contributor]
 }
 
 }
