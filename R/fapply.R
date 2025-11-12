@@ -78,6 +78,46 @@
 #' For large values, there are some differences between SAS and R in how they
 #' represent these numbers, and sometimes they will not match.
 #' 
+#' @section "DATEw." Format:
+#' #' The SAS "DATEw." format is used to display date values in a readable
+#' character form, such as "01JAN70" or "01-JAN-1970", depending on the
+#' specified width. The word "date" is followed by the desired w(width),
+#' e.g. "date7" or "date9".
+#' 
+#' The format converts numeric or Date values into character strings using
+#' a pattern that depends on the width. Smaller widths display shorter forms,
+#' while larger widths display more detail. For example:
+#' 
+#' \itemize{
+#'   \item \strong{date5} -- Displays as \code{mmmyy} (e.g., "JAN70")
+#'   \item \strong{date7} -- Displays as \code{ddmmmyy} (e.g., "01JAN70")
+#'   \item \strong{date9} -- Displays as \code{ddmmmyyyy} (e.g., "01JAN1970")
+#'   \item \strong{date11} -- Displays as \code{dd-mmm-yyyy} (e.g., "01-JAN-1970")
+#' }
+#' 
+#' The "date" format accepts widths between 5 and 11. Widths outside this
+#' range are not valid and will result in an error. The default width is 7.
+#' Both \code{"datew"} and \code{"datew."} are accepted, the trailing period
+#' is optional and does not affect behavior.
+#' 
+#' For input values that are numeric, the function will interpret them as
+#' the number of days since 1970-01-01, consistent with R's internal date
+#' representation (different from SAS, which uses 1960-01-01). If the input
+#' is already an R \code{Date} object, it will be used directly. Missing or
+#' invalid inputs will result in blank output of the specified width.
+#' 
+#' The output value is left-padded with spaces if it is shorter than the
+#' requested width, ensuring the formatted result always occupies exactly the
+#' specified number of characters. For example, for the date 1970-01-01,
+#' the result of \code{date7} is \code{"01JAN70"}, while the result of
+#' \code{date8} is \code{" 01JAN70"}, with one additional leading space.
+#' 
+#' This format has no direct equivalent in base R, so the \strong{fmtr} package
+#' adds this capability for users who wish to replicate SAS-style "date"
+#' formatting behavior as closely as possible, adapted to R's date origin
+#' and conventions.
+#' 
+#' 
 #' @param x A vector, factor, or list to apply the format to.
 #' @param format A format to be applied.
 #' @param width The desired character width of the formatted vector.  Default
@@ -199,6 +239,13 @@
 #' 
 #' fapply(v7, "best6")
 #' # [1] "12.346" "1.23E6" NA       "0.1235" "123E-7"
+#' 
+#' # Example 9: "DATEw." Format
+#' #' # Data Vector
+#' v8 <- as.Date(c("1924-02-29",NA,"1980-12-31","2019-12-31","2020-02-29","2030-08-20"))
+#' 
+#' fapply(v8, "date7")
+#' # [1] "29FEB24" NA        "31DEC80" "31DEC19" "29FEB20" "20AUG30"
 #' 
 fapply <- function(x, format = NULL, width = NULL, justify = NULL) {
   
@@ -442,39 +489,38 @@ eval_conditions_back <- function(x, conds) {
 format_vector <- function(x, fmt, udfmt = FALSE) {
  
   if ("character" %in% class(fmt)) {
-    if (any(class(x) %in% c("Date", "POSIXt"))) {
     
-      # For dates, call format
-      if (udfmt == TRUE) {
-        
-        ret <- tryCatch({suppressWarnings(format(x, format = fmt))},
-                        error = function(cond) {fmt})
-        
-      } else {
-        ret <- format(x, format = fmt)
-      }
-      
-      xin <- x
-      if (!"Date" %in% class(x))
-        xin <- as.Date(x)
-      
-      ret <- format_quarter(xin, ret, fmt)
-    
-    } else if (any(class(x) %in% c("numeric", "character", "integer"))) {
+     if (any(class(x) %in% c("numeric", "character", "integer"))) {
       
         bst <- grepl("^best[0-9]*\\.?$", fmt, ignore.case = TRUE)
-      
+        datew <- grepl("^date[0-9]*\\.?$", fmt, ignore.case = TRUE)
+        
         if (bst) { 
           
           wdth <- sub("best", "", tolower(fmt), fixed = TRUE)
           wdth <-suppressWarnings(as.integer(wdth))
           
           if (is.na(wdth)) {
-            wdth=12
+            
+            wdth = 12
+            
           }
           
           ret <- format_best(x, wdth)
           
+          
+        }else if (datew) {
+          
+          wdth <- sub("date", "", tolower(fmt), fixed = TRUE)
+          wdth <- suppressWarnings(as.integer(wdth))
+          
+          if (is.na(wdth)){
+            
+            wdth = 7
+            
+          }
+          
+          ret<-format_datew(x, wdth)
           
         } else {
         
@@ -490,10 +536,72 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
         }
         
         # Find NA strings
-        nas <- ret == "NA"
+        nas <- ret %in% c("NA", " NA")
         
         # Turn NA strings back into real NA
         ret <- replace(ret, nas, NA)
+        
+    } else if ( any( class(x) %in% c("Date"))){
+      
+      datew <- grepl("^date[0-9]*\\.?$", fmt, ignore.case = TRUE)
+      
+      
+      if (datew){
+        
+        
+        wdth<- sub("date", "", tolower(fmt), fixed = TRUE)
+        wdth<-suppressWarnings(as.integer(wdth))
+        
+        if (is.na(wdth)){
+          
+          wdth = 7
+          
+        }
+        
+        ret <- format_datew(x, wdth)
+        
+        # Find NA strings
+        nas <- ret == " NA"
+        
+        # Turn NA strings back into real NA
+        ret <- replace(ret, nas, NA)
+        
+      }else{
+        
+        if (udfmt == TRUE) {
+          
+          ret <- tryCatch({suppressWarnings(format(x, format = fmt))},
+                          error = function(cond) {fmt})
+          
+        } else {
+          ret <- format(x, format = fmt)
+        }
+        
+        xin <- x
+        if (!"Date" %in% class(x))
+          xin <- as.Date(x)
+        
+        ret <- format_quarter(xin, ret, fmt)
+      }
+      
+    } else if (any(class(x) %in% c( "POSIXt"))) {
+      
+      # For dates, call format
+      if (udfmt == TRUE) {
+        
+        ret <- tryCatch({suppressWarnings(format(x, format = fmt))},
+                        error = function(cond) {fmt})
+        
+      } else {
+        ret <- format(x, format = fmt)
+      }
+      
+      xin <- x
+      if (!"Date" %in% class(x))
+        xin <- as.Date(x)
+      
+      ret <- format_quarter(xin, ret, fmt)
+      
     } else {
       ret <- fmt
     }
