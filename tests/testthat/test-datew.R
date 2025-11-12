@@ -27,7 +27,7 @@ test_that("datew2: format_datew() works as expected.", {
              "2099-12-31")
   
   date = as.Date(v1)
-  ndate = as.numeric(date)
+  ndate = as.numeric(date, origin = "1970-01-01")
   pdate = lubridate::ym("1999-07")
   
   res1 = format_datew(date,7)
@@ -114,7 +114,7 @@ test_that("datew3: fapply with date5. format works as expected.", {
           "2099-12-31")
   
   date = as.Date(v1)
-  ndate = as.numeric(date)
+  ndate = as.numeric(date, origin = "1970-01-01")
   pdate = lubridate::ym("1999-07")
   
   res1 = fapply(date, "date5")
@@ -154,7 +154,7 @@ test_that("datew3: fapply with date6. format works as expected.", {
           "2099-12-31")
   
   date = as.Date(v1)
-  ndate = as.numeric(date)
+  ndate = as.numeric(date, origin = "1970-01-01")
   pdate = lubridate::ym("1999-07")
   
   res1 = fapply(date, "date6")
@@ -194,7 +194,7 @@ test_that("datew4: fapply with date7. format works as expected.", {
           "2099-12-31")
   
   date = as.Date(v1)
-  ndate = as.numeric(date)
+  ndate = as.numeric(date, origin = "1970-01-01")
   pdate = lubridate::ym("1999-07")
   
   res1 = fapply(date, "date7")
@@ -235,7 +235,7 @@ test_that("datew5: fapply with date8. format works as expected.", {
   
   date = as.Date(v1)
   pdate = lubridate::ym("1999-07")
-  ndate = as.numeric(date)
+  ndate = as.numeric(date, origin = "1970-01-01")
   
   res1 = fapply(date, "date8")
   res2 = fapply(pdate, "date8")
@@ -276,7 +276,7 @@ test_that("datew6: fapply with date9. format works as expected.", {
   
   date = as.Date(v1)
   pdate = lubridate::ym("1999-07")
-  ndate = as.numeric(date)
+  ndate = as.numeric(date, origin = "1970-01-01")
   
   res1 = fapply(date, "date9")
   res2 = fapply(pdate, "date9")
@@ -317,7 +317,7 @@ test_that("datew7: fapply with date10. format works as expected.", {
   
   date = as.Date(v1)
   pdate = lubridate::ym("1999-07")
-  ndate = as.numeric(date)
+  ndate = as.numeric(date, origin = "1970-01-01")
   
   res1 = fapply(date, "date10")
   res2 = fapply(pdate, "date10")
@@ -358,7 +358,7 @@ test_that("datew8: fapply with date11. format works as expected.", {
   
   date = as.Date(v1)
   pdate = lubridate::ym("1999-07")
-  ndate = as.numeric(date)
+  ndate = as.numeric(date, origin = "1970-01-01")
   
   res1 = fapply(date, "date11")
   res2 = fapply(pdate, "date11")
@@ -398,7 +398,7 @@ test_that("datew9: test default value handling.", {
           "2099-12-31")
   
   date = as.Date(v1)
-  ndate = as.numeric(date)
+  ndate = as.numeric(date, origin = "1970-01-01")
   pdate = lubridate::ym("1999-07")
   
   res1 = fapply(date, "date")
