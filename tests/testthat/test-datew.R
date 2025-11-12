@@ -3,7 +3,6 @@ context("date Tests")
 options("logr.output" = FALSE)
 Sys.setenv("LANGUAGE" = "EN")
 Sys.setlocale("LC_TIME", "English")
-library(lubridate)
 
 test_that("datew1: test error handling.", {
   
