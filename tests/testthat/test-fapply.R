@@ -1,6 +1,8 @@
 context("fapply Tests")
 
 options("logr.output" = FALSE)
+Sys.setenv("LANGUAGE" = "EN")
+Sys.setlocale("LC_TIME", "English")
 
 test_that("fapply1: fapply() function works as expected with vectors.", {
   
@@ -374,6 +376,10 @@ test_that("fapply13: fapply with quarter and date works as expected.", {
                            "2000-Q4-15",
                            "2025-Q4-15")), TRUE)
   
+
+  
+  
+  
   
 })
 
@@ -402,4 +408,25 @@ test_that("fapply14: standard numeric formats work with fapply.", {
   expect_equal(res[5], "    NA")
   
   
+})
+
+test_that("fapply15: fapply with format_datew() works as expected.", {
+  
+  v1 <- as.Date(c("2000-01-15", "2025-03-15", "2000-04-15", "2025-06-15", 
+                  "2000-07-15", "2025-09-15", "2000-10-15", "2025-12-15", 
+                  "2025-12-32", "2000-20-59"))
+  
+  res1 <- fapply(v1, "date7")
+  
+  res1
+  
+  expect_equal(all(res1[1:8] == c("15JAN00", "15MAR25", "15APR00","15JUN25", "15JUL00", 
+                                  "15SEP25", "15OCT00", "15DEC25")), TRUE)
+  
+  res2 <- fapply(v1, "date9")
+  
+  res2
+  
+  expect_equal(all(res2[1:8] == c("15JAN2000", "15MAR2025", "15APR2000","15JUN2025", "15JUL2000", 
+                                  "15SEP2025", "15OCT2000", "15DEC2025")), TRUE)
 })
