@@ -34,8 +34,7 @@ Suggests:
     logr,
     utils,
     dplyr,
-    libr,
-    lubridate
+    libr
 Imports: 
     tibble,
     stats,

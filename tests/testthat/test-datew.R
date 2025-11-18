@@ -28,11 +28,10 @@ test_that("datew2: format_datew() works as expected.", {
   
   date = as.Date(v1)
   ndate = as.numeric(date, origin = "1970-01-01")
-  pdate = lubridate::ym("1999-07")
+ 
   
   res1 = format_datew(date,7)
-  res2 = format_datew(pdate,7)
-  res3 = format_datew(ndate,7)
+  res2 = format_datew(ndate,7)
   
   expect_equal(res1[1], "01JAN00")
   expect_equal(res1[2], "15JUN12")
@@ -42,20 +41,19 @@ test_that("datew2: format_datew() works as expected.", {
   expect_equal(res1[6], "29FEB20")
   expect_equal(res1[7], "20AUG50")
   expect_equal(res1[8], "31DEC99")
-  expect_equal(res2, "01JUL99")
   
-  expect_equal(res3[1], "01JAN00")
-  expect_equal(res3[2], "15JUN12")
-  expect_equal(res3[3], "29FEB24")
-  expect_equal(is.na(res3[4]), TRUE )
-  expect_equal(res3[5], "31DEC80")
-  expect_equal(res3[6], "29FEB20")
-  expect_equal(res3[7], "20AUG50")
-  expect_equal(res3[8], "31DEC99")
+  
+  expect_equal(res2[1], "01JAN00")
+  expect_equal(res2[2], "15JUN12")
+  expect_equal(res2[3], "29FEB24")
+  expect_equal(is.na( res2[4]), TRUE )
+  expect_equal(res2[5], "31DEC80")
+  expect_equal(res2[6], "29FEB20")
+  expect_equal(res2[7], "20AUG50")
+  expect_equal(res2[8], "31DEC99")
   
   res1 = format_datew(date,9)
-  res2 = format_datew(pdate,9)
-  res3 = format_datew(ndate,9)
+  res2 = format_datew(ndate,9)
   
   expect_equal(res1[1], "01JAN1900")
   expect_equal(res1[2], "15JUN1912")
@@ -65,20 +63,18 @@ test_that("datew2: format_datew() works as expected.", {
   expect_equal(res1[6], "29FEB2020")
   expect_equal(res1[7], "20AUG2050")
   expect_equal(res1[8], "31DEC2099")
-  expect_equal(res2, "01JUL1999")
   
-  expect_equal(res3[1], "01JAN1900")
-  expect_equal(res3[2], "15JUN1912")
-  expect_equal(res3[3], "29FEB1924")
-  expect_equal(is.na(res3[4]), TRUE )
-  expect_equal(res3[5], "31DEC1980")
-  expect_equal(res3[6], "29FEB2020")
-  expect_equal(res3[7], "20AUG2050")
-  expect_equal(res3[8], "31DEC2099")
+  expect_equal(res2[1], "01JAN1900")
+  expect_equal(res2[2], "15JUN1912")
+  expect_equal(res2[3], "29FEB1924")
+  expect_equal(is.na(res2[4]), TRUE )
+  expect_equal(res2[5], "31DEC1980")
+  expect_equal(res2[6], "29FEB2020")
+  expect_equal(res2[7], "20AUG2050")
+  expect_equal(res2[8], "31DEC2099")
   
   res1 = format_datew(date,11)
-  res2 = format_datew(pdate,11)
-  res3 = format_datew(ndate,11)
+  res2 = format_datew(ndate,11)
   
   expect_equal(res1[1], "01-JAN-1900")
   expect_equal(res1[2], "15-JUN-1912")
@@ -88,16 +84,15 @@ test_that("datew2: format_datew() works as expected.", {
   expect_equal(res1[6], "29-FEB-2020")
   expect_equal(res1[7], "20-AUG-2050")
   expect_equal(res1[8], "31-DEC-2099")
-  expect_equal(res2, "01-JUL-1999")
   
-  expect_equal(res3[1], "01-JAN-1900")
-  expect_equal(res3[2], "15-JUN-1912")
-  expect_equal(res3[3], "29-FEB-1924")
-  expect_equal(is.na(res3[4]), TRUE )
-  expect_equal(res3[5], "31-DEC-1980")
-  expect_equal(res3[6], "29-FEB-2020")
-  expect_equal(res3[7], "20-AUG-2050")
-  expect_equal(res3[8], "31-DEC-2099")
+  expect_equal(res2[1], "01-JAN-1900")
+  expect_equal(res2[2], "15-JUN-1912")
+  expect_equal(res2[3], "29-FEB-1924")
+  expect_equal(is.na(res2[4]), TRUE )
+  expect_equal(res2[5], "31-DEC-1980")
+  expect_equal(res2[6], "29-FEB-2020")
+  expect_equal(res2[7], "20-AUG-2050")
+  expect_equal(res2[8], "31-DEC-2099")
 
   
 })
@@ -115,11 +110,10 @@ test_that("datew3: fapply with date5. format works as expected.", {
   
   date = as.Date(v1)
   ndate = as.numeric(date, origin = "1970-01-01")
-  pdate = lubridate::ym("1999-07")
+ 
   
   res1 = fapply(date, "date5")
-  res2 = fapply(pdate, "date5")
-  res3 = fapply(date, "date5")
+  res2 = fapply(date, "date5")
 
   expect_equal(res1[1], "01JAN")
   expect_equal(res1[2], "15JUN")
@@ -129,16 +123,15 @@ test_that("datew3: fapply with date5. format works as expected.", {
   expect_equal(res1[6], "29FEB")
   expect_equal(res1[7], "20AUG")
   expect_equal(res1[8], "31DEC")
-  expect_equal(res2, "01JUL")
   
-  expect_equal(res3[1], "01JAN")
-  expect_equal(res3[2], "15JUN")
-  expect_equal(res3[3], "29FEB")
-  expect_equal(is.na(res3[4]), TRUE )
-  expect_equal(res3[5], "31DEC")
-  expect_equal(res3[6], "29FEB")
-  expect_equal(res3[7], "20AUG")
-  expect_equal(res3[8], "31DEC")
+  expect_equal(res2[1], "01JAN")
+  expect_equal(res2[2], "15JUN")
+  expect_equal(res2[3], "29FEB")
+  expect_equal(is.na(res2[4]), TRUE )
+  expect_equal(res2[5], "31DEC")
+  expect_equal(res2[6], "29FEB")
+  expect_equal(res2[7], "20AUG")
+  expect_equal(res2[8], "31DEC")
 
 })
 
@@ -155,11 +148,10 @@ test_that("datew3: fapply with date6. format works as expected.", {
   
   date = as.Date(v1)
   ndate = as.numeric(date, origin = "1970-01-01")
-  pdate = lubridate::ym("1999-07")
+ 
   
   res1 = fapply(date, "date6")
-  res2 = fapply(pdate, "date6")
-  res3 = fapply(date, "date6")
+  res2 = fapply(ndate, "date6")
   
   expect_equal(res1[1], " 01JAN")
   expect_equal(res1[2], " 15JUN")
@@ -169,16 +161,15 @@ test_that("datew3: fapply with date6. format works as expected.", {
   expect_equal(res1[6], " 29FEB")
   expect_equal(res1[7], " 20AUG")
   expect_equal(res1[8], " 31DEC")
-  expect_equal(res2, " 01JUL")
   
-  expect_equal(res3[1], " 01JAN")
-  expect_equal(res3[2], " 15JUN")
-  expect_equal(res3[3], " 29FEB")
-  expect_equal(is.na(res3[4]), TRUE )
-  expect_equal(res3[5], " 31DEC")
-  expect_equal(res3[6], " 29FEB")
-  expect_equal(res3[7], " 20AUG")
-  expect_equal(res3[8], " 31DEC")
+  expect_equal(res2[1], " 01JAN")
+  expect_equal(res2[2], " 15JUN")
+  expect_equal(res2[3], " 29FEB")
+  expect_equal(is.na(res2[4]), TRUE )
+  expect_equal(res2[5], " 31DEC")
+  expect_equal(res2[6], " 29FEB")
+  expect_equal(res2[7], " 20AUG")
+  expect_equal(res2[8], " 31DEC")
   
 })
 
@@ -195,11 +186,10 @@ test_that("datew4: fapply with date7. format works as expected.", {
   
   date = as.Date(v1)
   ndate = as.numeric(date, origin = "1970-01-01")
-  pdate = lubridate::ym("1999-07")
+ 
   
   res1 = fapply(date, "date7")
-  res2 = fapply(pdate, "date7")
-  res3 = fapply(ndate, "date7")
+  res2 = fapply(ndate, "date7")
 
   expect_equal(res1[1], "01JAN00")
   expect_equal(res1[2], "15JUN12")
@@ -209,16 +199,15 @@ test_that("datew4: fapply with date7. format works as expected.", {
   expect_equal(res1[6], "29FEB20")
   expect_equal(res1[7], "20AUG50")
   expect_equal(res1[8], "31DEC99")
-  expect_equal(res2, "01JUL99")
   
-  expect_equal(res3[1], "01JAN00")
-  expect_equal(res3[2], "15JUN12")
-  expect_equal(res3[3], "29FEB24")
-  expect_equal(is.na(res3[4]), TRUE )
-  expect_equal(res3[5], "31DEC80")
-  expect_equal(res3[6], "29FEB20")
-  expect_equal(res3[7], "20AUG50")
-  expect_equal(res3[8], "31DEC99")
+  expect_equal(res2[1], "01JAN00")
+  expect_equal(res2[2], "15JUN12")
+  expect_equal(res2[3], "29FEB24")
+  expect_equal(is.na(res2[4]), TRUE )
+  expect_equal(res2[5], "31DEC80")
+  expect_equal(res2[6], "29FEB20")
+  expect_equal(res2[7], "20AUG50")
+  expect_equal(res2[8], "31DEC99")
   
 })
 
@@ -234,12 +223,11 @@ test_that("datew5: fapply with date8. format works as expected.", {
           "2099-12-31")
   
   date = as.Date(v1)
-  pdate = lubridate::ym("1999-07")
+ 
   ndate = as.numeric(date, origin = "1970-01-01")
   
   res1 = fapply(date, "date8")
-  res2 = fapply(pdate, "date8")
-  res3 = fapply(ndate, "date8")
+  res2 = fapply(ndate, "date8")
   
   
   expect_equal(res1[1], " 01JAN00")
@@ -250,16 +238,16 @@ test_that("datew5: fapply with date8. format works as expected.", {
   expect_equal(res1[6], " 29FEB20")
   expect_equal(res1[7], " 20AUG50")
   expect_equal(res1[8], " 31DEC99")
-  expect_equal(res2, " 01JUL99")
+
   
-  expect_equal(res3[1], " 01JAN00")
-  expect_equal(res3[2], " 15JUN12")
-  expect_equal(res3[3], " 29FEB24")
-  expect_equal(is.na(res3[4]), TRUE )
-  expect_equal(res3[5], " 31DEC80")
-  expect_equal(res3[6], " 29FEB20")
-  expect_equal(res3[7], " 20AUG50")
-  expect_equal(res3[8], " 31DEC99")
+  expect_equal(res2[1], " 01JAN00")
+  expect_equal(res2[2], " 15JUN12")
+  expect_equal(res2[3], " 29FEB24")
+  expect_equal(is.na(res2[4]), TRUE )
+  expect_equal(res2[5], " 31DEC80")
+  expect_equal(res2[6], " 29FEB20")
+  expect_equal(res2[7], " 20AUG50")
+  expect_equal(res2[8], " 31DEC99")
   
 })
 
@@ -275,12 +263,11 @@ test_that("datew6: fapply with date9. format works as expected.", {
           "2099-12-31")
   
   date = as.Date(v1)
-  pdate = lubridate::ym("1999-07")
+ 
   ndate = as.numeric(date, origin = "1970-01-01")
   
   res1 = fapply(date, "date9")
-  res2 = fapply(pdate, "date9")
-  res3 = fapply(ndate, "date9")
+  res2 = fapply(ndate, "date9")
   
   
   expect_equal(res1[1], "01JAN1900")
@@ -291,16 +278,15 @@ test_that("datew6: fapply with date9. format works as expected.", {
   expect_equal(res1[6], "29FEB2020")
   expect_equal(res1[7], "20AUG2050")
   expect_equal(res1[8], "31DEC2099")
-  expect_equal(res2, "01JUL1999")
   
-  expect_equal(res3[1], "01JAN1900")
-  expect_equal(res3[2], "15JUN1912")
-  expect_equal(res3[3], "29FEB1924")
-  expect_equal(is.na(res3[4]), TRUE )
-  expect_equal(res3[5], "31DEC1980")
-  expect_equal(res3[6], "29FEB2020")
-  expect_equal(res3[7], "20AUG2050")
-  expect_equal(res3[8], "31DEC2099")
+  expect_equal(res2[1], "01JAN1900")
+  expect_equal(res2[2], "15JUN1912")
+  expect_equal(res2[3], "29FEB1924")
+  expect_equal(is.na(res2[4]), TRUE )
+  expect_equal(res2[5], "31DEC1980")
+  expect_equal(res2[6], "29FEB2020")
+  expect_equal(res2[7], "20AUG2050")
+  expect_equal(res2[8], "31DEC2099")
   
 })
 
@@ -316,12 +302,11 @@ test_that("datew7: fapply with date10. format works as expected.", {
           "2099-12-31")
   
   date = as.Date(v1)
-  pdate = lubridate::ym("1999-07")
+ 
   ndate = as.numeric(date, origin = "1970-01-01")
   
   res1 = fapply(date, "date10")
-  res2 = fapply(pdate, "date10")
-  res3 = fapply(ndate, "date10")
+  res2 = fapply(ndate, "date10")
   
   
   expect_equal(res1[1], " 01JAN1900")
@@ -332,16 +317,15 @@ test_that("datew7: fapply with date10. format works as expected.", {
   expect_equal(res1[6], " 29FEB2020")
   expect_equal(res1[7], " 20AUG2050")
   expect_equal(res1[8], " 31DEC2099")
-  expect_equal(res2, " 01JUL1999")
   
-  expect_equal(res3[1], " 01JAN1900")
-  expect_equal(res3[2], " 15JUN1912")
-  expect_equal(res3[3], " 29FEB1924")
-  expect_equal(is.na(res3[4]), TRUE )
-  expect_equal(res3[5], " 31DEC1980")
-  expect_equal(res3[6], " 29FEB2020")
-  expect_equal(res3[7], " 20AUG2050")
-  expect_equal(res3[8], " 31DEC2099")
+  expect_equal(res2[1], " 01JAN1900")
+  expect_equal(res2[2], " 15JUN1912")
+  expect_equal(res2[3], " 29FEB1924")
+  expect_equal(is.na(res2[4]), TRUE )
+  expect_equal(res2[5], " 31DEC1980")
+  expect_equal(res2[6], " 29FEB2020")
+  expect_equal(res2[7], " 20AUG2050")
+  expect_equal(res2[8], " 31DEC2099")
   
 })
 
@@ -357,12 +341,11 @@ test_that("datew8: fapply with date11. format works as expected.", {
           "2099-12-31")
   
   date = as.Date(v1)
-  pdate = lubridate::ym("1999-07")
+ 
   ndate = as.numeric(date, origin = "1970-01-01")
   
   res1 = fapply(date, "date11")
-  res2 = fapply(pdate, "date11")
-  res3 = fapply(ndate, "date11")
+  res2 = fapply(ndate, "date11")
   
   
   expect_equal(res1[1], "01-JAN-1900")
@@ -373,16 +356,15 @@ test_that("datew8: fapply with date11. format works as expected.", {
   expect_equal(res1[6], "29-FEB-2020")
   expect_equal(res1[7], "20-AUG-2050")
   expect_equal(res1[8], "31-DEC-2099")
-  expect_equal(res2, "01-JUL-1999")
   
-  expect_equal(res3[1], "01-JAN-1900")
-  expect_equal(res3[2], "15-JUN-1912")
-  expect_equal(res3[3], "29-FEB-1924")
-  expect_equal(is.na(res3[4]), TRUE )
-  expect_equal(res3[5], "31-DEC-1980")
-  expect_equal(res3[6], "29-FEB-2020")
-  expect_equal(res3[7], "20-AUG-2050")
-  expect_equal(res3[8], "31-DEC-2099")
+  expect_equal(res2[1], "01-JAN-1900")
+  expect_equal(res2[2], "15-JUN-1912")
+  expect_equal(res2[3], "29-FEB-1924")
+  expect_equal(is.na(res2[4]), TRUE )
+  expect_equal(res2[5], "31-DEC-1980")
+  expect_equal(res2[6], "29-FEB-2020")
+  expect_equal(res2[7], "20-AUG-2050")
+  expect_equal(res2[8], "31-DEC-2099")
   
 })
 
@@ -399,11 +381,10 @@ test_that("datew9: test default value handling.", {
   
   date = as.Date(v1)
   ndate = as.numeric(date, origin = "1970-01-01")
-  pdate = lubridate::ym("1999-07")
+ 
   
   res1 = fapply(date, "date")
-  res2 = fapply(pdate, "date")
-  res3 = fapply(ndate, "date")
+  res2 = fapply(ndate, "date")
   
   expect_equal(res1[1], "01JAN00")
   expect_equal(res1[2], "15JUN12")
@@ -413,16 +394,15 @@ test_that("datew9: test default value handling.", {
   expect_equal(res1[6], "29FEB20")
   expect_equal(res1[7], "20AUG50")
   expect_equal(res1[8], "31DEC99")
-  expect_equal(res2, "01JUL99")
   
-  expect_equal(res3[1], "01JAN00")
-  expect_equal(res3[2], "15JUN12")
-  expect_equal(res3[3], "29FEB24")
-  expect_equal(is.na(res3[4]), TRUE )
-  expect_equal(res3[5], "31DEC80")
-  expect_equal(res3[6], "29FEB20")
-  expect_equal(res3[7], "20AUG50")
-  expect_equal(res3[8], "31DEC99")
+  expect_equal(res2[1], "01JAN00")
+  expect_equal(res2[2], "15JUN12")
+  expect_equal(res2[3], "29FEB24")
+  expect_equal(is.na(res2[4]), TRUE )
+  expect_equal(res2[5], "31DEC80")
+  expect_equal(res2[6], "29FEB20")
+  expect_equal(res2[7], "20AUG50")
+  expect_equal(res2[8], "31DEC99")
   
 })
 
