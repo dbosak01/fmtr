@@ -8,7 +8,7 @@ format_datew <- function(date, wdth){
   
   }else{
     
-      if (class(date) == "numeric"){
+      if ("numeric" %in% class(date) ){
         
         date = as.Date(date, origin = "1970-01-01")
         

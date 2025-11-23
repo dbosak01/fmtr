@@ -425,3 +425,32 @@ test_that("datew10: test case sensitivity of the format name.", {
 
 })
 
+test_that("datew11: fapply with POSIXt class work as expected", {
+  
+  v1 = c(
+    "2025-01-01 10:30:00",
+    "2025-02-15 23:59:59",
+    "2025-03-20 08:05:12",
+    "2025-04-10 14:45:30",
+    "2025-05-05 00:00:00"
+  )
+  
+  datetime = as.POSIXct(v1)
+  
+  res1 = fapply(datetime, "date7")
+  res2 = fapply(datetime, "date11")
+  
+  expect_equal(res1[1], "01JAN25")
+  expect_equal(res1[2], "15FEB25")
+  expect_equal(res1[3], "20MAR25")
+  expect_equal(res1[4], "10APR25")
+  expect_equal(res1[5], "05MAY25")
+  
+  expect_equal(res2[1], "01-JAN-2025")
+  expect_equal(res2[2], "15-FEB-2025")
+  expect_equal(res2[3], "20-MAR-2025")
+  expect_equal(res2[4], "10-APR-2025")
+  expect_equal(res2[5], "05-MAY-2025")
+  
+  
+})
