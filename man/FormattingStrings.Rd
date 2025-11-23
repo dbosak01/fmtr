@@ -47,6 +47,28 @@ See the \code{\link[base]{strptime}} function for additional codes and
 examples of formatting dates and times.
 }
 
+\section{"DATEw." date format}{
+
+The "date" format is a special date-display format that replicates the
+behavior of the SAS DATEw. family of formats. The "date" format converts
+either numeric date values, R \code{Date} objects, or \code{POSIXt} date-time
+objects into standard SAS-style character representations, with the specific 
+output depending on the width.
+
+Smaller widths show abbreviated forms (e.g., "JAN70" for date5), while
+larger widths show full day/month/year values (e.g., "01JAN1970" for date9
+or "01-JAN-1970" for date11). For \code{POSIXt} values, only the date
+portion is used.
+
+Numeric inputs follow R conventions and are interpreted as days since
+1970-01-01. The default width is 7, so "date" is interpreted as "date7". 
+Both "date7" and "date7." are accepted; the trailing period is optional.
+
+Output always occupies the exact width. If shorter, it is left-padded
+with spaces. For example, for 1970-01-01, "date7." returns "01JAN70"
+while "date8." returns " 01JAN70".
+}
+
 \section{Numeric Formatting}{
 
 
@@ -86,6 +108,18 @@ fapply(t, "\%y-\%m")                 # Two digit year - month
 fapply(t, "\%A, \%B \%d")             # Weekday, unabbreviated month and date
 fapply(t, "\%Y-\%Q")                 # Year and Quarter
 fapply(t, "\%Y-\%m\%-\%d \%H:\%M:\%S \%p") # Common timestamp format
+
+# Examples for formatting dates (date and times) using "DATEw."
+d <- Sys.Date()
+fapply(d, "date5")                 # Month Year (mmmyy)
+fapply(d, "date7")                 # Day Month Year (ddmmmyy)
+fapply(d, "date9")                 # Day Month Year (ddmmmyyyy)
+fapply(d, "date11")                # Day Month Year (dd-mmm-yyyy)
+t <- Sys.time()
+fapply(t, "date5")                 # Month Year (mmmyy)
+fapply(t, "date7")                 # Day Month Year (ddmmmyy)
+fapply(t, "date9")                 # Day Month Year (ddmmmyyyy)
+fapply(t, "date11")                # Day Month Year (dd-mmm-yyyy)
 
 # Examples for formatting numbers
 a <- 1234.56789
