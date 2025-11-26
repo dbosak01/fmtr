@@ -1,12 +1,15 @@
+
+
+#' @noRd
 format_datew <- function(date, wdth){
   
   
   
   if (5 > wdth | wdth > 11){
     
-    stop( paste0( "Width specified for format DATE is invalid,  width should be between 5 and 11" ) )
+    stop("Width specified for format DATE is invalid. Please specify a value between 5 and 11.")
   
-  }else{
+  } else {
     
       if ("numeric" %in% class(date) ){
         

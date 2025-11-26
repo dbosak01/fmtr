@@ -144,35 +144,27 @@ extension will be added automatically.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Create formatting list</span></span></span>
-<span class="r-in"><span><span class="va">fl</span> <span class="op">&lt;-</span> <span class="fu"><a href="flist.html">flist</a></span><span class="op">(</span>f1 <span class="op">=</span> <span class="st">"%5.1f"</span>,</span></span>
-<span class="r-in"><span>            f2 <span class="op">=</span> <span class="st">"%6.2f"</span>,</span></span>
-<span class="r-in"><span>            type <span class="op">=</span> <span class="st">"row"</span><span class="op">)</span></span></span>
-<span class="r-in"><span>           </span></span>
-<span class="r-in"><span><span class="co"># Get temp directory</span></span></span>
-<span class="r-in"><span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>            </span></span>
-<span class="r-in"><span>           </span></span>
-<span class="r-in"><span><span class="co"># Save formatting list to file system</span></span></span>
-<span class="r-in"><span><span class="va">pth</span> <span class="op">&lt;-</span> <span class="fu">write.flist</span><span class="op">(</span><span class="va">fl</span>, dir_path <span class="op">=</span> <span class="va">tmp</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Read from file system</span></span></span>
-<span class="r-in"><span><span class="va">fr</span> <span class="op">&lt;-</span> <span class="fu"><a href="read.flist.html">read.flist</a></span><span class="op">(</span><span class="va">pth</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A formatting list: 2 formats</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">- type: row</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">- simplify: TRUE</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Name Type Expression Label Order Factor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   f1    S      %5.1f          NA     NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   f2    S      %6.2f          NA     NA</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Create sample data</span></span></span>
-<span class="r-in"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12.3844</span>, <span class="fl">292.28432</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Use formats in the catalog</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">fr</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] " 12.4"  "292.28"</span>
-<span class="r-in"><span><span class="co"># [1] " 12.4"  "292.28"</span></span></span>
-<span class="r-in"><span></span></span>
-</code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># Create formatting list</span></span>
+<span><span class="va">fl</span> <span class="op">&lt;-</span> <span class="fu"><a href="flist.html">flist</a></span><span class="op">(</span>f1 <span class="op">=</span> <span class="st">"%5.1f"</span>,</span>
+<span>            f2 <span class="op">=</span> <span class="st">"%6.2f"</span>,</span>
+<span>            type <span class="op">=</span> <span class="st">"row"</span><span class="op">)</span></span>
+<span>           </span>
+<span><span class="co"># Get temp directory</span></span>
+<span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>            </span>
+<span>           </span>
+<span><span class="co"># Save formatting list to file system</span></span>
+<span><span class="va">pth</span> <span class="op">&lt;-</span> <span class="fu">write.flist</span><span class="op">(</span><span class="va">fl</span>, dir_path <span class="op">=</span> <span class="va">tmp</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Read from file system</span></span>
+<span><span class="va">fr</span> <span class="op">&lt;-</span> <span class="fu"><a href="read.flist.html">read.flist</a></span><span class="op">(</span><span class="va">pth</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create sample data</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12.3844</span>, <span class="fl">292.28432</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Use formats in the catalog</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">fr</span><span class="op">)</span></span>
+<span><span class="co"># [1] " 12.4"  "292.28"</span></span>
+<span></span></code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -182,7 +174,7 @@ extension will be added automatically.</p></dd>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by David Bosak.</p>
+  <p></p><p>Developed by David Bosak, Chen Ling.</p>
 </div>
 
 <div class="pkgdown">

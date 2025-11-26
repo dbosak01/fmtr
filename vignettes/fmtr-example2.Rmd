@@ -204,7 +204,7 @@ log_close()
 
 Here is the report produced by the above sample program:
 
-<img src="../man/images/example2.png"/>
+<img src="../man/images/example2.png" alt = "Example 2 Output"/>
 
 ## Log
 

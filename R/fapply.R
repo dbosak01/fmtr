@@ -25,7 +25,9 @@
 #' formats:
 #' \itemize{
 #'   \item{\strong{Formatting string:} A single string will be interpreted as 
-#' a formatting string.  See the \link{FormattingStrings} documentation for 
+#' a formatting string. Formatting strings include R-style formatting codes, 
+#' and some SAS-style format names like "best" and "date". 
+#' See the \link{FormattingStrings} documentation and the sections below for 
 #' further details.}
 #'   \item{\strong{Named vector:} A named vector can serve as a lookup list or 
 #'   decode 
@@ -39,9 +41,6 @@
 #' the most flexibility and power over your formatting.  You can use 
 #' an existing formatting function from any package, or create 
 #' your own vectorized formatting function using \code{\link[base]{Vectorize}}.}
-#' \item{\strong{"best" format name:} A "best" format name of the form 
-#' "bestW", where "W" is the desired width.  The "best" format replicates the 
-#' SAS format of the same name.  See section below for further information.}
 #' }
 #' 
 #' \code{fapply} will also accept a formatting list, which can contain any 
@@ -78,11 +77,11 @@
 #' For large values, there are some differences between SAS and R in how they
 #' represent these numbers, and sometimes they will not match.
 #' 
-#' @section "DATEw." Format:
-#' The SAS "DATEw." format is used to display date values in a readable
+#' @section "date" Format:
+#' The "date" format is used to display date values in a readable
 #' character form, such as "01JAN70" or "01-JAN-1970", depending on the
-#' specified width. The word "date" is followed by the desired w(width),
-#' e.g. "date7" or "date9".
+#' specified width. The word "date" is followed by the desired width,
+#' e.g. "date7" or "date9". This format replicates similar capabilities in SAS.
 #' 
 #' The format converts numeric or Date values into character strings using
 #' a pattern that depends on the width. Smaller widths display shorter forms,
@@ -97,14 +96,14 @@
 #' 
 #' The "date" format accepts widths between 5 and 11. Widths outside this
 #' range are not valid and will result in an error. The default width is 7.
-#' Both \code{"datew"} and \code{"datew."} are accepted, the trailing period
+#' Both \code{"dateW"} and \code{"dateW."} are accepted, the trailing dot (".")
 #' is optional and does not affect behavior.
 #' 
 #' For input values that are numeric, the function will interpret them as
 #' the number of days since 1970-01-01, consistent with R's internal date
-#' representation (different from SAS, which uses 1960-01-01). If the input
+#' representation. If the input
 #' is already an R \code{Date} or \code{POSIXt} object, it will be used directly. 
-#' Missing or invalid inputs will result in blank output of the specified width.
+#' Missing values will be returned as missing.
 #' 
 #' The output value is left-padded with spaces if it is shorter than the
 #' requested width, ensuring the formatted result always occupies exactly the
@@ -112,11 +111,9 @@
 #' the result of \code{date7} is \code{"01JAN70"}, while the result of
 #' \code{date8} is \code{" 01JAN70"}, with one additional leading space.
 #' 
-#' This format has no direct equivalent in base R, so the \strong{fmtr} package
+#' This format has no direct equivalent in base R. The \strong{fmtr} package
 #' adds this capability for users who wish to replicate SAS-style "date"
-#' formatting behavior as closely as possible, adapted to R's date origin
-#' and conventions.
-#' 
+#' formatting behavior as closely as possible.
 #' 
 #' @param x A vector, factor, or list to apply the format to.
 #' @param format A format to be applied.
@@ -240,12 +237,15 @@
 #' fapply(v7, "best6")
 #' # [1] "12.346" "1.23E6" NA       "0.1235" "123E-7"
 #' 
-#' # Example 9: "DATEw." Format
+#' # Example 9: "date" Format
 #' #' # Data Vector
 #' v8 <- as.Date(c("1924-02-29",NA,"1980-12-31","2019-12-31","2020-02-29","2030-08-20"))
 #' 
 #' fapply(v8, "date7")
-#' # [1] "29FEB24" NA        "31DEC80" "31DEC19" "29FEB20" "20AUG30"
+#' # [1] "29FEB24" NA   "31DEC80" "31DEC19" "29FEB20" "20AUG30"
+#' 
+#' fapply(v8, "date11")
+#' # [1] "29-FEB-1924" NA   "31-DEC-1980" "31-DEC-2019" "29-FEB-2020" "20-AUG-2030"
 #' 
 fapply <- function(x, format = NULL, width = NULL, justify = NULL) {
   
@@ -509,7 +509,7 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
           ret <- format_best(x, wdth)
           
           
-        }else if (datew) {
+        } else if (datew) {
           
           wdth <- sub("date", "", tolower(fmt), fixed = TRUE)
           wdth <- suppressWarnings(as.integer(wdth))
@@ -549,8 +549,8 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
       if (datew){
         
         
-        wdth<- sub("date", "", tolower(fmt), fixed = TRUE)
-        wdth<-suppressWarnings(as.integer(wdth))
+        wdth <- sub("date", "", tolower(fmt), fixed = TRUE)
+        wdth <-suppressWarnings(as.integer(wdth))
         
         if (is.na(wdth)){
           
@@ -566,7 +566,7 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
         # Turn NA strings back into real NA
         ret <- replace(ret, nas, NA)
         
-      }else{
+      } else {
         
         if (udfmt == TRUE) {
           

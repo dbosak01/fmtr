@@ -169,25 +169,18 @@ function.  See <code><a href="fapply.html">fapply</a></code> for further details
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Set up vector</span></span></span>
-<span class="r-in"><span><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"B"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Define format</span></span></span>
-<span class="r-in"><span><span class="va">fmt1</span> <span class="op">&lt;-</span> <span class="fu"><a href="value.html">value</a></span><span class="op">(</span><span class="fu">condition</span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"A"</span>, <span class="st">"Label A"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>              <span class="fu">condition</span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"B"</span>, <span class="st">"Label B"</span><span class="op">)</span>, </span></span>
-<span class="r-in"><span>              <span class="fu">condition</span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"Other"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A user-defined format: 3 conditions</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Name Type Expression   Label Order</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    x    U   x == "A" Label A    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    x    U   x == "B" Label B    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    x    U       TRUE   Other    NA</span>
-<span class="r-in"><span>              </span></span>
-<span class="r-in"><span><span class="co"># Apply format to vector</span></span></span>
-<span class="r-in"><span><span class="va">v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">v1</span>, <span class="va">fmt1</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">v2</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Label A" "Label B" "Other"   "Label B"</span>
-<span class="r-in"><span><span class="co"># [1] "Label A" "Label B" "Other"   "Label B"</span></span></span>
-</code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># Set up vector</span></span>
+<span><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"B"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define format</span></span>
+<span><span class="va">fmt1</span> <span class="op">&lt;-</span> <span class="fu"><a href="value.html">value</a></span><span class="op">(</span><span class="fu">condition</span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"A"</span>, <span class="st">"Label A"</span><span class="op">)</span>,</span>
+<span>              <span class="fu">condition</span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"B"</span>, <span class="st">"Label B"</span><span class="op">)</span>, </span>
+<span>              <span class="fu">condition</span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"Other"</span><span class="op">)</span><span class="op">)</span></span>
+<span>              </span>
+<span><span class="co"># Apply format to vector</span></span>
+<span><span class="va">v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">v1</span>, <span class="va">fmt1</span><span class="op">)</span></span>
+<span><span class="va">v2</span></span>
+<span><span class="co"># [1] "Label A" "Label B" "Other"   "Label B"</span></span></code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -197,7 +190,7 @@ function.  See <code><a href="fapply.html">fapply</a></code> for further details
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by David Bosak.</p>
+  <p></p><p>Developed by David Bosak, Chen Ling.</p>
 </div>
 
 <div class="pkgdown">

@@ -133,6 +133,23 @@ the output <code>"January 01, 1970"</code>.  The code
 </ul><p>See the <code><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strptime</a></code> function for additional codes and
 examples of formatting dates and times.</p>
     </div>
+    <div id="-date-format">
+    <h2>"date" Format</h2>
+
+
+<p>The "dateW." format is a date-display format that replicates the
+behavior of the SAS "DATEw." family of formats. The "dateW." format converts
+either numeric date values, R <code>Date</code> objects, or <code>POSIXt</code> date-time
+objects into standard fixed-width character representations.</p>
+<p>Smaller widths show abbreviated forms (e.g., "JAN70" for "date5"), while
+larger widths show full day/month/year values (e.g., "01JAN1970" for "date9"
+or "01-JAN-1970" for "date11"). For <code>POSIXt</code> values, only the date
+portion is used.</p>
+<p>Numeric inputs follow R conventions and are interpreted as days since
+1970-01-01. The default width is 7. A trailing dot (".") is optional.</p>
+<p>Output always occupies the specified width. If the date value is shorter
+than the specified width, it is left-padded with spaces.</p>
+    </div>
     <div id="numeric-formatting">
     <h2>Numeric Formatting</h2>
 
@@ -168,51 +185,44 @@ it will be interpreted as "best12".</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Examples for formatting dates and times </span></span></span>
-<span class="r-in"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"%d/%m/%Y"</span><span class="op">)</span>              <span class="co"># Day/Month/Year</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "06/10/2025"</span>
-<span class="r-in"><span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"%d%b%Y"</span><span class="op">)</span>                <span class="co"># Day abbreviated month year</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "06Oct2025"</span>
-<span class="r-in"><span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"%y-%m"</span><span class="op">)</span>                 <span class="co"># Two digit year - month</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "25-10"</span>
-<span class="r-in"><span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"%A, %B %d"</span><span class="op">)</span>             <span class="co"># Weekday, unabbreviated month and date</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Monday, October 06"</span>
-<span class="r-in"><span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"%Y-%Q"</span><span class="op">)</span>                 <span class="co"># Year and Quarter</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2025-Q4"</span>
-<span class="r-in"><span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"%Y-%m%-%d %H:%M:%S %p"</span><span class="op">)</span> <span class="co"># Common timestamp format</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2025-10-06 00:00:32 AM"</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Examples for formatting numbers</span></span></span>
-<span class="r-in"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">1234.56789</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"%f"</span><span class="op">)</span>                    <span class="co"># Floating point number</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1234.567890"</span>
-<span class="r-in"><span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"%.1f"</span><span class="op">)</span>                  <span class="co"># One decimal place</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1234.6"</span>
-<span class="r-in"><span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"%8.1f"</span><span class="op">)</span>                 <span class="co"># Fixed width</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "  1234.6"</span>
-<span class="r-in"><span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"%-8.1f"</span><span class="op">)</span>                <span class="co"># Fixed width left justified</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1234.6  "</span>
-<span class="r-in"><span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"%08.1f"</span><span class="op">)</span>                <span class="co"># Zero padded</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "001234.6"</span>
-<span class="r-in"><span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"%+.1f"</span><span class="op">)</span>                 <span class="co"># Forced sign</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "+1234.6"</span>
-<span class="r-in"><span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="op">-</span><span class="va">a</span>, <span class="st">"%+.1f"</span><span class="op">)</span>                <span class="co"># Negative </span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "-1234.6"</span>
-<span class="r-in"><span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"%.1f%%"</span><span class="op">)</span>                <span class="co"># Percentage</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1234.6%"</span>
-<span class="r-in"><span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"$%.2f"</span><span class="op">)</span>                 <span class="co"># Currency</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "$1234.57"</span>
-<span class="r-in"><span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"The number is %f."</span><span class="op">)</span>     <span class="co"># Interpolation</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The number is 1234.567890."</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># "best" formatting</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"best6"</span><span class="op">)</span>                 <span class="co"># Total width of 6</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1234.6"</span>
-<span class="r-in"><span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"best8"</span><span class="op">)</span>                 <span class="co"># Total width of 8</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1234.568"</span>
-<span class="r-in"><span></span></span>
-</code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># Examples for formatting dates and times </span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"%d/%m/%Y"</span><span class="op">)</span>              <span class="co"># Day/Month/Year</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"%d%b%Y"</span><span class="op">)</span>                <span class="co"># Day abbreviated month year</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"%y-%m"</span><span class="op">)</span>                 <span class="co"># Two digit year - month</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"%A, %B %d"</span><span class="op">)</span>             <span class="co"># Weekday, unabbreviated month and date</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"%Y-%Q"</span><span class="op">)</span>                 <span class="co"># Year and Quarter</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"%Y-%m%-%d %H:%M:%S %p"</span><span class="op">)</span> <span class="co"># Common timestamp format</span></span>
+<span></span>
+<span><span class="co"># Examples for formatting dates (date and times) using "dateW."</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">d</span>, <span class="st">"date5"</span><span class="op">)</span>                 <span class="co"># Month Year (mmmyy)</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">d</span>, <span class="st">"date7"</span><span class="op">)</span>                 <span class="co"># Day Month Year (ddmmmyy)</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">d</span>, <span class="st">"date9"</span><span class="op">)</span>                 <span class="co"># Day Month Year (ddmmmyyyy)</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">d</span>, <span class="st">"date11"</span><span class="op">)</span>                <span class="co"># Day Month Year (dd-mmm-yyyy)</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"date5"</span><span class="op">)</span>                 <span class="co"># Month Year (mmmyy)</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"date7"</span><span class="op">)</span>                 <span class="co"># Day Month Year (ddmmmyy)</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"date9"</span><span class="op">)</span>                 <span class="co"># Day Month Year (ddmmmyyyy)</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"date11"</span><span class="op">)</span>                <span class="co"># Day Month Year (dd-mmm-yyyy)</span></span>
+<span></span>
+<span><span class="co"># Examples for formatting numbers</span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">1234.56789</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"%f"</span><span class="op">)</span>                    <span class="co"># Floating point number</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"%.1f"</span><span class="op">)</span>                  <span class="co"># One decimal place</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"%8.1f"</span><span class="op">)</span>                 <span class="co"># Fixed width</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"%-8.1f"</span><span class="op">)</span>                <span class="co"># Fixed width left justified</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"%08.1f"</span><span class="op">)</span>                <span class="co"># Zero padded</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"%+.1f"</span><span class="op">)</span>                 <span class="co"># Forced sign</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="op">-</span><span class="va">a</span>, <span class="st">"%+.1f"</span><span class="op">)</span>                <span class="co"># Negative </span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"%.1f%%"</span><span class="op">)</span>                <span class="co"># Percentage</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"$%.2f"</span><span class="op">)</span>                 <span class="co"># Currency</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"The number is %f."</span><span class="op">)</span>     <span class="co"># Interpolation</span></span>
+<span></span>
+<span><span class="co"># "best" formatting</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"best6"</span><span class="op">)</span>                 <span class="co"># Total width of 6</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"best8"</span><span class="op">)</span>                 <span class="co"># Total width of 8</span></span>
+<span></span></code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -222,7 +232,7 @@ it will be interpreted as "best12".</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by David Bosak.</p>
+  <p></p><p>Developed by David Bosak, Chen Ling.</p>
 </div>
 
 <div class="pkgdown">

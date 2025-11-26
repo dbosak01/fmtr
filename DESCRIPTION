@@ -9,7 +9,7 @@ Authors@R: c(person(given = "David",
                   email = "dbosak01@gmail.com"),
              person(given = "Chen",
                   family = "Ling",
-                  role = c("ctb"),
+                  role = c("aut"),
                   email = "chen.lingcpu@gmail.com")
                   )
 Description: Contains a set of functions that can be used to apply
@@ -40,7 +40,7 @@ Imports:
     stats,
     crayon,
     Rcpp
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 VignetteBuilder: knitr
 LinkingTo: 
     Rcpp

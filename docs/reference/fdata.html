@@ -151,71 +151,48 @@ functions to get or set formatting for an entire data frame.  Also see
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Construct data frame from state vectors</span></span></span>
-<span class="r-in"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>state <span class="op">=</span> <span class="va">state.abb</span>, area <span class="op">=</span> <span class="va">state.area</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Calculate percentages</span></span></span>
-<span class="r-in"><span><span class="va">df</span><span class="op">$</span><span class="va">pct</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">area</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">state.area</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Before formatting </span></span></span>
-<span class="r-in"><span><span class="va">df</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    state   area         pct</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1     AL  51609  1.42629378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2     AK 589757 16.29883824</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3     AZ 113909  3.14804973</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4     AR  53104  1.46761040</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5     CA 158693  4.38572418</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6     CO 104247  2.88102556</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7     CT   5009  0.13843139</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8     DE   2057  0.05684835</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9     FL  58560  1.61839532</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10    GA  58876  1.62712846</span>
-<span class="r-in"><span><span class="co">#    state   area         pct</span></span></span>
-<span class="r-in"><span><span class="co"># 1     AL  51609  1.42629378</span></span></span>
-<span class="r-in"><span><span class="co"># 2     AK 589757 16.29883824</span></span></span>
-<span class="r-in"><span><span class="co"># 3     AZ 113909  3.14804973</span></span></span>
-<span class="r-in"><span><span class="co"># 4     AR  53104  1.46761040</span></span></span>
-<span class="r-in"><span><span class="co"># 5     CA 158693  4.38572418</span></span></span>
-<span class="r-in"><span><span class="co"># 6     CO 104247  2.88102556</span></span></span>
-<span class="r-in"><span><span class="co"># 7     CT   5009  0.13843139</span></span></span>
-<span class="r-in"><span><span class="co"># 8     DE   2057  0.05684835</span></span></span>
-<span class="r-in"><span><span class="co"># 9     FL  58560  1.61839532</span></span></span>
-<span class="r-in"><span><span class="co"># 10    GA  58876  1.62712846</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Create state name lookup list</span></span></span>
-<span class="r-in"><span><span class="va">name_lookup</span> <span class="op">&lt;-</span> <span class="va">state.name</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">name_lookup</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">state.abb</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Assign formats</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="formats.html">formats</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>state <span class="op">=</span> <span class="va">name_lookup</span>,                         </span></span>
-<span class="r-in"><span>                    area  <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">x</span>, big.mark <span class="op">=</span> <span class="st">","</span><span class="op">)</span>, </span></span>
-<span class="r-in"><span>                    pct   <span class="op">=</span> <span class="st">"%.1f%%"</span><span class="op">)</span> </span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Apply formats</span></span></span>
-<span class="r-in"><span><span class="fu">fdata</span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          state    area   pct</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1      Alabama  51,609  1.4%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2       Alaska 589,757 16.3%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3      Arizona 113,909  3.1%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4     Arkansas  53,104  1.5%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   California 158,693  4.4%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6     Colorado 104,247  2.9%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  Connecticut   5,009  0.1%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8     Delaware   2,057  0.1%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9      Florida  58,560  1.6%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10     Georgia  58,876  1.6%</span>
-<span class="r-in"><span><span class="co">#          state    area   pct</span></span></span>
-<span class="r-in"><span><span class="co"># 1      Alabama  51,609  1.4%</span></span></span>
-<span class="r-in"><span><span class="co"># 2       Alaska 589,757 16.3%</span></span></span>
-<span class="r-in"><span><span class="co"># 3      Arizona 113,909  3.1%</span></span></span>
-<span class="r-in"><span><span class="co"># 4     Arkansas  53,104  1.5%</span></span></span>
-<span class="r-in"><span><span class="co"># 5   California 158,693  4.4%</span></span></span>
-<span class="r-in"><span><span class="co"># 6     Colorado 104,247  2.9%</span></span></span>
-<span class="r-in"><span><span class="co"># 7  Connecticut   5,009  0.1%</span></span></span>
-<span class="r-in"><span><span class="co"># 8     Delaware   2,057  0.1%</span></span></span>
-<span class="r-in"><span><span class="co"># 9      Florida  58,560  1.6%</span></span></span>
-<span class="r-in"><span><span class="co"># 10     Georgia  58,876  1.6%</span></span></span>
-</code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># Construct data frame from state vectors</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>state <span class="op">=</span> <span class="va">state.abb</span>, area <span class="op">=</span> <span class="va">state.area</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="co"># Calculate percentages</span></span>
+<span><span class="va">df</span><span class="op">$</span><span class="va">pct</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">$</span><span class="va">area</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">state.area</span><span class="op">)</span> <span class="op">*</span> <span class="fl">100</span></span>
+<span></span>
+<span><span class="co"># Before formatting </span></span>
+<span><span class="va">df</span></span>
+<span><span class="co">#    state   area         pct</span></span>
+<span><span class="co"># 1     AL  51609  1.42629378</span></span>
+<span><span class="co"># 2     AK 589757 16.29883824</span></span>
+<span><span class="co"># 3     AZ 113909  3.14804973</span></span>
+<span><span class="co"># 4     AR  53104  1.46761040</span></span>
+<span><span class="co"># 5     CA 158693  4.38572418</span></span>
+<span><span class="co"># 6     CO 104247  2.88102556</span></span>
+<span><span class="co"># 7     CT   5009  0.13843139</span></span>
+<span><span class="co"># 8     DE   2057  0.05684835</span></span>
+<span><span class="co"># 9     FL  58560  1.61839532</span></span>
+<span><span class="co"># 10    GA  58876  1.62712846</span></span>
+<span></span>
+<span><span class="co"># Create state name lookup list</span></span>
+<span><span class="va">name_lookup</span> <span class="op">&lt;-</span> <span class="va">state.name</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">name_lookup</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">state.abb</span></span>
+<span></span>
+<span><span class="co"># Assign formats</span></span>
+<span><span class="fu"><a href="formats.html">formats</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>state <span class="op">=</span> <span class="va">name_lookup</span>,                         </span>
+<span>                    area  <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">x</span>, big.mark <span class="op">=</span> <span class="st">","</span><span class="op">)</span>, </span>
+<span>                    pct   <span class="op">=</span> <span class="st">"%.1f%%"</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="co"># Apply formats</span></span>
+<span><span class="fu">fdata</span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span><span class="co">#          state    area   pct</span></span>
+<span><span class="co"># 1      Alabama  51,609  1.4%</span></span>
+<span><span class="co"># 2       Alaska 589,757 16.3%</span></span>
+<span><span class="co"># 3      Arizona 113,909  3.1%</span></span>
+<span><span class="co"># 4     Arkansas  53,104  1.5%</span></span>
+<span><span class="co"># 5   California 158,693  4.4%</span></span>
+<span><span class="co"># 6     Colorado 104,247  2.9%</span></span>
+<span><span class="co"># 7  Connecticut   5,009  0.1%</span></span>
+<span><span class="co"># 8     Delaware   2,057  0.1%</span></span>
+<span><span class="co"># 9      Florida  58,560  1.6%</span></span>
+<span><span class="co"># 10     Georgia  58,876  1.6%</span></span></code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -225,7 +202,7 @@ functions to get or set formatting for an entire data frame.  Also see
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by David Bosak.</p>
+  <p></p><p>Developed by David Bosak, Chen Ling.</p>
 </div>
 
 <div class="pkgdown">

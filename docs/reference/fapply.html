@@ -141,7 +141,9 @@ formatting attributes.</p>
 
 <p>The <code>fapply</code> function will process any of the following types of
 formats:</p><ul><li><p><strong>Formatting string:</strong> A single string will be interpreted as
-a formatting string.  See the <a href="FormattingStrings.html">FormattingStrings</a> documentation for
+a formatting string. Formatting strings include R-style formatting codes,
+and some SAS-style format names like "best" and "date".
+See the <a href="FormattingStrings.html">FormattingStrings</a> documentation and the sections below for
 further details.</p></li>
 <li><p><strong>Named vector:</strong> A named vector can serve as a lookup list or
   decode
@@ -155,9 +157,6 @@ lookups on character vectors.</p></li>
 the most flexibility and power over your formatting.  You can use
 an existing formatting function from any package, or create
 your own vectorized formatting function using <code><a href="https://rdrr.io/r/base/Vectorize.html" class="external-link">Vectorize</a></code>.</p></li>
-<li><p><strong>"best" format name:</strong> A "best" format name of the form
-"bestW", where "W" is the desired width.  The "best" format replicates the
-SAS format of the same name.  See section below for further information.</p></li>
 </ul><p><code>fapply</code> will also accept a formatting list, which can contain any
 number of formats from the above list.  To create a formatting list,
 see the <code><a href="flist.html">flist</a></code> function.</p>
@@ -190,6 +189,39 @@ Small widths have many special cases, and the logic is difficult to replicate.
 For large values, there are some differences between SAS and R in how they
 represent these numbers, and sometimes they will not match.</p>
     </div>
+    <div id="-date-format">
+    <h2>"date" Format</h2>
+
+
+<p>The "date" format is used to display date values in a readable
+character form, such as "01JAN70" or "01-JAN-1970", depending on the
+specified width. The word "date" is followed by the desired width,
+e.g. "date7" or "date9". This format replicates similar capabilities in SAS.</p>
+<p>The format converts numeric or Date values into character strings using
+a pattern that depends on the width. Smaller widths display shorter forms,
+while larger widths display more detail. For example:</p>
+<ul><li><p><strong>date5</strong> – Displays as <code>mmmyy</code> (e.g., "JAN70")</p></li>
+<li><p><strong>date7</strong> – Displays as <code>ddmmmyy</code> (e.g., "01JAN70")</p></li>
+<li><p><strong>date9</strong> – Displays as <code>ddmmmyyyy</code> (e.g., "01JAN1970")</p></li>
+<li><p><strong>date11</strong> – Displays as <code>dd-mmm-yyyy</code> (e.g., "01-JAN-1970")</p></li>
+</ul><p>The "date" format accepts widths between 5 and 11. Widths outside this
+range are not valid and will result in an error. The default width is 7.
+Both <code>"dateW"</code> and <code>"dateW."</code> are accepted, the trailing dot (".")
+is optional and does not affect behavior.</p>
+<p>For input values that are numeric, the function will interpret them as
+the number of days since 1970-01-01, consistent with R's internal date
+representation. If the input
+is already an R <code>Date</code> or <code>POSIXt</code> object, it will be used directly.
+Missing values will be returned as missing.</p>
+<p>The output value is left-padded with spaces if it is shorter than the
+requested width, ensuring the formatted result always occupies exactly the
+specified number of characters. For example, for the date 1970-01-01,
+the result of <code>date7</code> is <code>"01JAN70"</code>, while the result of
+<code>date8</code> is <code>" 01JAN70"</code>, with one additional leading space.</p>
+<p>This format has no direct equivalent in base R. The <strong>fmtr</strong> package
+adds this capability for users who wish to replicate SAS-style "date"
+formatting behavior as closely as possible.</p>
+    </div>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p><code><a href="fcat.html">fcat</a></code> to create a format catalog,
@@ -202,141 +234,122 @@ and <code><a href="flist.html">flist</a></code> to define a formatting list.  Al
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Example 1: Formatting string ##</span></span></span>
-<span class="r-in"><span><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.235</span>, <span class="fl">8.363</span>, <span class="fl">5.954</span>, <span class="fl">2.465</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Apply string format.</span></span></span>
-<span class="r-in"><span><span class="fu">fapply</span><span class="op">(</span><span class="va">v1</span>, <span class="st">"%.1f"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1.2" "8.4" "6.0" "2.5"</span>
-<span class="r-in"><span><span class="co"># [1] "1.2" "8.4" "6.0" "2.5"</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Apply width and two decimals</span></span></span>
-<span class="r-in"><span><span class="fu">fapply</span><span class="op">(</span><span class="va">v1</span>, <span class="st">"%5.2f"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] " 1.24" " 8.36" " 5.95" " 2.46"</span>
-<span class="r-in"><span><span class="co"># [1] " 1.24" " 8.36" " 5.95" " 2.46"</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Apply "best" format</span></span></span>
-<span class="r-in"><span><span class="fu">fapply</span><span class="op">(</span><span class="va">v1</span>, <span class="st">"best3"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1.2" "8.4" "  6" "2.5"</span>
-<span class="r-in"><span><span class="co"># [1] "1.2" "8.4" "  6" "2.5"</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">## Example 2: Named vector ##</span></span></span>
-<span class="r-in"><span><span class="co"># Set up vector</span></span></span>
-<span class="r-in"><span><span class="va">v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"B"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Set up named vector for formatting</span></span></span>
-<span class="r-in"><span><span class="va">fmt2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>A <span class="op">=</span> <span class="st">"Label A"</span>, B <span class="op">=</span> <span class="st">"Label B"</span>, C <span class="op">=</span> <span class="st">"Label C"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Apply format to vector</span></span></span>
-<span class="r-in"><span><span class="fu">fapply</span><span class="op">(</span><span class="va">v2</span>, <span class="va">fmt2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Label A" "Label B" "Label C" "Label B"</span>
-<span class="r-in"><span><span class="co"># [1] "Label A" "Label B" "Label C" "Label B"</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">## Example 3: User-defined format ##</span></span></span>
-<span class="r-in"><span><span class="co"># Define format</span></span></span>
-<span class="r-in"><span><span class="va">fmt3</span> <span class="op">&lt;-</span> <span class="fu"><a href="value.html">value</a></span><span class="op">(</span><span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"A"</span>, <span class="st">"Label A"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>              <span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"B"</span>, <span class="st">"Label B"</span><span class="op">)</span>, </span></span>
-<span class="r-in"><span>              <span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"Other"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A user-defined format: 3 conditions</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Name Type Expression   Label Order</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    x    U   x == "A" Label A    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    x    U   x == "B" Label B    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    x    U       TRUE   Other    NA</span>
-<span class="r-in"><span>              </span></span>
-<span class="r-in"><span><span class="co"># Apply format to vector</span></span></span>
-<span class="r-in"><span><span class="fu">fapply</span><span class="op">(</span><span class="va">v2</span>, <span class="va">fmt3</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Label A" "Label B" "Other"   "Label B"</span>
-<span class="r-in"><span><span class="co"># [1] "Label A" "Label B" "Other"   "Label B"</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">## Example 4: Formatting function ##</span></span></span>
-<span class="r-in"><span><span class="co"># Set up vectorized function</span></span></span>
-<span class="r-in"><span><span class="va">fmt4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Vectorize.html" class="external-link">Vectorize</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="va">ret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Label"</span>, <span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="kw">else</span></span></span>
-<span class="r-in"><span>    <span class="va">ret</span> <span class="op">&lt;-</span> <span class="st">"Other"</span> </span></span>
-<span class="r-in"><span>    </span></span>
-<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">ret</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Apply format to vector</span></span></span>
-<span class="r-in"><span><span class="fu">fapply</span><span class="op">(</span><span class="va">v2</span>, <span class="va">fmt4</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Label A" "Label B" "Other"   "Label B"</span>
-<span class="r-in"><span><span class="co"># [1] "Label A" "Label B" "Other"   "Label B"</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">## Example 5: Formatting List - Row Type ##</span></span></span>
-<span class="r-in"><span><span class="co"># Set up data</span></span></span>
-<span class="r-in"><span><span class="co"># Notice each row has a different data type</span></span></span>
-<span class="r-in"><span><span class="va">v3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">2841.258</span>, <span class="st">"H"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>           <span class="st">"L"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fl">60</span>, <span class="fl">1382.8865</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">v4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"int"</span>, <span class="st">"char"</span>, <span class="st">"date"</span>, <span class="st">"char"</span>, <span class="st">"date"</span>, <span class="st">"int"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Create formatting list</span></span></span>
-<span class="r-in"><span><span class="va">lst</span> <span class="op">&lt;-</span> <span class="fu"><a href="flist.html">flist</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"row"</span>, lookup <span class="op">=</span> <span class="va">v4</span>,</span></span>
-<span class="r-in"><span>       int <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fl">2</span>, nsmall <span class="op">=</span> <span class="fl">1</span>, </span></span>
-<span class="r-in"><span>                                  big.mark<span class="op">=</span><span class="st">","</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>       char <span class="op">=</span> <span class="fu"><a href="value.html">value</a></span><span class="op">(</span><span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"H"</span>, <span class="st">"High"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                     <span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"L"</span>, <span class="st">"Low"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                     <span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"NA"</span><span class="op">)</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>       date <span class="op">=</span> <span class="st">"%d%b%Y"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A user-defined format: 3 conditions</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Name Type Expression Label Order</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    x    U   x == "H"  High    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    x    U   x == "L"   Low    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    x    U       TRUE    NA    NA</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Apply formatting list to vector</span></span></span>
-<span class="r-in"><span><span class="fu">fapply</span><span class="op">(</span><span class="va">v3</span>, <span class="va">lst</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2,841.3"   "High"      "06Oct2025" "Low"       "05Dec2025" "1,382.9"  </span>
-<span class="r-in"><span><span class="co"># [1] "2,841.3"   "High"      "06Jan2024" "Low"       "06Mar2024" "1,382.9"  </span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">## Example 6: Formatting List - Column Type ##</span></span></span>
-<span class="r-in"><span><span class="co"># Set up data</span></span></span>
-<span class="r-in"><span><span class="va">v5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fl">30</span>, <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fl">60</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">v5</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "2025-10-06" "2025-11-05" "2025-12-05"</span>
-<span class="r-in"><span><span class="co"># [1] "2024-01-06" "2024-02-05" "2024-03-06"</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Create formatting list</span></span></span>
-<span class="r-in"><span><span class="va">lst</span> <span class="op">&lt;-</span> <span class="fu"><a href="flist.html">flist</a></span><span class="op">(</span><span class="st">"%B"</span>, <span class="st">"This month is: %s"</span>, type <span class="op">=</span> <span class="st">"column"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Apply formatting list to vector</span></span></span>
-<span class="r-in"><span><span class="fu">fapply</span><span class="op">(</span><span class="va">v5</span>, <span class="va">lst</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "This month is: October"  "This month is: November"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "This month is: December"</span>
-<span class="r-in"><span><span class="co"># [1] "This month is: January"  "This month is: February" "This month is: March" </span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Example 7: Conditional Formatting</span></span></span>
-<span class="r-in"><span><span class="co"># Data vector</span></span></span>
-<span class="r-in"><span><span class="va">v6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8.38371</span>, <span class="fl">1.46938</span>, <span class="fl">3.28783</span>, <span class="cn">NA</span>, <span class="fl">0.98632</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># User-defined format</span></span></span>
-<span class="r-in"><span><span class="va">fmt5</span> <span class="op">&lt;-</span> <span class="fu"><a href="value.html">value</a></span><span class="op">(</span><span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="st">"Missing"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>              <span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">1</span>, <span class="st">"Low"</span><span class="op">)</span>, </span></span>
-<span class="r-in"><span>              <span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">5</span>, <span class="st">"High"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>              <span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"%.2f"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A user-defined format: 4 conditions</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Name Type Expression   Label Order</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    x    U   is.na(x) Missing    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    x    U      x &lt; 1     Low    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    x    U      x &gt; 5    High    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4    x    U       TRUE    %.2f    NA</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Apply format to data vector</span></span></span>
-<span class="r-in"><span><span class="fu">fapply</span><span class="op">(</span><span class="va">v6</span>, <span class="va">fmt5</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "High"    "1.47"    "3.29"    "Missing" "Low"    </span>
-<span class="r-in"><span><span class="co"># [1] "High"    "1.47"    "3.29"    "Missing" "Low" </span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Example 8: "best" Format</span></span></span>
-<span class="r-in"><span><span class="co">#' # Data vector</span></span></span>
-<span class="r-in"><span><span class="va">v7</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12.3456</span>, <span class="fl">1234567.89</span>, <span class="cn">NA</span>, <span class="fl">0.123456</span>, <span class="fl">0.000012345</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">fapply</span><span class="op">(</span><span class="va">v7</span>, <span class="st">"best6"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "12.346" "1.23E6" NA       "0.1235" "123E-7"</span>
-<span class="r-in"><span><span class="co"># [1] "12.346" "1.23E6" NA       "0.1235" "123E-7"</span></span></span>
-<span class="r-in"><span></span></span>
-</code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co">## Example 1: Formatting string ##</span></span>
+<span><span class="va">v1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1.235</span>, <span class="fl">8.363</span>, <span class="fl">5.954</span>, <span class="fl">2.465</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Apply string format.</span></span>
+<span><span class="fu">fapply</span><span class="op">(</span><span class="va">v1</span>, <span class="st">"%.1f"</span><span class="op">)</span></span>
+<span><span class="co"># [1] "1.2" "8.4" "6.0" "2.5"</span></span>
+<span></span>
+<span><span class="co"># Apply width and two decimals</span></span>
+<span><span class="fu">fapply</span><span class="op">(</span><span class="va">v1</span>, <span class="st">"%5.2f"</span><span class="op">)</span></span>
+<span><span class="co"># [1] " 1.24" " 8.36" " 5.95" " 2.46"</span></span>
+<span></span>
+<span><span class="co"># Apply "best" format</span></span>
+<span><span class="fu">fapply</span><span class="op">(</span><span class="va">v1</span>, <span class="st">"best3"</span><span class="op">)</span></span>
+<span><span class="co"># [1] "1.2" "8.4" "  6" "2.5"</span></span>
+<span></span>
+<span><span class="co">## Example 2: Named vector ##</span></span>
+<span><span class="co"># Set up vector</span></span>
+<span><span class="va">v2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"B"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set up named vector for formatting</span></span>
+<span><span class="va">fmt2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>A <span class="op">=</span> <span class="st">"Label A"</span>, B <span class="op">=</span> <span class="st">"Label B"</span>, C <span class="op">=</span> <span class="st">"Label C"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Apply format to vector</span></span>
+<span><span class="fu">fapply</span><span class="op">(</span><span class="va">v2</span>, <span class="va">fmt2</span><span class="op">)</span></span>
+<span><span class="co"># [1] "Label A" "Label B" "Label C" "Label B"</span></span>
+<span></span>
+<span><span class="co">## Example 3: User-defined format ##</span></span>
+<span><span class="co"># Define format</span></span>
+<span><span class="va">fmt3</span> <span class="op">&lt;-</span> <span class="fu"><a href="value.html">value</a></span><span class="op">(</span><span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"A"</span>, <span class="st">"Label A"</span><span class="op">)</span>,</span>
+<span>              <span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"B"</span>, <span class="st">"Label B"</span><span class="op">)</span>, </span>
+<span>              <span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"Other"</span><span class="op">)</span><span class="op">)</span></span>
+<span>              </span>
+<span><span class="co"># Apply format to vector</span></span>
+<span><span class="fu">fapply</span><span class="op">(</span><span class="va">v2</span>, <span class="va">fmt3</span><span class="op">)</span></span>
+<span><span class="co"># [1] "Label A" "Label B" "Other"   "Label B"</span></span>
+<span></span>
+<span><span class="co">## Example 4: Formatting function ##</span></span>
+<span><span class="co"># Set up vectorized function</span></span>
+<span><span class="va">fmt4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Vectorize.html" class="external-link">Vectorize</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="va">ret</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Label"</span>, <span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="kw">else</span></span>
+<span>    <span class="va">ret</span> <span class="op">&lt;-</span> <span class="st">"Other"</span> </span>
+<span>    </span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">ret</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Apply format to vector</span></span>
+<span><span class="fu">fapply</span><span class="op">(</span><span class="va">v2</span>, <span class="va">fmt4</span><span class="op">)</span></span>
+<span><span class="co"># [1] "Label A" "Label B" "Other"   "Label B"</span></span>
+<span></span>
+<span><span class="co">## Example 5: Formatting List - Row Type ##</span></span>
+<span><span class="co"># Set up data</span></span>
+<span><span class="co"># Notice each row has a different data type</span></span>
+<span><span class="va">v3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">2841.258</span>, <span class="st">"H"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>           <span class="st">"L"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fl">60</span>, <span class="fl">1382.8865</span><span class="op">)</span></span>
+<span><span class="va">v4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"int"</span>, <span class="st">"char"</span>, <span class="st">"date"</span>, <span class="st">"char"</span>, <span class="st">"date"</span>, <span class="st">"int"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create formatting list</span></span>
+<span><span class="va">lst</span> <span class="op">&lt;-</span> <span class="fu"><a href="flist.html">flist</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"row"</span>, lookup <span class="op">=</span> <span class="va">v4</span>,</span>
+<span>       int <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fl">2</span>, nsmall <span class="op">=</span> <span class="fl">1</span>, </span>
+<span>                                  big.mark<span class="op">=</span><span class="st">","</span><span class="op">)</span>,</span>
+<span>       char <span class="op">=</span> <span class="fu"><a href="value.html">value</a></span><span class="op">(</span><span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"H"</span>, <span class="st">"High"</span><span class="op">)</span>,</span>
+<span>                     <span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"L"</span>, <span class="st">"Low"</span><span class="op">)</span>,</span>
+<span>                     <span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"NA"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>       date <span class="op">=</span> <span class="st">"%d%b%Y"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Apply formatting list to vector</span></span>
+<span><span class="fu">fapply</span><span class="op">(</span><span class="va">v3</span>, <span class="va">lst</span><span class="op">)</span></span>
+<span><span class="co"># [1] "2,841.3"   "High"      "06Jan2024" "Low"       "06Mar2024" "1,382.9"  </span></span>
+<span></span>
+<span><span class="co">## Example 6: Formatting List - Column Type ##</span></span>
+<span><span class="co"># Set up data</span></span>
+<span><span class="va">v5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fl">30</span>, <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fl">60</span><span class="op">)</span></span>
+<span><span class="va">v5</span></span>
+<span><span class="co"># [1] "2024-01-06" "2024-02-05" "2024-03-06"</span></span>
+<span></span>
+<span><span class="co"># Create formatting list</span></span>
+<span><span class="va">lst</span> <span class="op">&lt;-</span> <span class="fu"><a href="flist.html">flist</a></span><span class="op">(</span><span class="st">"%B"</span>, <span class="st">"This month is: %s"</span>, type <span class="op">=</span> <span class="st">"column"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Apply formatting list to vector</span></span>
+<span><span class="fu">fapply</span><span class="op">(</span><span class="va">v5</span>, <span class="va">lst</span><span class="op">)</span></span>
+<span><span class="co"># [1] "This month is: January"  "This month is: February" "This month is: March" </span></span>
+<span></span>
+<span><span class="co"># Example 7: Conditional Formatting</span></span>
+<span><span class="co"># Data vector</span></span>
+<span><span class="va">v6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8.38371</span>, <span class="fl">1.46938</span>, <span class="fl">3.28783</span>, <span class="cn">NA</span>, <span class="fl">0.98632</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># User-defined format</span></span>
+<span><span class="va">fmt5</span> <span class="op">&lt;-</span> <span class="fu"><a href="value.html">value</a></span><span class="op">(</span><span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="st">"Missing"</span><span class="op">)</span>,</span>
+<span>              <span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;</span> <span class="fl">1</span>, <span class="st">"Low"</span><span class="op">)</span>, </span>
+<span>              <span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">5</span>, <span class="st">"High"</span><span class="op">)</span>,</span>
+<span>              <span class="fu"><a href="condition.html">condition</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="st">"%.2f"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Apply format to data vector</span></span>
+<span><span class="fu">fapply</span><span class="op">(</span><span class="va">v6</span>, <span class="va">fmt5</span><span class="op">)</span></span>
+<span><span class="co"># [1] "High"    "1.47"    "3.29"    "Missing" "Low" </span></span>
+<span></span>
+<span><span class="co"># Example 8: "best" Format</span></span>
+<span><span class="co">#' # Data vector</span></span>
+<span><span class="va">v7</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12.3456</span>, <span class="fl">1234567.89</span>, <span class="cn">NA</span>, <span class="fl">0.123456</span>, <span class="fl">0.000012345</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">fapply</span><span class="op">(</span><span class="va">v7</span>, <span class="st">"best6"</span><span class="op">)</span></span>
+<span><span class="co"># [1] "12.346" "1.23E6" NA       "0.1235" "123E-7"</span></span>
+<span></span>
+<span><span class="co"># Example 9: "date" Format</span></span>
+<span><span class="co">#' # Data Vector</span></span>
+<span><span class="va">v8</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1924-02-29"</span>,<span class="cn">NA</span>,<span class="st">"1980-12-31"</span>,<span class="st">"2019-12-31"</span>,<span class="st">"2020-02-29"</span>,<span class="st">"2030-08-20"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">fapply</span><span class="op">(</span><span class="va">v8</span>, <span class="st">"date7"</span><span class="op">)</span></span>
+<span><span class="co"># [1] "29FEB24" NA   "31DEC80" "31DEC19" "29FEB20" "20AUG30"</span></span>
+<span></span>
+<span><span class="fu">fapply</span><span class="op">(</span><span class="va">v8</span>, <span class="st">"date11"</span><span class="op">)</span></span>
+<span><span class="co"># [1] "29-FEB-1924" NA   "31-DEC-1980" "31-DEC-2019" "29-FEB-2020" "20-AUG-2030"</span></span>
+<span></span></code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -346,7 +359,7 @@ and <code><a href="flist.html">flist</a></code> to define a formatting list.  Al
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by David Bosak.</p>
+  <p></p><p>Developed by David Bosak, Chen Ling.</p>
 </div>
 
 <div class="pkgdown">

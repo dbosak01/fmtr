@@ -95,9 +95,9 @@ Useful links:
 \author{
 \strong{Maintainer}: David Bosak \email{dbosak01@gmail.com}
 
-Other contributors:
+Authors:
 \itemize{
-  \item Chen Ling \email{chen.lingcpu@gmail.com} [contributor]
+  \item Chen Ling \email{chen.lingcpu@gmail.com}
 }
 
 }

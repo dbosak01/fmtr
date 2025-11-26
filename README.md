@@ -10,7 +10,8 @@
 <!-- badges: end -->
 
 # Introduction to **fmtr**
-<img src="man/images/fmtr_new.png" align="left" height="138px" style="height:138px;margin-right:10px"/>
+<img src="man/images/fmtr_new.png" align="left" height="138px" style="height:138px;margin-right:10px"
+alt = "fmtr package logo"/>
 
 R has a variety of ways to format data. There are functions for 
 formatting dates, several functions to format numbers, plus you can always 

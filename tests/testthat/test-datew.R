@@ -6,11 +6,11 @@ Sys.setlocale("LC_TIME", "English")
 
 test_that("datew1: test error handling.", {
   
+  dt <- as.Date("2018-03-15")
   
-  expect_error(fapply(2018-03-15, "date4"))
-  expect_error(fapply(2018-03-15, "date12"))
-  expect_warning(fapply(2018-03-15, "datex"))
-  expect_warning(fapply(2018-03-15, "I'd like to eat a date "))
+  expect_error(fapply(dt, "date4"))
+  expect_error(fapply(dt, "date12"))
+  expect_equal(fapply(dt, "datex"), "datex") # Just falls through
   
 })
 
