@@ -139,6 +139,28 @@
 #' Output always occupies the specified width. If the date value is shorter 
 #' than the specified width, it is left-padded with spaces. 
 #' 
+#' @section "time" Format:
+#' The "TIMEw.d" format is a time-display format that replicates the
+#' behavior of the SAS "TIMEw.d" family of formats. It converts time values
+#' into fixed-width character representations of the form \code{h:mm:ss},
+#' optionally including fractional seconds.
+#'
+#' The format accepts numeric values (interpreted as seconds),
+#' \code{hms} objects, or \code{POSIXt} objects. For \code{POSIXt} inputs,
+#' only the time-of-day component is used. Numeric and \code{hms} inputs
+#' may be negative or exceed 24 hours; this is not applicable to
+#' \code{POSIXt} values.
+#'
+#' The width \code{W} controls the total output width, while \code{D}
+#' specifies the number of decimal places for seconds. If omitted,
+#' \code{W} defaults to 8 and \code{D} defaults to 0. A trailing dot (".")
+#' is optional.
+#'
+#' Output always occupies the specified width and is left-padded with spaces
+#' if needed. Missing values return \code{NA}. This format resolves known
+#' rounding differences between R and SAS and supports up to 12 digits of
+#' fractional seconds, exceeding R's default precision.
+#' 
 #' @section Numeric Formatting:
 #' 
 #' Below are some commonly used formatting codes for other data types:
