@@ -19,7 +19,7 @@ functions. See below for further details."><meta property="og:image" content="ht
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.1</span>
       </span>
     </div>
 
@@ -149,6 +149,28 @@ portion is used.</p>
 1970-01-01. The default width is 7. A trailing dot (".") is optional.</p>
 <p>Output always occupies the specified width. If the date value is shorter
 than the specified width, it is left-padded with spaces.</p>
+    </div>
+    <div id="-time-format">
+    <h2>"time" Format</h2>
+
+
+<p>The "TIMEw.d" format is a time-display format that replicates the
+behavior of the SAS "TIMEw.d" family of formats. It converts time values
+into fixed-width character representations of the form <code>h:mm:ss</code>,
+optionally including fractional seconds.</p>
+<p>The format accepts numeric values (interpreted as seconds),
+<code>hms</code> objects, or <code>POSIXt</code> objects. For <code>POSIXt</code> inputs,
+only the time-of-day component is used. Numeric and <code>hms</code> inputs
+may be negative or exceed 24 hours; this is not applicable to
+<code>POSIXt</code> values.</p>
+<p>The width <code>W</code> controls the total output width, while <code>D</code>
+specifies the number of decimal places for seconds. If omitted,
+<code>W</code> defaults to 8 and <code>D</code> defaults to 0. A trailing dot (".")
+is optional.</p>
+<p>Output always occupies the specified width and is left-padded with spaces
+if needed. Missing values return <code>NA</code>. This format resolves known
+rounding differences between R and SAS and supports up to 12 digits of
+fractional seconds, exceeding R's default precision.</p>
     </div>
     <div id="numeric-formatting">
     <h2>Numeric Formatting</h2>

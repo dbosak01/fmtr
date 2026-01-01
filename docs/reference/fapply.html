@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.1</span>
       </span>
     </div>
 
@@ -222,6 +222,69 @@ the result of <code>date7</code> is <code>"01JAN70"</code>, while the result of
 adds this capability for users who wish to replicate SAS-style "date"
 formatting behavior as closely as possible.</p>
     </div>
+    <div id="-time-format">
+    <h2>"time" Format</h2>
+
+
+<p>The <strong>"time"</strong> format is used to display time-of-day values in a
+readable character form, such as <code>"9:00"</code> or <code>"23:59:59.995"</code>,
+depending on the specified width and number of decimal places. The word
+"time" is followed by the desired width <em>w</em> and optional decimal
+precision <em>d</em>, e.g. <code>"time8"</code>, <code>"time12.3"</code>, or
+<code>"time20.9"</code>. This format closely replicates the behavior of SAS
+<code>TIMEw.d</code>.</p>
+<p>The format converts numeric or time-like objects into character strings
+representing elapsed time in hours, minutes, and seconds. Hours are not
+limited to the 0–23 range and may exceed 24, allowing the format to represent
+durations such as <code>"119:26:40"</code> or <code>"1388:53:20"</code>.</p>
+<div class="section">
+<h3 id="width-and-precision">Width and precision<a class="anchor" aria-label="anchor" href="#width-and-precision"></a></h3>
+<p>The total width <em>w</em> controls the minimum number of characters in the
+output, while the optional decimal precision <em>d</em> controls the number
+of digits displayed after the decimal point for seconds.</p>
+<ul><li><p><strong>time5</strong> – Displays hours and minutes or only hours (e.g.
+         " 9:00", "24:00", "  120")</p></li>
+<li><p><strong>time7</strong> – Displays h:mm:ss or hh:mm (e.g., "1:03:10",
+         "  23:59")</p></li>
+<li><p><strong>time8</strong> – Displays as hh:mm:ss (e.g. " 1:03:10", "23:59:59")</p></li>
+<li><p><strong>time9.1</strong> – Displays seconds with one decimal place
+        (e.g., "1:00:00.0")</p></li>
+<li><p><strong>time12.3</strong> – Displays seconds with three decimal places
+        (e.g., " 9:00:01.005")</p></li>
+<li><p><strong>time20.9</strong> – Displays seconds with up to nine decimal places
+        (e.g., "   9:00:00.987654321")</p></li>
+</ul></div>
+
+<p>Valid widths range from 2 to 20. The decimal precision <em>d</em>, when
+specified, must be between 0 and <code>w - 1</code>. Widths or precisions outside
+these ranges are not valid and will result in an error.</p>
+<p>If the width <em>w</em> is omitted (e.g., <code>"time"</code> or <code>"time."</code>),
+it defaults to <code>8</code>. If the decimal precision <em>d</em> is omitted,
+it defaults to <code>0</code>. Both <code>"TIMEw"</code> and <code>"TIMEw."</code> are accepted,
+and the trailing dot is optional.</p>
+<div class="section">
+<h3 id="input-handling">Input handling<a class="anchor" aria-label="anchor" href="#input-handling"></a></h3>
+<p>The <code>TIMEw.d</code> format accepts the following input types:</p>
+<ul><li><p>Numeric values, interpreted as the number of seconds
+        since midnight</p></li>
+<li><p><code>POSIXt</code> objects, using the time-of-day component</p></li>
+<li><p><code>hms</code> objects from the <span class="pkg">hms</span> package</p></li>
+</ul><p>For numeric and <code>hms</code> inputs, negative values and values larger than
+24 hours are allowed and formatted accordingly, consistent with SAS
+behavior. For example, values such as <code>-3600</code> or <code>430000</code>
+are valid. For <code>POSIXt</code> inputs, only the clock time is used. As a result,
+negative times and times exceeding 24 hours are not applicable to
+<code>POSIXt</code> objects.</p>
+<p>The <code>TIMEw.d</code> format resolves known differences in fractional-second
+rounding between base R and SAS, it applies SAS-compatible rounding to ensure
+that formatted results match SAS output exactly, particularly near rounding
+boundaries.</p>
+<p>In addition, whereas base R effectively limits fractional seconds to
+6 digits, <code>TIMEw.d</code> supports up to 12 digits of decimal precision,
+padding with trailing zeros when necessary, consistent with SAS behavior.</p>
+</div>
+
+    </div>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p><code><a href="fcat.html">fcat</a></code> to create a format catalog,
@@ -341,7 +404,7 @@ and <code><a href="flist.html">flist</a></code> to define a formatting list.  Al
 <span><span class="co"># [1] "12.346" "1.23E6" NA       "0.1235" "123E-7"</span></span>
 <span></span>
 <span><span class="co"># Example 9: "date" Format</span></span>
-<span><span class="co">#' # Data Vector</span></span>
+<span><span class="co"># Data Vector</span></span>
 <span><span class="va">v8</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1924-02-29"</span>,<span class="cn">NA</span>,<span class="st">"1980-12-31"</span>,<span class="st">"2019-12-31"</span>,<span class="st">"2020-02-29"</span>,<span class="st">"2030-08-20"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">fapply</span><span class="op">(</span><span class="va">v8</span>, <span class="st">"date7"</span><span class="op">)</span></span>
@@ -349,7 +412,16 @@ and <code><a href="flist.html">flist</a></code> to define a formatting list.  Al
 <span></span>
 <span><span class="fu">fapply</span><span class="op">(</span><span class="va">v8</span>, <span class="st">"date11"</span><span class="op">)</span></span>
 <span><span class="co"># [1] "29-FEB-1924" NA   "31-DEC-1980" "31-DEC-2019" "29-FEB-2020" "20-AUG-2030"</span></span>
-<span></span></code></pre></div>
+<span></span>
+<span><span class="co"># Example 10: "time" format</span></span>
+<span><span class="co"># Data vector</span></span>
+<span><span class="va">v9</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3600</span>, <span class="cn">NA</span>, <span class="fl">0</span>, <span class="fl">59.9</span>, <span class="fl">3600.12345</span>, <span class="fl">86399.995</span>, <span class="fl">90000</span><span class="op">)</span></span>
+<span><span class="va">v10</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strptime</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"01:00:00.123"</span>, <span class="st">"09:00:01.456"</span>, <span class="cn">NA</span><span class="op">)</span>, format<span class="op">=</span><span class="st">"%H:%M:%OS"</span><span class="op">)</span></span>
+<span><span class="fu">fapply</span><span class="op">(</span><span class="va">v9</span>, <span class="st">"time8"</span><span class="op">)</span></span>
+<span><span class="co"># [1]  "-1:00:00" NA         " 0:00:00" " 0:01:00" " 1:00:00" "24:00:00" "25:00:00"</span></span>
+<span></span>
+<span><span class="fu">fapply</span><span class="op">(</span><span class="va">v10</span>, <span class="st">"time10.2"</span><span class="op">)</span></span>
+<span><span class="co"># [1] "1:00:00.12" "9:00:01.46" NA  </span></span></code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
