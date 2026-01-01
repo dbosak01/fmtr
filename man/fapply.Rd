@@ -138,6 +138,78 @@ adds this capability for users who wish to replicate SAS-style "date"
 formatting behavior as closely as possible.
 }
 
+\section{"time" Format}{
+
+The \strong{"time"} format is used to display time-of-day values in a
+readable character form, such as \code{"9:00"} or \code{"23:59:59.995"},
+depending on the specified width and number of decimal places. The word
+"time" is followed by the desired width \emph{w} and optional decimal
+precision \emph{d}, e.g. \code{"time8"}, \code{"time12.3"}, or
+\code{"time20.9"}. This format closely replicates the behavior of SAS
+\code{TIMEw.d}.
+
+The format converts numeric or time-like objects into character strings
+representing elapsed time in hours, minutes, and seconds. Hours are not
+limited to the 0–23 range and may exceed 24, allowing the format to represent
+durations such as \code{"119:26:40"} or \code{"1388:53:20"}.
+
+\subsection{Width and precision}{
+The total width \emph{w} controls the minimum number of characters in the
+output, while the optional decimal precision \emph{d} controls the number
+of digits displayed after the decimal point for seconds.
+
+\itemize{
+  \item \strong{time5} -- Displays hours and minutes or only hours (e.g. 
+         " 9:00", "24:00", "  120")
+  \item \strong{time7} -- Displays h:mm:ss or hh:mm (e.g., "1:03:10", 
+         "  23:59")
+  \item \strong{time8} -- Displays as hh:mm:ss (e.g. " 1:03:10", "23:59:59")
+  \item \strong{time9.1} -- Displays seconds with one decimal place
+        (e.g., "1:00:00.0")
+  \item \strong{time12.3} -- Displays seconds with three decimal places
+        (e.g., " 9:00:01.005")
+  \item \strong{time20.9} -- Displays seconds with up to nine decimal places
+        (e.g., "   9:00:00.987654321")
+}
+}
+
+Valid widths range from 2 to 20. The decimal precision \emph{d}, when
+specified, must be between 0 and \code{w - 1}. Widths or precisions outside
+these ranges are not valid and will result in an error.
+
+If the width \emph{w} is omitted (e.g., \code{"time"} or \code{"time."}),
+it defaults to \code{8}. If the decimal precision \emph{d} is omitted,
+it defaults to \code{0}. Both \code{"TIMEw"} and \code{"TIMEw."} are accepted,
+and the trailing dot is optional.
+
+\subsection{Input handling}{
+The \code{TIMEw.d} format accepts the following input types:
+
+\itemize{
+  \item Numeric values, interpreted as the number of seconds
+        since midnight
+  \item \code{POSIXt} objects, using the time-of-day component
+  \item \code{hms} objects from the \pkg{hms} package
+}
+
+For numeric and \code{hms} inputs, negative values and values larger than
+24 hours are allowed and formatted accordingly, consistent with SAS
+behavior. For example, values such as \code{-3600} or \code{430000}
+are valid. For \code{POSIXt} inputs, only the clock time is used. As a result,
+negative times and times exceeding 24 hours are not applicable to
+\code{POSIXt} objects.
+
+The \code{TIMEw.d} format resolves known differences in fractional-second
+rounding between base R and SAS, it applies SAS-compatible rounding to ensure 
+that formatted results match SAS output exactly, particularly near rounding 
+boundaries.
+
+In addition, whereas base R effectively limits fractional seconds to
+6 digits, \code{TIMEw.d} supports up to 12 digits of decimal precision,
+padding with trailing zeros when necessary, consistent with SAS behavior.
+}
+}
+
 \examples{
 ## Example 1: Formatting string ##
 v1 <- c(1.235, 8.363, 5.954, 2.465)
@@ -246,7 +318,7 @@ fapply(v7, "best6")
 # [1] "12.346" "1.23E6" NA       "0.1235" "123E-7"
 
 # Example 9: "date" Format
-#' # Data Vector
+# Data Vector
 v8 <- as.Date(c("1924-02-29",NA,"1980-12-31","2019-12-31","2020-02-29","2030-08-20"))
 
 fapply(v8, "date7")
@@ -255,6 +327,15 @@ fapply(v8, "date7")
 fapply(v8, "date11")
 # [1] "29-FEB-1924" NA   "31-DEC-1980" "31-DEC-2019" "29-FEB-2020" "20-AUG-2030"
 
+# Example 10: "time" format
+# Data vector
+v9 <- c(-3600, NA, 0, 59.9, 3600.12345, 86399.995, 90000)
+v10 <- strptime(c("01:00:00.123", "09:00:01.456", NA), format="\%H:\%M:\%OS")
+fapply(v9, "time8")
+# [1]  "-1:00:00" NA         " 0:00:00" " 0:01:00" " 1:00:00" "24:00:00" "25:00:00"
+
+fapply(v10, "time10.2")
+# [1] "1:00:00.12" "9:00:01.46" NA  
 }
 \seealso{
 \code{\link{fcat}} to create a format catalog,
