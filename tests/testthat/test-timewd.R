@@ -48,6 +48,7 @@ test_that("timewd2: format_timewd() work as expected.", {
   time_num <- v1
 
   time_pos = strptime(v2, format="%H:%M:%OS")
+  time_hms = hms::as_hms(v1)
 
   # ---- TIME8. (no decimals) ----
   res1 <- format_timewd(time_num, 8)
@@ -116,6 +117,39 @@ test_that("timewd2: format_timewd() work as expected.", {
   expect_equal(res4[10], "23:59:59.995000")
 
 
+  res5 <- format_timewd(time_hms, 8)
+  
+  expect_equal(res5[1], "-1:00:00")
+  expect_equal(res5[2], "-0:00:01")
+  expect_equal(res5[3], "-0:00:00")
+  expect_equal(res5[4], " 0:00:00")
+  expect_equal(res5[5], " 0:00:01")
+  expect_equal(res5[6], " 0:00:59")
+  expect_equal(res5[7], " 0:01:00")
+  expect_equal(res5[8], " 0:59:59")
+  expect_equal(res5[9], " 1:00:00")
+  expect_equal(res5[10], " 9:00:00")
+  expect_equal(res5[11], " 9:00:00")
+  expect_equal(res5[12], "24:00:00")
+  expect_equal(res5[13], "24:00:00")
+  expect_equal(res5[14], "25:00:00")
+  
+  res6 <- format_timewd(time_hms, 12, 2)
+  
+  expect_equal(res6[1], " -1:00:00.00")
+  expect_equal(res6[2], " -0:00:01.00")
+  expect_equal(res6[3], " -0:00:00.01")
+  expect_equal(res6[4], "  0:00:00.00")
+  expect_equal(res6[5], "  0:00:01.00")
+  expect_equal(res6[6], "  0:00:59.00")
+  expect_equal(res6[7], "  0:01:00.00")
+  expect_equal(res6[8], "  0:59:59.00")
+  expect_equal(res6[9], "  1:00:00.00")
+  expect_equal(res6[10], "  8:59:59.99")
+  expect_equal(res6[11], "  9:00:00.00")
+  expect_equal(res6[12], " 23:59:59.99")
+  expect_equal(res6[13], " 24:00:00.00")
+  expect_equal(res6[14], " 25:00:00.00")
 })
 
 test_that("timewd3: as_character_time() work as expected ", {
