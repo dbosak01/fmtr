@@ -190,10 +190,11 @@ The \code{TIMEw.d} format accepts the following input types:
         since midnight
   \item \code{POSIXt} objects, using the time-of-day component
   \item \code{hms} objects from the \pkg{hms} package
+  \item \code{difftime} objects
 }
 
-For numeric and \code{hms} inputs, negative values and values larger than
-24 hours are allowed and formatted accordingly, consistent with SAS
+For numeric, \code{hms} and \code{difftime} inputs, negative values and values
+larger than 24 hours are allowed and formatted accordingly, consistent with SAS
 behavior. For example, values such as \code{-3600} or \code{430000}
 are valid. For \code{POSIXt} inputs, only the clock time is used. As a result,
 negative times and times exceeding 24 hours are not applicable to

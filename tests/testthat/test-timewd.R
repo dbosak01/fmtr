@@ -49,6 +49,7 @@ test_that("timewd2: format_timewd() work as expected.", {
 
   time_pos = strptime(v2, format="%H:%M:%OS")
   time_hms = hms::as_hms(v1)
+  time_difftime = as.difftime(v1, units = "secs")
 
   # ---- TIME8. (no decimals) ----
   res1 <- format_timewd(time_num, 8)
@@ -116,7 +117,8 @@ test_that("timewd2: format_timewd() work as expected.", {
   expect_equal(res4[9], "23:59:59.994900")
   expect_equal(res4[10], "23:59:59.995000")
 
-
+  #tests for hms objects
+  
   res5 <- format_timewd(time_hms, 8)
   
   expect_equal(res5[1], "-1:00:00")
@@ -150,6 +152,43 @@ test_that("timewd2: format_timewd() work as expected.", {
   expect_equal(res6[12], " 23:59:59.99")
   expect_equal(res6[13], " 24:00:00.00")
   expect_equal(res6[14], " 25:00:00.00")
+  
+  #tests for difftime objects
+  
+  res7 <- format_timewd(time_difftime, 8)
+  
+  expect_equal(res7[1], "-1:00:00")
+  expect_equal(res7[2], "-0:00:01")
+  expect_equal(res7[3], "-0:00:00")
+  expect_equal(res7[4], " 0:00:00")
+  expect_equal(res7[5], " 0:00:01")
+  expect_equal(res7[6], " 0:00:59")
+  expect_equal(res7[7], " 0:01:00")
+  expect_equal(res7[8], " 0:59:59")
+  expect_equal(res7[9], " 1:00:00")
+  expect_equal(res7[10], " 9:00:00")
+  expect_equal(res7[11], " 9:00:00")
+  expect_equal(res7[12], "24:00:00")
+  expect_equal(res7[13], "24:00:00")
+  expect_equal(res7[14], "25:00:00")
+  
+  res8 <- format_timewd(time_difftime, 12, 2)
+  
+  expect_equal(res8[1], " -1:00:00.00")
+  expect_equal(res8[2], " -0:00:01.00")
+  expect_equal(res8[3], " -0:00:00.01")
+  expect_equal(res8[4], "  0:00:00.00")
+  expect_equal(res8[5], "  0:00:01.00")
+  expect_equal(res8[6], "  0:00:59.00")
+  expect_equal(res8[7], "  0:01:00.00")
+  expect_equal(res8[8], "  0:59:59.00")
+  expect_equal(res8[9], "  1:00:00.00")
+  expect_equal(res8[10], "  8:59:59.99")
+  expect_equal(res8[11], "  9:00:00.00")
+  expect_equal(res8[12], " 23:59:59.99")
+  expect_equal(res8[13], " 24:00:00.00")
+  expect_equal(res8[14], " 25:00:00.00")
+
 })
 
 test_that("timewd3: as_character_time() work as expected ", {

@@ -74,10 +74,10 @@ into fixed-width character representations of the form \code{h:mm:ss},
 optionally including fractional seconds.
 
 The format accepts numeric values (interpreted as seconds),
-\code{hms} objects, or \code{POSIXt} objects. For \code{POSIXt} inputs,
-only the time-of-day component is used. Numeric and \code{hms} inputs
-may be negative or exceed 24 hours; this is not applicable to
-\code{POSIXt} values.
+\code{POSIXt} objects, \code{hms} objects or \code{difftime} objects. 
+For \code{POSIXt} inputs, only the time-of-day component is used. Numeric 
+\code{hms} and \code{difftime} inputs may be negative or exceed 24 hours; 
+this is not applicable to \code{POSIXt} values.
 
 The width \code{W} controls the total output width, while \code{D}
 specifies the number of decimal places for seconds. If omitted,
