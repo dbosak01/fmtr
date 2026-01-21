@@ -159,10 +159,10 @@ behavior of the SAS "TIMEw.d" family of formats. It converts time values
 into fixed-width character representations of the form <code>h:mm:ss</code>,
 optionally including fractional seconds.</p>
 <p>The format accepts numeric values (interpreted as seconds),
-<code>hms</code> objects, or <code>POSIXt</code> objects. For <code>POSIXt</code> inputs,
-only the time-of-day component is used. Numeric and <code>hms</code> inputs
-may be negative or exceed 24 hours; this is not applicable to
-<code>POSIXt</code> values.</p>
+<code>POSIXt</code> objects, <code>hms</code> objects or <code>difftime</code> objects.
+For <code>POSIXt</code> inputs, only the time-of-day component is used. Numeric
+<code>hms</code> and <code>difftime</code> inputs may be negative or exceed 24 hours;
+this is not applicable to <code>POSIXt</code> values.</p>
 <p>The width <code>W</code> controls the total output width, while <code>D</code>
 specifies the number of decimal places for seconds. If omitted,
 <code>W</code> defaults to 8 and <code>D</code> defaults to 0. A trailing dot (".")

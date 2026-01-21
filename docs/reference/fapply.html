@@ -269,8 +269,9 @@ and the trailing dot is optional.</p>
         since midnight</p></li>
 <li><p><code>POSIXt</code> objects, using the time-of-day component</p></li>
 <li><p><code>hms</code> objects from the <span class="pkg">hms</span> package</p></li>
-</ul><p>For numeric and <code>hms</code> inputs, negative values and values larger than
-24 hours are allowed and formatted accordingly, consistent with SAS
+<li><p><code>difftime</code> objects</p></li>
+</ul><p>For numeric, <code>hms</code> and <code>difftime</code> inputs, negative values and values
+larger than 24 hours are allowed and formatted accordingly, consistent with SAS
 behavior. For example, values such as <code>-3600</code> or <code>430000</code>
 are valid. For <code>POSIXt</code> inputs, only the clock time is used. As a result,
 negative times and times exceeding 24 hours are not applicable to

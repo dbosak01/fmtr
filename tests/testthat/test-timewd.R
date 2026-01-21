@@ -1724,6 +1724,22 @@ test_that("timewd16: fapply() with time20. to time20.19 work as expected", {
   
 })
 
+test_that("timewd18: fapply() with difftime works as expected.", {
+  
+  t1 <- strptime("12:00", format = "%H:%M")
+  t2 <- strptime("12:03:36", format = "%H:%M:%S")
+  
+  df1 <- t2 - t1  
+  
+  res <- fapply(df1, "time7")
+  
+  expect_equal(res, "0:03:36")
+  
+  
+})
+
+
+
 # test_that("timewd17: sas_round() work as expected", {
 # 
 #   v1 <- c(-1.25, -1.24, -0.15, -0.05, -0.04,
