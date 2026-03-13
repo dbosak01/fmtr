@@ -1,6 +1,8 @@
 #' @noRd
 format_datetimewd <- function(x, w, d = 0){
   options(digits.secs = 6)
+  shown_numeric_msg <- FALSE
+  shown_posix_warn  <- FALSE
   
   vectorize<-function(x1){
     
@@ -26,11 +28,15 @@ format_datetimewd <- function(x, w, d = 0){
       decimals <- datetimen%%1
       datetime_int <- floor(datetimen)
       
-      if (attr(x1,"tzone") == ""){
-        timezone = "utc"
-        warning("No timezone is assigned to POSIXt object, UTC will be used by default")
-      }else {
-        timezone = attr(x1,"tzone")
+      tz <- attr(x1, "tzone")
+      if (length(tz) == 0 || identical(tz, "")) {
+        timezone <- "UTC"
+        if (!shown_posix_warn) {
+          warning("No timezone is assigned to POSIXt object, UTC will be used by default\n", call. = FALSE)
+          shown_posix_warn <<- TRUE
+        }
+      } else {
+        timezone <- tz[1]
       }
     }
     
@@ -38,7 +44,13 @@ format_datetimewd <- function(x, w, d = 0){
       decimals <-  x1%%1
       datetime_int <- floor(x1)
       timezone = "utc"
-      message("UTC timezone will be used by default for numeric input")
+      
+      if (!shown_numeric_msg) {
+        
+        cat("UTC timezone will be used by default for numeric input\n\n")
+        shown_numeric_msg <<- TRUE
+      }
+      
     }
     
     #number will be rounded by d first
