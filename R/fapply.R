@@ -575,6 +575,7 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
         bst <- grepl("^best[0-9]*\\.?$", fmt, ignore.case = TRUE)
         datew <- grepl("^date[0-9]*\\.?$", fmt, ignore.case = TRUE)
         timewd <- grepl("^time([0-9]+)?(\\.[0-9]*)?$", fmt, ignore.case = TRUE)
+        datetimewd <- grepl("^datetime([0-9]+)?(\\.[0-9]*)?$", fmt, ignore.case = TRUE)
         
         if (bst) { 
           
@@ -621,6 +622,24 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
 
          
           ret <- format_timewd(x, wdth, digit)
+        }else if (datetimewd) {
+          
+          wd <- sub("datetime", "", tolower(fmt), fixed = TRUE)
+          wdth <- as.numeric(sub("\\..*$", "", wd))
+          digit <- ifelse(grepl("\\.", wd), as.numeric(sub(".*\\.", "", wd)), 0)
+          
+          if (is.na(wdth)){
+            
+            wdth = 16
+            digit = 0
+            
+          }
+          if (is.na(digit)){
+            digit = 0
+          }
+          
+          ret <- format_datetimewd(x, wdth, digit)
+          
         }else {
         
           # For numerics, call sprintf
@@ -644,6 +663,7 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
       
       datew <- grepl("^date[0-9]*\\.?$", fmt, ignore.case = TRUE)
       timewd <- grepl("^time([0-9]+)?(\\.[0-9]*)?$", fmt, ignore.case = TRUE)
+      datetimewd <- grepl("^datetime([0-9]+)?(\\.[0-9]*)?$", fmt, ignore.case = TRUE)
       
       if (datew){
         
@@ -683,6 +703,24 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
         
         
         ret <- format_timewd(x, wdth, digit)
+        
+      }else if (datetimewd) {
+        
+        wd <- sub("datetime", "", tolower(fmt), fixed = TRUE)
+        wdth <- as.numeric(sub("\\..*$", "", wd))
+        digit <- ifelse(grepl("\\.", wd), as.numeric(sub(".*\\.", "", wd)), 0)
+        
+        if (is.na(wdth)){
+          
+          wdth = 16
+          digit = 0
+          
+        }
+        if (is.na(digit)){
+          digit = 0
+        }
+        
+        ret <- format_datetimewd(x, wdth, digit)
         
       }else {
         
