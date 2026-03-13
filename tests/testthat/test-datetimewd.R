@@ -6,7 +6,7 @@ Sys.setenv("LANGUAGE" = "EN")
 Sys.setlocale("LC_TIME", "English")
 test_that("datetimewd1: test error handling.", {
   
-  dt <- as.POSIXct("2000-02-29 12:34:56", tz = "UTC")
+  dt <- as.POSIXct("2000-02-29 12:34:56", tz = "UTC", origin = "1970-01-01")
   
   expect_error(format_datetimewd(dt, 6))
   expect_error(format_datetimewd(dt, 41))
@@ -25,7 +25,7 @@ test_that("datetimewd2: format_timewd() work as expected.", {
   
   v2 = v1 - sas_offset
   
-  dt_pos <-as.POSIXct(v2,tz="utc")
+  dt_pos <-as.POSIXct(v2, tz="utc", origin = "1970-01-01")
   
   #numeric input
   expect_equal(
