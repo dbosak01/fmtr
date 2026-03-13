@@ -1,3 +1,7 @@
+# fmtr 1.7.2 
+
+* Fixes for CRAN.
+
 # fmtr 1.7.1
 
 * Added "timeW.d" formats to `fapply()`.
