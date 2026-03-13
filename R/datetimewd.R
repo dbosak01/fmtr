@@ -65,7 +65,7 @@ format_datetimewd <- function(x, w, d = 0){
       decimal_r <- 0
     }
     
-    datetime_pos <- as.POSIXct(datetime_int, timezone)
+    datetime_pos <- as.POSIXct(datetime_int, tz = timezone, origin = "1970-01-01")
     
     #break down the datetime
     date7 <-  fmtr::fapply(datetime_pos,"date7")
