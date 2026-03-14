@@ -1,58 +1,51 @@
 #' @noRd
 format_datetimewd <- function(x, w, d = 0){
   options(digits.secs = 6)
-  shown_numeric_msg <- FALSE
-  shown_posix_warn  <- FALSE
+ 
+  # ---- Validate DATETIMEw.d parameters ----
+  if (!w %in% 7:40) {
+    
+    stop(paste0("'DATETIMEw.d' width must be between 7 and 40."))
+  }
+  if (!d %in% 0:39) {
+    
+    stop(paste0("'DATETIMEw.d' number of digits must be between 0 and 39."))
+  }
+  if (w <= d){
+    stop(paste0("'DATETIMEw.d' number of digits must be less than the width"))
+  }
+  
+  
+  if (inherits(x, "POSIXt")) {
+    datetimen <- as.numeric(x)
+    
+    tz <- attr(x, "tzone")
+    if (length(tz) == 0 || identical(tz, "")) {
+      timezone <- "UTC"
+      warning(
+        "No timezone is assigned to POSIXt object, UTC will be used by default",
+        call. = FALSE
+      )
+    } else {
+      timezone <- tz[1]
+    }
+    
+  } else if (is.numeric(x)) {
+    datetimen <- x
+    timezone <- "UTC"
+    cat("UTC timezone will be used by default for numeric input\n\n")
+    
+  }
   
   vectorize<-function(x1){
     
     if (is.na(x1)) {
       return(NA_character_)
     }
-    # ---- Validate DATETIMEw.d parameters ----
-    if (!w %in% 7:40) {
-      
-      stop(paste0("'DATETIMEw.d' width must be between 7 and 40."))
-    }
-    if (!d %in% 0:39) {
-      
-      stop(paste0("'DATETIMEw.d' number of digits must be between 0 and 39."))
-    }
-    if (w <= d){
-      stop(paste0("'DATETIMEw.d' number of digits must be less than the width"))
-    }
-  
-    if ("POSIXt" %in% class(x1)){
-      
-      datetimen <- as.numeric(x1)
-      decimals <- datetimen%%1
-      datetime_int <- floor(datetimen)
-      
-      tz <- attr(x1, "tzone")
-      if (length(tz) == 0 || identical(tz, "")) {
-        timezone <- "UTC"
-        if (!shown_posix_warn) {
-          warning("No timezone is assigned to POSIXt object, UTC will be used by default\n", call. = FALSE)
-          shown_posix_warn <<- TRUE
-        }
-      } else {
-        timezone <- tz[1]
-      }
-    }
     
-    if ("numeric" %in% class(x1)){
-      decimals <-  x1%%1
-      datetime_int <- floor(x1)
-      timezone = "utc"
-      
-      if (!shown_numeric_msg) {
-        
-        cat("UTC timezone will be used by default for numeric input\n\n")
-        shown_numeric_msg <<- TRUE
-      }
-      
-    }
-    
+    decimals <- x1 %% 1
+    datetime_int <- floor(x1)
+
     #number will be rounded by d first
     if (decimals == 0){
       decimal_r <- 0
@@ -158,5 +151,5 @@ format_datetimewd <- function(x, w, d = 0){
     
   }
   # Vectorized wrapper
-  vapply(x, vectorize, FUN.VALUE = character(1))
+  vapply(datetimen, vectorize, FUN.VALUE = character(1))
 }
