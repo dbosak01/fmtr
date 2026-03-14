@@ -667,7 +667,7 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
           
           if (is.na(wdth)) {
             
-            wdth = 12
+            wdth <- 12
             
           }
           
@@ -681,7 +681,7 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
           
           if (is.na(wdth)){
             
-            wdth = 7
+            wdth <- 7
             
           }
           
@@ -695,12 +695,12 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
           
           if (is.na(wdth)){
             
-            wdth = 8
-            digit = 0
+            wdth <- 8
+            digit <- 0
 
           }
           if (is.na(digit)){
-            digit = 0
+            digit <- 0
           }
 
          
@@ -713,12 +713,12 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
           
           if (is.na(wdth)){
             
-            wdth = 16
-            digit = 0
+            wdth <- 16
+            digit <- 0
             
           }
           if (is.na(digit)){
-            digit = 0
+            digit <- 0
           }
           
           ret <- format_datetimewd(x, wdth, digit)
@@ -756,7 +756,7 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
         
         if (is.na(wdth)){
           
-          wdth = 7
+          wdth <- 7
           
         }
         
@@ -776,12 +776,12 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
         
         if (is.na(wdth)){
           
-          wdth = 8
-          digit = 0
+          wdth <- 8
+          digit <- 0
           
         }
         if (is.na(digit)){
-          digit = 0
+          digit <- 0
         }
         
         
@@ -795,12 +795,12 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
         
         if (is.na(wdth)){
           
-          wdth = 16
-          digit = 0
+          wdth <- 16
+          digit <- 0
           
         }
         if (is.na(digit)){
-          digit = 0
+          digit <- 0
         }
         
         ret <- format_datetimewd(x, wdth, digit)
@@ -835,12 +835,12 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
         
         if (is.na(wdth)){
           
-          wdth = 8
-          digit = 0
+          wdth <- 8
+          digit <- 0
           
         }
         if (is.na(digit)){
-          digit = 0
+          digit <- 0
         }
         
         
