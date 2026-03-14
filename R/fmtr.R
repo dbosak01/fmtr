@@ -161,6 +161,29 @@
 #' rounding differences between R and SAS and supports up to 12 digits of
 #' fractional seconds, exceeding R's default precision.
 #' 
+#' @section "datetime" Format:
+#' The "DATETIMEw.d" format is a datetime-display format that replicates the
+#' behavior of the SAS "DATETIMEw.d" family of formats. It converts date-time
+#' values into fixed-width character representations of the form
+#' \code{ddMMMyy:hh:mm:ss} or \code{ddMMMyyyy:hh:mm:ss}, optionally including
+#' fractional seconds.
+#'
+#' The format accepts numeric values and \code{POSIXt} objects.  Numeric inputs
+#' follow R conventions and are interpreted as seconds since
+#' \code{1970-01-01 00:00:00} in UTC by default. Negative numeric values
+#' are allowed and represent datetimes before 1970. For \code{POSIXt} inputs,
+#' the full date and time components are used.
+#'
+#' The width \code{w} controls the total output width, while \code{d}
+#' specifies the number of decimal places for seconds. If omitted,
+#' \code{W} defaults to 16 and \code{D} defaults to 0. A trailing dot (".")
+#' is optional.
+#'
+#' Output always occupies the specified width and is left-padded with spaces
+#' if needed. Missing values return \code{NA}. This format supports display of
+#' up to 23 digits after the decimal point. Precision is maintained through
+#' 15 digits; beyond that, additional decimal places are padded with zeros.
+#' 
 #' @section Numeric Formatting:
 #' 
 #' Below are some commonly used formatting codes for other data types:

@@ -186,6 +186,73 @@
 #' padding with trailing zeros when necessary, consistent with SAS behavior.
 #' }
 #' 
+#' @section "datetime" Format:
+#' The \strong{"datetime"} format is used to display date-time values in a
+#' readable character form, such as \code{"01JAN70:00:00:00"} or
+#' \code{"31DEC1999:23:59:59.995"}, depending on the specified width and number
+#' of decimal places. The word \code{"datetime"} is followed by the desired
+#' width \emph{w} and optional decimal precision \emph{d}, e.g.
+#' \code{"datetime16"}, \code{"datetime22.3"}, or \code{"datetime40.12"}.
+#' This format closely replicates the behavior of SAS
+#' \code{DATETIMEw.d}.
+#'
+#' The format accepts numeric values and \code{POSIXt} objects. Numeric inputs
+#' follow R conventions and are interpreted as seconds since
+#' \code{1970-01-01 00:00:00} in UTC by default. Negative numeric values are
+#' allowed and represent datetimes before 1970. For \code{POSIXt} inputs, the
+#' full date and time components are used.
+#'
+#' \subsection{Width and precision}{
+#' The total width \emph{w} controls the minimum number of characters in the
+#' output, while the optional decimal precision \emph{d} controls the number
+#' of digits displayed after the decimal point for seconds. Valid widths range 
+#' from 7 to 40. The decimal precision \emph{d}, when specified, must be between
+#' 0 and \code{w - 1}. Widths or precisions outside these ranges are not valid 
+#' and will result in an error.
+#' 
+#' The exact appearance depends on the requested width. Narrower widths may use
+#' abbreviated forms, while wider widths allow full date-time values,
+#' four-digit years, and fractional seconds. Common examples include:
+#'
+#' \itemize{
+#'   \item \strong{datetime16} -- Displays date and time with a two-digit year
+#'         (e.g., "01JAN70:00:00:00")
+#'   \item \strong{datetime18} -- Displays date and time with a four-digit year
+#'         (e.g., "01JAN1970:00:00:00")
+#'   \item \strong{datetime22.3} -- Displays seconds with three decimal places
+#'         (e.g., "01JAN1970:00:00:00.000")
+#'   \item \strong{datetime25.6} -- Displays seconds with six decimal places
+#'         (e.g., "31DEC1999:23:59:59.995000")
+#'   \item \strong{datetime40.12} -- Displays seconds with up to twelve decimal
+#'         places and pads to the requested width
+#' }
+#' }
+#'
+#' If the width \emph{w} is omitted (e.g., \code{"datetime"} or
+#' \code{"datetime."}), it defaults to \code{16}. If the decimal precision
+#' \emph{d} is omitted, it defaults to \code{0}. Both \code{"DATETIMEw"} and
+#' \code{"DATETIMEw."} are accepted, and the trailing dot is optional.
+#'
+#' \subsection{Input handling}{
+#' The \code{DATETIMEw.d} format accepts the following input types:
+#'
+#' \itemize{
+#'   \item Numeric values, interpreted as the number of seconds since
+#'         \code{1970-01-01 00:00:00} in UTC by default
+#'   \item \code{POSIXt} objects
+#' }
+#'
+#' For numeric input, negative values and values far beyond a single day are
+#' allowed and formatted accordingly, consistent with SAS behavior. Because
+#' numeric datetime values do not inherently carry time zone information,
+#' \code{DATETIMEw.d} interprets them in UTC by default. For \code{POSIXt}
+#' input, the full calendar date and time components are used.
+#'
+#' In addition, whereas base R effectively limits fractional seconds to
+#' 6 digits, \code{DATETIMEw.d} supports display of up to 23 digits after the
+#' decimal point. Precision is maintained through 15 digits; beyond that,
+#' additional decimal places are padded with zeros.
+#' }
 #' @param x A vector, factor, or list to apply the format to.
 #' @param format A format to be applied.
 #' @param width The desired character width of the formatted vector.  Default
@@ -327,6 +394,22 @@
 #' 
 #' fapply(v10, "time10.2")
 #' # [1] "1:00:00.12" "9:00:01.46" NA  
+#' 
+#' # Example 11: "datetime" format
+#' # Data vectors
+#' v11 <- c(-1, NA, 0, 315619199, 1267446896, 1752566950)
+#' v12 <- as.POSIXct(c("1960-01-01 00:00:00.123",
+#'                     "1999-12-31 23:59:59.995",
+#'                     NA),
+#'                   format = "%Y-%m-%d %H:%M:%OS", tz = "UTC")
+#' 
+#' fapply(v11, "datetime18")
+#' 
+#' # [1] "  31DEC69:23:59:59" NA                   "  01JAN70:00:00:00" "  01JAN80:23:59:59"
+#' # [5] "  01MAR10:12:34:56" "  15JUL25:08:09:10"
+#' 
+#' fapply(v12, "datetime22.3")
+#' # [1] "01JAN1960:00:00:00.123" "31DEC1999:23:59:59.995" NA
 fapply <- function(x, format = NULL, width = NULL, justify = NULL) {
   
   # Get attribute values if available
@@ -575,6 +658,7 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
         bst <- grepl("^best[0-9]*\\.?$", fmt, ignore.case = TRUE)
         datew <- grepl("^date[0-9]*\\.?$", fmt, ignore.case = TRUE)
         timewd <- grepl("^time([0-9]+)?(\\.[0-9]*)?$", fmt, ignore.case = TRUE)
+        datetimewd <- grepl("^datetime([0-9]+)?(\\.[0-9]*)?$", fmt, ignore.case = TRUE)
         
         if (bst) { 
           
@@ -583,7 +667,7 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
           
           if (is.na(wdth)) {
             
-            wdth = 12
+            wdth <- 12
             
           }
           
@@ -597,7 +681,7 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
           
           if (is.na(wdth)){
             
-            wdth = 7
+            wdth <- 7
             
           }
           
@@ -611,16 +695,34 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
           
           if (is.na(wdth)){
             
-            wdth = 8
-            digit = 0
+            wdth <- 8
+            digit <- 0
 
           }
           if (is.na(digit)){
-            digit = 0
+            digit <- 0
           }
 
          
           ret <- format_timewd(x, wdth, digit)
+        }else if (datetimewd) {
+          
+          wd <- sub("datetime", "", tolower(fmt), fixed = TRUE)
+          wdth <- as.numeric(sub("\\..*$", "", wd))
+          digit <- ifelse(grepl("\\.", wd), as.numeric(sub(".*\\.", "", wd)), 0)
+          
+          if (is.na(wdth)){
+            
+            wdth <- 16
+            digit <- 0
+            
+          }
+          if (is.na(digit)){
+            digit <- 0
+          }
+          
+          ret <- format_datetimewd(x, wdth, digit)
+          
         }else {
         
           # For numerics, call sprintf
@@ -644,6 +746,7 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
       
       datew <- grepl("^date[0-9]*\\.?$", fmt, ignore.case = TRUE)
       timewd <- grepl("^time([0-9]+)?(\\.[0-9]*)?$", fmt, ignore.case = TRUE)
+      datetimewd <- grepl("^datetime([0-9]+)?(\\.[0-9]*)?$", fmt, ignore.case = TRUE)
       
       if (datew){
         
@@ -653,7 +756,7 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
         
         if (is.na(wdth)){
           
-          wdth = 7
+          wdth <- 7
           
         }
         
@@ -673,16 +776,34 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
         
         if (is.na(wdth)){
           
-          wdth = 8
-          digit = 0
+          wdth <- 8
+          digit <- 0
           
         }
         if (is.na(digit)){
-          digit = 0
+          digit <- 0
         }
         
         
         ret <- format_timewd(x, wdth, digit)
+        
+      }else if (datetimewd) {
+        
+        wd <- sub("datetime", "", tolower(fmt), fixed = TRUE)
+        wdth <- as.numeric(sub("\\..*$", "", wd))
+        digit <- ifelse(grepl("\\.", wd), as.numeric(sub(".*\\.", "", wd)), 0)
+        
+        if (is.na(wdth)){
+          
+          wdth <- 16
+          digit <- 0
+          
+        }
+        if (is.na(digit)){
+          digit <- 0
+        }
+        
+        ret <- format_datetimewd(x, wdth, digit)
         
       }else {
         
@@ -714,12 +835,12 @@ format_vector <- function(x, fmt, udfmt = FALSE) {
         
         if (is.na(wdth)){
           
-          wdth = 8
-          digit = 0
+          wdth <- 8
+          digit <- 0
           
         }
         if (is.na(digit)){
-          digit = 0
+          digit <- 0
         }
         
         
