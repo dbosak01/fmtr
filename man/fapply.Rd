@@ -224,7 +224,7 @@ This format closely replicates the behavior of SAS
 
 The format accepts numeric values and \code{POSIXt} objects. Numeric inputs
 follow R conventions and are interpreted as seconds since
-\code{1970-01-01 00:00:00} in UTC by default. Negative numeric values are
+\code{1970-01-01 00:00:00}. Negative numeric values are
 allowed and represent datetimes before 1970. For \code{POSIXt} inputs, the
 full date and time components are used.
 
@@ -263,9 +263,9 @@ If the width \emph{w} is omitted (e.g., \code{"datetime"} or
 The \code{DATETIMEw.d} format accepts the following input types:
 
 \itemize{
+  \item \code{POSIXt} objects, which have both a date and time component.
   \item Numeric values, interpreted as the number of seconds since
-        \code{1970-01-01 00:00:00} in the local time zone, by default.
-  \item \code{POSIXt} objects
+        \code{1970-01-01 00:00:00} in the local time zone.
 }
 
 For numeric input, negative values and values far beyond a single day are
@@ -276,7 +276,7 @@ zone is not included in the \code{POSIXt} value, the function will
 use the local time zone.
 Likewise for numeric datetime values, because
 numeric values do not inherently carry time zone information,
-\code{DATETIMEw.d} interprets them in in the local time zone. 
+\code{DATETIMEw.d} interprets them in the local time zone. 
 
 To view the time zone for your session, use \code{Sys.timezone()}.  To change the
 time zone, use \code{Sys.setenv(TZ = "<timezone code>")}. 

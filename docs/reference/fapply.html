@@ -300,7 +300,7 @@ This format closely replicates the behavior of SAS
 <code>DATETIMEw.d</code>.</p>
 <p>The format accepts numeric values and <code>POSIXt</code> objects. Numeric inputs
 follow R conventions and are interpreted as seconds since
-<code>1970-01-01 00:00:00</code> in UTC by default. Negative numeric values are
+<code>1970-01-01 00:00:00</code>. Negative numeric values are
 allowed and represent datetimes before 1970. For <code>POSIXt</code> inputs, the
 full date and time components are used.</p>
 <div class="section">
@@ -333,9 +333,9 @@ four-digit years, and fractional seconds. Common examples include:</p>
 <div class="section">
 <h3 id="input-handling-1">Input handling<a class="anchor" aria-label="anchor" href="#input-handling-1"></a></h3>
 <p>The <code>DATETIMEw.d</code> format accepts the following input types:</p>
-<ul><li><p>Numeric values, interpreted as the number of seconds since
-        <code>1970-01-01 00:00:00</code> in the local time zone, by default.</p></li>
-<li><p><code>POSIXt</code> objects</p></li>
+<ul><li><p><code>POSIXt</code> objects, which have both a date and time component.</p></li>
+<li><p>Numeric values, interpreted as the number of seconds since
+        <code>1970-01-01 00:00:00</code> in the local time zone.</p></li>
 </ul><p>For numeric input, negative values and values far beyond a single day are
 allowed and formatted accordingly, consistent with SAS behavior.
 For <code>POSIXt</code>
@@ -344,9 +344,9 @@ zone is not included in the <code>POSIXt</code> value, the function will
 use the local time zone.
 Likewise for numeric datetime values, because
 numeric values do not inherently carry time zone information,
-<code>DATETIMEw.d</code> interprets them in in the local time zone.</p>
+<code>DATETIMEw.d</code> interprets them in the local time zone.</p>
 <p>To view the time zone for your session, use <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">Sys.timezone()</a></code>.  To change the
-time zone, use <code>Sys.setenv(TZ = "&lt;timezone code&gt;"</code>.</p>
+time zone, use <code>Sys.setenv(TZ = "&lt;timezone code&gt;")</code>.</p>
 <p>In addition, whereas base R effectively limits fractional seconds to
 6 digits, <code>DATETIMEw.d</code> supports display of up to 23 digits after the
 decimal point. Precision is maintained through 15 digits; beyond that,
