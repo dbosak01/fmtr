@@ -279,8 +279,7 @@ numeric values do not inherently carry time zone information,
 \code{DATETIMEw.d} interprets them in in the local time zone. 
 
 To view the time zone for your session, use \code{Sys.timezone()}.  To change the
-time zone, use 
-\code{Setenv(TZ = "<timezone code>"}. 
+time zone, use \code{Sys.setenv(TZ = "<timezone code>")}. 
 
 In addition, whereas base R effectively limits fractional seconds to
 6 digits, \code{DATETIMEw.d} supports display of up to 23 digits after the

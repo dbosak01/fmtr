@@ -346,8 +346,7 @@ Likewise for numeric datetime values, because
 numeric values do not inherently carry time zone information,
 <code>DATETIMEw.d</code> interprets them in in the local time zone.</p>
 <p>To view the time zone for your session, use <code><a href="https://rdrr.io/r/base/timezones.html" class="external-link">Sys.timezone()</a></code>.  To change the
-time zone, use
-<code>Setenv(TZ = "&lt;timezone code&gt;"</code>.</p>
+time zone, use <code>Sys.setenv(TZ = "&lt;timezone code&gt;"</code>.</p>
 <p>In addition, whereas base R effectively limits fractional seconds to
 6 digits, <code>DATETIMEw.d</code> supports display of up to 23 digits after the
 decimal point. Precision is maintained through 15 digits; beyond that,
