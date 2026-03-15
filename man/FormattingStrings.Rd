@@ -100,7 +100,8 @@ fractional seconds.
 
 The format accepts numeric values and \code{POSIXt} objects.  Numeric inputs
 follow R conventions and are interpreted as seconds since
-\code{1970-01-01 00:00:00} in UTC by default. Negative numeric values
+\code{1970-01-01 00:00:00} in the local time zone, by default. 
+Negative numeric values
 are allowed and represent datetimes before 1970. For \code{POSIXt} inputs,
 the full date and time components are used.
 
@@ -146,7 +147,7 @@ it will be interpreted as "best12".
 }
 
 \examples{
-# Examples for formatting dates and times 
+# Examples of R-Style date and time formats 
 t <- Sys.time()
 fapply(t, "\%d/\%m/\%Y")              # Day/Month/Year
 fapply(t, "\%d\%b\%Y")                # Day abbreviated month year
@@ -155,17 +156,17 @@ fapply(t, "\%A, \%B \%d")             # Weekday, unabbreviated month and date
 fapply(t, "\%Y-\%Q")                 # Year and Quarter
 fapply(t, "\%Y-\%m\%-\%d \%H:\%M:\%S \%p") # Common timestamp format
 
-# Examples for formatting dates (date and times) using "dateW."
+# Examples of SAS-Style date and time formats
 d <- Sys.Date()
 fapply(d, "date5")                 # Month Year (mmmyy)
 fapply(d, "date7")                 # Day Month Year (ddmmmyy)
 fapply(d, "date9")                 # Day Month Year (ddmmmyyyy)
 fapply(d, "date11")                # Day Month Year (dd-mmm-yyyy)
 t <- Sys.time()
-fapply(t, "date5")                 # Month Year (mmmyy)
-fapply(t, "date7")                 # Day Month Year (ddmmmyy)
-fapply(t, "date9")                 # Day Month Year (ddmmmyyyy)
-fapply(t, "date11")                # Day Month Year (dd-mmm-yyyy)
+fapply(t, "time5")                 # Hour and Minute (HH:MM)
+fapply(t, "time8")                 # Hour, Minute, Second (HH:MM:SS)
+fapply(t, "datetime14")            # Datetime format (ddmmyy:HH:MM)
+fapply(t, "datetime19")            # Datetime format (ddmmyyyy:HH:MM:SS)
 
 # Examples for formatting numbers
 a <- 1234.56789
@@ -181,8 +182,8 @@ fapply(a, "$\%.2f")                 # Currency
 fapply(a, "The number is \%f.")     # Interpolation
 
 # "best" formatting
-fapply(a, "best6")                 # Total width of 6
-fapply(a, "best8")                 # Total width of 8
+fapply(a, "best6")                 # Total width of 6 (####.#)
+fapply(a, "best8")                 # Total width of 8 (####.###)
 
 }
 \seealso{

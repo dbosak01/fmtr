@@ -21,21 +21,16 @@ format_datetimewd <- function(x, w, d = 0){
     
     tz <- attr(x, "tzone")
     if (length(tz) == 0 || identical(tz, "")) {
-      timezone <- "UTC"
-      warning(
-        "No timezone is assigned to POSIXt object, UTC will be used by default",
-        call. = FALSE
-      )
+      timezone <- Sys.timezone()
     } else {
       timezone <- tz[1]
     }
     
   } else if (is.numeric(x)) {
     datetimen <- x
-    timezone <- "UTC"
-    cat("UTC timezone will be used by default for numeric input\n\n")
-    
+    timezone <- Sys.timezone()
   }
+
   
   vectorize<-function(x1){
     
@@ -149,7 +144,11 @@ format_datetimewd <- function(x, w, d = 0){
       ret <- combine
     }
     
+    return(ret)
   }
+  
   # Vectorized wrapper
-  vapply(datetimen, vectorize, FUN.VALUE = character(1))
+  fret <- vapply(datetimen, vectorize, FUN.VALUE = character(1))
+  
+  return(fret)
 }

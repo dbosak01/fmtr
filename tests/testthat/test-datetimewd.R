@@ -4,6 +4,8 @@ options("logr.output" = FALSE)
 
 Sys.setenv("LANGUAGE" = "EN")
 Sys.setlocale("LC_TIME", "English")
+Sys.setenv(TZ = "UTC")
+
 test_that("datetimewd1: test error handling.", {
   
   dt <- as.POSIXct("2000-02-29 12:34:56", tz = "UTC", origin = "1970-01-01")

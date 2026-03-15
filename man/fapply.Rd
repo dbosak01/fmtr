@@ -44,7 +44,7 @@ formats:
 \itemize{
   \item{\strong{Formatting string:} A single string will be interpreted as 
 a formatting string. Formatting strings include R-style formatting codes, 
-and some SAS-style format names like "best" and "date". 
+and some SAS-style format names like "best", "date", and "datetime". 
 See the \link{FormattingStrings} documentation and the sections below for 
 further details.}
   \item{\strong{Named vector:} A named vector can serve as a lookup list or 
@@ -264,15 +264,23 @@ The \code{DATETIMEw.d} format accepts the following input types:
 
 \itemize{
   \item Numeric values, interpreted as the number of seconds since
-        \code{1970-01-01 00:00:00} in UTC by default
+        \code{1970-01-01 00:00:00} in the local time zone, by default.
   \item \code{POSIXt} objects
 }
 
 For numeric input, negative values and values far beyond a single day are
-allowed and formatted accordingly, consistent with SAS behavior. Because
-numeric datetime values do not inherently carry time zone information,
-\code{DATETIMEw.d} interprets them in UTC by default. For \code{POSIXt}
-input, the full calendar date and time components are used.
+allowed and formatted accordingly, consistent with SAS behavior. 
+For \code{POSIXt}
+input, the full calendar date and time components are used. If the time
+zone is not included in the \code{POSIXt} value, the function will
+use the local time zone.
+Likewise for numeric datetime values, because
+numeric values do not inherently carry time zone information,
+\code{DATETIMEw.d} interprets them in in the local time zone. 
+
+To view the time zone for your session, use \code{Sys.timezone()}.  To change the
+time zone, use 
+\code{Setenv(TZ = "<timezone code>"}. 
 
 In addition, whereas base R effectively limits fractional seconds to
 6 digits, \code{DATETIMEw.d} supports display of up to 23 digits after the

@@ -1,3 +1,8 @@
+# fmtr 1.7.3 
+
+* Add "datetimeW.d" formats to `fapply()`.
+* Update documentation.
+
 # fmtr 1.7.2 
 
 * Fixes for CRAN.

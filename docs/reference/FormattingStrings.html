@@ -19,7 +19,7 @@ functions. See below for further details."><meta property="og:image" content="ht
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fmtr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.7.3</span>
       </span>
     </div>
 
@@ -172,6 +172,30 @@ if needed. Missing values return <code>NA</code>. This format resolves known
 rounding differences between R and SAS and supports up to 12 digits of
 fractional seconds, exceeding R's default precision.</p>
     </div>
+    <div id="-datetime-format">
+    <h2>"datetime" Format</h2>
+
+
+<p>The "DATETIMEw.d" format is a datetime-display format that replicates the
+behavior of the SAS "DATETIMEw.d" family of formats. It converts date-time
+values into fixed-width character representations of the form
+<code>ddMMMyy:hh:mm:ss</code> or <code>ddMMMyyyy:hh:mm:ss</code>, optionally including
+fractional seconds.</p>
+<p>The format accepts numeric values and <code>POSIXt</code> objects.  Numeric inputs
+follow R conventions and are interpreted as seconds since
+<code>1970-01-01 00:00:00</code> in the local time zone, by default.
+Negative numeric values
+are allowed and represent datetimes before 1970. For <code>POSIXt</code> inputs,
+the full date and time components are used.</p>
+<p>The width <code>w</code> controls the total output width, while <code>d</code>
+specifies the number of decimal places for seconds. If omitted,
+<code>W</code> defaults to 16 and <code>D</code> defaults to 0. A trailing dot (".")
+is optional.</p>
+<p>Output always occupies the specified width and is left-padded with spaces
+if needed. Missing values return <code>NA</code>. This format supports display of
+up to 23 digits after the decimal point. Precision is maintained through
+15 digits; beyond that, additional decimal places are padded with zeros.</p>
+    </div>
     <div id="numeric-formatting">
     <h2>Numeric Formatting</h2>
 
@@ -207,7 +231,7 @@ it will be interpreted as "best12".</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># Examples for formatting dates and times </span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># Examples of R-Style date and time formats </span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"%d/%m/%Y"</span><span class="op">)</span>              <span class="co"># Day/Month/Year</span></span>
 <span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"%d%b%Y"</span><span class="op">)</span>                <span class="co"># Day abbreviated month year</span></span>
@@ -216,17 +240,17 @@ it will be interpreted as "best12".</p>
 <span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"%Y-%Q"</span><span class="op">)</span>                 <span class="co"># Year and Quarter</span></span>
 <span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"%Y-%m%-%d %H:%M:%S %p"</span><span class="op">)</span> <span class="co"># Common timestamp format</span></span>
 <span></span>
-<span><span class="co"># Examples for formatting dates (date and times) using "dateW."</span></span>
+<span><span class="co"># Examples of SAS-Style date and time formats</span></span>
 <span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">d</span>, <span class="st">"date5"</span><span class="op">)</span>                 <span class="co"># Month Year (mmmyy)</span></span>
 <span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">d</span>, <span class="st">"date7"</span><span class="op">)</span>                 <span class="co"># Day Month Year (ddmmmyy)</span></span>
 <span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">d</span>, <span class="st">"date9"</span><span class="op">)</span>                 <span class="co"># Day Month Year (ddmmmyyyy)</span></span>
 <span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">d</span>, <span class="st">"date11"</span><span class="op">)</span>                <span class="co"># Day Month Year (dd-mmm-yyyy)</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"date5"</span><span class="op">)</span>                 <span class="co"># Month Year (mmmyy)</span></span>
-<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"date7"</span><span class="op">)</span>                 <span class="co"># Day Month Year (ddmmmyy)</span></span>
-<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"date9"</span><span class="op">)</span>                 <span class="co"># Day Month Year (ddmmmyyyy)</span></span>
-<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"date11"</span><span class="op">)</span>                <span class="co"># Day Month Year (dd-mmm-yyyy)</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"time5"</span><span class="op">)</span>                 <span class="co"># Hour and Minute (HH:MM)</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"time8"</span><span class="op">)</span>                 <span class="co"># Hour, Minute, Second (HH:MM:SS)</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"datetime14"</span><span class="op">)</span>            <span class="co"># Datetime format (ddmmyy:HH:MM)</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">t</span>, <span class="st">"datetime19"</span><span class="op">)</span>            <span class="co"># Datetime format (ddmmyyyy:HH:MM:SS)</span></span>
 <span></span>
 <span><span class="co"># Examples for formatting numbers</span></span>
 <span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">1234.56789</span></span>
@@ -242,8 +266,8 @@ it will be interpreted as "best12".</p>
 <span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"The number is %f."</span><span class="op">)</span>     <span class="co"># Interpolation</span></span>
 <span></span>
 <span><span class="co"># "best" formatting</span></span>
-<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"best6"</span><span class="op">)</span>                 <span class="co"># Total width of 6</span></span>
-<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"best8"</span><span class="op">)</span>                 <span class="co"># Total width of 8</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"best6"</span><span class="op">)</span>                 <span class="co"># Total width of 6 (####.#)</span></span>
+<span><span class="fu"><a href="fapply.html">fapply</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">"best8"</span><span class="op">)</span>                 <span class="co"># Total width of 8 (####.###)</span></span>
 <span></span></code></pre></div>
     </div>
   </div>
